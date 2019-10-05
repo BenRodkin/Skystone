@@ -9,11 +9,42 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name = "Test Intake", group = "Testing")
 public class TestIntake extends OpMode {
 
-    public void init() {
+    public DcMotor intake1;
+    public DcMotor intake2;
 
+    public Servo deploy1;
+    public Servo deploy2;
+
+    public void init() {
+        intake1 = hardwareMap.dcMotor.get("intake1");
+        intake2 = hardwareMap.dcMotor.get("intake2");
+
+        deploy1 = hardwareMap.servo.get("deploy1");
+        deploy2 = hardwareMap.servo.get("deploy2");
+
+        intake2.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        telemetry.addLine("Ready");
+        telemetry.update();
     }
 
     public void loop() {
+
+        // Intake motor controls
+        if(gamepad1.a) setIntakePower(1.0);
+        else if(gamepad1.b) setIntakePower(-1.0);
+        else setIntakePower(0.0);
+
+        // Deploy servo controls
+        deploy1.setPosition(1 - gamepad1.right_trigger);
+        deploy2.setPosition(gamepad1.left_trigger);
     }
 
+
+
+    public void setIntakePower(double power) {
+        intake1.setPower(power);
+        intake2.setPower(power);
+    }
 }
+
