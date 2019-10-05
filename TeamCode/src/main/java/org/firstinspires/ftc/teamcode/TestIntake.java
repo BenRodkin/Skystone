@@ -38,6 +38,18 @@ public class TestIntake extends OpMode {
         // Deploy servo controls
         deploy1.setPosition(1 - gamepad1.right_trigger);
         deploy2.setPosition(gamepad1.left_trigger);
+
+
+        telemetry.addLine("Motor telemetry:");
+        telemetry.addData("Intake1 power", intake1.getPower());
+        telemetry.addData("Intake2 power", intake2.getPower());
+        telemetry.addLine();
+        telemetry.addLine("Servo telemetry:");
+        telemetry.addData("Deploy1 position",deploy1.getPosition());
+        telemetry.addData("Deploy2 position",deploy2.getPosition());
+        telemetry.update();
+
+
     }
 
 
