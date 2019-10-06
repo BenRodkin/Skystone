@@ -18,8 +18,6 @@ public class SLICBotTeleOp extends OpMode {
     public DcMotor intake1;
     public DcMotor intake2;
 
-//    public Servo gripper;
-
     public Servo deploy1;
     public Servo deploy2;
 
@@ -35,9 +33,7 @@ public class SLICBotTeleOp extends OpMode {
 
         intake1     = hardwareMap.dcMotor.get("intake1");
         intake2     = hardwareMap.dcMotor.get("intake2");
-
-//        gripper     = hardwareMap.servo.get("gripper");
-
+        
         deploy1     = hardwareMap.servo.get("deploy1");
         deploy2     = hardwareMap.servo.get("deploy2");
 
@@ -96,22 +92,9 @@ public class SLICBotTeleOp extends OpMode {
             setIntakePower(0.0);
         }
 
-//        if(gamepad2.y) gripper.setPosition(1.0);
-//        else gripper.setPosition(0.0);
-
         // Deploy servo controls
         deploy1.setPosition(1 - gamepad1.right_trigger);
         deploy2.setPosition(gamepad1.left_trigger);
-
-
-
-//        frontLeft.setPower(gamepad1.left_stick_y);
-//        frontRight.setPower(gamepad1.right_stick_y);
-//
-//        rearLeft.setPower(gamepad1.left_stick_y);
-//        rearRight.setPower(gamepad1.right_stick_y);
-
-//        lift.setPower(gamepad1.left_trigger - gamepad1.right_trigger);
 
 
         telemetry.addData("Drive power", drive);
