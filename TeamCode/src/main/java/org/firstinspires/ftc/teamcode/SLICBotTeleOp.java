@@ -99,11 +99,9 @@ public class SLICBotTeleOp extends OpMode {
 //        if(gamepad2.y) gripper.setPosition(1.0);
 //        else gripper.setPosition(0.0);
 
-        if(gamepad1.x) deploy1.setPosition(1.0);
-        else deploy1.setPosition(0.0);
-
-        if(gamepad1.y) deploy2.setPosition(1.0);
-        else deploy2.setPosition(0.0);
+        // Deploy servo controls
+        deploy1.setPosition(1 - gamepad1.right_trigger);
+        deploy2.setPosition(gamepad1.left_trigger);
 
 
 
