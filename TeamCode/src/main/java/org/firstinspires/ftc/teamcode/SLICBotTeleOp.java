@@ -116,6 +116,12 @@ public class SLICBotTeleOp extends OpMode {
 
         telemetry.addData("Drive power", drive);
         telemetry.addData("Turn power", turn);
+        telemetry.addLine();
+        telemetry.addData("Intake1 power", intake1.getPower());
+        telemetry.addData("Intake2 power", intake2.getPower());
+        telemetry.addLine();
+        telemetry.addData("Deploy1 position",deploy1.getPosition());
+        telemetry.addData("Deploy2 position",deploy2.getPosition());
         telemetry.update();
     }
 
