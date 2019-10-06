@@ -21,6 +21,11 @@ public class SLICBotTeleOp extends OpMode {
     public Servo deploy1;
     public Servo deploy2;
 
+    // Deploy servo positions (index 0 is the left servo, index 1 is the right)
+    public final double[] STOWED =      {0.0, 0.0};
+    public final double[] DEPLOYED =    {1.0, 1.0};
+    public final double[] GRABBING =    {0.5, 0.4};
+
     public final boolean BRAKE_ON_ZERO = true;
 
     public void init() {
@@ -33,7 +38,7 @@ public class SLICBotTeleOp extends OpMode {
 
         intake1     = hardwareMap.dcMotor.get("intake1");
         intake2     = hardwareMap.dcMotor.get("intake2");
-        
+
         deploy1     = hardwareMap.servo.get("deploy1");
         deploy2     = hardwareMap.servo.get("deploy2");
 
@@ -93,8 +98,16 @@ public class SLICBotTeleOp extends OpMode {
         }
 
         // Deploy servo controls
-        deploy1.setPosition(1 - gamepad1.right_trigger);
-        deploy2.setPosition(gamepad1.left_trigger);
+        if(gamepad2.dpad_down) {        // STOWED
+            deploy2.setPosition(STOWED[0]);
+            deploy1.setPosition(STOWED[1]);
+        } else if(gamepad2.dpad_left) { // DEPLOYED
+            deploy2.setPosition(DEPLOYED[0]);
+            deploy1.setPosition(DEPLOYED[1]);
+        } else if(gamepad2.dpad_up) {   // GRABBING
+            deploy2.setPosition(GRABBING[0]);
+            deploy1.setPosition(GRABBING[1]);
+        }
 
 
         telemetry.addData("Drive power", drive);
