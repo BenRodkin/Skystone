@@ -80,9 +80,6 @@ public class InternalCameraExample extends LinearOpMode
          */
         phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-        /*
-         * Wait for the user to press start on the Driver Station
-         */
         waitForStart();
 
         while (opModeIsActive())
