@@ -17,8 +17,16 @@ public class SLICBotTeleOp extends OpMode {
     public DcMotor intake1;
     public DcMotor intake2;
 
+    public DcMotor pulley;
+
+    public DcMotor arm;
+
     public Servo deploy1;
     public Servo deploy2;
+
+    public Servo clamp;
+
+    public Servo holder;
 
     // Deploy servo positions (index 0 is the left servo, index 1 is the right)
     public final double[] STOWED =      {0.0, 0.0};
@@ -26,6 +34,11 @@ public class SLICBotTeleOp extends OpMode {
     public final double[] GRABBING =    {0.5, 0.4};
 
     public final boolean BRAKE_ON_ZERO = true;
+
+
+    // Button cooldowns
+    ButtonCooldown gp2_a = new ButtonCooldown();
+    ButtonCooldown gp2_x = new ButtonCooldown();
 
     public void init() {
         frontLeft   = hardwareMap.dcMotor.get("fl_drive");
@@ -37,8 +50,16 @@ public class SLICBotTeleOp extends OpMode {
         intake1     = hardwareMap.dcMotor.get("intake1");
         intake2     = hardwareMap.dcMotor.get("intake2");
 
+        pulley      = hardwareMap.dcMotor.get("pulley");
+
+        arm         = hardwareMap.dcMotor.get("arm");
+
         deploy1     = hardwareMap.servo.get("deploy1");
         deploy2     = hardwareMap.servo.get("deploy2");
+
+        clamp       = hardwareMap.servo.get("clamp");
+
+        holder      = hardwareMap.servo.get("holder");
 
 
 
@@ -47,6 +68,8 @@ public class SLICBotTeleOp extends OpMode {
 
 
         intake2.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        pulley.setDirection(DcMotorSimple.Direction.REVERSE);
 
         if(BRAKE_ON_ZERO) {
             frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -61,6 +84,9 @@ public class SLICBotTeleOp extends OpMode {
             rearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         }
+
+        gp2_a.setCooldown(0.100);
+        gp2_x.setCooldown(0.100);
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -82,7 +108,23 @@ public class SLICBotTeleOp extends OpMode {
             setRightPower((drive + turn) * speedMod);
         }
 
+        double pulleySpeed = (gamepad2.right_trigger - gamepad2.left_trigger) * 0.35;
+        telemetry.addData("motor position", pulley.getCurrentPosition());
 
+        pulley.setPower(pulleySpeed);
+
+        arm.setPower(gamepad2.left_stick_y * 0.4);
+
+        double runtime = getRuntime();
+
+        if (gamepad2.a && gp2_a.ready(runtime)) {
+            clamp.setPosition(Math.abs(clamp.getPosition() - 1));
+            gp2_a.updateSnapshot(runtime);
+        }
+
+        if (gamepad2.x && gp2_x.ready(runtime)) {
+            holder.setPosition((Math.abs(holder.getPosition() - 1)));
+            gp2_x.updateSnapshot(runtime);
         }
 
 //        if(gamepad1.a || gamepad2.a) {
