@@ -83,13 +83,15 @@ public class SLICBotTeleOp extends OpMode {
         }
 
 
-        if(gamepad1.a || gamepad2.a) {
-            setIntakePower(1.0);
-        } else if(gamepad1.b || gamepad2.b) {
-            setIntakePower(-1.0);
-        } else {
-            setIntakePower(0.0);
         }
+
+//        if(gamepad1.a || gamepad2.a) {
+//            setIntakePower(1.0);
+//        } else if(gamepad1.b || gamepad2.b) {
+//            setIntakePower(-1.0);
+//        } else {
+//            setIntakePower(0.0);
+//        }
 
         // Deploy servo controls
         if(gamepad2.dpad_down) {        // STOWED
