@@ -85,8 +85,8 @@ public class SLICBotTeleOp extends OpMode {
 
         }
 
-        gp2_a.setCooldown(0.100);
-        gp2_x.setCooldown(0.100);
+        gp2_a.setCooldown(1.000);
+        gp2_x.setCooldown(1.000);
 
         telemetry.addLine("Ready");
         telemetry.update();
