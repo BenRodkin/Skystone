@@ -71,6 +71,10 @@ public class SLICBotTeleOp extends OpMode {
 
         pulley.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         if(BRAKE_ON_ZERO) {
             frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
