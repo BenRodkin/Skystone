@@ -21,6 +21,7 @@ public class AutoBlueQuarry extends LinearOpMode {
     BNO055IMU imu;
 
 
+    @Override public void runOpMode() throws InterruptedException {
 
         telemetry.addLine("Initializing hardware");
         telemetry.update();
@@ -33,7 +34,6 @@ public class AutoBlueQuarry extends LinearOpMode {
         parameters.loggingTag          = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-    public void runOpMode() {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
 
@@ -76,6 +76,19 @@ public class AutoBlueQuarry extends LinearOpMode {
         sleep(1000);
 
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
+
+        telemetry.addLine("Step 5");
+        telemetry.update();
+        sleep(1000);
+
+        driveInches(-21.0, 0.4);
+
+        telemetry.addLine("Step 6");
+        telemetry.update();
+        sleep(1000);
+
+        turnToHeadingPID(90);
+
 
         while(opModeIsActive()) {
             telemetry.addLine("Finished.");
@@ -136,7 +149,6 @@ public class AutoBlueQuarry extends LinearOpMode {
     public float heading() {
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
-}
 
 
 
