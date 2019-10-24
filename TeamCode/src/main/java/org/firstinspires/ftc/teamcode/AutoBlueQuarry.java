@@ -90,8 +90,16 @@ public class AutoBlueQuarry extends LinearOpMode {
         turnToHeadingPID(90);
 
 
+        telemetry.addLine("Step 7");
+        telemetry.update();
+        sleep(1000);
+
+        driveInches(75.0, 0.4);
+
         while(opModeIsActive()) {
             telemetry.addLine("Finished.");
+            telemetry.addData("Heading", heading());
+            telemetry.addData("Runtime", getRuntime());
             telemetry.update();
         }
 
