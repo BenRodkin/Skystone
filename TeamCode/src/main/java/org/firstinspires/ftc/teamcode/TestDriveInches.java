@@ -41,6 +41,33 @@ public class TestDriveInches extends LinearOpMode {
         hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition() + counts);
         hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition() + counts);
         hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition() + counts);
+
+        hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearLeft.setMode   (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearRight.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.setLeftPower(speed);
+        hardware.setRightPower(speed);
+
+        while(opModeIsActive() &&
+                hardware.frontLeft.isBusy() &&
+                hardware.frontRight.isBusy() &&
+                hardware.rearLeft.isBusy() &&
+                hardware.rearRight.isBusy()) {
+            telemetry.addData("Front left encoder", hardware.frontLeft.getCurrentPosition());
+            telemetry.addData("Front right encoder", hardware.frontRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
     public void resetDriveEncoders() {
