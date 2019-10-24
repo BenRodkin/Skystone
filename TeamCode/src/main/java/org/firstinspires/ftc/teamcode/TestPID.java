@@ -19,6 +19,23 @@ public class TestPID extends LinearOpMode {
     // Hardware class
     SLICBotHardware hardware = new SLICBotHardware();
 
+    // Button cooldowns
+    GamepadCooldowns cooldowns = new GamepadCooldowns();
+
+    // Threshold for using triggers as binary input (e.g. if(gamepad1.right_trigger > TRIGGER_THRESHOLD) )
+    public final double TRIGGER_THRESHOLD = 0.7;
+
+    // Local runtime variable (cuts down on the number of calls to getRuntime() )
+    private double runtime;
+
+    // PID coefficients (start with val in hardware)
+    private double kP = hardware.P;
+    private double kI = hardware.I;
+    private double kD = hardware.D;
+
+    // Increment for increasing or decreasing PID coefficients
+    private final double K_STEP = 0.005;
+
     public void runOpMode() {
 
         telemetry.addLine("Initializing hardware");
@@ -44,6 +61,68 @@ public class TestPID extends LinearOpMode {
 
 
         while(opModeIsActive()) {
+
+            //--------------------------------------------------------------------------------------
+            // START PID COEFFICIENT CONTROLS
+            //--------------------------------------------------------------------------------------
+
+                /*
+                    CONTROLS: (increase, decrease)
+                    P: gp1.up,      gp1.down
+                    I: gp1.right,   gp1.left
+                    D: gp1.lb,      gp1.lt
+                */
+
+            runtime = getRuntime();
+
+
+            // Proportional coefficient-------------------------------------------------------------
+            if(gamepad1.dpad_up && cooldowns.dpUp.ready(runtime)) {
+                kP += K_STEP;
+                cooldowns.dpUp.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.dpad_down && cooldowns.dpDown.ready(runtime)) {
+                if(kP < K_STEP) kP = 0.0;
+                else            kP -= K_STEP;
+                cooldowns.dpDown.updateSnapshot(runtime);
+            }
+
+
+            // Integral coefficient-----------------------------------------------------------------
+            if(gamepad1.dpad_right && cooldowns.dpRight.ready(runtime)) {
+                kI += K_STEP;
+                cooldowns.dpRight.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.dpad_left && cooldowns.dpLeft.ready(runtime)) {
+                if(kI < K_STEP) kI = 0.0;
+                else            kI -= K_STEP;
+                cooldowns.dpLeft.updateSnapshot(runtime);
+            }
+
+
+            // Derivative coefficient---------------------------------------------------------------
+            if(gamepad1.left_bumper && cooldowns.lb.ready(runtime)) {
+                kD += K_STEP;
+                cooldowns.lb.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.left_trigger > TRIGGER_THRESHOLD && cooldowns.lt.ready(runtime)) {
+                if(kD < K_STEP) kD = 0.0;
+                else            kD -= K_STEP;
+                cooldowns.lt.updateSnapshot(runtime);
+            }
+
+            //--------------------------------------------------------------------------------------
+            // END PID COEFFICIENT CONTROLS
+            //--------------------------------------------------------------------------------------
+
+            // Set PID coefficients
+            hardware.pid.setPID(kP, kI, kD);
+
+
+
             telemetry.addData("kP", hardware.pid.getP());
             telemetry.addData("kI", hardware.pid.getI());
             telemetry.addData("kD", hardware.pid.getD());
