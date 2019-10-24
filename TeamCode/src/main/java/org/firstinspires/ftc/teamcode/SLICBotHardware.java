@@ -42,6 +42,15 @@ public class SLICBotHardware {
 
 
 
+    public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
+    public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
+    public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
+    public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
+
+    public final int ARM_COUNTS_DEPLOY   = -1150;
+
+
+
     public void init(HardwareMap hardwareMap) {
         frontLeft   = hardwareMap.dcMotor.get("fl_drive");
         frontRight  = hardwareMap.dcMotor.get("fr_drive");
