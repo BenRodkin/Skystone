@@ -88,6 +88,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         sleep(1000);
 
         turnToHeadingPID(90);
+        turnToHeadingPID(90);   // Call twice in order to account for occasional errors in heading
 
 
         telemetry.addLine("Step 7");
