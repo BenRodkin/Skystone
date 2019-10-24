@@ -36,7 +36,7 @@ public class TestPID extends LinearOpMode {
     // Increment for increasing or decreasing PID coefficients
     private final double K_STEP = 0.005;
 
-    public void runOpMode() {
+    @Override public void runOpMode() throws InterruptedException {
 
         telemetry.addLine("Initializing hardware");
         telemetry.update();
@@ -120,6 +120,18 @@ public class TestPID extends LinearOpMode {
 
             // Set PID coefficients
             hardware.pid.setPID(kP, kI, kD);
+
+
+
+            /*
+                    CONTROLS: (Target heading listed)
+                    0:      gp2.y
+                    45:     gp2.a
+                    90:     gp2.x
+            */
+            if(gamepad2.y) turnToHeadingPID(0);
+            else if(gamepad2.a) turnToHeadingPID(45);
+            else if(gamepad2.x) turnToHeadingPID(90);
 
 
 
