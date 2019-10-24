@@ -85,8 +85,8 @@ public class SLICBotHardware {
 
 
 
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        rearLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        rearRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         intake2.setDirection(DcMotorSimple.Direction.REVERSE);
