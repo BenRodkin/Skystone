@@ -63,8 +63,8 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         hardware.clamp.setPosition(1.0);
 
-        hardware.setLeftPower(-0.2);
-        hardware.setRightPower(-0.4);
+        hardware.setLeftPower(0.2);
+        hardware.setRightPower(0.4);
         sleep(700);
 
         hardware.setLeftPower(0.0);
