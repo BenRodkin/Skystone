@@ -51,7 +51,7 @@ public class SLICBotHardware {
 
 
     // PID variables
-    public final double MAX_SPEED = 0.4;
+    public final double MAX_SPEED = 0.2;
     public final double P = 0.0;
     public final double I = 0.0;
     public final double D = 0.0;
