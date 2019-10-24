@@ -106,4 +106,16 @@ public class SLICBotHardware {
         rearRight.setPower(power);
         frontRight.setPower(power);
     }
+
+    public void resetDriveEncoders() {
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
 }
