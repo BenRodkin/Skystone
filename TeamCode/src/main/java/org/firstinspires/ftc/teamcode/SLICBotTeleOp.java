@@ -120,14 +120,12 @@ public class SLICBotTeleOp extends OpMode {
         double drive = gamepad1.left_trigger - gamepad1.right_trigger;
         double turn = gamepad1.left_stick_x * 3 / 4;
 
-        double speedMod = 1.0;
-
         if(drive > 0.0) {
-            setLeftPower((drive + turn) * speedMod);
-            setRightPower((drive - turn) * speedMod);
+            setLeftPower((drive + turn) * driverSpeedMod);
+            setRightPower((drive - turn) * driverSpeedMod);
         } else {
-            setLeftPower((drive - turn) * speedMod);
-            setRightPower((drive + turn) * speedMod);
+            setLeftPower((drive - turn) * driverSpeedMod);
+            setRightPower((drive + turn) * driverSpeedMod);
         }
 
         double pulleySpeed = (gamepad2.right_trigger - gamepad2.left_trigger);
