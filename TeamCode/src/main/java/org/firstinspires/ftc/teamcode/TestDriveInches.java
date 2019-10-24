@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous(name = "Test: driveInches()", group = "Testing")
 public class TestDriveInches extends LinearOpMode {
@@ -19,6 +20,9 @@ public class TestDriveInches extends LinearOpMode {
 
         while(opModeIsActive()) {
 
+            if(gamepad1.x) resetDriveEncoders();
+
+
 
             telemetry.addData("FL encoder", hardware.frontLeft.getCurrentPosition());
             telemetry.addData("FR encoder", hardware.frontRight.getCurrentPosition());
@@ -27,5 +31,12 @@ public class TestDriveInches extends LinearOpMode {
             telemetry.update();
         }
 
+    }
+
+    public void resetDriveEncoders() {
+        hardware.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }
