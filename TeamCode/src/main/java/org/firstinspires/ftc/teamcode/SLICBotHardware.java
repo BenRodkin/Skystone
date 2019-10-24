@@ -92,5 +92,18 @@ public class SLICBotHardware {
         }
     }
 
+
+
+
+
+    public void setLeftPower(double power) {
+        rearLeft.setPower(power);
+        frontLeft.setPower(power);
+
+    }
+
+    public void setRightPower(double power) {
+        rearRight.setPower(power);
+        frontRight.setPower(power);
     }
 }
