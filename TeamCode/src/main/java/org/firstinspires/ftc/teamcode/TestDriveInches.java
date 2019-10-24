@@ -28,7 +28,7 @@ public class TestDriveInches extends LinearOpMode {
 
             if(gamepad1.x) resetDriveEncoders();
 
-            if(gamepad1.a) driveEncoderCounts(2000, 0.4);
+            if(gamepad1.a) driveInches(24.0, 0.4);
 
 
             telemetry.addData("FL encoder", hardware.frontLeft.getCurrentPosition());
@@ -40,6 +40,11 @@ public class TestDriveInches extends LinearOpMode {
 
     }
 
+
+    public void driveInches(double inches, double speed) {
+        driveEncoderCounts((int) (inches * COUNTS_PER_INCH), speed);
+
+    }
 
     public void driveEncoderCounts(int counts, double speed) {
         hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition() - counts);
