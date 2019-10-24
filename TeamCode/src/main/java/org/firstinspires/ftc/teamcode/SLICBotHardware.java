@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class SLICBotHardware {
@@ -40,7 +42,55 @@ public class SLICBotHardware {
 
 
 
-    public void init() {
+    public void init(HardwareMap hardwareMap) {
+        frontLeft   = hardwareMap.dcMotor.get("fl_drive");
+        frontRight  = hardwareMap.dcMotor.get("fr_drive");
+        rearLeft    = hardwareMap.dcMotor.get("rl_drive");
+        rearRight   = hardwareMap.dcMotor.get("rr_drive");
+
+
+        intake1     = hardwareMap.dcMotor.get("intake1");
+        intake2     = hardwareMap.dcMotor.get("intake2");
+
+        pulley      = hardwareMap.dcMotor.get("pulley");
+
+        arm         = hardwareMap.dcMotor.get("arm");
+
+        deploy1     = hardwareMap.servo.get("deploy1");
+        deploy2     = hardwareMap.servo.get("deploy2");
+
+        clamp       = hardwareMap.servo.get("clamp");
+
+        holder      = hardwareMap.servo.get("holder");
+
+
+
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        rearLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        intake2.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        pulley.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        if(BRAKE_ON_ZERO) {
+            frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        } else {
+            frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            rearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            rearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        }
+    }
 
     }
 }
