@@ -38,5 +38,10 @@ public class TestDriveInches extends LinearOpMode {
         hardware.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hardware.rearLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hardware.rearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
