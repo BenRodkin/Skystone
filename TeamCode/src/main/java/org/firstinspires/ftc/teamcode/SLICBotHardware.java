@@ -50,6 +50,17 @@ public class SLICBotHardware {
     public final int ARM_COUNTS_DEPLOY   = -1150;
 
 
+    // PID variables
+    public final double MAX_SPEED = 0.4;
+    public final double P = 0.0;
+    public final double I = 0.0;
+    public final double D = 0.0;
+    public final double TOLERANCE = 2;
+
+    public final SynchronousPID pid = new SynchronousPID(P, I, D);
+
+
+
 
     public void init(HardwareMap hardwareMap) {
         frontLeft   = hardwareMap.dcMotor.get("fl_drive");
