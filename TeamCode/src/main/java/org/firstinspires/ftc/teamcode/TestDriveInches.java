@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @Autonomous(name = "Test: driveInches()", group = "Testing")
 public class TestDriveInches extends LinearOpMode {
@@ -35,7 +36,7 @@ public class TestDriveInches extends LinearOpMode {
     }
 
 
-    public void driveEncoderCounts(int counts) {
+    public void driveEncoderCounts(int counts, double speed) {
         hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition() + counts);
         hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition() + counts);
         hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition() + counts);
