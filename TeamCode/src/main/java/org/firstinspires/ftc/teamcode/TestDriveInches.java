@@ -15,6 +15,8 @@ public class TestDriveInches extends LinearOpMode {
     public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
     public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
 
+    public final int ARM_COUNTS_DEPLOY   = -1200;
+
     public void runOpMode() {
 
         hardware.init(hardwareMap);
@@ -27,14 +29,21 @@ public class TestDriveInches extends LinearOpMode {
         while(opModeIsActive()) {
 
             if(gamepad1.x) resetDriveEncoders();
+            if(gamepad2.y) {
+                hardware.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                hardware.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
 
             if(gamepad1.a) driveInches(24.0, 0.4);
+            if(gamepad2.a) moveArmCounts(ARM_COUNTS_DEPLOY, 0.2);
 
 
             telemetry.addData("FL encoder", hardware.frontLeft.getCurrentPosition());
             telemetry.addData("FR encoder", hardware.frontRight.getCurrentPosition());
             telemetry.addData("RL encoder", hardware.rearLeft.getCurrentPosition());
             telemetry.addData("RR encoder", hardware.rearRight.getCurrentPosition());
+
+            telemetry.addData("Arm encoder", hardware.arm.getCurrentPosition());
             telemetry.update();
         }
 
