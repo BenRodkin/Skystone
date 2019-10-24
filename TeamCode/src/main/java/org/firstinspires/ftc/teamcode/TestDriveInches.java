@@ -49,6 +49,23 @@ public class TestDriveInches extends LinearOpMode {
 
     }
 
+    public void moveArmCounts(int counts, double speed) {
+        hardware.arm.setTargetPosition (hardware.arm.getCurrentPosition() + counts);
+
+        hardware.arm.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.arm.setPower(speed);
+
+        while(opModeIsActive() && hardware.arm.isBusy()) {
+            telemetry.addData("Arm encoder", hardware.arm.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.arm.setPower(0.0);
+
+        hardware.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+    }
 
     public void driveInches(double inches, double speed) {
         driveEncoderCounts((int) (inches * COUNTS_PER_INCH), speed);
