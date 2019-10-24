@@ -35,6 +35,14 @@ public class SLICBotTeleOp extends OpMode {
 
     public final boolean BRAKE_ON_ZERO = true;
 
+    // Speed modifiers
+    public final double SLOW = 0.4;
+    public final double NORMAL = 0.8;
+    public final double FAST = 1.0;
+
+    public double driverSpeedMod = NORMAL;
+
+
 
     // Button cooldowns
     ButtonCooldown gp2_a = new ButtonCooldown();
@@ -97,6 +105,16 @@ public class SLICBotTeleOp extends OpMode {
     }
 
     public void loop() {
+
+
+
+        // Speed Modifiers
+        if(gamepad1.left_bumper) driverSpeedMod = SLOW;
+        else if(gamepad1.right_bumper) driverSpeedMod = FAST;
+        else driverSpeedMod = NORMAL;
+
+
+
 
 
         double drive = gamepad1.left_trigger - gamepad1.right_trigger;
