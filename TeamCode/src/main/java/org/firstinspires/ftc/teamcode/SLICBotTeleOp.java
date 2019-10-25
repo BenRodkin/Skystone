@@ -41,7 +41,7 @@ public class SLICBotTeleOp extends OpMode {
         double drive = -gamepad1.left_trigger + gamepad1.right_trigger;
         double turn = -gamepad1.left_stick_x * 3 / 4;
 
-        if(drive > 0.0) {
+        if(drive < 0.0) {
             hardware.setLeftPower((drive + turn) * hardware.driverSpeedMod);
             hardware.setRightPower((drive - turn) * hardware.driverSpeedMod);
         } else {
