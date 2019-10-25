@@ -90,7 +90,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         turnToHeadingPID(90);
 
-        sleep(1000);        // Allow time to settle
+        sleep(750);        // Allow time to settle
 
         turnToHeadingPID(90);   // Call twice in order to account for occasional errors in heading
 
@@ -148,7 +148,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 //        sleep(1000);
 
         turnToHeadingPID(-90);
-        sleep(1000);
+        sleep(750);
         turnToHeadingPID(-90);
 
 
