@@ -82,7 +82,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         telemetry.update();
 //        sleep(1000);
 
-        driveInches(-21.0, 0.4);
+        driveInches(-6.0, 0.4);
 
         telemetry.addLine("Step 6");
         telemetry.addData("Heading", heading());
