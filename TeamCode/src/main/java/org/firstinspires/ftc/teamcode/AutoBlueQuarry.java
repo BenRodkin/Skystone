@@ -126,6 +126,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 //        sleep(1000);
 
         hardware.clamp.setPosition(0.0);
+        sleep(500);
 
 
         telemetry.addLine("Step 11");
