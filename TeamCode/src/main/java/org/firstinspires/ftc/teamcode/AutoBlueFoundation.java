@@ -20,7 +20,7 @@ public class AutoBlueFoundation extends LinearOpMode {
     BNO055IMU imu;
 
 
-    public void runOpMode() {
+    @Override public void runOpMode() throws InterruptedException {
 
         telemetry.addLine("Initializing hardware");
         telemetry.update();
