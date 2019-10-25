@@ -117,6 +117,25 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(5.0, 0.4);
 
 
+        telemetry.addLine("Step 10");
+        telemetry.update();
+        sleep(1000);
+
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);
+
+        sleep(1000);
+
+        hardware.clamp.setPosition(0.0);
+
+
+        telemetry.addLine("Step 11");
+        telemetry.update();
+        sleep(1000);
+
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+        hardware.clamp.setPosition(1.0);
+
+
 
         while(opModeIsActive()) {
             telemetry.addLine("Finished.");
