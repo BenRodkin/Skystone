@@ -47,7 +47,7 @@ public class SLICBotHardware {
     public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
     public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
 
-    public final int ARM_COUNTS_DEPLOY   = -1150;
+    public final int ARM_COUNTS_DEPLOY   = -1250;
 
 
     // PID variables
