@@ -46,22 +46,22 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         telemetry.addLine("Step 1");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         hardware.clamp.setPosition(0.0);
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
 
         telemetry.addLine("Step 2");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(37.0, 0.4);
 
         telemetry.addLine("Step 3");
         telemetry.update();
-        sleep(1000);
 
         hardware.clamp.setPosition(1.0);
+//        sleep(1000);
 
         hardware.setLeftPower(0.2);
         hardware.setRightPower(0.4);
@@ -73,20 +73,20 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         telemetry.addLine("Step 4");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
 
         telemetry.addLine("Step 5");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(-21.0, 0.4);
 
         telemetry.addLine("Step 6");
         telemetry.addData("Heading", heading());
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         turnToHeadingPID(90);
 
@@ -98,39 +98,39 @@ public class AutoBlueQuarry extends LinearOpMode {
         telemetry.addLine("Step 7");
         telemetry.addData("Heading", heading());
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(93.0, 0.4);
 
 
         telemetry.addLine("Step 8");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         turnToHeadingPID(0);
 
 
         telemetry.addLine("Step 9");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(5.0, 0.4);
 
 
         telemetry.addLine("Step 10");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);
 
-        sleep(1000);
+//        sleep(1000);
 
         hardware.clamp.setPosition(0.0);
 
 
         telemetry.addLine("Step 11");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
         hardware.clamp.setPosition(1.0);
@@ -138,14 +138,14 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         telemetry.addLine("Step 12");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(-7.0, 0.4);
 
 
         telemetry.addLine("Step 13");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         turnToHeadingPID(-90);
         sleep(1000);
@@ -154,7 +154,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         telemetry.addLine("Step 14");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(55.0, 0.4);
 
