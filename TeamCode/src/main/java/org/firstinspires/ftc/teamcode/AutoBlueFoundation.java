@@ -44,10 +44,54 @@ public class AutoBlueFoundation extends LinearOpMode {
         waitForStart();
 
 
+        telemetry.addLine("Step 1");
+        telemetry.update();
+        sleep(1000);
+
+        driveInches(-29.0, 0.4);
+
+
+
+        telemetry.addLine("Step 2");
+        telemetry.update();
+        sleep(1000);
+
+        hardware.holder.setPosition(1.0);
+
+
+        telemetry.addLine("Step 3");
+        telemetry.update();
+        sleep(1000);
+
+        driveInches(24.0, 0.4);
+        hardware.holder.setPosition(0.0);
+
+
+        telemetry.addLine("Step 4");
+        telemetry.update();
+        sleep(1000);
+
+        driveInches(2.0, 0.4);
+
+
+        telemetry.addLine("Step 5");
+        telemetry.update();
+        sleep(1000);
+
+        turnToHeadingPID(-90);
+
+
+        telemetry.addLine("Step 6");
+        telemetry.update();
+        sleep(1000);
+
+        driveInches(48.0, 0.4);
 
 
         while(opModeIsActive()) {
-
+            telemetry.addLine("Finished.");
+            telemetry.addData("Heading", heading());
+            telemetry.update();
         }
     }
 
