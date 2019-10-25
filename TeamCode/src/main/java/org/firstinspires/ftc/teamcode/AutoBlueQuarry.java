@@ -97,6 +97,9 @@ public class AutoBlueQuarry extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
+        driveInches(93.0, 0.4);
+
+
 
         while(opModeIsActive()) {
             telemetry.addLine("Finished.");
