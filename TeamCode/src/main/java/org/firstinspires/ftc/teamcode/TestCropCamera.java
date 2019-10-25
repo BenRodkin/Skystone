@@ -14,7 +14,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 
-@Autonomous
+@Autonomous(name = "Test: Crop Camera", group = "Testing")
 public class TestCropCamera extends LinearOpMode {
 
     OpenCvCamera phoneCam;
