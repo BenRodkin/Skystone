@@ -59,16 +59,14 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         telemetry.addLine("Step 3");
         telemetry.update();
-
-        hardware.clamp.setPosition(1.0);
 //        sleep(1000);
 
-        hardware.setLeftPower(0.2);
-        hardware.setRightPower(0.4);
-        sleep(700);
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(15);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
-        hardware.setLeftPower(0.0);
-        hardware.setRightPower(0.0);
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
 
 
         telemetry.addLine("Step 4");
