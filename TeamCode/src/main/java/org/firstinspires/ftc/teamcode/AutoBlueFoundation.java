@@ -37,6 +37,7 @@ public class AutoBlueFoundation extends LinearOpMode {
         imu.initialize(parameters);
 
         hardware.init(hardwareMap);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -64,7 +65,7 @@ public class AutoBlueFoundation extends LinearOpMode {
         telemetry.addLine("Press dpad_down to stop.");
 
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
-        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
+        //hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
         while (opModeIsActive()) {
