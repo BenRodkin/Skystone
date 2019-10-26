@@ -56,13 +56,13 @@ public class AutoRedQuarry extends LinearOpMode {
 
         telemetry.addLine("Step 2");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         driveInches(37.0, 0.4);
 
         telemetry.addLine("Step 3");
         telemetry.update();
-        sleep(1000);
+//        sleep(1000);
 
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(15);
