@@ -122,7 +122,7 @@ public class AutoRedQuarry extends LinearOpMode {
         telemetry.update();
 //        sleep(1000);
 
-        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 200, 0.3);
 
         sleep(1000);
 
