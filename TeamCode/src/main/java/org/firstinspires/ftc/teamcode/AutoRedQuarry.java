@@ -124,7 +124,7 @@ public class AutoRedQuarry extends LinearOpMode {
 
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);
 
-//        sleep(1000);
+        sleep(1000);
 
         hardware.clamp.setPosition(0.0);
         sleep(500);
