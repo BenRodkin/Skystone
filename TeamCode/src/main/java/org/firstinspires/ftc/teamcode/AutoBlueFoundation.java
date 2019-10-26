@@ -45,7 +45,26 @@ public class AutoBlueFoundation extends LinearOpMode {
         waitForStart();
 
 
-        
+        driveInches(-5.0, 0.4);
+
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(25);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        driveInches(-37.0, 0.3);
+
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(0);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        driveInches(-3.0, 0.4);
+
+        hardware.holder.setPosition(1.0);
+        sleep(500);
+
+        driveInches(45.0, 0.4);
+
+
 
 
         while(opModeIsActive()) {
