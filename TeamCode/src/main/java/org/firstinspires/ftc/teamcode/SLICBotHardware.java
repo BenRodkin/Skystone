@@ -110,6 +110,10 @@ public class SLICBotHardware {
             rearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         }
+
+
+        clamp.setPosition(1.0);
+        holder.setPosition(0.0);
     }
 
 
