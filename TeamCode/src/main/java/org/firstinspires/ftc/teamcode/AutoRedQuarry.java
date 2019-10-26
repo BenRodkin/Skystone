@@ -89,11 +89,11 @@ public class AutoRedQuarry extends LinearOpMode {
         telemetry.update();
 //        sleep(1000);
 
-        turnToHeadingPID(90);
+        turnToHeadingPID(-90);
 
         sleep(750);        // Allow time to settle
 
-        turnToHeadingPID(90);   // Call twice in order to account for occasional errors in heading
+        turnToHeadingPID(-90);   // Call twice in order to account for occasional errors in heading
 
 
         telemetry.addLine("Step 7");
@@ -149,9 +149,9 @@ public class AutoRedQuarry extends LinearOpMode {
         telemetry.update();
 //        sleep(1000);
 
-        turnToHeadingPID(-90);
+        turnToHeadingPID(90);
         sleep(750);
-        turnToHeadingPID(-90);
+        turnToHeadingPID(90);
 
 
         telemetry.addLine("Step 14");
