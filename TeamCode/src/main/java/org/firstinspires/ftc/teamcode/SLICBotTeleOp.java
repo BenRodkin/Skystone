@@ -50,7 +50,6 @@ public class SLICBotTeleOp extends OpMode {
         }
 
         double pulleySpeed = (gamepad2.right_trigger - gamepad2.left_trigger);
-        telemetry.addData("motor position", hardware.pulley.getCurrentPosition());
 
         hardware.pulley.setPower(pulleySpeed);
 
