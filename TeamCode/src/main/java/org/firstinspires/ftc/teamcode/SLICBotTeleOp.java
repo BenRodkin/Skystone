@@ -49,7 +49,7 @@ public class SLICBotTeleOp extends OpMode {
             hardware.setRightPower((drive + turn) * hardware.driverSpeedMod);
         }
 
-        double pulleySpeed = (gamepad2.right_trigger - gamepad2.left_trigger);
+        double pulleySpeed = -gamepad2.right_stick_y;
 
         hardware.pulley.setPower(pulleySpeed);
 
