@@ -53,7 +53,7 @@ public class SLICBotTeleOp extends OpMode {
 
         hardware.pulley.setPower(pulleySpeed);
 
-        hardware.arm.setPower(gamepad2.left_stick_y * 0.4);
+        hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
 
         double runtime = getRuntime();
 
