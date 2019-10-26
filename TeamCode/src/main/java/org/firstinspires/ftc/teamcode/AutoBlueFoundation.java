@@ -48,7 +48,7 @@ public class AutoBlueFoundation extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
-        driveInches(-29.0, 0.4);
+        driveInches(-38.0, 0.4);
 
 
 
@@ -63,7 +63,7 @@ public class AutoBlueFoundation extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
-        driveInches(24.0, 0.4);
+        driveInches(33.0, 0.4);
         hardware.holder.setPosition(0.0);
 
 
