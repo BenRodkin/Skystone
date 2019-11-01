@@ -20,6 +20,13 @@ public class TestArm extends OpMode {
     @Override
     public void loop() {
 
+        if(gamepad2.x) {
+            resetEncoder(hardware.arm);
+        }
+        if(gamepad2.y) {
+            resetEncoder(hardware.pulley);
+        }
+
 
         hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
 
@@ -35,6 +42,10 @@ public class TestArm extends OpMode {
 
     }
 
+    public void resetEncoder(DcMotor motor){
+        DcMotor.RunMode runMode = motor.getMode();
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor.setMode(runMode);
     }
 
 }
