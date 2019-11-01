@@ -8,9 +8,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class TestArm extends OpMode {
     SLICBotHardware hardware = new SLICBotHardware();
 
+    ButtonCooldown gp2_a = new ButtonCooldown();
+
     @Override
     public void init() {
         hardware.init(hardwareMap);
+
+        gp2_a.setCooldown(1.000);
+
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -27,6 +32,12 @@ public class TestArm extends OpMode {
             resetEncoder(hardware.pulley);
         }
 
+        double runtime = getRuntime();
+
+        if (gamepad2.a && gp2_a.ready(runtime)) {
+            hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
+            gp2_a.updateSnapshot(runtime);
+        }
 
         hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
 
