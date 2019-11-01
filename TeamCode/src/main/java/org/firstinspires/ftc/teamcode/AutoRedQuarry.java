@@ -51,6 +51,10 @@ public class AutoRedQuarry extends LinearOpMode {
         telemetry.update();
 //        sleep(1000);
 
+        //------------------------
+        driveInches(5.0, 0.4);
+        //------------------------
+
         hardware.clamp.setPosition(0.0);
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
 
@@ -58,7 +62,9 @@ public class AutoRedQuarry extends LinearOpMode {
         telemetry.update();
 //        sleep(1000);
 
-        driveInches(37.0, 0.4);
+        //------------------------
+        driveInches(32.0, 0.4);
+        //------------------------
 
         telemetry.addLine("Step 3");
         telemetry.update();
