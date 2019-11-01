@@ -21,6 +21,13 @@ public class TestArm extends OpMode {
     public void loop() {
 
 
+        hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
+
+        double pulleySpeed = gamepad2.right_trigger - gamepad2.left_trigger;
+
+        hardware.pulley.setPower(pulleySpeed);
+
+
         telemetry.addData("Arm Position", hardware.arm.getCurrentPosition());
         telemetry.addData("Lift Position", hardware.pulley.getCurrentPosition());
         telemetry.update();
