@@ -79,16 +79,16 @@ public class TestArm extends OpMode {
         }
 
 
-        if (gamepad2.a && gp2_a.ready(runtime)) {
-            hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
-            gp2_a.updateSnapshot(runtime);
-        }
-
-        hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
-
-        double pulleySpeed = gamepad2.right_trigger - gamepad2.left_trigger;
-
-        hardware.pulley.setPower(pulleySpeed);
+//        if (gamepad2.a && gp2_a.ready(runtime)) {
+//            hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
+//            gp2_a.updateSnapshot(runtime);
+//        }
+//
+//        hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
+//
+//        double pulleySpeed = gamepad2.right_trigger - gamepad2.left_trigger;
+//
+//        hardware.pulley.setPower(pulleySpeed);
 
         telemetry.addData("Arm step", armStep);
         telemetry.addData("Lift step", liftStep);
