@@ -39,6 +39,9 @@ public class TestArm extends OpMode {
         gp1_rb  .setCooldown(1.000);
         gp1_y   .setCooldown(1.000);
 
+        hardware.arm.setTargetPosition(ARM_STOWED); // Default target
+        hardware.pulley.setTargetPosition(LIFT_STOWED); // Default target
+
 
         telemetry.addLine("Ready");
         telemetry.update();
