@@ -51,7 +51,6 @@ public class TestArm extends OpMode {
 
 
         // Position cycling
-
         if(gamepad1.right_bumper && gp1_rb.ready(runtime) && liftStep < 4) {
             liftStep ++;
             gp1_rb.updateSnapshot(runtime);
@@ -66,10 +65,55 @@ public class TestArm extends OpMode {
             armStep %= 3;
             gp1_y.updateSnapshot(runtime);
         }
-
-
-
         // End position cycling
+
+        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.arm.setPower(0.3);
+        hardware.pulley.setPower(0.3);
+
+        switch (liftStep) {
+            case 0:
+                hardware.pulley.setTargetPosition(LIFT_STOWED);
+                break;
+            case 1:
+                hardware.pulley.setTargetPosition(LIFT_1);
+                break;
+            case 2:
+                hardware.pulley.setTargetPosition(LIFT_2);
+                break;
+            case 3:
+                hardware.pulley.setTargetPosition(LIFT_3);
+                break;
+            case 4:
+                hardware.pulley.setTargetPosition(LIFT_4);
+                break;
+            default:
+                hardware.pulley.setTargetPosition(LIFT_STOWED);
+                break;
+        }
+
+        switch (armStep) {
+            case 0:
+                hardware.arm.setTargetPosition(ARM_STOWED);
+                break;
+            case 1:
+                hardware.arm.setTargetPosition(ARM_GRABBING);
+                break;
+            case 2:
+                if(liftStep <= 2) {
+                    hardware.arm.setTargetPosition(ARM_PLACING_LOW);
+                } else {
+                    hardware.arm.setTargetPosition(ARM_PLACING_HIGH);
+                }
+                break;
+            default:
+                hardware.arm.setTargetPosition(ARM_STOWED);
+                break;
+        }
+
+
 
         if(gamepad2.x) {
             resetEncoder(hardware.arm);
