@@ -8,13 +8,36 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class TestArm extends OpMode {
     SLICBotHardware hardware = new SLICBotHardware();
 
-    ButtonCooldown gp2_a = new ButtonCooldown();
+    ButtonCooldown gp2_a    = new ButtonCooldown();
+    ButtonCooldown gp1_lb   = new ButtonCooldown();
+    ButtonCooldown gp1_rb   = new ButtonCooldown();
+    ButtonCooldown gp1_y    = new ButtonCooldown();
+
+
+    public final int ARM_STOWED         = 0;
+    public final int ARM_GRABBING       = -1200;
+    public final int ARM_PLACING_LOW    = -1200;
+    public final int ARM_PLACING_HIGH   = -900;
+
+    public final int LIFT_STOWED    = 0;
+    public final int LIFT_1         = 3468;
+    public final int LIFT_2         = 7951;
+    public final int LIFT_3         = 5879;
+    public final int LIFT_4         = 9642;
+
+    public int liftStep = 0;
+    public int armStep  = 0;
+
+
 
     @Override
     public void init() {
         hardware.init(hardwareMap);
 
-        gp2_a.setCooldown(1.000);
+        gp2_a   .setCooldown(1.000);
+        gp1_lb  .setCooldown(1.000);
+        gp1_rb  .setCooldown(1.000);
+        gp1_y   .setCooldown(1.000);
 
 
         telemetry.addLine("Ready");
@@ -24,6 +47,29 @@ public class TestArm extends OpMode {
 
     @Override
     public void loop() {
+        double runtime = getRuntime();
+
+
+        // Position cycling
+
+        if(gamepad1.right_bumper && gp1_rb.ready(runtime) && liftStep < 4) {
+            liftStep ++;
+            gp1_rb.updateSnapshot(runtime);
+        }
+        if(gamepad1.left_bumper && gp1_lb.ready(runtime) && liftStep > 0) {
+            liftStep --;
+            gp1_lb.updateSnapshot(runtime);
+        }
+
+        if(gamepad1.y && gp1_y.ready(runtime)) {
+            armStep ++;
+            armStep %= 3;
+            gp1_y.updateSnapshot(runtime);
+        }
+
+
+
+        // End position cycling
 
         if(gamepad2.x) {
             resetEncoder(hardware.arm);
@@ -32,7 +78,6 @@ public class TestArm extends OpMode {
             resetEncoder(hardware.pulley);
         }
 
-        double runtime = getRuntime();
 
         if (gamepad2.a && gp2_a.ready(runtime)) {
             hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
@@ -45,7 +90,9 @@ public class TestArm extends OpMode {
 
         hardware.pulley.setPower(pulleySpeed);
 
-
+        telemetry.addData("Arm step", armStep);
+        telemetry.addData("Lift step", liftStep);
+        telemetry.addLine();
         telemetry.addData("Arm Position", hardware.arm.getCurrentPosition());
         telemetry.addData("Lift Position", hardware.pulley.getCurrentPosition());
         telemetry.update();
