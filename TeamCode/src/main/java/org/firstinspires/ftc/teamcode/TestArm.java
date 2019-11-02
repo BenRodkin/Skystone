@@ -42,6 +42,9 @@ public class TestArm extends OpMode {
         hardware.arm.setTargetPosition(ARM_STOWED); // Default target
         hardware.pulley.setTargetPosition(LIFT_STOWED); // Default target
 
+        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -69,9 +72,6 @@ public class TestArm extends OpMode {
             gp1_y.updateSnapshot(runtime);
         }
         // End position cycling
-
-        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         hardware.arm.setPower(0.3);
         hardware.pulley.setPower(0.3);
