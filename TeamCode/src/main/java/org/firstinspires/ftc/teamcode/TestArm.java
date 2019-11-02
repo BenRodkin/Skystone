@@ -25,8 +25,8 @@ public class TestArm extends OpMode {
     public final int LIFT_3         = 5879;
     public final int LIFT_4         = 9642;
 
-    public int liftStep = 0;
-    public int armStep  = 0;
+    public int liftStep = -1;   // Default state (cannot be reached during driver control)
+    public int armStep  = -1;   // Default state (cannot be reached during driver control)
 
 
 
@@ -39,8 +39,8 @@ public class TestArm extends OpMode {
         gp1_rb  .setCooldown(1.000);
         gp1_y   .setCooldown(1.000);
 
-        hardware.arm.setTargetPosition(ARM_STOWED); // Default target
-        hardware.pulley.setTargetPosition(LIFT_STOWED); // Default target
+        hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition()); // Default target
+        hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition()); // Default target
 
         hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -77,6 +77,9 @@ public class TestArm extends OpMode {
         hardware.pulley.setPower(0.3);
 
         switch (liftStep) {
+            case -1:
+                hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
+                break;
             case 0:
                 hardware.pulley.setTargetPosition(LIFT_STOWED);
                 break;
@@ -98,6 +101,9 @@ public class TestArm extends OpMode {
         }
 
         switch (armStep) {
+            case -1:
+                hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
+                break;
             case 0:
                 hardware.arm.setTargetPosition(ARM_STOWED);
                 break;
