@@ -76,6 +76,8 @@ public class TestArm extends OpMode {
         hardware.arm.setPower(0.3);
         hardware.pulley.setPower(0.3);
 
+        int armPlacingVal = ( liftStep <= 2 ? ARM_PLACING_LOW : ARM_PLACING_HIGH);
+
         switch (liftStep) {
             case -1:
                 hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
@@ -111,11 +113,7 @@ public class TestArm extends OpMode {
                 hardware.arm.setTargetPosition(ARM_GRABBING);
                 break;
             case 2:
-                if(liftStep <= 2) {
-                    hardware.arm.setTargetPosition(ARM_PLACING_LOW);
-                } else {
-                    hardware.arm.setTargetPosition(ARM_PLACING_HIGH);
-                }
+                hardware.arm.setTargetPosition(armPlacingVal);
                 break;
             default:
                 hardware.arm.setTargetPosition(ARM_STOWED);
