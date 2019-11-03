@@ -131,14 +131,18 @@ public class SLICBotTeleOp extends OpMode {
                 default:
                     break;
             }
-            hardware.pulley.setPower(0.3);
+            hardware.pulley.setPower(
+                    (hardware.pulley.getTargetPosition() - hardware.pulley.getCurrentPosition()) > 0.0 ?
+                            1.0 : 0.3);
         } else if(Math.abs(gamepad2.right_trigger - gamepad2.left_trigger) > ANALOG_THRESHOLD){
             hardware.pulley.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             hardware.pulley.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
             hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
         } else {
             hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            hardware.pulley.setPower(0.3);
+            hardware.pulley.setPower(
+                    (hardware.pulley.getTargetPosition() - hardware.pulley.getCurrentPosition()) > 0.0 ?
+                            1.0 : 0.3);
         }
 
         if(gamepad2.y) {
