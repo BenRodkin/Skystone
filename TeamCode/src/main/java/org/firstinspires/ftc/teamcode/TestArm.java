@@ -79,7 +79,7 @@ public class TestArm extends OpMode {
         // End position cycling
 
 
-        if( Math.abs(gamepad2.right_trigger - gamepad2.left_trigger) < ANALOG_THRESHOLD) {
+        if(gamepad2.left_bumper || gamepad2.right_bumper) {
             hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             switch (liftStep) {
                 case -1:
@@ -110,7 +110,7 @@ public class TestArm extends OpMode {
             hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
         }
 
-        if( Math.abs(gamepad2.left_stick_y) < ANALOG_THRESHOLD) {
+        if(gamepad2.y) {
             hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             switch (armStep) {
                 case -1:
@@ -134,7 +134,6 @@ public class TestArm extends OpMode {
             hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
             hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
         }
-
 
 
 
