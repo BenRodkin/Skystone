@@ -104,10 +104,13 @@ public class TestArm extends OpMode {
                     break;
             }
             hardware.pulley.setPower(0.3);
-        } else {
+        } else if(Math.abs(gamepad2.right_trigger - gamepad2.left_trigger) > ANALOG_THRESHOLD){
             hardware.pulley.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             hardware.pulley.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
             hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
+        } else {
+            hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.pulley.setPower(0.3);
         }
 
         if(gamepad2.y) {
@@ -129,10 +132,13 @@ public class TestArm extends OpMode {
                     break;
             }
             hardware.arm.setPower(0.3);
-        } else {
+        } else if(Math.abs(gamepad2.left_stick_y) > ANALOG_THRESHOLD) {
             hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
             hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
+        } else {
+            hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.arm.setPower(0.3);
         }
 
 
