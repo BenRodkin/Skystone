@@ -29,6 +29,9 @@ public class TestArm extends OpMode {
     public int armStep  = -1;   // Default state (cannot be reached during driver control)
 
 
+    public final double ANALOG_THRESHOLD = 0.05;
+
+
 
     @Override
     public void init() {
@@ -71,54 +74,68 @@ public class TestArm extends OpMode {
             armStep %= 3;
             gp2_y.updateSnapshot(runtime);
         }
-        // End position cycling
-
-        hardware.arm.setPower(0.3);
-        hardware.pulley.setPower(0.3);
 
         int armPlacingVal = ( liftStep <= 2 ? ARM_PLACING_LOW : ARM_PLACING_HIGH);
+        // End position cycling
 
-        switch (liftStep) {
-            case -1:
-                hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
-                break;
-            case 0:
-                hardware.pulley.setTargetPosition(LIFT_STOWED);
-                break;
-            case 1:
-                hardware.pulley.setTargetPosition(LIFT_1);
-                break;
-            case 2:
-                hardware.pulley.setTargetPosition(LIFT_2);
-                break;
-            case 3:
-                hardware.pulley.setTargetPosition(LIFT_3);
-                break;
-            case 4:
-                hardware.pulley.setTargetPosition(LIFT_4);
-                break;
-            default:
-                hardware.pulley.setTargetPosition(LIFT_STOWED);
-                break;
+
+        if( Math.abs(gamepad2.right_trigger - gamepad2.left_trigger) < ANALOG_THRESHOLD) {
+            hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            switch (liftStep) {
+                case -1:
+                    hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
+                    break;
+                case 0:
+                    hardware.pulley.setTargetPosition(LIFT_STOWED);
+                    break;
+                case 1:
+                    hardware.pulley.setTargetPosition(LIFT_1);
+                    break;
+                case 2:
+                    hardware.pulley.setTargetPosition(LIFT_2);
+                    break;
+                case 3:
+                    hardware.pulley.setTargetPosition(LIFT_3);
+                    break;
+                case 4:
+                    hardware.pulley.setTargetPosition(LIFT_4);
+                    break;
+                default:
+                    break;
+            }
+            hardware.pulley.setPower(0.3);
+        } else {
+            hardware.pulley.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hardware.pulley.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+            hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition());
         }
 
-        switch (armStep) {
-            case -1:
-                hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
-                break;
-            case 0:
-                hardware.arm.setTargetPosition(ARM_STOWED);
-                break;
-            case 1:
-                hardware.arm.setTargetPosition(ARM_GRABBING);
-                break;
-            case 2:
-                hardware.arm.setTargetPosition(armPlacingVal);
-                break;
-            default:
-                hardware.arm.setTargetPosition(ARM_STOWED);
-                break;
+        if( Math.abs(gamepad2.left_stick_y) < ANALOG_THRESHOLD) {
+            hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            switch (armStep) {
+                case -1:
+                    hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
+                    break;
+                case 0:
+                    hardware.arm.setTargetPosition(ARM_STOWED);
+                    break;
+                case 1:
+                    hardware.arm.setTargetPosition(ARM_GRABBING);
+                    break;
+                case 2:
+                    hardware.arm.setTargetPosition(armPlacingVal);
+                    break;
+                default:
+                    break;
+            }
+            hardware.arm.setPower(0.3);
+        } else {
+            hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
+            hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
         }
+
+
 
 
 
@@ -146,6 +163,9 @@ public class TestArm extends OpMode {
         telemetry.addLine();
         telemetry.addData("Arm Position", hardware.arm.getCurrentPosition());
         telemetry.addData("Lift Position", hardware.pulley.getCurrentPosition());
+        telemetry.addLine();
+        telemetry.addData("Arm run mode", hardware.arm.getMode());
+        telemetry.addData("Lift run mode", hardware.pulley.getMode());
         telemetry.update();
 
 
