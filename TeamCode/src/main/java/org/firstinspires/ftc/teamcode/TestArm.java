@@ -9,9 +9,9 @@ public class TestArm extends OpMode {
     SLICBotHardware hardware = new SLICBotHardware();
 
     ButtonCooldown gp2_a    = new ButtonCooldown();
-    ButtonCooldown gp1_lb   = new ButtonCooldown();
-    ButtonCooldown gp1_rb   = new ButtonCooldown();
-    ButtonCooldown gp1_y    = new ButtonCooldown();
+    ButtonCooldown gp2_lb   = new ButtonCooldown();
+    ButtonCooldown gp2_rb   = new ButtonCooldown();
+    ButtonCooldown gp2_y    = new ButtonCooldown();
 
 
     public final int ARM_STOWED         = 0;
@@ -35,9 +35,9 @@ public class TestArm extends OpMode {
         hardware.init(hardwareMap);
 
         gp2_a   .setCooldown(1.000);
-        gp1_lb  .setCooldown(1.000);
-        gp1_rb  .setCooldown(1.000);
-        gp1_y   .setCooldown(1.000);
+        gp2_lb  .setCooldown(1.000);
+        gp2_rb  .setCooldown(1.000);
+        gp2_y   .setCooldown(1.000);
 
         hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition()); // Default target
         hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition()); // Default target
@@ -57,19 +57,19 @@ public class TestArm extends OpMode {
 
 
         // Position cycling
-        if(gamepad1.right_bumper && gp1_rb.ready(runtime) && liftStep < 4) {
+        if(gamepad2.right_bumper && gp2_rb.ready(runtime) && liftStep < 4) {
             liftStep ++;
-            gp1_rb.updateSnapshot(runtime);
+            gp2_rb.updateSnapshot(runtime);
         }
-        if(gamepad1.left_bumper && gp1_lb.ready(runtime) && liftStep > 0) {
+        if(gamepad2.left_bumper && gp2_lb.ready(runtime) && liftStep > 0) {
             liftStep --;
-            gp1_lb.updateSnapshot(runtime);
+            gp2_lb.updateSnapshot(runtime);
         }
 
-        if(gamepad1.y && gp1_y.ready(runtime)) {
+        if(gamepad2.y && gp2_y.ready(runtime)) {
             armStep ++;
             armStep %= 3;
-            gp1_y.updateSnapshot(runtime);
+            gp2_y.updateSnapshot(runtime);
         }
         // End position cycling
 
@@ -122,10 +122,10 @@ public class TestArm extends OpMode {
 
 
 
-        if(gamepad2.x) {
+        if(gamepad1.x) {
             resetEncoder(hardware.arm);
         }
-        if(gamepad2.y) {
+        if(gamepad1.y) {
             resetEncoder(hardware.pulley);
         }
 
