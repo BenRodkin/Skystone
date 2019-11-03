@@ -130,10 +130,10 @@ public class TestArm extends OpMode {
         }
 
 
-//        if (gamepad2.a && gp2_a.ready(runtime)) {
-//            hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
-//            gp2_a.updateSnapshot(runtime);
-//        }
+        if (gamepad2.a && gp2_a.ready(runtime)) {
+             hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
+            gp2_a.updateSnapshot(runtime);
+        }
 //
 //        hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
 //
