@@ -14,6 +14,7 @@ public class SLICBotTeleOp extends OpMode {
     // Button cooldowns
     ButtonCooldown gp2_a = new ButtonCooldown();
     ButtonCooldown gp2_x = new ButtonCooldown();
+    public double runtime;
 
     public void init() {
 
@@ -26,6 +27,8 @@ public class SLICBotTeleOp extends OpMode {
     }
 
     public void loop() {
+
+        runtime = getRuntime();
 
 
 
@@ -55,7 +58,6 @@ public class SLICBotTeleOp extends OpMode {
 
         hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
 
-        double runtime = getRuntime();
 
         if (gamepad2.a && gp2_a.ready(runtime)) {
             hardware.clamp.setPosition(Math.abs(hardware.clamp.getPosition() - 1));
