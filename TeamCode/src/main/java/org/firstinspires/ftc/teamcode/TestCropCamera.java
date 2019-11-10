@@ -22,9 +22,9 @@ public class TestCropCamera extends LinearOpMode {
     OpenCvCamera phoneCam;
     StageSwitchingPipeline stageSwitchingPipeline;
 
-    public double rectTop = 0.0;
-    public double rectLeft = 0.0;
-    public double rectBot = 0.0;
+    public double rectTop   = 0.0;
+    public double rectLeft  = 0.0;
+    public double rectBot   = 0.0;
     public double rectRight = 0.0;
 
 
