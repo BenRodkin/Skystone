@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+@Disabled
 @TeleOp (name = "Test: Arm & Lift Presets", group = "Testing")
 public class TestArm extends OpMode {
     SLICBotHardware hardware = new SLICBotHardware();
