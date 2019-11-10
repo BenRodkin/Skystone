@@ -35,6 +35,7 @@ public class TestCropCamera extends LinearOpMode {
     public final double TRIGGER_THRESHOLD = 0.7;
 
     public final double RECT_STEP = 1.0;
+    public final double RECT_MIN = 0.0;
 
     public static int numCols = -1;
     public static int numRows = -1;
@@ -74,20 +75,24 @@ public class TestCropCamera extends LinearOpMode {
                         ~ top left corner means top and left move, similar for bottom right corner
              */
 
-            if(gamepad1.dpad_up) {
-                if(grabbingTopLeft) rectTop     -= RECT_STEP;
-                else                rectBot     -= RECT_STEP;
-            } else if(gamepad1.dpad_down) {
-                if(grabbingTopLeft) rectTop     += RECT_STEP;
-                else                rectBot     += RECT_STEP;
+            if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
+                if(grabbingTopLeft) rectTop     = trim(rectTop - RECT_STEP, RECT_MIN, numCols);
+                else                rectBot     = trim(rectBot - RECT_STEP, RECT_MIN, numCols);
+                gp1.dpUp.updateSnapshot(runtime);
+            } else if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
+                if(grabbingTopLeft) rectTop     = trim(rectTop + RECT_STEP, RECT_MIN, numCols);
+                else                rectBot     = trim(rectBot + RECT_STEP, RECT_MIN, numCols);
+                gp1.dpDown.updateSnapshot(runtime);
             }
 
-            if(gamepad1.dpad_left) {
-                if(grabbingTopLeft) rectLeft    -= RECT_STEP;
-                else                rectRight   -= RECT_STEP;
-            } else if(gamepad1.dpad_right) {
-                if(grabbingTopLeft) rectLeft    += RECT_STEP;
-                else                rectRight   += RECT_STEP;
+            if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
+                if(grabbingTopLeft) rectLeft    = trim(rectLeft - RECT_STEP, RECT_MIN, numRows);
+                else                rectRight   = trim(rectRight - RECT_STEP, RECT_MIN, numRows);
+                gp1.dpLeft.updateSnapshot(runtime);
+            } else if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
+                if(grabbingTopLeft) rectLeft    = trim(rectLeft + RECT_STEP, RECT_MIN, numRows);
+                else                rectRight   = trim(rectRight + RECT_STEP, RECT_MIN, numRows);
+                gp1.dpRight.updateSnapshot(runtime);
             }
 
             grabbingTopLeft = (gamepad1.left_trigger > TRIGGER_THRESHOLD); // True if left trigger is held down
@@ -116,8 +121,13 @@ public class TestCropCamera extends LinearOpMode {
 
     }
 
-    static class StageSwitchingPipeline extends OpenCvPipeline {
+    public double trim(double input, double min, double max) {
+        if(input < min) input = min;
+        if(input > max) input = max;
+        return input;
+    }
 
+    static class StageSwitchingPipeline extends OpenCvPipeline {
 
         @Override
         public Mat processFrame(Mat input) {
