@@ -50,6 +50,10 @@ public class TestCropCamera extends LinearOpMode {
         while(opModeIsActive()) {
 
 
+            //////////////////////////////////////////////////
+            // START CROP CONTROLS
+            //////////////////////////////////////////////////
+
             /*
                 Controls:
                     - Holding gp1.lt grabs top left corner
@@ -62,6 +66,29 @@ public class TestCropCamera extends LinearOpMode {
                     - Bounds moved depends on which corner is grabbed
                         ~ top left corner means top and left move, similar for bottom right corner
              */
+
+            if(gamepad1.dpad_up) {
+                if(grabbingTopLeft) rectTop     += RECT_STEP;
+                else                rectBot     += RECT_STEP;
+            } else if(gamepad1.dpad_down) {
+                if(grabbingTopLeft) rectTop     -= RECT_STEP;
+                else                rectBot     -= RECT_STEP;
+            }
+
+            if(gamepad1.dpad_left) {
+                if(grabbingTopLeft) rectLeft    += RECT_STEP;
+                else                rectRight   += RECT_STEP;
+            } else if(gamepad1.dpad_right) {
+                if(grabbingTopLeft) rectLeft    -= RECT_STEP;
+                else                rectRight   -= RECT_STEP;
+            }
+
+            grabbingTopLeft = (gamepad1.left_trigger > TRIGGER_THRESHOLD); // True if left trigger is held down
+
+            //////////////////////////////////////////////////
+            // END CROP CONTROLS
+            //////////////////////////////////////////////////
+
 
 
 
