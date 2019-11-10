@@ -22,6 +22,12 @@ public class TestCropCamera extends LinearOpMode {
     OpenCvCamera phoneCam;
     StageSwitchingPipeline stageSwitchingPipeline;
 
+    public double rectTop = 0.0;
+    public double rectLeft = 0.0;
+    public double rectBot = 0.0;
+    public double rectRight = 0.0;
+
+
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
@@ -38,7 +44,14 @@ public class TestCropCamera extends LinearOpMode {
         while(opModeIsActive()) {
 
 
+            
+
+
             telemetry.addLine("Running");
+            telemetry.addData("rectTop",    rectTop);
+            telemetry.addData("rectLeft",   rectLeft);
+            telemetry.addData("rectBot",    rectBot);
+            telemetry.addData("rectRight",  rectRight);
             telemetry.update();
         }
 
