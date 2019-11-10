@@ -29,10 +29,18 @@ public class TestCropCamera extends LinearOpMode {
         phoneCam.setPipeline(stageSwitchingPipeline);
         phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
 
+
+        telemetry.addLine("Ready");
+        telemetry.update();
         waitForStart();
 
         while(opModeIsActive()) {
 
+
+
+
+            telemetry.addLine("Running");
+            telemetry.update();
         }
 
 
