@@ -22,6 +22,8 @@ public class TestCropCamera extends LinearOpMode {
     OpenCvCamera phoneCam;
     StageSwitchingPipeline stageSwitchingPipeline;
 
+    GamepadCooldowns gp1 = new GamepadCooldowns();
+
     public double rectTop   = 0.0;
     public double rectLeft  = 0.0;
     public double rectBot   = 0.0;
@@ -32,7 +34,7 @@ public class TestCropCamera extends LinearOpMode {
 
     public final double TRIGGER_THRESHOLD = 0.7;
 
-    public final double RECT_STEP = 0.01;
+    public final double RECT_STEP = 1.0;
 
     public static int numCols = -1;
     public static int numRows = -1;
@@ -51,6 +53,8 @@ public class TestCropCamera extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()) {
+
+            double runtime = getRuntime();
 
 
             //////////////////////////////////////////////////
