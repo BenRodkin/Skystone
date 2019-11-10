@@ -46,7 +46,19 @@ public class TestCropCamera extends LinearOpMode {
         while(opModeIsActive()) {
 
 
-            
+            /*
+                Controls:
+                    - Holding gp1.lt grabs top left corner
+                    - Releasing gp1.lt grabs bottom right corner
+                    - Dpad controls:
+                        ~ gp1.dp_up:    move horizontal bound up
+                        ~ gp1.dp_down:  move horizontal bound down
+                        ~ gp1.dp_left:  move vertical bound left
+                        ~ gp1.dp_right: move vertical bound right
+                    - Bounds moved depends on which corner is grabbed
+                        ~ top left corner means top and left move, similar for bottom right corner
+             */
+
 
 
             telemetry.addLine("Running");
