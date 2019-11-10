@@ -27,6 +27,8 @@ public class TestCropCamera extends LinearOpMode {
     public double rectBot   = 0.0;
     public double rectRight = 0.0;
 
+    public boolean grabbingTopLeft = false;
+
 
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -52,6 +54,8 @@ public class TestCropCamera extends LinearOpMode {
             telemetry.addData("rectLeft",   rectLeft);
             telemetry.addData("rectBot",    rectBot);
             telemetry.addData("rectRight",  rectRight);
+            telemetry.addLine();
+            telemetry.addData("grabbingTopLeft", grabbingTopLeft);
             telemetry.update();
         }
 
