@@ -30,6 +30,9 @@ public class TestCropCamera extends LinearOpMode {
     public boolean grabbingTopLeft = false;
 
 
+    public final double TRIGGER_THRESHOLD = 0.7;
+
+
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
