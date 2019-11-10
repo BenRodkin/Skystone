@@ -33,7 +33,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@TeleOp
+@TeleOp(name = "OpenFTC Camera Example", group = "Testing")
 public class InternalCameraExample extends LinearOpMode
 {
     OpenCvCamera phoneCam;
