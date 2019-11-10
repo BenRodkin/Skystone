@@ -32,6 +32,7 @@ public class TestCropCamera extends LinearOpMode {
 
     public final double TRIGGER_THRESHOLD = 0.7;
 
+    public final double RECT_STEP = 0.01;
 
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
