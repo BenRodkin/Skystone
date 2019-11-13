@@ -44,6 +44,7 @@ public class TestExternalCamera extends LinearOpMode {
 
 
             telemetry.addLine("Running");
+            telemetry.addData("Webcam data", webcam.getCameraCharacteristics().getSizes(ImageFormat.YUY2).length);
             telemetry.update();
         }
 
