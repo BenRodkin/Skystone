@@ -29,6 +29,11 @@ public class TestExternalCamera extends LinearOpMode {
         );
 
 
+        webcam.openCameraDevice();
+        webcam.setPipeline(new StageSwitchingPipeline());
+        webcam.startStreaming(1920, 1080, OpenCvCameraRotation.UPRIGHT);
+
+
         telemetry.addLine("Ready");
         telemetry.update();
 
