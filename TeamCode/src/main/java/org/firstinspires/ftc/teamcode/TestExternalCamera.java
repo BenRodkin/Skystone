@@ -29,7 +29,10 @@ public class TestExternalCamera extends LinearOpMode {
 
 
         while(opModeIsActive()) {
-            
+
+
+            telemetry.addLine("Running");
+            telemetry.update();
         }
 
     }
