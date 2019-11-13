@@ -13,9 +13,26 @@ import org.openftc.easyopencv.OpenCvPipeline;
 @Autonomous(name = "Test: External Camera", group = "Testing")
 public class TestExternalCamera extends LinearOpMode {
 
+    SLICBotHardware hardware = new SLICBotHardware();
+    WebcamName webcamName;
 
     public void runOpMode() {
 
+        hardware.init(hardwareMap);
+        webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+
+
+        telemetry.addLine("Ready");
+        telemetry.update();
+
+        waitForStart();
+
+
+        while(opModeIsActive()) {
+            
+        }
+
+    }
 
     static class StageSwitchingPipeline extends OpenCvPipeline {
 
