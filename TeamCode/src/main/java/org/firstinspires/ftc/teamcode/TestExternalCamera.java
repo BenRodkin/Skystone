@@ -16,6 +16,28 @@ public class TestExternalCamera extends LinearOpMode {
 
     public void runOpMode() {
 
+
+    static class StageSwitchingPipeline extends OpenCvPipeline {
+
+        @Override
+        public Mat processFrame(Mat input) {
+
+//            numCols = input.cols();
+//            numRows = input.rows();
+
+
+            Imgproc.rectangle(
+                    input,
+                    new Point(
+                            input.cols()/4,
+                            input.rows()/4),
+                    new Point(
+                            input.cols()*(3f/4f),
+                            input.rows()*(3f/4f)),
+                    new Scalar(0, 255, 0), 4);
+
+            return input;
+        }
     }
 }
 
