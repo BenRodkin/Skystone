@@ -37,8 +37,11 @@ public class TestCropCamera extends LinearOpMode {
     public final double RECT_STEP = 1.0;
     public final double RECT_MIN = 0.0;
 
-    public static int numCols = -1;
-    public static int numRows = -1;
+//    public static int numCols = -1;
+//    public static int numRows = -1;
+
+    public final int IMG_WIDTH = 640;
+    public final int IMG_HEIGHT = 480;
 
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -46,7 +49,7 @@ public class TestCropCamera extends LinearOpMode {
         phoneCam.openCameraDevice();
         stageSwitchingPipeline = new StageSwitchingPipeline();
         phoneCam.setPipeline(stageSwitchingPipeline);
-        phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+        phoneCam.startStreaming(IMG_WIDTH, IMG_HEIGHT, OpenCvCameraRotation.UPRIGHT);
 
 
         telemetry.addLine("Ready");
@@ -76,22 +79,22 @@ public class TestCropCamera extends LinearOpMode {
              */
 
             if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
-                if(grabbingTopLeft) rectTop     = trim(rectTop - RECT_STEP, RECT_MIN, numCols);
-                else                rectBot     = trim(rectBot - RECT_STEP, RECT_MIN, numCols);
+                if(grabbingTopLeft) rectTop     = trim(rectTop - RECT_STEP, RECT_MIN, IMG_HEIGHT);
+                else                rectBot     = trim(rectBot - RECT_STEP, RECT_MIN, IMG_HEIGHT);
                 gp1.dpUp.updateSnapshot(runtime);
             } else if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
-                if(grabbingTopLeft) rectTop     = trim(rectTop + RECT_STEP, RECT_MIN, numCols);
-                else                rectBot     = trim(rectBot + RECT_STEP, RECT_MIN, numCols);
+                if(grabbingTopLeft) rectTop     = trim(rectTop + RECT_STEP, RECT_MIN, IMG_HEIGHT);
+                else                rectBot     = trim(rectBot + RECT_STEP, RECT_MIN, IMG_HEIGHT);
                 gp1.dpDown.updateSnapshot(runtime);
             }
 
             if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
-                if(grabbingTopLeft) rectLeft    = trim(rectLeft - RECT_STEP, RECT_MIN, numRows);
-                else                rectRight   = trim(rectRight - RECT_STEP, RECT_MIN, numRows);
+                if(grabbingTopLeft) rectLeft    = trim(rectLeft - RECT_STEP, RECT_MIN, IMG_WIDTH);
+                else                rectRight   = trim(rectRight - RECT_STEP, RECT_MIN, IMG_WIDTH);
                 gp1.dpLeft.updateSnapshot(runtime);
             } else if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
-                if(grabbingTopLeft) rectLeft    = trim(rectLeft + RECT_STEP, RECT_MIN, numRows);
-                else                rectRight   = trim(rectRight + RECT_STEP, RECT_MIN, numRows);
+                if(grabbingTopLeft) rectLeft    = trim(rectLeft + RECT_STEP, RECT_MIN, IMG_WIDTH);
+                else                rectRight   = trim(rectRight + RECT_STEP, RECT_MIN, IMG_WIDTH);
                 gp1.dpRight.updateSnapshot(runtime);
             }
 
@@ -112,8 +115,8 @@ public class TestCropCamera extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("grabbingTopLeft", grabbingTopLeft);
             telemetry.addLine();
-            telemetry.addData("Columns", numCols);
-            telemetry.addData("Rows", numRows);
+//            telemetry.addData("Columns", numCols);
+//            telemetry.addData("Rows", numRows);
             telemetry.update();
         }
 
@@ -132,8 +135,8 @@ public class TestCropCamera extends LinearOpMode {
         @Override
         public Mat processFrame(Mat input) {
 
-            numCols = input.cols();
-            numRows = input.rows();
+//            numCols = input.cols();
+//            numRows = input.rows();
 
 
             Imgproc.rectangle(
