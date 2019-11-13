@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.ImageFormat;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -8,18 +10,23 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
+import org.openftc.easyopencv.OpenCvWebcam;
 
 @Autonomous(name = "Test: External Camera", group = "Testing")
 public class TestExternalCamera extends LinearOpMode {
 
     SLICBotHardware hardware = new SLICBotHardware();
-    WebcamName webcamName;
+    OpenCvWebcam webcam;
 
     public void runOpMode() {
 
-        hardware.init(hardwareMap);
-        webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        //hardware.init(hardwareMap);
+        webcam = new OpenCvWebcam(
+                hardwareMap.get(WebcamName.class, "Webcam 1"),
+                hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())
+        );
 
 
         telemetry.addLine("Ready");
