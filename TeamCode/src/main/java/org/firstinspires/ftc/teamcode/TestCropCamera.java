@@ -27,17 +27,17 @@ public class TestCropCamera extends LinearOpMode {
     public final int IMG_WIDTH = 640;
     public final int IMG_HEIGHT = 480;
 
-    public double rectTop   = 0.0;
-    public double rectLeft  = 0.0;
-    public double rectBot   = 0.0;
-    public double rectRight = 0.0;
+    public static double rectTop   = 0.0;
+    public static double rectLeft  = 0.0;
+    public static double rectBot   = 0.0;
+    public static double rectRight = 0.0;
 
     public boolean grabbingTopLeft = false;
 
 
     public final double TRIGGER_THRESHOLD = 0.7;
 
-    public final double RECT_STEP = 1.0;
+    public final double RECT_STEP = 4.0;
     public final double RECT_MIN = 0.0;
 
 //    public static int numCols = -1;
@@ -141,13 +141,13 @@ public class TestCropCamera extends LinearOpMode {
 
             Imgproc.rectangle(
                     input,
-                    new Point(
-                            input.cols()/4,
-                            input.rows()/4),
-                    new Point(
-                            input.cols()*(3f/4f),
-                            input.rows()*(3f/4f)),
-                    new Scalar(0, 255, 0), 4);
+                    new Point(  // Top left corner
+                            rectLeft,   // Left value
+                            rectTop),   // Top value
+                    new Point( // Bottom right corner
+                            rectRight,  // Right value
+                            rectBot),   // Bottom value
+                    new Scalar(0, 255, 0), 4); // Line color and thickness
 
             return input;
         }
