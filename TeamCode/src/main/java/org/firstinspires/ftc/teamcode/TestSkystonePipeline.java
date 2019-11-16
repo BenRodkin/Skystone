@@ -82,9 +82,6 @@ public class TestSkystonePipeline extends LinearOpMode {
 
             // Modify threshold variables if the buttons are pressed and thresholds are within outer limits 0 & 255
 
-            // Update runtime once every cycle
-            double runtime = getRuntime();
-
             // HUE MINIMUM
             if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
                 if (hsvHue[0] > HSV_MIN)   hsvHue[0] -= THRESHOLD_STEP;
