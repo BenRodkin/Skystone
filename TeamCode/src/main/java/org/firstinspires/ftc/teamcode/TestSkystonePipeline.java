@@ -100,7 +100,7 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
 
-            return input;
+            return hsvThresholdOutput;
         }
 
 
