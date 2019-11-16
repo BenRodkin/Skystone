@@ -73,9 +73,9 @@ public class TestSkystonePipeline extends LinearOpMode {
 
             // Step HSV_Threshold0:
             Mat hsvThresholdInput = input;
-            double[] hsvThresholdHue = {17.805755395683452, 26.41638225255974};
-            double[] hsvThresholdSaturation = {135.29676258992808, 255.0};
-            double[] hsvThresholdValue = {114.65827338129496, 235.41808873720134};
+            double[] hsvThresholdHue =          {15.0, 30.0};
+            double[] hsvThresholdSaturation =   {125.0, 255.0};
+            double[] hsvThresholdValue =        {110.0, 255.0};
             hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
             // Step Find_Contours0:
