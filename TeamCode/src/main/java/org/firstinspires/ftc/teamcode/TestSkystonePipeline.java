@@ -39,9 +39,9 @@ public class TestSkystonePipeline extends LinearOpMode {
     private final double VAL_MAX = 255.0;
     private final double HSV_MIN = 0.0;
 
-    private double[] hsvHue = new double[]{0.0, 180.0};
-    private double[] hsvSat = new double[]{0.0, 255.0};
-    private double[] hsvVal = new double[]{0.0, 255.0};
+    private static double[] hsvHue = new double[]{0.0, 180.0};
+    private static double[] hsvSat = new double[]{0.0, 255.0};
+    private static double[] hsvVal = new double[]{0.0, 255.0};
 
 
     public void runOpMode() {
@@ -212,9 +212,9 @@ public class TestSkystonePipeline extends LinearOpMode {
 
             // Step HSV_Threshold0:
             Mat hsvThresholdInput = input;
-            double[] hsvThresholdHue =          {15.0, 30.0};
-            double[] hsvThresholdSaturation =   {125.0, 255.0};
-            double[] hsvThresholdValue =        {110.0, 255.0};
+            double[] hsvThresholdHue =          hsvHue;
+            double[] hsvThresholdSaturation =   hsvSat;
+            double[] hsvThresholdValue =        hsvVal;
             hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
             // Step Find_Contours0:
