@@ -24,8 +24,8 @@ public class TestCropCamera extends LinearOpMode {
 
     GamepadCooldowns gp1 = new GamepadCooldowns();
 
-    public final int IMG_WIDTH = 640;
-    public final int IMG_HEIGHT = 480;
+    public final int IMG_WIDTH = 480;
+    public final int IMG_HEIGHT = 640;
 
     public static double rectTop   = 0.0;
     public static double rectLeft  = 0.0;
@@ -49,7 +49,7 @@ public class TestCropCamera extends LinearOpMode {
         phoneCam.openCameraDevice();
         stageSwitchingPipeline = new StageSwitchingPipeline();
         phoneCam.setPipeline(stageSwitchingPipeline);
-        phoneCam.startStreaming(IMG_WIDTH, IMG_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+        phoneCam.startStreaming(IMG_HEIGHT, IMG_WIDTH, OpenCvCameraRotation.UPRIGHT);
 
 
         telemetry.addLine("Ready");
