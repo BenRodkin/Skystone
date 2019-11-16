@@ -29,6 +29,16 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
     public void runOpMode() {
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam.openCameraDevice();
+        skystonePatternPipeline = new SkystonePatternPipeline();
+        phoneCam.setPipeline(skystonePatternPipeline);
+        phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+
+
+        telemetry.addLine("Ready");
+        telemetry.update();
 
 
         waitForStart();
@@ -36,6 +46,9 @@ public class TestSkystonePipeline extends LinearOpMode {
 
         while(opModeIsActive()) {
 
+
+            telemetry.addLine("Running");
+            telemetry.update();
         }
     }
 
