@@ -24,6 +24,9 @@ public class TestCropCamera extends LinearOpMode {
 
     GamepadCooldowns gp1 = new GamepadCooldowns();
 
+    public final int IMG_WIDTH = 640;
+    public final int IMG_HEIGHT = 480;
+
     public double rectTop   = 0.0;
     public double rectLeft  = 0.0;
     public double rectBot   = 0.0;
@@ -39,9 +42,6 @@ public class TestCropCamera extends LinearOpMode {
 
 //    public static int numCols = -1;
 //    public static int numRows = -1;
-
-    public final int IMG_WIDTH = 640;
-    public final int IMG_HEIGHT = 480;
 
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
