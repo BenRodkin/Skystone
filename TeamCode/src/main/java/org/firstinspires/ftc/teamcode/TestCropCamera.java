@@ -40,8 +40,6 @@ public class TestCropCamera extends LinearOpMode {
     public final double RECT_STEP = 4.0;
     public final double RECT_MIN = 0.0;
 
-//    public static int numCols = -1;
-//    public static int numRows = -1;
 
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -115,8 +113,6 @@ public class TestCropCamera extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("grabbingTopLeft", grabbingTopLeft);
             telemetry.addLine();
-//            telemetry.addData("Columns", numCols);
-//            telemetry.addData("Rows", numRows);
             telemetry.update();
         }
 
@@ -134,10 +130,6 @@ public class TestCropCamera extends LinearOpMode {
 
         @Override
         public Mat processFrame(Mat input) {
-
-//            numCols = input.cols();
-//            numRows = input.rows();
-
 
             Imgproc.rectangle(
                     input,
