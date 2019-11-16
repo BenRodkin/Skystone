@@ -27,6 +27,22 @@ public class TestSkystonePipeline extends LinearOpMode {
     OpenCvCamera phoneCam;
     SkystonePatternPipeline skystonePatternPipeline;
 
+    GamepadCooldowns gp1 = new GamepadCooldowns();
+    double runtime = 0.0;
+    final double TRIGGER_THRESHOLD = 0.7;
+
+    // HSV Threshold input variables
+    private final double THRESHOLD_STEP = 1.0;
+
+    private final double HUE_MAX = 180.0;
+    private final double SAT_MAX = 255.0;
+    private final double VAL_MAX = 255.0;
+    private final double HSV_MIN = 0.0;
+
+    private double[] hsvHue = new double[]{0.0, 180.0};
+    private double[] hsvSat = new double[]{0.0, 255.0};
+    private double[] hsvVal = new double[]{0.0, 255.0};
+
 
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -46,11 +62,134 @@ public class TestSkystonePipeline extends LinearOpMode {
 
         while(opModeIsActive()) {
 
+            runtime = getRuntime();
+
+            //--------------------------------------------------------------------------------------
+            // START HSV THRESHOLD CONTROLS
+            //--------------------------------------------------------------------------------------
+
+            /*
+                CONTROLS: (increase, decrease)
+                Hue min: gp1.up,    gp1.down
+                Hue max: gp1.y,     gp1.a
+
+                Sat min: gp1.right, gp1.left
+                Sat max: gp1.b,     gp1.x
+
+                Val min: gp1.lb,    gp1.lt
+                Val max: gp1.rb,    gp1.rt
+             */
+
+            // Modify threshold variables if the buttons are pressed and thresholds are within outer limits 0 & 255
+
+            // Update runtime once every cycle
+            double runtime = getRuntime();
+
+            // HUE MINIMUM
+            if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
+                if (hsvHue[0] > HSV_MIN)   hsvHue[0] -= THRESHOLD_STEP;
+                else                        hsvHue[0] = HSV_MIN;
+                gp1.dpDown.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
+                if(hsvHue[0] < hsvHue[1])  hsvHue[0] += THRESHOLD_STEP;
+                else                        hsvHue[0] = hsvHue[1];
+                gp1.dpUp.updateSnapshot(runtime);
+            }
+
+
+            // HUE MAXIMUM
+            if(gamepad1.y && gp1.y.ready(runtime)) {
+                if (hsvHue[1] < HUE_MAX)   hsvHue[1] += THRESHOLD_STEP;
+                else                        hsvHue[1] = HUE_MAX;
+                gp1.y.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.a && gp1.a.ready(runtime)) {
+                if(hsvHue[1] > hsvHue[0])  hsvHue[1] -= THRESHOLD_STEP;
+                else                        hsvHue[1] = hsvHue[0];
+                gp1.a.updateSnapshot(runtime);
+            }
+
+
+
+
+            // SAT MINIMUM
+            if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
+                if (hsvSat[0] > HSV_MIN)   hsvSat[0] -= THRESHOLD_STEP;
+                else                        hsvSat[0] = HSV_MIN;
+                gp1.dpLeft.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
+                if(hsvSat[0] < hsvSat[1])  hsvSat[0] += THRESHOLD_STEP;
+                else                        hsvSat[0] = hsvSat[1];
+                gp1.dpRight.updateSnapshot(runtime);
+            }
+
+
+            // SAT MAXIMUM
+            if(gamepad1.b && gp1.b.ready(runtime)) {
+                if (hsvSat[1] < SAT_MAX)   hsvSat[1] += THRESHOLD_STEP;
+                else                        hsvSat[1] = SAT_MAX;
+                gp1.b.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.x && gp1.x.ready(runtime)) {
+                if(hsvSat[1] > hsvSat[0])  hsvSat[1] -= THRESHOLD_STEP;
+                else                        hsvSat[1] = hsvSat[0];
+                gp1.x.updateSnapshot(runtime);
+            }
+
+
+
+
+            // VAL MINIMUM
+            if(gamepad1.left_trigger > TRIGGER_THRESHOLD && gp1.lt.ready(runtime)) {
+                if (hsvVal[0] > HSV_MIN)   hsvVal[0] -= THRESHOLD_STEP;
+                else                        hsvVal[0] = HSV_MIN;
+                gp1.lt.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
+                if(hsvVal[0] < hsvVal[1])  hsvVal[0] += THRESHOLD_STEP;
+                else                        hsvVal[0] = hsvVal[1];
+                gp1.lb.updateSnapshot(runtime);
+            }
+
+
+
+            // VAL MAXIMUM
+            if(gamepad1.right_trigger > TRIGGER_THRESHOLD && gp1.rt.ready(runtime)) {
+                if (hsvVal[1] > hsvVal[0])  hsvVal[1] -= THRESHOLD_STEP;
+                else                        hsvVal[1] = hsvVal[0];
+                gp1.rt.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.right_bumper && gp1.rb.ready(runtime)) {
+                if(hsvVal[1] < VAL_MAX)     hsvVal[1] += THRESHOLD_STEP;
+                else                        hsvVal[1] = VAL_MAX;
+                gp1.rb.updateSnapshot(runtime);
+            }
+
+
+
+
+
+            //--------------------------------------------------------------------------------------
+            // END HSV THRESHOLD CONTROLS
+            //--------------------------------------------------------------------------------------
 
             telemetry.addLine("Running");
             telemetry.update();
         }
     }
+
+
+
+
+
 
 
     /**
