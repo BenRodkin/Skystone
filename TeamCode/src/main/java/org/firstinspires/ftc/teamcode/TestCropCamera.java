@@ -37,7 +37,7 @@ public class TestCropCamera extends LinearOpMode {
 
     public final double TRIGGER_THRESHOLD = 0.7;
 
-    public final double RECT_STEP = 4.0;
+    public final double RECT_STEP = 0.04;
     public final double RECT_MIN = 0.0;
 
 
