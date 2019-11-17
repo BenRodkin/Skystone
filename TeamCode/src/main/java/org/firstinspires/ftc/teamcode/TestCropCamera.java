@@ -111,11 +111,11 @@ public class TestCropCamera extends LinearOpMode {
                         ~ right_stick_y (changes bottom bound)
              */
 
-            rectTop     += gamepad2.left_stick_y * RECT_STEP;
-            rectLeft    += gamepad2.left_stick_x * RECT_STEP;
+            rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT);
+            rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH);
 
-            rectBot     += gamepad2.right_stick_y * RECT_STEP;
-            rectRight   += gamepad2.right_stick_x * RECT_STEP;
+            rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT);
+            rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH);
 
 
 
