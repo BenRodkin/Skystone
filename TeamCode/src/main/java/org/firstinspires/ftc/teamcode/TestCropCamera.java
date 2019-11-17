@@ -101,6 +101,21 @@ public class TestCropCamera extends LinearOpMode {
             //////////////////////////////////////////////////
             // END CROP CONTROLS
             //////////////////////////////////////////////////
+            /*
+                NEW Controls: (left stick and right stick configuration)
+                    - Left stick: change top-left corner values relative to
+                        ~ left_stick_x (changes left bound)
+                        ~ left_stick_y (changes top bound)
+                    - Right stick: change bottom-right corner values relative to
+                        ~ right_stick_x (changes right bound)
+                        ~ right_stick_y (changes bottom bound)
+             */
+
+            rectTop     += gamepad2.left_stick_y * RECT_STEP;
+            rectLeft    += gamepad2.left_stick_x * RECT_STEP;
+
+            rectBot     += gamepad2.right_stick_y * RECT_STEP;
+            rectRight   += gamepad2.right_stick_x * RECT_STEP;
 
 
 
