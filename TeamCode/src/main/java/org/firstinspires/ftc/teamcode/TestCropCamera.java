@@ -41,6 +41,12 @@ public class TestCropCamera extends LinearOpMode {
     public final double RECT_MIN = 0.0;
 
 
+
+
+
+    public static boolean returnHSV = false;
+
+
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
@@ -118,6 +124,9 @@ public class TestCropCamera extends LinearOpMode {
             rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH);
 
 
+            returnHSV = gamepad2.a;
+
+
 
 
             telemetry.addLine("Running");
@@ -155,7 +164,6 @@ public class TestCropCamera extends LinearOpMode {
                             rectBot),   // Bottom value
                     new Scalar(0, 255, 0), 4); // Line color and thickness
 
-            return input;
 
 
             Mat hsvOutput = new Mat();
@@ -163,6 +171,9 @@ public class TestCropCamera extends LinearOpMode {
 
 
 
+
+            return (returnHSV ? hsvOutput : input);
+        }
 
         /**
          * Segment an image based on hue, saturation, and value ranges.
