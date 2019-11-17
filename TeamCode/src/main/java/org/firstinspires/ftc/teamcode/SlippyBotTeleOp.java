@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
 public class SlippyBotTeleOp extends OpMode {
 
     SlippyBotHardware hardware = new SlippyBotHardware();
