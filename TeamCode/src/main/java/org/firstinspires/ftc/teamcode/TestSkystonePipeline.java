@@ -39,9 +39,23 @@ public class TestSkystonePipeline extends LinearOpMode {
     private final double VAL_MAX = 255.0;
     private final double HSV_MIN = 0.0;
 
-    private static double[] hsvHue = new double[]{0.0, 180.0};
-    private static double[] hsvSat = new double[]{0.0, 255.0};
+    private static double[] hsvHue = new double[]{80.0, 150.0};
+    private static double[] hsvSat = new double[]{175.0, 255.0};
     private static double[] hsvVal = new double[]{0.0, 255.0};
+
+
+    public static double rectTop   = 0.0;
+    public static double rectLeft  = 0.0;
+    public static double rectBot   = 0.0;
+    public static double rectRight = 0.0;
+
+    public final double RECT_STEP = 0.04;
+    public final double RECT_MIN = 0.0;
+
+    public final int IMG_WIDTH = 480;
+    public final int IMG_HEIGHT = 640;
+
+    public static boolean returnHSV = false;
 
 
 
@@ -183,6 +197,25 @@ public class TestSkystonePipeline extends LinearOpMode {
             //--------------------------------------------------------------------------------------
 
 
+            /*
+                NEW Controls: (left stick and right stick configuration)
+                    - Left stick: change top-left corner values relative to
+                        ~ left_stick_x (changes left bound)
+                        ~ left_stick_y (changes top bound)
+                    - Right stick: change bottom-right corner values relative to
+                        ~ right_stick_x (changes right bound)
+                        ~ right_stick_y (changes bottom bound)
+             */
+
+            rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT);
+            rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH);
+
+            rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT);
+            rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH);
+
+
+            returnHSV = gamepad2.a;
+
 
 
 
@@ -195,11 +228,20 @@ public class TestSkystonePipeline extends LinearOpMode {
             telemetry.addLine(String.format("Sat: [%s, %s]", hsvSat[0], hsvSat[1]));
             telemetry.addLine(String.format("Val: [%s, %s]", hsvVal[0], hsvVal[1]));
             telemetry.addData("Contours size", contours.size());
+            telemetry.addLine();
+            telemetry.addData("rectTop", rectTop);
+            telemetry.addData("rectLeft", rectLeft);
+            telemetry.addData("rectBot", rectBot);
+            telemetry.addData("rectRight", rectRight);
             telemetry.update();
         }
     }
 
-
+    public double trim(double input, double min, double max) {
+        if(input < min) input = min;
+        if(input > max) input = max;
+        return input;
+    }
 
 
 
@@ -225,20 +267,22 @@ public class TestSkystonePipeline extends LinearOpMode {
 
             // Step HSV_Threshold0:
             Mat hsvThresholdInput = input;
+
+            Imgproc.rectangle(
+                    input,
+                    new Point(  // Top left corner
+                            rectLeft,   // Left value
+                            rectTop),   // Top value
+                    new Point( // Bottom right corner
+                            rectRight,  // Right value
+                            rectBot),   // Bottom value
+                    new Scalar(0, 255, 0), 4);
+
             double[] hsvThresholdHue =          hsvHue;
             double[] hsvThresholdSaturation =   hsvSat;
             double[] hsvThresholdValue =        hsvVal;
             hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
-            Imgproc.rectangle(
-                    hsvThresholdOutput,
-                    new Point(
-                            hsvThresholdOutput.cols()/4,
-                            hsvThresholdOutput.rows()/4),
-                    new Point(
-                            hsvThresholdOutput.cols()*(3f/4f),
-                            hsvThresholdOutput.rows()*(3f/4f)),
-                    new Scalar(255, 255, 255), 4);
 
             // Step Find_Contours0:
             Mat findContoursInput = hsvThresholdOutput;
@@ -262,7 +306,7 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
 
-            return hsvThresholdOutput;
+            return (returnHSV ? hsvThresholdOutput : input);
         }
 
 
