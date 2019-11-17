@@ -44,6 +44,10 @@ public class TestSkystonePipeline extends LinearOpMode {
     private static double[] hsvVal = new double[]{0.0, 255.0};
 
 
+
+    List<MatOfPoint> contours; // Contours from pipeline after filtering
+
+
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
@@ -224,7 +228,7 @@ public class TestSkystonePipeline extends LinearOpMode {
 
             // Step Filter_Contours0:
             ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-            double filterContoursMinArea = 420000.0;
+            double filterContoursMinArea = 0.0;
             double filterContoursMinPerimeter = 0.0;
             double filterContoursMinWidth = 0.0;
             double filterContoursMaxWidth = 2.147483647E9;
