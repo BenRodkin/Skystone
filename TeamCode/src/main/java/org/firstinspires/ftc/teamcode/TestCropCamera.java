@@ -156,6 +156,28 @@ public class TestCropCamera extends LinearOpMode {
                     new Scalar(0, 255, 0), 4); // Line color and thickness
 
             return input;
+
+
+            Mat hsvOutput = new Mat();
+            hsvThreshold(input, new double[]{90, 100}, new double[]{0, 255}, new double[]{0, 255}, hsvOutput);
+
+
+
+
+        /**
+         * Segment an image based on hue, saturation, and value ranges.
+         *
+         * @param input The image on which to perform the HSL threshold.
+         * @param hue The min and max hue
+         * @param sat The min and max saturation
+         * @param val The min and max value
+         * @param output The image in which to store the output.
+         */
+        private void hsvThreshold(Mat input, double[] hue, double[] sat, double[] val,
+                                  Mat out) {
+            Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2HSV);
+            Core.inRange(out, new Scalar(hue[0], sat[0], val[0]),
+                    new Scalar(hue[1], sat[1], val[1]), out);
         }
     }
 
