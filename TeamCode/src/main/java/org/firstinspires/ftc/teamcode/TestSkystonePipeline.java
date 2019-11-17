@@ -223,6 +223,24 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
             contours = skystonePatternPipeline.filterContoursOutput();
+            int numContoursInRect = 0;
+
+
+            try {
+                for(MatOfPoint c : contours) {
+                    Rect boundingRect = Imgproc.boundingRect(c);
+
+                    // See if boundingRect is inside of the cropping rectangle
+                    if(boundingRect.x >= rectLeft &&
+                            boundingRect.y >= rectTop &&
+                            boundingRect.x + boundingRect.width <= rectRight &&
+                            boundingRect.y + boundingRect.height <= rectBot)
+                        numContoursInRect ++;
+                }
+            } catch(Exception e) {
+                telemetry.addLine("Error while iterating through contours!");
+            }
+
 
 
 
@@ -236,6 +254,8 @@ public class TestSkystonePipeline extends LinearOpMode {
             telemetry.addData("rectLeft", rectLeft);
             telemetry.addData("rectBot", rectBot);
             telemetry.addData("rectRight", rectRight);
+            telemetry.addLine();
+            telemetry.addData("numContoursInRect", numContoursInRect);
             telemetry.update();
         }
     }
