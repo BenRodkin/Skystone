@@ -126,7 +126,6 @@ public class TestCropCamera extends LinearOpMode {
             telemetry.addData("rectBot",    rectBot);
             telemetry.addData("rectRight",  rectRight);
             telemetry.addLine();
-            telemetry.addData("grabbingTopLeft", grabbingTopLeft);
             telemetry.addLine();
             telemetry.update();
         }
