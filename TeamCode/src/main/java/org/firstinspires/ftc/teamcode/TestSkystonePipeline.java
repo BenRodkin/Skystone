@@ -230,6 +230,16 @@ public class TestSkystonePipeline extends LinearOpMode {
             double[] hsvThresholdValue =        hsvVal;
             hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
+            Imgproc.rectangle(
+                    hsvThresholdOutput,
+                    new Point(
+                            hsvThresholdOutput.cols()/4,
+                            hsvThresholdOutput.rows()/4),
+                    new Point(
+                            hsvThresholdOutput.cols()*(3f/4f),
+                            hsvThresholdOutput.rows()*(3f/4f)),
+                    new Scalar(255, 255, 255), 4);
+
             // Step Find_Contours0:
             Mat findContoursInput = hsvThresholdOutput;
             boolean findContoursExternalOnly = false;
