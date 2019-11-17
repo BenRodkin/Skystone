@@ -18,5 +18,6 @@ public class SlippyBotTeleOp extends OpMode {
 
 
         telemetry.addLine("Running");
+        telemetry.update();
     }
 }
