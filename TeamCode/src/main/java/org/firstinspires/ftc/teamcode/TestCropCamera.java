@@ -64,7 +64,7 @@ public class TestCropCamera extends LinearOpMode {
             //////////////////////////////////////////////////
 
             /*
-                Controls:
+                OLD Controls: (grabbing corner and dpad controls)
                     - Holding gp1.lt grabs top left corner
                     - Releasing gp1.lt grabs bottom right corner
                     - Dpad controls:
@@ -76,27 +76,27 @@ public class TestCropCamera extends LinearOpMode {
                         ~ top left corner means top and left move, similar for bottom right corner
              */
 
-            if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
-                if(grabbingTopLeft) rectTop     = trim(rectTop - RECT_STEP, RECT_MIN, IMG_HEIGHT);
-                else                rectBot     = trim(rectBot - RECT_STEP, RECT_MIN, IMG_HEIGHT);
-                gp1.dpUp.updateSnapshot(runtime);
-            } else if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
-                if(grabbingTopLeft) rectTop     = trim(rectTop + RECT_STEP, RECT_MIN, IMG_HEIGHT);
-                else                rectBot     = trim(rectBot + RECT_STEP, RECT_MIN, IMG_HEIGHT);
-                gp1.dpDown.updateSnapshot(runtime);
-            }
-
-            if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
-                if(grabbingTopLeft) rectLeft    = trim(rectLeft - RECT_STEP, RECT_MIN, IMG_WIDTH);
-                else                rectRight   = trim(rectRight - RECT_STEP, RECT_MIN, IMG_WIDTH);
-                gp1.dpLeft.updateSnapshot(runtime);
-            } else if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
-                if(grabbingTopLeft) rectLeft    = trim(rectLeft + RECT_STEP, RECT_MIN, IMG_WIDTH);
-                else                rectRight   = trim(rectRight + RECT_STEP, RECT_MIN, IMG_WIDTH);
-                gp1.dpRight.updateSnapshot(runtime);
-            }
-
-            grabbingTopLeft = (gamepad1.left_trigger > TRIGGER_THRESHOLD); // True if left trigger is held down
+//            if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
+//                if(grabbingTopLeft) rectTop     = trim(rectTop - RECT_STEP, RECT_MIN, IMG_HEIGHT);
+//                else                rectBot     = trim(rectBot - RECT_STEP, RECT_MIN, IMG_HEIGHT);
+//                gp1.dpUp.updateSnapshot(runtime);
+//            } else if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
+//                if(grabbingTopLeft) rectTop     = trim(rectTop + RECT_STEP, RECT_MIN, IMG_HEIGHT);
+//                else                rectBot     = trim(rectBot + RECT_STEP, RECT_MIN, IMG_HEIGHT);
+//                gp1.dpDown.updateSnapshot(runtime);
+//            }
+//
+//            if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
+//                if(grabbingTopLeft) rectLeft    = trim(rectLeft - RECT_STEP, RECT_MIN, IMG_WIDTH);
+//                else                rectRight   = trim(rectRight - RECT_STEP, RECT_MIN, IMG_WIDTH);
+//                gp1.dpLeft.updateSnapshot(runtime);
+//            } else if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
+//                if(grabbingTopLeft) rectLeft    = trim(rectLeft + RECT_STEP, RECT_MIN, IMG_WIDTH);
+//                else                rectRight   = trim(rectRight + RECT_STEP, RECT_MIN, IMG_WIDTH);
+//                gp1.dpRight.updateSnapshot(runtime);
+//            }
+//
+//            grabbingTopLeft = (gamepad1.left_trigger > TRIGGER_THRESHOLD); // True if left trigger is held down
 
             //////////////////////////////////////////////////
             // END CROP CONTROLS
