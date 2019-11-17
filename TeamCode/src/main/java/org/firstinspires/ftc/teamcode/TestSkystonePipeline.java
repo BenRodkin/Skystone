@@ -182,10 +182,19 @@ public class TestSkystonePipeline extends LinearOpMode {
             // END HSV THRESHOLD CONTROLS
             //--------------------------------------------------------------------------------------
 
+
+
+
+
+            contours = skystonePatternPipeline.filterContoursOutput();
+
+
+
             telemetry.addLine("Running");
             telemetry.addLine(String.format("Hue: [%s, %s]", hsvHue[0], hsvHue[1]));
             telemetry.addLine(String.format("Sat: [%s, %s]", hsvSat[0], hsvSat[1]));
             telemetry.addLine(String.format("Val: [%s, %s]", hsvVal[0], hsvVal[1]));
+            telemetry.addData("Contours size", contours.size());
             telemetry.update();
         }
     }
