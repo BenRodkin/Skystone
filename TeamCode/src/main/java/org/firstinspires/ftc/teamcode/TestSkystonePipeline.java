@@ -56,6 +56,7 @@ public class TestSkystonePipeline extends LinearOpMode {
     public final int IMG_HEIGHT = 640;
 
     public static boolean returnHSV = false;
+    public static boolean drawRect = false;
 
 
 
@@ -215,6 +216,8 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
             returnHSV = gamepad2.a;
+            if(gamepad2.x) drawRect = false;
+            else if(gamepad2.y) drawRect = true;
 
 
 
@@ -268,15 +271,17 @@ public class TestSkystonePipeline extends LinearOpMode {
             // Step HSV_Threshold0:
             Mat hsvThresholdInput = input;
 
-            Imgproc.rectangle(
-                    input,
-                    new Point(  // Top left corner
-                            rectLeft,   // Left value
-                            rectTop),   // Top value
-                    new Point( // Bottom right corner
-                            rectRight,  // Right value
-                            rectBot),   // Bottom value
-                    new Scalar(0, 255, 0), 4);
+            if(drawRect) {
+                Imgproc.rectangle(
+                        input,
+                        new Point(  // Top left corner
+                                rectLeft,   // Left value
+                                rectTop),   // Top value
+                        new Point( // Bottom right corner
+                                rectRight,  // Right value
+                                rectBot),   // Bottom value
+                        new Scalar(0, 255, 0), 4);
+            }
 
             double[] hsvThresholdHue =          hsvHue;
             double[] hsvThresholdSaturation =   hsvSat;
