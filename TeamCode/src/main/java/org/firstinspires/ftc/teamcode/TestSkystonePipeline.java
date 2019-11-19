@@ -273,6 +273,9 @@ public class TestSkystonePipeline extends LinearOpMode {
             telemetry.addData("rectBot", rectBot);
             telemetry.addData("rectRight", rectRight);
             telemetry.addLine();
+            telemetry.addData("leftBound", leftBound);
+            telemetry.addData("centerBound", centerBound);
+            telemetry.addLine();
             telemetry.addData("numContoursInRect",  numContoursInRect);
             telemetry.addData("numContoursLeft",    numContoursLeft);
             telemetry.addData("numContoursCenter",  numContoursCenter);
