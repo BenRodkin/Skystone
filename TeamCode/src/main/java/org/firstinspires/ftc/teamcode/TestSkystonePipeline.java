@@ -223,7 +223,19 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
             contours = skystonePatternPipeline.filterContoursOutput();
-            int numContoursInRect = 0;
+            int numContoursInRect   = 0;
+            int numContoursLeft     = 0;
+            int numContoursCenter   = 0;
+            int numContoursRight    = 0;
+
+
+            // Calculate left and center boundary lines for cropping rectangle
+            double leftBound = rectLeft + (rectRight - rectLeft) / 3.0;         // x position plus 1/3 of the width
+            double centerBound = rectLeft + (rectRight - rectLeft) * 2.0 / 3.0; // x position plus 2/3 of the width
+
+            // Create Point variable holding center coordinates of boundingRect
+            Point rectCenter = new Point();
+
 
 
             try {
@@ -234,8 +246,16 @@ public class TestSkystonePipeline extends LinearOpMode {
                     if(boundingRect.x >= rectLeft &&
                             boundingRect.y >= rectTop &&
                             boundingRect.x + boundingRect.width <= rectRight &&
-                            boundingRect.y + boundingRect.height <= rectBot)
+                            boundingRect.y + boundingRect.height <= rectBot) {
+                        // We've got a valid contour!
                         numContoursInRect ++;
+                        // Now classify as left, center, or right
+                        rectCenter.x = (boundingRect.x + boundingRect.width) / 2.0;   // Get the center of the rectangle
+                        rectCenter.y = (boundingRect.y + boundingRect.height) / 2.0;
+                        if(rectCenter.x < leftBound)        numContoursLeft     ++; // rectangle in left 1/3 of the screen
+                        else if(rectCenter.x < centerBound) numContoursCenter   ++; // rectangle in center 1/3 of the screen
+                        else                                numContoursRight    ++; // rectangle in right 1/3 of the screen
+                    }
                 }
             } catch(Exception e) {
                 telemetry.addLine("Error while iterating through contours!");
@@ -253,7 +273,10 @@ public class TestSkystonePipeline extends LinearOpMode {
             telemetry.addData("rectBot", rectBot);
             telemetry.addData("rectRight", rectRight);
             telemetry.addLine();
-            telemetry.addData("numContoursInRect", numContoursInRect);
+            telemetry.addData("numContoursInRect",  numContoursInRect);
+            telemetry.addData("numContoursLeft",    numContoursLeft);
+            telemetry.addData("numContoursCenter",  numContoursCenter);
+            telemetry.addData("numContoursRight",   numContoursRight);
             telemetry.update();
         }
     }
