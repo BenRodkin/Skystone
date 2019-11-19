@@ -230,8 +230,8 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
             // Calculate left and center boundary lines for cropping rectangle
-            double leftBound = rectLeft + (rectRight - rectLeft) / 3.0;         // x position plus 1/3 of the width
-            double centerBound = rectLeft + (rectRight - rectLeft) * 2.0 / 3.0; // x position plus 2/3 of the width
+            double leftBound = rectTop + (rectBot - rectTop) / 3.0;         // x position plus 1/3 of the width; corrected for sideways-left phone orientation
+            double centerBound = rectTop + (rectBot - rectTop) * 2.0 / 3.0; // x position plus 2/3 of the width; corrected for sideways-left phone orientation
 
             // Create Point variable holding center coordinates of boundingRect
             Point rectCenter = new Point();
