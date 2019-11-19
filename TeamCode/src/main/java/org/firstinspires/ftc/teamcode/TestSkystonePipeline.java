@@ -242,8 +242,6 @@ public class TestSkystonePipeline extends LinearOpMode {
             }
 
 
-
-
             telemetry.addLine("Running");
             telemetry.addLine(String.format("Hue: [%s, %s]", hsvHue[0], hsvHue[1]));
             telemetry.addLine(String.format("Sat: [%s, %s]", hsvSat[0], hsvSat[1]));
@@ -316,7 +314,7 @@ public class TestSkystonePipeline extends LinearOpMode {
 
             // Step Filter_Contours0:
             ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-            double filterContoursMinArea = 0.0;
+            double filterContoursMinArea = 100.0;
             double filterContoursMinPerimeter = 0.0;
             double filterContoursMinWidth = 0.0;
             double filterContoursMaxWidth = 2.147483647E9;
