@@ -28,6 +28,20 @@ public class TestQuarryPaths extends LinearOpMode {
             if(gamepad1.dpad_up)    placement   = CENTER;
             if(gamepad1.dpad_right) placement   = RIGHT;
 
+            if(gamepad1.a) {
+                switch(placement) {
+                    case LEFT:
+                        runLeft();
+                        break;
+                    case CENTER:
+                        runCenter();
+                        break;
+                    case RIGHT:
+                        runRight();
+                        break;
+                }
+            }
+
 
 
 
@@ -37,5 +51,24 @@ public class TestQuarryPaths extends LinearOpMode {
             telemetry.update();
         }
 
+    }
+
+
+    public void runLeft() {
+        telemetry.addLine("Running LEFT");
+        telemetry.update();
+        sleep(1000);
+    }
+
+    public void runCenter() {
+        telemetry.addLine("Running CENTER");
+        telemetry.update();
+        sleep(1000);
+    }
+
+    public void runRight() {
+        telemetry.addLine("Running RIGHT");
+        telemetry.update();
+        sleep(1000);
     }
 }
