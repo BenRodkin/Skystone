@@ -21,6 +21,10 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
+import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
+import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
+
 @Autonomous(name = "Test: Skystone Pipeline", group = "Testing")
 public class TestSkystonePipeline extends LinearOpMode {
 
@@ -269,6 +273,15 @@ public class TestSkystonePipeline extends LinearOpMode {
             }
 
 
+            // Compare contour area tallies to see which third of the bounding rectangle
+            // has the least (which will be the third with the Skystone in it)
+            SkystonePlacement skystonePlacement =
+                    compareAreaTallies(numContoursLeft, numContoursCenter, numContoursRight);
+
+
+
+
+
             telemetry.addLine("Running");
             telemetry.addLine(String.format("Hue: [%s, %s]", hsvHue[0], hsvHue[1]));
             telemetry.addLine(String.format("Sat: [%s, %s]", hsvSat[0], hsvSat[1]));
@@ -287,6 +300,8 @@ public class TestSkystonePipeline extends LinearOpMode {
             telemetry.addData("numContoursLeft",    numContoursLeft);
             telemetry.addData("numContoursCenter",  numContoursCenter);
             telemetry.addData("numContoursRight",   numContoursRight);
+            telemetry.addLine();
+            telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
         }
     }
@@ -297,6 +312,18 @@ public class TestSkystonePipeline extends LinearOpMode {
         return input;
     }
 
+
+    public SkystonePlacement compareAreaTallies(double tallyLeft, double tallyCenter, double tallyRight) {
+        // Tally counts the area contained by yellow blobs in each third of the screen
+        if(tallyLeft < tallyCenter &&
+                tallyLeft < tallyRight)     return LEFT;    // Skystone is in the left position
+        if(tallyCenter < tallyLeft &&
+                tallyCenter < tallyRight)   return CENTER;  // Skystone is in the center position
+        if(tallyRight < tallyLeft &&
+                tallyRight < tallyCenter)   return RIGHT;   // Skystone is in the right position
+
+        return CENTER;                                      // Default case
+    }
 
 
 
