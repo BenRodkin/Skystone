@@ -266,11 +266,11 @@ public class TestSkystonePipeline extends LinearOpMode {
                         // We've got a valid contour!
                         numContoursInRect ++;
                         // Now classify as left, center, or right
-                        rectCenter.x = (boundingRect.y + boundingRect.height) / 2.0;    // Get the center of the rectangle
-                        rectCenter.y = (boundingRect.x + boundingRect.width) / 2.0;     // Flipped to account for phone orientation
                         if(rectCenter.x < leftBound)        numContoursLeft     ++; // rectangle in left 1/3 of the screen
                         else if(rectCenter.x < centerBound) numContoursCenter   ++; // rectangle in center 1/3 of the screen
                         else                                numContoursRight    ++; // rectangle in right 1/3 of the screen
+                        rectCenter.x = (2 * boundingRect.y + boundingRect.height) / 2.0;    // Get the center of the rectangle
+                        rectCenter.y = (2 * boundingRect.x + boundingRect.width) / 2.0;     // Flipped to account for phone orientation
 
                         totalX += rectCenter.x;
                         totalY += rectCenter.y;
