@@ -244,6 +244,16 @@ public class TestSkystonePipeline extends LinearOpMode {
 
 
 
+
+
+            int totalX = 0;
+            int totalY = 0;
+
+            int avgX = 0;
+            int avgY = 0;
+
+
+
             try {
                 for(MatOfPoint c : contours) {
                     Rect boundingRect = Imgproc.boundingRect(c);
@@ -261,8 +271,14 @@ public class TestSkystonePipeline extends LinearOpMode {
                         if(rectCenter.x < leftBound)        numContoursLeft     ++; // rectangle in left 1/3 of the screen
                         else if(rectCenter.x < centerBound) numContoursCenter   ++; // rectangle in center 1/3 of the screen
                         else                                numContoursRight    ++; // rectangle in right 1/3 of the screen
+
+                        totalX += rectCenter.x;
+                        totalY += rectCenter.y;
                     }
                 }
+
+                avgX = totalX / numContoursInRect;
+                avgY = totalY / numContoursInRect;
             } catch(Exception e) {
                 telemetry.addLine("Error while iterating through contours!");
             }
@@ -281,6 +297,9 @@ public class TestSkystonePipeline extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("leftBound", leftBound);
             telemetry.addData("centerBound", centerBound);
+            telemetry.addLine();
+            telemetry.addData("avgX", avgX);
+            telemetry.addData("avgY", avgY);
             telemetry.addLine();
             telemetry.addData("numContoursInRect",  numContoursInRect);
             telemetry.addData("numContoursLeft",    numContoursLeft);
