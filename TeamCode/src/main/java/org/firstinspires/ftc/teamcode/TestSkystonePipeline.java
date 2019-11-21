@@ -332,6 +332,24 @@ public class TestSkystonePipeline extends LinearOpMode {
                                 rectBot),   // Bottom value
                         new Scalar(0, 255, 0), 4);
             }
+            Imgproc.line(
+                    input,
+                    new Point(
+                            rectLeft,
+                            leftBound),
+                    new Point(
+                            rectRight,
+                            leftBound),
+                    new Scalar(0, 0, 255), 4);
+            Imgproc.line(
+                    input,
+                    new Point(
+                            rectLeft,
+                            centerBound),
+                    new Point(
+                            rectRight,
+                            centerBound),
+                    new Scalar(255, 0, 0), 4);
 
             double[] hsvThresholdHue =          hsvHue;
             double[] hsvThresholdSaturation =   hsvSat;
