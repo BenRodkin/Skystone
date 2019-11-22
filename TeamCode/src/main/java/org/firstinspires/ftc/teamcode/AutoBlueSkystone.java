@@ -553,7 +553,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
-        driveInches(-5.0, 0.3);
+        driveInches(-4.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
