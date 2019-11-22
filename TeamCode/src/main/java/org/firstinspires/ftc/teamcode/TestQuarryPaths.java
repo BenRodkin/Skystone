@@ -233,7 +233,7 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID(-15);
+        turnToHeadingPID(-13);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Drive to Skystone
