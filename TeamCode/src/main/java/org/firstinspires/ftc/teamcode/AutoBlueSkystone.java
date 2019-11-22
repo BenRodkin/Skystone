@@ -401,10 +401,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         driveInches(5.0, 0.4);
 
         // Place Skystone
-        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 100, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
         hardware.clamp.setPosition(0.0);
         sleep(500);
-        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
         driveInches(-5.0, 0.3);
@@ -473,10 +473,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         driveInches(5.0, 0.4);
 
         // Place Skystone
-        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 100, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
         hardware.clamp.setPosition(0.0);
         sleep(500);
-        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
         driveInches(-5.0, 0.3);
@@ -543,10 +543,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         driveInches(5.0, 0.4);
 
         // Place Skystone
-        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 100, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
         hardware.clamp.setPosition(0.0);
         sleep(500);
-        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
         driveInches(-5.0, 0.3);
