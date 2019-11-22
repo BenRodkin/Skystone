@@ -366,6 +366,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         turnToHeadingPID(10);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
+
         // Drive to Skystone
         driveInches(31.0,0.4);
 
@@ -385,6 +386,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
 
         // Turn to go under the bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
@@ -410,6 +415,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         driveInches(-5.0, 0.3);
 
         // Turn towards bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(-90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
@@ -463,6 +472,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         turnToHeadingPID(90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
         // Drive parallel to Foundation
         driveInches(93.0, 0.8);
 
@@ -484,6 +497,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         driveInches(-4.0, 0.3);
 
         // Turn towards bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(-90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
@@ -535,6 +552,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         turnToHeadingPID(90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
         // Drive parallel to Foundation
         driveInches(93.0, 0.8);
 
@@ -556,6 +577,10 @@ public class AutoBlueSkystone extends LinearOpMode {
         driveInches(-4.0, 0.3);
 
         // Turn towards bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(-90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
