@@ -119,6 +119,31 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Drive parallel to Foundation
         driveInches(93.0, 0.8);
+
+        // Turn towards Foundation
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(0);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Drive into Foundation
+        driveInches(5.0, 0.4);
+
+        // Place Skystone
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+
+        // Drive away from Foundation
+        driveInches(-7.0, 0.3);
+
+        // Turn towards bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Park
+        driveInches(55.0, 0.8);
     }
 
     public void runCenter() throws InterruptedException {
@@ -166,6 +191,20 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Drive parallel to Foundation
         driveInches(93.0, 0.8);
+
+        // Turn towards Foundation
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(0);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Drive into Foundation
+        driveInches(5.0, 0.4);
+
+        // Place Skystone
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
     }
 
     public void runRight() throws InterruptedException {
@@ -211,6 +250,20 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Drive parallel to Foundation
         driveInches(93.0, 0.8);
+
+        // Turn towards Foundation
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(0);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Drive into Foundation
+        driveInches(5.0, 0.4);
+
+        // Place Skystone
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
+        moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
     }
 
 
