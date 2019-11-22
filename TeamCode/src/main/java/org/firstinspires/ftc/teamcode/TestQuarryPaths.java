@@ -94,6 +94,8 @@ public class TestQuarryPaths extends LinearOpMode {
         turnToHeadingPID(10);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
+        // Drive to Skystone
+        driveInches(31.0,0.4);
 
 
     }
@@ -117,6 +119,8 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
 
+        // Drive to Skystone
+        driveInches(31.0,0.4);
 
     }
 
@@ -137,7 +141,10 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(-15);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
-        
+
+        // Drive to Skystone
+        driveInches(31.0,0.4);
+
     }
 
 
