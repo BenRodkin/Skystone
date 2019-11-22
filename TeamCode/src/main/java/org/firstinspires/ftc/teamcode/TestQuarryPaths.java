@@ -99,7 +99,7 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID((int)(heading() + 10));
+        turnToHeadingPID((int)(heading() + 15));
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Close clamp
