@@ -205,6 +205,17 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.clamp.setPosition(1.0);
         sleep(500);
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+
+        // Drive away from Foundation
+        driveInches(-7.0, 0.3);
+
+        // Turn towards bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Park
+        driveInches(55.0, 0.8);
     }
 
     public void runRight() throws InterruptedException {
@@ -264,6 +275,17 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.clamp.setPosition(1.0);
         sleep(500);
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
+
+        // Drive away from Foundation
+        driveInches(-7.0, 0.3);
+
+        // Turn towards bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Park
+        driveInches(55.0, 0.8);
     }
 
 
