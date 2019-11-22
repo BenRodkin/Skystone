@@ -51,7 +51,10 @@ public class SLICBotTeleOp extends OpMode {
         hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition()); // Default target
 
 //        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         telemetry.addLine("Ready");
         telemetry.update();
