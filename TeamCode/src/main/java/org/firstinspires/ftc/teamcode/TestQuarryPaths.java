@@ -89,8 +89,9 @@ public class TestQuarryPaths extends LinearOpMode {
         turnToHeadingPID(15);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
-        // Lower arm
+        // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
+        hardware.clamp.setPosition(0.0);
 
 
     }
@@ -108,8 +109,10 @@ public class TestQuarryPaths extends LinearOpMode {
         turnToHeadingPID(0);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
-        // Lower arm
+        // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
+        hardware.clamp.setPosition(0.0);
+
 
 
     }
@@ -127,9 +130,9 @@ public class TestQuarryPaths extends LinearOpMode {
         turnToHeadingPID(-15);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
-        // Lower arm
+        // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
-
+        hardware.clamp.setPosition(0.0);
 
     }
 
