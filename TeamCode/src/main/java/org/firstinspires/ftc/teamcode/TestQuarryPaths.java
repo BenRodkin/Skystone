@@ -21,7 +21,7 @@ public class TestQuarryPaths extends LinearOpMode {
 
 
 
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
 
         hardware.init(hardwareMap);
 
@@ -51,8 +51,6 @@ public class TestQuarryPaths extends LinearOpMode {
             }
 
 
-
-
             telemetry.addLine("Running");
             telemetry.addLine();
             telemetry.addData("Skystone Placement", placement);
@@ -62,7 +60,7 @@ public class TestQuarryPaths extends LinearOpMode {
     }
 
 
-    public void runLeft() {
+    public void runLeft() throws InterruptedException {
         telemetry.addLine("Running LEFT");
         telemetry.update();
         sleep(1000);
@@ -76,7 +74,7 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
     }
 
-    public void runCenter() {
+    public void runCenter() throws InterruptedException {
         telemetry.addLine("Running CENTER");
         telemetry.update();
         sleep(1000);
@@ -90,7 +88,7 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
     }
 
-    public void runRight() {
+    public void runRight() throws InterruptedException {
         telemetry.addLine("Running RIGHT");
         telemetry.update();
         sleep(1000);
