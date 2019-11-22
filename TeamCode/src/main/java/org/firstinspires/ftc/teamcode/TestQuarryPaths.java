@@ -135,7 +135,7 @@ public class TestQuarryPaths extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
 
         // Drive away from Foundation
-        driveInches(-7.0, 0.3);
+        driveInches(-5.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -207,7 +207,7 @@ public class TestQuarryPaths extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
 
         // Drive away from Foundation
-        driveInches(-7.0, 0.3);
+        driveInches(-5.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -277,7 +277,7 @@ public class TestQuarryPaths extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
 
         // Drive away from Foundation
-        driveInches(-7.0, 0.3);
+        driveInches(-5.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
