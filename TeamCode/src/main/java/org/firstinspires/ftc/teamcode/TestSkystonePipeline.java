@@ -26,7 +26,7 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
 
-@Disabled
+//@Disabled
 @Autonomous(name = "Test: Skystone Pipeline", group = "Testing")
 public class TestSkystonePipeline extends LinearOpMode {
 
