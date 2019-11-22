@@ -489,7 +489,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Park
-        driveInches(55.0, 0.8);
+        driveInches(51.0, 0.8);
 
         hardware.clamp.setPosition(1.0);
     }
