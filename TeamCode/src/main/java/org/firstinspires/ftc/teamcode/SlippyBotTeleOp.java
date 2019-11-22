@@ -24,8 +24,8 @@ public class SlippyBotTeleOp extends OpMode {
 
         // Do the math
         double drive  = gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x;
-        double twist  = gamepad1.right_stick_x;
+        double strafe = -gamepad1.left_stick_x;
+        double twist  = -gamepad1.right_stick_x;
 
         flPower = (drive + strafe + twist);
         frPower = (drive - strafe - twist);
