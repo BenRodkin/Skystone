@@ -58,10 +58,10 @@ public class AutoBlueSkystone extends LinearOpMode {
     private static double[] hsvVal = new double[]{50.0, 255.0};      // Testing showed 50 (min) to be enough to cut out most of the Skystone
 
 
-    private static double rectTop   = 0.0;
-    private static double rectLeft  = 0.0;
-    private static double rectBot   = 0.0;
-    private static double rectRight = 0.0;
+    private static double rectTop   = 235.0;
+    private static double rectLeft  = 5.0;
+    private static double rectBot   = 333.0;
+    private static double rectRight = 480.0;
 
     private final double RECT_STEP = 0.04;
     private final double RECT_MIN = 0.0;
