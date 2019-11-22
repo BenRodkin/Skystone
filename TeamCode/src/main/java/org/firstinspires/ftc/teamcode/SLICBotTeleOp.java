@@ -21,10 +21,10 @@ public class SLICBotTeleOp extends OpMode {
     public double runtime;
 
 
-    public final int ARM_STOWED         = 0;
-    public final int ARM_GRABBING       = -1200;
-    public final int ARM_PLACING_LOW    = -1200;
-    public final int ARM_PLACING_HIGH   = -900;
+//    public final int ARM_STOWED         = 0;
+//    public final int ARM_GRABBING       = -1200;
+//    public final int ARM_PLACING_LOW    = -1200;
+//    public final int ARM_PLACING_HIGH   = -900;
 
     public final int LIFT_STOWED    = 0;
     public final int LIFT_1         = 3468;
@@ -33,7 +33,7 @@ public class SLICBotTeleOp extends OpMode {
     public final int LIFT_4         = 9642;
 
     public int liftStep = -1;   // Default state (cannot be reached during driver control)
-    public int armStep  = -1;   // Default state (cannot be reached during driver control)
+//    public int armStep  = -1;   // Default state (cannot be reached during driver control)
 
 
     public final double ANALOG_THRESHOLD = 0.05;
@@ -47,10 +47,10 @@ public class SLICBotTeleOp extends OpMode {
         gp2_rb  .setCooldown(1.000);
         gp2_y   .setCooldown(1.000);
 
-        hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition()); // Default target
+//        hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition()); // Default target
         hardware.pulley.setTargetPosition(hardware.pulley.getCurrentPosition()); // Default target
 
-        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.pulley.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         telemetry.addLine("Ready");
@@ -82,13 +82,13 @@ public class SLICBotTeleOp extends OpMode {
             gp2_lb.updateSnapshot(runtime);
         }
 
-        if(gamepad2.y && gp2_y.ready(runtime)) {
-            armStep ++;
-            armStep %= 3;
-            gp2_y.updateSnapshot(runtime);
-        }
+//        if(gamepad2.y && gp2_y.ready(runtime)) {
+//            armStep ++;
+//            armStep %= 3;
+//            gp2_y.updateSnapshot(runtime);
+//        }
 
-        int armPlacingVal = ( liftStep <= 2 ? ARM_PLACING_LOW : ARM_PLACING_HIGH);
+//        int armPlacingVal = ( liftStep <= 2 ? ARM_PLACING_LOW : ARM_PLACING_HIGH);
         // End arm and lift position cycling
 
 
@@ -145,34 +145,34 @@ public class SLICBotTeleOp extends OpMode {
                             1.0 : 0.3);
         }
 
-        if(gamepad2.y) {
-            hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            switch (armStep) {
-                case -1:
-                    hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
-                    break;
-                case 0:
-                    hardware.arm.setTargetPosition(ARM_STOWED);
-                    break;
-                case 1:
-                    hardware.arm.setTargetPosition(ARM_GRABBING);
-                    break;
-                case 2:
-                    hardware.arm.setTargetPosition(armPlacingVal);
-                    break;
-                default:
-                    break;
-            }
-            hardware.arm.setPower(0.3);
-        } else if(Math.abs(gamepad2.left_stick_y) > ANALOG_THRESHOLD) {
-            hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
-            hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
-        } else {
-            hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            hardware.arm.setPower(0.3);
-        }
-
+//        if(gamepad2.y) {
+//            hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            switch (armStep) {
+//                case -1:
+//                    hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
+//                    break;
+//                case 0:
+//                    hardware.arm.setTargetPosition(ARM_STOWED);
+//                    break;
+//                case 1:
+//                    hardware.arm.setTargetPosition(ARM_GRABBING);
+//                    break;
+//                case 2:
+//                    hardware.arm.setTargetPosition(armPlacingVal);
+//                    break;
+//                default:
+//                    break;
+//            }
+//            hardware.arm.setPower(0.3);
+//        } else if(Math.abs(gamepad2.left_stick_y) > ANALOG_THRESHOLD) {
+//            hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
+//            hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition());
+//        } else {
+//            hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            hardware.arm.setPower(0.3);
+//        }
+        hardware.arm.setPower(gamepad2.left_stick_y * 0.3);
 
 
         if (gamepad2.a && gp2_a.ready(runtime)) {
