@@ -130,7 +130,7 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Place Skystone
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
-        hardware.clamp.setPosition(1.0);
+        hardware.clamp.setPosition(0.0);
         sleep(500);
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
 
@@ -202,7 +202,7 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Place Skystone
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
-        hardware.clamp.setPosition(1.0);
+        hardware.clamp.setPosition(0.0);
         sleep(500);
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
 
@@ -272,7 +272,7 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Place Skystone
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 300, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
-        hardware.clamp.setPosition(1.0);
+        hardware.clamp.setPosition(0.0);
         sleep(500);
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 300), 0.3);
 
