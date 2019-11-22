@@ -106,7 +106,11 @@ public class TestQuarryPaths extends LinearOpMode {
         hardware.clamp.setPosition(1.0);
         sleep(500);
 
+        // Drive back before turning
+        driveInches(-8.0, 0.4);
 
+        // Bring arm back inside the robot
+        moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
     }
 
     public void runCenter() throws InterruptedException {
@@ -140,6 +144,12 @@ public class TestQuarryPaths extends LinearOpMode {
         // Close clamp
         hardware.clamp.setPosition(1.0);
         sleep(500);
+
+        // Drive back before turning
+        driveInches(-8.0, 0.4);
+
+        // Bring arm back inside the robot
+        moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
     }
 
     public void runRight() throws InterruptedException {
@@ -171,6 +181,12 @@ public class TestQuarryPaths extends LinearOpMode {
         // Close clamp
         hardware.clamp.setPosition(1.0);
         sleep(500);
+
+        // Drive back before turning
+        driveInches(-8.0, 0.4);
+
+        // Bring arm back inside the robot
+        moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
     }
 
 
