@@ -97,6 +97,15 @@ public class TestQuarryPaths extends LinearOpMode {
         // Drive to Skystone
         driveInches(31.0,0.4);
 
+        // Turn towards left stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID((int)(heading() + 10));
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Close clamp
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
+
 
     }
 
@@ -122,6 +131,15 @@ public class TestQuarryPaths extends LinearOpMode {
         // Drive to Skystone
         driveInches(31.0,0.4);
 
+
+        // Turn towards left stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID((int)(heading() + 10));
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Close clamp
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
     }
 
     public void runRight() throws InterruptedException {
@@ -145,6 +163,14 @@ public class TestQuarryPaths extends LinearOpMode {
         // Drive to Skystone
         driveInches(31.0,0.4);
 
+        // Turn towards left stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID((int)(heading() + 10));
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Close clamp
+        hardware.clamp.setPosition(1.0);
+        sleep(500);
     }
 
 
