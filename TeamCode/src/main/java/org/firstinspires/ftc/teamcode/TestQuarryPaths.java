@@ -111,6 +111,14 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
+
+        // Turn to go under the bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Drive parallel to Foundation
+        driveInches(93.0, 0.8);
     }
 
     public void runCenter() throws InterruptedException {
@@ -150,6 +158,14 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
+
+        // Turn to go under the bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Drive parallel to Foundation
+        driveInches(93.0, 0.8);
     }
 
     public void runRight() throws InterruptedException {
@@ -187,6 +203,14 @@ public class TestQuarryPaths extends LinearOpMode {
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
+
+        // Turn to go under the bridge
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(90);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+
+        // Drive parallel to Foundation
+        driveInches(93.0, 0.8);
     }
 
 
