@@ -241,8 +241,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
 
             // Calculate left and center boundary lines for cropping rectangle
-            leftBound = rectTop + Math.abs((rectBot - rectTop) / 3.0);         // x position plus 1/3 of the width; corrected for sideways-left phone orientation
-            centerBound = rectTop + Math.abs((rectBot - rectTop) * 2.0 / 3.0); // x position plus 2/3 of the width; corrected for sideways-left phone orientation
+            leftBound = rectLeft + Math.abs((rectRight - rectLeft) / 3.0);         // x position plus 1/3 of the width
+            centerBound = rectLeft + Math.abs((rectRight - rectLeft) * 2.0 / 3.0); // x position plus 2/3 of the width
 
             // Create Point variable holding center coordinates of boundingRect
             Point rectCenter = new Point();
@@ -364,20 +364,20 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             Imgproc.line(
                     input,
                     new Point(
-                            rectLeft,
-                            leftBound),
+                            leftBound,
+                            rectBot),
                     new Point(
-                            rectRight,
-                            leftBound),
+                            leftBound,
+                            rectTop),
                     new Scalar(0, 0, 255), 4);
             Imgproc.line(
                     input,
                     new Point(
-                            rectLeft,
-                            centerBound),
+                            centerBound,
+                            rectBot),
                     new Point(
-                            rectRight,
-                            centerBound),
+                            centerBound,
+                            rectTop),
                     new Scalar(255, 0, 0), 4);
 
             double[] hsvThresholdHue =          hsvHue;
