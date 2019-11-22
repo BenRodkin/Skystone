@@ -93,7 +93,7 @@ public class SLICBotHardware {
 
         pulley.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        arm.setDirection(DcMotorSimple.Direction.REVERSE);
+        arm.setDirection(DcMotorSimple.Direction.FORWARD);
 
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
