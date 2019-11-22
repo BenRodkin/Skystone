@@ -76,18 +76,14 @@ public class AutoBlueSkystone extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
 
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam.openCameraDevice();
+        skystonePatternPipeline = new SkystonePatternPipeline();
+        phoneCam.setPipeline(skystonePatternPipeline);
+        phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+
         while(!isStarted() && !isStopRequested()) {
-            int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-            phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
-            phoneCam.openCameraDevice();
-            skystonePatternPipeline = new SkystonePatternPipeline();
-            phoneCam.setPipeline(skystonePatternPipeline);
-            phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
-
-
-            telemetry.addLine("Ready");
-            telemetry.update();
-
                 runtime = getRuntime();
 
                 //--------------------------------------------------------------------------------------
