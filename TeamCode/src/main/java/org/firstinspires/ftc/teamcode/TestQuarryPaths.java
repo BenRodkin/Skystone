@@ -84,14 +84,15 @@ public class TestQuarryPaths extends LinearOpMode {
         // Drive away from wall
         driveInches(5.0, 0.4);
 
+        // Lower arm and open clamp
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
+        hardware.clamp.setPosition(0.0);
+
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(15);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
-        // Lower arm and open clamp
-        moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
-        hardware.clamp.setPosition(0.0);
 
 
     }
@@ -104,14 +105,14 @@ public class TestQuarryPaths extends LinearOpMode {
         // Drive away from wall
         driveInches(5.0, 0.4);
 
+        // Lower arm and open clamp
+        moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
+        hardware.clamp.setPosition(0.0);
+
         // Test will show if turning is necessary for center stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
         turnToHeadingPID(0);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
-
-        // Lower arm and open clamp
-        moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
-        hardware.clamp.setPosition(0.0);
 
 
 
@@ -125,15 +126,15 @@ public class TestQuarryPaths extends LinearOpMode {
         // Drive away from wall
         driveInches(5.0, 0.4);
 
-        // Turn towards left stone
-        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID(-15);
-        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
-
         // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
         hardware.clamp.setPosition(0.0);
 
+        // Turn towards left stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-15);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
+        
     }
 
 
