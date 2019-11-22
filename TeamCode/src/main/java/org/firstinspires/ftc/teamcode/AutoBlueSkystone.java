@@ -416,6 +416,8 @@ public class AutoBlueSkystone extends LinearOpMode {
 
         // Park
         driveInches(55.0, 0.8);
+
+        hardware.clamp.setPosition(1.0);
     }
 
     public void runCenter() throws InterruptedException {
@@ -479,7 +481,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
-        driveInches(-5.0, 0.3);
+        driveInches(-4.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -488,6 +490,8 @@ public class AutoBlueSkystone extends LinearOpMode {
 
         // Park
         driveInches(55.0, 0.8);
+
+        hardware.clamp.setPosition(1.0);
     }
 
     public void runRight() throws InterruptedException {
@@ -558,6 +562,8 @@ public class AutoBlueSkystone extends LinearOpMode {
 
         // Park
         driveInches(55.0, 0.8);
+
+        hardware.clamp.setPosition(1.0);
     }
 
 
