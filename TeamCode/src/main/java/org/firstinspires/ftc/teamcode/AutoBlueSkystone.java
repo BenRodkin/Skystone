@@ -88,9 +88,6 @@ public class AutoBlueSkystone extends LinearOpMode {
             telemetry.addLine("Ready");
             telemetry.update();
 
-
-            waitForStart();
-
                 runtime = getRuntime();
 
                 //--------------------------------------------------------------------------------------
