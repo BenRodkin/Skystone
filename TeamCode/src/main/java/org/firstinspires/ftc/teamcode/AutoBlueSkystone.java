@@ -83,7 +83,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         phoneCam.setPipeline(skystonePatternPipeline);
         phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
 
-        while(!isStarted() && !isStopRequested()) {
+        while(!opModeIsActive() && !isStopRequested()) {
                 runtime = getRuntime();
 
                 //--------------------------------------------------------------------------------------
