@@ -15,12 +15,15 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
 @Autonomous(name = "Test: Quarry-Side Paths", group = "Testing")
 public class TestQuarryPaths extends LinearOpMode {
 
+    SLICBotHardware hardware = new SLICBotHardware();
+
     SkystonePlacement placement = CENTER; // Default is center
 
 
 
     public void runOpMode() {
 
+        hardware.init(hardwareMap);
 
 
         telemetry.addLine("Ready");
