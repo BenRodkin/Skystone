@@ -66,18 +66,42 @@ public class TestQuarryPaths extends LinearOpMode {
         telemetry.addLine("Running LEFT");
         telemetry.update();
         sleep(1000);
+
+        // Drive away from wall
+        driveInches(5.0, 0.4);
+
+        // Turn towards left stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(15);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
     }
 
     public void runCenter() {
         telemetry.addLine("Running CENTER");
         telemetry.update();
         sleep(1000);
+
+        // Drive away from wall
+        driveInches(5.0, 0.4);
+
+        // Test will show if turning is necessary for center stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(0);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
     }
 
     public void runRight() {
         telemetry.addLine("Running RIGHT");
         telemetry.update();
         sleep(1000);
+
+        // Drive away from wall
+        driveInches(5.0, 0.4);
+
+        // Turn towards left stone
+        hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
+        turnToHeadingPID(-15);
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
     }
 
 
