@@ -34,7 +34,7 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
 public class AutoBlueSkystone extends LinearOpMode {
 
 
-    SLICBotHardware hardware;
+    SLICBotHardware hardware = new SLICBotHardware();
 
     OpenCvCamera phoneCam;
     SkystonePatternPipeline skystonePatternPipeline;
@@ -81,7 +81,7 @@ public class AutoBlueSkystone extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
 
-        hardware = new SLICBotHardware();
+        hardware.init(hardwareMap);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
