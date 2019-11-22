@@ -87,6 +87,7 @@ public class TestQuarryPaths extends LinearOpMode {
         // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
         hardware.clamp.setPosition(0.0);
+        sleep(500);
 
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -108,6 +109,7 @@ public class TestQuarryPaths extends LinearOpMode {
         // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
         hardware.clamp.setPosition(0.0);
+        sleep(500);
 
         // Test will show if turning is necessary for center stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -129,6 +131,7 @@ public class TestQuarryPaths extends LinearOpMode {
         // Lower arm and open clamp
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY, 0.3);
         hardware.clamp.setPosition(0.0);
+        sleep(500);
 
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
