@@ -28,7 +28,7 @@ public class TestQuarryPaths extends LinearOpMode {
             if(gamepad1.dpad_up)    placement   = CENTER;
             if(gamepad1.dpad_right) placement   = RIGHT;
 
-            if(gamepad1.a) {
+            if(gamepad1.y) {
                 switch(placement) {
                     case LEFT:
                         runLeft();
