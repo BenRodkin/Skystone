@@ -368,7 +368,7 @@ public class AutoBlueSkystone extends LinearOpMode {
 
 
         // Drive to Skystone
-        driveInches(31.0,0.4);
+        driveInches(33.0,0.4);
 
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -380,7 +380,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         sleep(500);
 
         // Drive back before turning
-        driveInches(-8.0, 0.4);
+        driveInches(-10.0, 0.4);
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
@@ -449,7 +449,7 @@ public class AutoBlueSkystone extends LinearOpMode {
 
 
         // Drive to Skystone
-        driveInches(31.0,0.4);
+        driveInches(33.0,0.4);
 
 
         // Turn towards left stone
@@ -462,7 +462,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         sleep(500);
 
         // Drive back before turning
-        driveInches(-8.0, 0.4);
+        driveInches(-10.0, 0.4);
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
@@ -530,7 +530,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Drive to Skystone
-        driveInches(31.0,0.4);
+        driveInches(33.0,0.4);
 
         // Turn towards left stone
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -542,7 +542,7 @@ public class AutoBlueSkystone extends LinearOpMode {
         sleep(500);
 
         // Drive back before turning
-        driveInches(-8.0, 0.4);
+        driveInches(-10.0, 0.4);
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
