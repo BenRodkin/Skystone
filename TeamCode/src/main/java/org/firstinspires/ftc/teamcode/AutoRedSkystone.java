@@ -387,11 +387,11 @@ public class AutoRedSkystone extends LinearOpMode {
 
         // Turn to go under the bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID(90);
+        turnToHeadingPID(-90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID(90);
+        turnToHeadingPID(-90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Drive parallel to Foundation
@@ -416,11 +416,11 @@ public class AutoRedSkystone extends LinearOpMode {
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID(-90);
+        turnToHeadingPID(90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
-        turnToHeadingPID(-90);
+        turnToHeadingPID(90);
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Park
