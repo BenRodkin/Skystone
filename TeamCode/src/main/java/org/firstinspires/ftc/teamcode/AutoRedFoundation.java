@@ -66,7 +66,11 @@ public class AutoRedFoundation extends LinearOpMode {
 //        driveInches(45.0, 0.4);
 
 
+        // Drive to Foundation
 
+        // Turn to heading -90
+
+        // Park
 
 
         while(opModeIsActive()) {

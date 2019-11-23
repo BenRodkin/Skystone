@@ -66,7 +66,11 @@ public class AutoBlueFoundation extends LinearOpMode {
 //        driveInches(45.0, 0.4);
 
 
-        
+        // Drive to Foundation
+
+        // Flat spin to a heading of 90
+
+        // Park
 
 
         while(opModeIsActive()) {
