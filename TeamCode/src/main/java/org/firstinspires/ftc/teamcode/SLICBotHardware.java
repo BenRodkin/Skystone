@@ -115,6 +115,9 @@ public class SLICBotHardware {
 
 
         clamp.setPosition(1.0);
+
+        foundLeft.setPosition(0.0);
+        foundRight.setPosition(0.0);
     }
 
 
