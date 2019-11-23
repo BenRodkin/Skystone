@@ -656,7 +656,8 @@ public class AutoRedSkystone extends LinearOpMode {
 
         hardware.arm.setPower(speed);
 
-        while(opModeIsActive() && hardware.arm.isBusy()) {
+        double timeout = getRuntime();
+        while(opModeIsActive() && hardware.arm.isBusy() && getRuntime() - timeout < 2.0) {
             telemetry.addData("Arm encoder", hardware.arm.getCurrentPosition());
             telemetry.update();
         }
