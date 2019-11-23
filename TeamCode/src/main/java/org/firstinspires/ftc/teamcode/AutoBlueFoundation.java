@@ -59,8 +59,7 @@ public class AutoBlueFoundation extends LinearOpMode {
 
         driveInches(-3.0, 0.4);
 
-        hardware.holder.setPosition(1.0);
-        sleep(500);
+        // Missing foundation call here
 
         driveInches(45.0, 0.4);
 
