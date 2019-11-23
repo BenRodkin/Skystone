@@ -217,13 +217,14 @@ public class SLICBotTeleOp extends OpMode {
 //        telemetry.addData("Intake2 power", hardware.intake2.getPower());
 //        telemetry.addLine();
 //        telemetry.addData("Deploy1 position", hardware.deploy1.getPosition());
-//        telemetry.addData("Deploy2 position", hardware.deploy2.getPosition());
-        telemetry.addData("Clamp position", hardware.clamp.getPosition());
-        telemetry.addLine();
-        telemetry.addData("Pulley position", hardware.pulley.getCurrentPosition());
-        telemetry.addLine();
-        telemetry.addData("foundLeft pos", hardware.foundLeft.getPosition());
-        telemetry.addData("foundRight pos", hardware.foundRight.getPosition());
+////        telemetry.addData("Deploy2 position", hardware.deploy2.getPosition());
+//        telemetry.addData("Clamp position", hardware.clamp.getPosition());
+//        telemetry.addLine();
+//        telemetry.addData("Pulley position", hardware.pulley.getCurrentPosition());
+//        telemetry.addLine();
+//        telemetry.addData("foundLeft pos", hardware.foundLeft.getPosition());
+//        telemetry.addData("foundRight pos", hardware.foundRight.getPosition());
+        telemetry.addData("arm power", hardware.arm.getPower());
         telemetry.update();
     }
 
