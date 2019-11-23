@@ -380,7 +380,7 @@ public class AutoRedSkystone extends LinearOpMode {
         sleep(500);
 
         // Drive back before turning
-        driveInches(-8.0, 0.4);
+        driveInches(-7.0, 0.4);
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
@@ -462,7 +462,7 @@ public class AutoRedSkystone extends LinearOpMode {
         sleep(500);
 
         // Drive back before turning
-        driveInches(-8.0, 0.4);
+        driveInches(-7.0, 0.4);
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
@@ -542,7 +542,7 @@ public class AutoRedSkystone extends LinearOpMode {
         sleep(500);
 
         // Drive back before turning
-        driveInches(-8.0, 0.4);
+        driveInches(-7.0, 0.4);
 
         // Bring arm back inside the robot
         moveArmCounts(-hardware.ARM_COUNTS_DEPLOY, 0.3);
