@@ -75,15 +75,15 @@ public class SLICBotTeleOp extends OpMode {
 
 
 
-        // Arm and lift position cycling
-        if(gamepad2.right_bumper && gp2_rb.ready(runtime) && liftStep < 4) {
-            liftStep ++;
-            gp2_rb.updateSnapshot(runtime);
-        }
-        if(gamepad2.left_bumper && gp2_lb.ready(runtime) && liftStep > 0) {
-            liftStep --;
-            gp2_lb.updateSnapshot(runtime);
-        }
+//        // Arm and lift position cycling
+//        if(gamepad2.right_bumper && gp2_rb.ready(runtime) && liftStep < 4) {
+//            liftStep ++;
+//            gp2_rb.updateSnapshot(runtime);
+//        }
+//        if(gamepad2.left_bumper && gp2_lb.ready(runtime) && liftStep > 0) {
+//            liftStep --;
+//            gp2_lb.updateSnapshot(runtime);
+//        }
 
 //        if(gamepad2.y && gp2_y.ready(runtime)) {
 //            armStep ++;
