@@ -403,7 +403,7 @@ public class AutoRedSkystone extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Drive into Foundation
-        driveInches(5.0, 0.4);
+        driveInches(8.0, 0.4);
 
         // Place Skystone
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 100, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
@@ -412,7 +412,7 @@ public class AutoRedSkystone extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
-        driveInches(-5.0, 0.3);
+        driveInches(-8.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -485,7 +485,7 @@ public class AutoRedSkystone extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Drive into Foundation
-        driveInches(5.0, 0.4);
+        driveInches(8.0, 0.4);
 
         // Place Skystone
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 100, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
@@ -494,7 +494,7 @@ public class AutoRedSkystone extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
-        driveInches(-4.0, 0.3);
+        driveInches(-5.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
@@ -565,7 +565,7 @@ public class AutoRedSkystone extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);
 
         // Drive into Foundation
-        driveInches(5.0, 0.4);
+        driveInches(8.0, 0.4);
 
         // Place Skystone
         moveArmCounts(hardware.ARM_COUNTS_DEPLOY + 100, 0.3);   // Adding 300 to ARM_COUNTS_DEPLOY because negative is out of the robot
@@ -574,7 +574,7 @@ public class AutoRedSkystone extends LinearOpMode {
         moveArmCounts(-(hardware.ARM_COUNTS_DEPLOY + 100), 0.3);
 
         // Drive away from Foundation
-        driveInches(-4.0, 0.3);
+        driveInches(-8.0, 0.3);
 
         // Turn towards bridge
         hardware.pid.setOutputRange(-(hardware.MAX_SPEED / 2.0), (hardware.MAX_SPEED / 2.0));
