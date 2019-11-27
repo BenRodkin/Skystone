@@ -13,6 +13,12 @@ public class SlippyBotHardware {
 
     public DcMotor pulley;
 
+    public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
+    public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
+    public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
+    public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
+
+
     // PID variables
     public final double MAX_SPEED = 0.4;
     public final double P = 0.02;
