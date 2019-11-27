@@ -234,9 +234,9 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             contours = skystonePatternPipeline.filterContoursOutput();
             int numContoursInRect   = 0;
-            double numContoursLeft     = 0;
-            double numContoursCenter   = 0;
-            double numContoursRight    = 0;
+            double contoursProportionLeft     = 0;
+            double contoursProportionCenter   = 0;
+            double contoursProportionRight    = 0;
 
 
             // Calculate left and center boundary lines for cropping rectangle
@@ -263,9 +263,9 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
                         // Now classify as left, center, or right
                         rectCenter.x = (2 * boundingRect.x + boundingRect.width) / 2.0;     // Get the center of the rectangle
                         rectCenter.y = (2 * boundingRect.y + boundingRect.height) / 2.0;
-                        if(rectCenter.x < leftBound)        numContoursLeft     += boundingRect.area(); // rectangle in left 1/3 of the screen
-                        else if(rectCenter.x < centerBound) numContoursCenter   += boundingRect.area(); // rectangle in center 1/3 of the screen
-                        else                                numContoursRight    += boundingRect.area(); // rectangle in right 1/3 of the screen
+                        if(rectCenter.x < leftBound)        contoursProportionLeft     += boundingRect.area(); // rectangle in left 1/3 of the screen
+                        else if(rectCenter.x < centerBound) contoursProportionCenter   += boundingRect.area(); // rectangle in center 1/3 of the screen
+                        else                                contoursProportionRight    += boundingRect.area(); // rectangle in right 1/3 of the screen
                     }
                 }
             } catch(Exception e) {
@@ -273,13 +273,13 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             }
 
             // Get the largest tally
-            double largestTally = largest(numContoursLeft, numContoursCenter, numContoursRight);
+            double largestTally = largest(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
 
             // Divide all three tallies by the largest to get proportions
             try {
-                numContoursLeft     /= largestTally;
-                numContoursCenter   /= largestTally;
-                numContoursRight    /= largestTally;
+                contoursProportionLeft     /= largestTally;
+                contoursProportionCenter   /= largestTally;
+                contoursProportionRight    /= largestTally;
             } catch (Exception e) {
                 telemetry.addLine("Error while dividing contour tallies by largest tally.");
             }
@@ -290,7 +290,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             // Compare contour area tallies to see which third of the bounding rectangle
             // has the least (which will be the third with the Skystone in it)
             skystonePlacement =
-                    compareAreaTallies(numContoursLeft, numContoursCenter, numContoursRight);
+                    compareAreaTallies(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
 
 
 
@@ -311,9 +311,9 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("centerBound", centerBound);
             telemetry.addLine();
             telemetry.addData("numContoursInRect",  numContoursInRect);
-            telemetry.addData("numContoursLeft",    String.format(Locale.ENGLISH, "%.2f", numContoursLeft));
-            telemetry.addData("numContoursCenter",  String.format(Locale.ENGLISH, "%.2f", numContoursCenter));
-            telemetry.addData("numContoursRight",   String.format(Locale.ENGLISH, "%.2f", numContoursRight));
+            telemetry.addData("contoursProportionLeft",    String.format(Locale.ENGLISH, "%.2f", contoursProportionLeft));
+            telemetry.addData("contoursProportionCenter",  String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
+            telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
             telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
