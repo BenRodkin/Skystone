@@ -66,6 +66,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
     private static double leftBound = 0;
     private static double centerBound = 0;
 
+    private SkystonePlacement skystonePlacement;
+
 
     List<MatOfPoint> contours; // Contours from pipeline after filtering
 
@@ -272,7 +274,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             // Compare contour area tallies to see which third of the bounding rectangle
             // has the least (which will be the third with the Skystone in it)
-            SkystonePlacement skystonePlacement =
+            skystonePlacement =
                     compareAreaTallies(numContoursLeft, numContoursCenter, numContoursRight);
 
 
