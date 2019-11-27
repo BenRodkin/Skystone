@@ -13,6 +13,8 @@ public class SlippyBotTeleOp extends OpMode {
     double rlPower = 0.0;
     double rrPower = 0.0;
 
+    double pullyPower = 0.0;
+
     public void init() {
         hardware.init(hardwareMap);
 
@@ -27,10 +29,14 @@ public class SlippyBotTeleOp extends OpMode {
         double strafe = gamepad1.left_stick_x;
         double twist  = -gamepad1.right_stick_x;
 
+        pullyPower = gamepad2.left_stick_y;
+
         flPower = (drive + strafe + twist);
         frPower = (drive - strafe - twist);
         rlPower = (drive - strafe + twist);
         rrPower = (drive + strafe - twist);
+
+
 
 
 
@@ -39,6 +45,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.frontRight.setPower(frPower);
         hardware.rearLeft.  setPower(rlPower);
         hardware.rearRight. setPower(rrPower);
+
+        hardware.pulley.    setPower(pullyPower);
 
 
         telemetry.addLine("Running");
