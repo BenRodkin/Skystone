@@ -20,6 +20,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
@@ -310,9 +311,9 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("centerBound", centerBound);
             telemetry.addLine();
             telemetry.addData("numContoursInRect",  numContoursInRect);
-            telemetry.addData("numContoursLeft",    numContoursLeft);
-            telemetry.addData("numContoursCenter",  numContoursCenter);
-            telemetry.addData("numContoursRight",   numContoursRight);
+            telemetry.addData("numContoursLeft",    String.format(Locale.ENGLISH, "%.2f", numContoursLeft));
+            telemetry.addData("numContoursCenter",  String.format(Locale.ENGLISH, "%.2f", numContoursCenter));
+            telemetry.addData("numContoursRight",   String.format(Locale.ENGLISH, "%.2f", numContoursRight));
             telemetry.addLine();
             telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
