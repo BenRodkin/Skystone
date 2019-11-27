@@ -46,7 +46,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.rearLeft.  setPower(rlPower);
         hardware.rearRight. setPower(rrPower);
 
-        hardware.pulley.    setPower(pullyPower);
+        hardware.pulleyLeft.    setPower(pullyPower);
+        hardware.pulleyRight.   setPower(pullyPower);
 
 
         telemetry.addLine("Running");
