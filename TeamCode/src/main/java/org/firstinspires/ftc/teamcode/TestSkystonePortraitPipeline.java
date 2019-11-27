@@ -44,15 +44,15 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
     private final double VAL_MAX = 255.0;
     private final double HSV_MIN = 0.0;
 
-    private static double[] hsvHue = new double[]{80.0, 150.0};
+    private static double[] hsvHue = new double[]{80.0, 119.0};     // Starts with red outside of threshold (red is hue of 120)
     private static double[] hsvSat = new double[]{175.0, 255.0};
-    private static double[] hsvVal = new double[]{0.0, 255.0};
+    private static double[] hsvVal = new double[]{50.0, 255.0};      // Testing showed 50 (min) to be enough to cut out most of the Skystone
 
 
-    private static double rectTop   = 0.0;
-    private static double rectLeft  = 0.0;
-    private static double rectBot   = 0.0;
-    private static double rectRight = 0.0;
+    private static double rectTop   = 235.0;
+    private static double rectLeft  = 5.0;
+    private static double rectBot   = 333.0;
+    private static double rectRight = 480.0;
 
     private final double RECT_STEP = 0.04;
     private final double RECT_MIN = 0.0;
@@ -62,10 +62,6 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     private static boolean returnHSV = false;
     private static boolean drawRect = false;
-
-
-
-
 
     private static double leftBound = 0;
     private static double centerBound = 0;
