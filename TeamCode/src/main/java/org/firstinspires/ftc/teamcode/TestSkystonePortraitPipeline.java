@@ -271,6 +271,20 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
                 telemetry.addLine("Error while iterating through contours!");
             }
 
+            // Get the largest tally
+            double largestTally = largest(numContoursLeft, numContoursCenter, numContoursRight);
+
+            // Divide all three tallies by the largest to get proportions
+            try {
+                numContoursLeft     /= largestTally;
+                numContoursCenter   /= largestTally;
+                numContoursRight    /= largestTally;
+            } catch (Exception e) {
+                telemetry.addLine("Error while dividing contour tallies by largest tally.");
+            }
+
+
+
 
             // Compare contour area tallies to see which third of the bounding rectangle
             // has the least (which will be the third with the Skystone in it)
@@ -310,6 +324,13 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
         if(input > max) input = max;
         return input;
     }
+
+
+    public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
+        return Math.max(Math.max(tallyLeft, tallyCenter), tallyRight);
+    }
+
+
 
 
     public SkystonePlacement compareAreaTallies(double tallyLeft, double tallyCenter, double tallyRight) {
