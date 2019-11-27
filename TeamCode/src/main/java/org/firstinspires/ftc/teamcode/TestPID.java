@@ -19,7 +19,7 @@ public class TestPID extends LinearOpMode {
     BNO055IMU imu;
 
     // Hardware class
-    SLICBotHardware hardware = new SLICBotHardware();
+    SlippyBotHardware hardware = new SlippyBotHardware();
 
     // Button cooldowns
     GamepadCooldowns cooldowns = new GamepadCooldowns();
