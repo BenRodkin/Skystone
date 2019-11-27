@@ -233,9 +233,9 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             contours = skystonePatternPipeline.filterContoursOutput();
             int numContoursInRect   = 0;
-            int numContoursLeft     = 0;
-            int numContoursCenter   = 0;
-            int numContoursRight    = 0;
+            double numContoursLeft     = 0;
+            double numContoursCenter   = 0;
+            double numContoursRight    = 0;
 
 
             // Calculate left and center boundary lines for cropping rectangle
