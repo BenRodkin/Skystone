@@ -49,4 +49,15 @@ public class SlippyBotHardware {
         pulley.     setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+
+    public void setLeftPower(double power) {
+        frontLeft.setPower(power);
+        rearLeft.setPower(power);
+    }
+
+    public void setRightPower(double power) {
+        frontLeft.setPower(power);
+        rearRight.setPower(power);
+    }
+
 }
