@@ -56,7 +56,7 @@ public class SlippyBotHardware {
     }
 
     public void setRightPower(double power) {
-        frontLeft.setPower(power);
+        frontRight.setPower(power);
         rearRight.setPower(power);
     }
 
