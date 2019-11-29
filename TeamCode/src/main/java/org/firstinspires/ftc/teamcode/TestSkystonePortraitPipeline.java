@@ -62,7 +62,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
     private final int IMG_HEIGHT = 640;
 
     private static boolean returnHSV = false;
-    private static boolean drawRect = false;
+    private static boolean drawRect = true;
 
     private static double leftBound = 0;
     private static double centerBound = 0;
