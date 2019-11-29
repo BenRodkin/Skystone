@@ -100,6 +100,12 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
         while(opModeIsActive()) {
 
+            // Update local HSV threshold references
+            double[] localHsvHue = skystonePatternPipeline.gethsvHue();
+            double[] localHsvSat = skystonePatternPipeline.getHsvSat();
+            double[] localHsvVal = skystonePatternPipeline.getHsvVal();
+
+            // Update runtime read
             runtime = getRuntime();
 
             //--------------------------------------------------------------------------------------
