@@ -20,12 +20,12 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
 class SkystonePatternPipeline extends OpenCvPipeline {
 
     // HSV Threshold input variables
-    private final double THRESHOLD_STEP = 1.0;
+    public static final double THRESHOLD_STEP = 1.0;
 
-    private final double HUE_MAX = 180.0;
-    private final double SAT_MAX = 255.0;
-    private final double VAL_MAX = 255.0;
-    private final double HSV_MIN = 0.0;
+    public static final double HUE_MAX = 180.0;
+    public static final double SAT_MAX = 255.0;
+    public static final double VAL_MAX = 255.0;
+    public static final double HSV_MIN = 0.0;
 
     private static double[] hsvHue = new double[]{80.0, 119.0};     // Starts with red outside of threshold (red is hue of 120)
     private static double[] hsvSat = new double[]{175.0, 255.0};
@@ -37,11 +37,11 @@ class SkystonePatternPipeline extends OpenCvPipeline {
     private static double rectBot   = 333.0;
     private static double rectRight = 480.0;
 
-    private final double RECT_STEP = 0.04;
-    private final double RECT_MIN = 0.0;
+    public static final double RECT_STEP = 0.04;
+    public static final double RECT_MIN = 0.0;
 
-    private final int IMG_WIDTH = 480;
-    private final int IMG_HEIGHT = 640;
+    public static final int IMG_WIDTH = 480;
+    public static final int IMG_HEIGHT = 640;
 
     private static boolean returnHSV = false;
     private static boolean drawRect = true;
@@ -52,7 +52,7 @@ class SkystonePatternPipeline extends OpenCvPipeline {
     private final double CONFIDENCE_THRESHOLD = 0.65;
 
 
-    List<MatOfPoint> contours; // Contours from pipeline after filtering
+    private List<MatOfPoint> contours; // Contours from pipeline after filtering
 
 
     //Outputs
