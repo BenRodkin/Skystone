@@ -22,6 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.HSV_MIN;
+import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.HUE_MAX;
+import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.SAT_MAX;
+import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.THRESHOLD_STEP;
+import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.VAL_MAX;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
