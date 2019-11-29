@@ -284,6 +284,11 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
                 telemetry.addLine("Error while dividing contour tallies by largest tally.");
             }
 
+            // Get the smallest proportioned tally
+            double smallestProportionedTally = smallest(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
+
+            // Subtract from one to get confidence
+            double confidence = 1.0 - smallestProportionedTally;
 
 
 
@@ -315,6 +320,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("contoursProportionCenter",  String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
             telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
+            telemetry.addData("Confidence", String.format(Locale.ENGLISH, "%.2f", confidence));
+            telemetry.addLine();
             telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
         }
@@ -329,6 +336,10 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
         return Math.max(Math.max(tallyLeft, tallyCenter), tallyRight);
+    }
+
+    public double smallest(double tallyLeft, double tallyCenter, double tallyRight) {
+        return Math.min(Math.min(tallyLeft, tallyCenter), tallyRight);
     }
 
 
