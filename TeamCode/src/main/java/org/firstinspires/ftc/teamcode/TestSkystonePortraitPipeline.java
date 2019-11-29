@@ -69,6 +69,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     private SkystonePlacement skystonePlacement;
 
+    private final double CONFIDENCE_THRESHOLD = 0.65;
+
 
     List<MatOfPoint> contours; // Contours from pipeline after filtering
 
@@ -293,9 +295,16 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
 
             // Compare contour area tallies to see which third of the bounding rectangle
-            // has the least (which will be the third with the Skystone in it)
-            skystonePlacement =
-                    compareAreaTallies(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
+            // has the least (which will be the third with the Skystone in it).
+            // If data is below our confidence threshold, keep the last reading instead
+            // of getting a new one from bad data.
+            if(confidence < CONFIDENCE_THRESHOLD) {
+                // Do nothing; last reading will be kept
+            } else {
+                // Good data! Update our decision.
+                skystonePlacement =
+                        compareAreaTallies(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
+            }
 
 
 
@@ -321,6 +330,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
             telemetry.addData("Confidence", String.format(Locale.ENGLISH, "%.2f", confidence));
+            if(confidence < CONFIDENCE_THRESHOLD) telemetry.addLine("Confidence is below threshold. Keeping last placement decision.");
             telemetry.addLine();
             telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
