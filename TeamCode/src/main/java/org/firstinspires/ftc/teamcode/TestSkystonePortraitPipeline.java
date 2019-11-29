@@ -298,7 +298,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             // has the least (which will be the third with the Skystone in it).
             // If data is below our confidence threshold, keep the last reading instead
             // of getting a new one from bad data.
-            if(confidence < CONFIDENCE_THRESHOLD) {
+            boolean badData = confidence < CONFIDENCE_THRESHOLD || Double.isNaN(confidence);    // true if confidence is too low or if we get NaN as confidence
+            if(badData) {
                 // Do nothing; last reading will be kept
             } else {
                 // Good data! Update our decision.
@@ -330,7 +331,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
             telemetry.addData("Confidence", String.format(Locale.ENGLISH, "%.2f", confidence));
-            if(confidence < CONFIDENCE_THRESHOLD) telemetry.addLine("Confidence is below threshold. Keeping last placement decision.");
+            if(badData) telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
             telemetry.addLine();
             telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
