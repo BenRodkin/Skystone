@@ -315,17 +315,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addLine(String.format("Hue: [%s, %s]", hsvHue[0], hsvHue[1]));
             telemetry.addLine(String.format("Sat: [%s, %s]", hsvSat[0], hsvSat[1]));
             telemetry.addLine(String.format("Val: [%s, %s]", hsvVal[0], hsvVal[1]));
-            telemetry.addData("Contours size", contours.size());
             telemetry.addLine();
-            telemetry.addData("rectTop", rectTop);
-            telemetry.addData("rectLeft", rectLeft);
-            telemetry.addData("rectBot", rectBot);
-            telemetry.addData("rectRight", rectRight);
-            telemetry.addLine();
-            telemetry.addData("leftBound", leftBound);
-            telemetry.addData("centerBound", centerBound);
-            telemetry.addLine();
-            telemetry.addData("numContoursInRect",  numContoursInRect);
             telemetry.addData("contoursProportionLeft",    String.format(Locale.ENGLISH, "%.2f", contoursProportionLeft));
             telemetry.addData("contoursProportionCenter",  String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
             telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
