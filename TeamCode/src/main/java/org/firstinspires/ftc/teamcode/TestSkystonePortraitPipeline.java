@@ -32,6 +32,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     OpenCvCamera phoneCam;
     SkystonePatternPipeline skystonePatternPipeline;
+    private SkystonePlacement skystonePlacement = CENTER;
+
 
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
