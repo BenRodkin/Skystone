@@ -320,10 +320,10 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("contoursProportionCenter",  String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
             telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
+            telemetry.addData("skystonePlacement", skystonePlacement);
+            telemetry.addLine();
             telemetry.addData("Confidence", String.format(Locale.ENGLISH, "%.2f", confidence));
             if(badData) telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
-            telemetry.addLine();
-            telemetry.addData("skystonePlacement", skystonePlacement);
             telemetry.update();
         }
     }
