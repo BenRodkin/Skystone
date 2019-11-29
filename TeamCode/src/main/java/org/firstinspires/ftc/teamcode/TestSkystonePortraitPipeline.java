@@ -67,7 +67,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
     private static double leftBound = 0;
     private static double centerBound = 0;
 
-    private SkystonePlacement skystonePlacement;
+    private SkystonePlacement skystonePlacement = CENTER;
 
     private final double CONFIDENCE_THRESHOLD = 0.65;
 
