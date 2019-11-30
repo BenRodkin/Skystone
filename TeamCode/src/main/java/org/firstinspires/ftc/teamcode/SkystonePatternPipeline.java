@@ -248,8 +248,15 @@ class SkystonePatternPipeline extends OpenCvPipeline {
     public double[] getHsvSat() { return hsvSat;}
     public double[] getHsvVal() { return hsvVal;}
 
-    public double getRectLeft() { return rectLeft;}
-    public double getRectRight() { return rectRight;}
+    public double getRectTop()      { return rectTop;}
+    public double getRectLeft()     { return rectLeft;}
+    public double getRectBot()      { return rectBot;}
+    public double getRectRight()    { return rectRight;}
+
+    public double getLeftBound()    { return leftBound;}
+    public double getCenterBound()  { return centerBound;}
+
+    public List<MatOfPoint> getFilteredContours()   {return filterContoursOutput;}
 
 
 
