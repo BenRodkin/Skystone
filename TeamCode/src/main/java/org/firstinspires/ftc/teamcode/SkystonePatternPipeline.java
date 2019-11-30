@@ -274,8 +274,16 @@ class SkystonePatternPipeline extends OpenCvPipeline {
     public void setHsvValMin(double hsvValMin) { hsvVal[0] = hsvValMin;}
     public void setHsvValMax(double hsvValMax) { hsvVal[1] = hsvValMax;}
 
-    public void setRectLeft(double left)    { rectLeft = left;}
-    public void setRectRight(double right)  { rectRight = right;}
+    public void setRectTop(double top)      { rectTop   =     top;}
+    public void setRectLeft(double left)    { rectLeft  =    left;}
+    public void setRectBot(double bot)      { rectBot   =     bot;}
+    public void setRectRight(double right)  { rectRight =   right;}
+
+    public void setLeftBound(double lBound)     { leftBound     = lBound;}
+    public void setCenterBound(double cBound)   { centerBound   = cBound;}
+
+    public void setReturnHSV(boolean retHsv)    { returnHSV = retHsv;}
+    public void setDrawRect(boolean draw)       { drawRect  = draw;}
 
 }
 
