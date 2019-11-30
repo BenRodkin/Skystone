@@ -8,9 +8,6 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.List;
 import java.util.Locale;
@@ -33,12 +30,14 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
 @Autonomous(name = "Test: Portrait Pipeline", group = "Testing")
 public class TestSkystonePortraitPipeline extends LinearOpMode {
 
-    OpenCvCamera phoneCam;
-    SkystonePatternPipeline skystonePatternPipeline;
-    private SkystonePlacement placement = CENTER;
+    SlippyBotHardware hardware = new SlippyBotHardware();
 
     private List<MatOfPoint> contours; // Contours from pipeline after filtering
 
+
+    private SkystonePlacement placement = CENTER;
+
+    private final boolean INIT_CAMERA = true;
 
 
 
@@ -48,12 +47,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
 
     public void runOpMode() {
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
-        phoneCam.openCameraDevice();
-        skystonePatternPipeline = new SkystonePatternPipeline();
-        phoneCam.setPipeline(skystonePatternPipeline);
-        phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+
+        hardware.init(hardwareMap, INIT_CAMERA);
 
 
         telemetry.addLine("Ready");
@@ -66,9 +61,9 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
         while(opModeIsActive()) {
 
             // Update local HSV threshold references
-            double[] localHsvHue = skystonePatternPipeline.gethsvHue();
-            double[] localHsvSat = skystonePatternPipeline.getHsvSat();
-            double[] localHsvVal = skystonePatternPipeline.getHsvVal();
+            double[] localHsvHue = hardware.vision.gethsvHue();
+            double[] localHsvSat = hardware.vision.getHsvSat();
+            double[] localHsvVal = hardware.vision.getHsvVal();
 
             // Update runtime read
             runtime = getRuntime();
@@ -93,28 +88,28 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             // HUE MINIMUM
             if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
-                if (localHsvHue[0] > HSV_MIN)       skystonePatternPipeline.setHsvHueMin(localHsvHue[0] - THRESHOLD_STEP)   /*hsvHue[0] -= THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvHueMin(HSV_MIN)                           /*hsvHue[0] = HSV_MIN*/;
+                if (localHsvHue[0] > HSV_MIN)       hardware.vision.setHsvHueMin(localHsvHue[0] - THRESHOLD_STEP)   /*hsvHue[0] -= THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvHueMin(HSV_MIN)                           /*hsvHue[0] = HSV_MIN*/;
                 gp1.dpDown.updateSnapshot(runtime);
             }
 
             if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
-                if(localHsvHue[0] < localHsvHue[1]) skystonePatternPipeline.setHsvHueMin(localHsvHue[0] + THRESHOLD_STEP)   /*hsvHue[0] += THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvHueMin(localHsvHue[1])                    /*hsvHue[0] = hsvHue[1]*/;
+                if(localHsvHue[0] < localHsvHue[1]) hardware.vision.setHsvHueMin(localHsvHue[0] + THRESHOLD_STEP)   /*hsvHue[0] += THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvHueMin(localHsvHue[1])                    /*hsvHue[0] = hsvHue[1]*/;
                 gp1.dpUp.updateSnapshot(runtime);
             }
 
 
             // HUE MAXIMUM
             if(gamepad1.y && gp1.y.ready(runtime)) {
-                if (localHsvHue[1] < HUE_MAX)       skystonePatternPipeline.setHsvHueMax(localHsvHue[1] + THRESHOLD_STEP)   /*hsvHue[1] += THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvHueMax(HUE_MAX)                           /*hsvHue[1] = HUE_MAX*/;
+                if (localHsvHue[1] < HUE_MAX)       hardware.vision.setHsvHueMax(localHsvHue[1] + THRESHOLD_STEP)   /*hsvHue[1] += THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvHueMax(HUE_MAX)                           /*hsvHue[1] = HUE_MAX*/;
                 gp1.y.updateSnapshot(runtime);
             }
 
             if(gamepad1.a && gp1.a.ready(runtime)) {
-                if(localHsvHue[1] > localHsvHue[0]) skystonePatternPipeline.setHsvHueMax(localHsvHue[1] - THRESHOLD_STEP)   /*hsvHue[1] -= THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvHueMax(localHsvHue[0])                    /*hsvHue[1] = hsvHue[0]*/;
+                if(localHsvHue[1] > localHsvHue[0]) hardware.vision.setHsvHueMax(localHsvHue[1] - THRESHOLD_STEP)   /*hsvHue[1] -= THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvHueMax(localHsvHue[0])                    /*hsvHue[1] = hsvHue[0]*/;
                 gp1.a.updateSnapshot(runtime);
             }
 
@@ -123,28 +118,28 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             // SAT MINIMUM
             if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
-                if (localHsvSat[0] > HSV_MIN)       skystonePatternPipeline.setHsvSatMin(localHsvSat[0] - THRESHOLD_STEP)   /*hsvSat[0] -= THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvSatMin(HSV_MIN)                           /*hsvSat[0] = HSV_MIN*/;
+                if (localHsvSat[0] > HSV_MIN)       hardware.vision.setHsvSatMin(localHsvSat[0] - THRESHOLD_STEP)   /*hsvSat[0] -= THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvSatMin(HSV_MIN)                           /*hsvSat[0] = HSV_MIN*/;
                 gp1.dpLeft.updateSnapshot(runtime);
             }
 
             if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
-                if(localHsvSat[0] < localHsvSat[1]) skystonePatternPipeline.setHsvSatMin(localHsvSat[0] + THRESHOLD_STEP)   /*hsvSat[0] += THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvSatMin(localHsvSat[1])                    /*hsvSat[0] = hsvSat[1]*/;
+                if(localHsvSat[0] < localHsvSat[1]) hardware.vision.setHsvSatMin(localHsvSat[0] + THRESHOLD_STEP)   /*hsvSat[0] += THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvSatMin(localHsvSat[1])                    /*hsvSat[0] = hsvSat[1]*/;
                 gp1.dpRight.updateSnapshot(runtime);
             }
 
 
             // SAT MAXIMUM
             if(gamepad1.b && gp1.b.ready(runtime)) {
-                if (localHsvSat[1] < SAT_MAX)       skystonePatternPipeline.setHsvSatMax(localHsvSat[1] + THRESHOLD_STEP)   /*hsvSat[1] += THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvSatMax(SAT_MAX)                           /*hsvSat[1] = SAT_MAX*/;
+                if (localHsvSat[1] < SAT_MAX)       hardware.vision.setHsvSatMax(localHsvSat[1] + THRESHOLD_STEP)   /*hsvSat[1] += THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvSatMax(SAT_MAX)                           /*hsvSat[1] = SAT_MAX*/;
                 gp1.b.updateSnapshot(runtime);
             }
 
             if(gamepad1.x && gp1.x.ready(runtime)) {
-                if(localHsvSat[1] > localHsvSat[0]) skystonePatternPipeline.setHsvSatMax(localHsvSat[1] - THRESHOLD_STEP)   /*hsvSat[1] -= THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvSatMax(localHsvSat[0])                    /*hsvSat[1] = hsvSat[0]*/;
+                if(localHsvSat[1] > localHsvSat[0]) hardware.vision.setHsvSatMax(localHsvSat[1] - THRESHOLD_STEP)   /*hsvSat[1] -= THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvSatMax(localHsvSat[0])                    /*hsvSat[1] = hsvSat[0]*/;
                 gp1.x.updateSnapshot(runtime);
             }
 
@@ -153,14 +148,14 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             // VAL MINIMUM
             if(gamepad1.left_trigger > TRIGGER_THRESHOLD && gp1.lt.ready(runtime)) {
-                if (localHsvVal[0] > HSV_MIN)       skystonePatternPipeline.setHsvValMin(localHsvVal[0] - THRESHOLD_STEP)   /*hsvVal[0] -= THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvValMin(HSV_MIN)                           /*hsvVal[0] = HSV_MIN*/;
+                if (localHsvVal[0] > HSV_MIN)       hardware.vision.setHsvValMin(localHsvVal[0] - THRESHOLD_STEP)   /*hsvVal[0] -= THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvValMin(HSV_MIN)                           /*hsvVal[0] = HSV_MIN*/;
                 gp1.lt.updateSnapshot(runtime);
             }
 
             if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
-                if(localHsvVal[0] < localHsvVal[1]) skystonePatternPipeline.setHsvValMin(localHsvVal[0] + THRESHOLD_STEP)   /*hsvVal[0] += THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvValMin(localHsvVal[1])                    /*hsvVal[0] = hsvVal[1]*/;
+                if(localHsvVal[0] < localHsvVal[1]) hardware.vision.setHsvValMin(localHsvVal[0] + THRESHOLD_STEP)   /*hsvVal[0] += THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvValMin(localHsvVal[1])                    /*hsvVal[0] = hsvVal[1]*/;
                 gp1.lb.updateSnapshot(runtime);
             }
 
@@ -168,14 +163,14 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
             // VAL MAXIMUM
             if(gamepad1.right_trigger > TRIGGER_THRESHOLD && gp1.rt.ready(runtime)) {
-                if (localHsvVal[1] > localHsvVal[0]) skystonePatternPipeline.setHsvValMax(localHsvVal[1] - THRESHOLD_STEP)  /*hsvVal[1] -= THRESHOLD_STEP*/;
-                else                                 skystonePatternPipeline.setHsvValMax(localHsvVal[0])                   /*hsvVal[1] = hsvVal[0]*/;
+                if (localHsvVal[1] > localHsvVal[0]) hardware.vision.setHsvValMax(localHsvVal[1] - THRESHOLD_STEP)  /*hsvVal[1] -= THRESHOLD_STEP*/;
+                else                                 hardware.vision.setHsvValMax(localHsvVal[0])                   /*hsvVal[1] = hsvVal[0]*/;
                 gp1.rt.updateSnapshot(runtime);
             }
 
             if(gamepad1.right_bumper && gp1.rb.ready(runtime)) {
-                if(localHsvVal[1] < VAL_MAX)        skystonePatternPipeline.setHsvValMax(localHsvVal[1] + THRESHOLD_STEP)   /*hsvVal[1] += THRESHOLD_STEP*/;
-                else                                skystonePatternPipeline.setHsvValMax(VAL_MAX)                           /*hsvVal[1] = VAL_MAX*/;
+                if(localHsvVal[1] < VAL_MAX)        hardware.vision.setHsvValMax(localHsvVal[1] + THRESHOLD_STEP)   /*hsvVal[1] += THRESHOLD_STEP*/;
+                else                                hardware.vision.setHsvValMax(VAL_MAX)                           /*hsvVal[1] = VAL_MAX*/;
                 gp1.rb.updateSnapshot(runtime);
             }
 
@@ -199,37 +194,37 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
              */
 
             // Get rectangle boundaries
-            double localRectTop     = skystonePatternPipeline.getRectTop();
-            double localRectLeft    = skystonePatternPipeline.getRectLeft();
-            double localRectBot     = skystonePatternPipeline.getRectBot();
-            double localRectRight   = skystonePatternPipeline.getRectRight();
+            double localRectTop     = hardware.vision.getRectTop();
+            double localRectLeft    = hardware.vision.getRectLeft();
+            double localRectBot     = hardware.vision.getRectBot();
+            double localRectRight   = hardware.vision.getRectRight();
 
 
-            skystonePatternPipeline.setRectTop  (Range.clip(localRectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))   /*rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
-            skystonePatternPipeline.setRectLeft (Range.clip(localRectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))    /*rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
-            skystonePatternPipeline.setRectBot  (Range.clip(localRectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))  /*rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
-            skystonePatternPipeline.setRectRight(Range.clip(localRectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))   /*rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
+            hardware.vision.setRectTop  (Range.clip(localRectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))   /*rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
+            hardware.vision.setRectLeft (Range.clip(localRectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))    /*rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
+            hardware.vision.setRectBot  (Range.clip(localRectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))  /*rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
+            hardware.vision.setRectRight(Range.clip(localRectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))   /*rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
 
 
-            skystonePatternPipeline.setReturnHSV(gamepad2.a)                /*returnHSV = gamepad2.a*/;
-            if(gamepad2.x) skystonePatternPipeline.setDrawRect(false)       /*drawRect = false*/;
-            else if(gamepad2.y) skystonePatternPipeline.setDrawRect(true)   /*drawRect = true*/;
+            hardware.vision.setReturnHSV(gamepad2.a)                /*returnHSV = gamepad2.a*/;
+            if(gamepad2.x) hardware.vision.setDrawRect(false)       /*drawRect = false*/;
+            else if(gamepad2.y) hardware.vision.setDrawRect(true)   /*drawRect = true*/;
 
 
 
 
-            contours = skystonePatternPipeline.filterContoursOutput();
+            contours = hardware.vision.filterContoursOutput();
             double contoursProportionLeft     = 0;
             double contoursProportionCenter   = 0;
             double contoursProportionRight    = 0;
 
 
-            double leftBound = skystonePatternPipeline.getLeftBound();
-            double centerBound = skystonePatternPipeline.getCenterBound();
+            double leftBound = hardware.vision.getLeftBound();
+            double centerBound = hardware.vision.getCenterBound();
 
             // Calculate left and center boundary lines for cropping rectangle
-            skystonePatternPipeline.setLeftBound(localRectLeft + Math.abs(localRectRight - localRectLeft) / 3.0)            /*leftBound = rectLeft + Math.abs((rectRight - rectLeft) / 3.0)*/;         // x position plus 1/3 of the width
-            skystonePatternPipeline.setCenterBound(localRectLeft + Math.abs(localRectRight - localRectLeft) * 2.0 / 3.0)    /*centerBound = rectLeft + Math.abs((rectRight - rectLeft) * 2.0 / 3.0)*/; // x position plus 2/3 of the width
+            hardware.vision.setLeftBound(localRectLeft + Math.abs(localRectRight - localRectLeft) / 3.0)            /*leftBound = rectLeft + Math.abs((rectRight - rectLeft) / 3.0)*/;         // x position plus 1/3 of the width
+            hardware.vision.setCenterBound(localRectLeft + Math.abs(localRectRight - localRectLeft) * 2.0 / 3.0)    /*centerBound = rectLeft + Math.abs((rectRight - rectLeft) * 2.0 / 3.0)*/; // x position plus 2/3 of the width
 
             // Create Point variable holding center coordinates of boundingRect
             Point rectCenter = new Point();
