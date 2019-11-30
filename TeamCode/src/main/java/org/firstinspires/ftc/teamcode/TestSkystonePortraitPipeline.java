@@ -35,7 +35,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     OpenCvCamera phoneCam;
     SkystonePatternPipeline skystonePatternPipeline;
-    private SkystonePlacement skystonePlacement = CENTER;
+    private SkystonePlacement placement = CENTER;
 
     private List<MatOfPoint> contours; // Contours from pipeline after filtering
 
@@ -290,7 +290,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
                 // Do nothing; last reading will be kept
             } else {
                 // Good data! Update our decision.
-                skystonePlacement =
+                placement =
                         compareAreaTallies(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
             }
 
@@ -303,7 +303,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             telemetry.addData("contoursProportionCenter",  String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
             telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
-            telemetry.addData("skystonePlacement", skystonePlacement);
+            telemetry.addData("placement", placement);
             telemetry.addLine();
             telemetry.addData("Confidence", String.format(Locale.ENGLISH, "%.2f", confidence));
             if(badData) telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
