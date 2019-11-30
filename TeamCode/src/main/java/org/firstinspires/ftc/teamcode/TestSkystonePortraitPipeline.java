@@ -219,7 +219,6 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
 
             contours = skystonePatternPipeline.filterContoursOutput();
-            int numContoursInRect   = 0;
             double contoursProportionLeft     = 0;
             double contoursProportionCenter   = 0;
             double contoursProportionRight    = 0;
@@ -248,7 +247,6 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
                             boundingRect.x + boundingRect.width <= localRectRight &&
                             boundingRect.y + boundingRect.height <= localRectBot) {
                         // We've got a valid contour!
-                        numContoursInRect ++;
                         // Now classify as left, center, or right
                         rectCenter.x = (2 * boundingRect.x + boundingRect.width) / 2.0;     // Get the center of the rectangle
                         rectCenter.y = (2 * boundingRect.y + boundingRect.height) / 2.0;
