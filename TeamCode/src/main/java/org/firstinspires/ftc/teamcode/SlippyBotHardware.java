@@ -4,6 +4,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvInternalCamera;
+
 public class SlippyBotHardware {
 
     public DcMotor frontLeft;
@@ -29,8 +33,12 @@ public class SlippyBotHardware {
 
     public final SynchronousPID pid = new SynchronousPID(P, I, D);
 
+    // Camera variables
+    OpenCvCamera phoneCam;
+    SkystonePatternPipeline vision;
 
-    public void init(HardwareMap hardwareMap) {
+
+    public void init(HardwareMap hardwareMap, boolean initCamera) {
         frontLeft   = hardwareMap.dcMotor.get("fl_drive");
         frontRight  = hardwareMap.dcMotor.get("fr_drive");
         rearLeft    = hardwareMap.dcMotor.get("rl_drive");
@@ -52,6 +60,18 @@ public class SlippyBotHardware {
 
         pulleyLeft.     setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         pulleyRight.    setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+
+        // Camera
+        if(initCamera) {
+            int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+            phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+            phoneCam.openCameraDevice();
+            vision = new SkystonePatternPipeline();
+            phoneCam.setPipeline(vision);
+            phoneCam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+        }
     }
 
 
