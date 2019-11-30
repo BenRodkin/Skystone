@@ -52,8 +52,6 @@ class SkystonePatternPipeline extends OpenCvPipeline {
     public static final double SKYSTONE_CONFIDENCE_THRESHOLD = 0.65;
 
 
-    private List<MatOfPoint> contours; // Contours from pipeline after filtering
-
 
     //Outputs
     private Mat hsvThresholdOutput = new Mat();
