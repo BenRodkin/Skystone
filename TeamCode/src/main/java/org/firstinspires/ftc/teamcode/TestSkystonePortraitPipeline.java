@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.Range;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -212,10 +213,10 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             double localRectRight   = skystonePatternPipeline.getRectRight();
 
 
-            skystonePatternPipeline.setRectTop  (trim(localRectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))   /*rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
-            skystonePatternPipeline.setRectLeft (trim(localRectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))    /*rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
-            skystonePatternPipeline.setRectBot  (trim(localRectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))  /*rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
-            skystonePatternPipeline.setRectRight(trim(localRectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))   /*rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
+            skystonePatternPipeline.setRectTop  (Range.clip(localRectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))   /*rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
+            skystonePatternPipeline.setRectLeft (Range.clip(localRectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))    /*rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
+            skystonePatternPipeline.setRectBot  (Range.clip(localRectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))  /*rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
+            skystonePatternPipeline.setRectRight(Range.clip(localRectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))   /*rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
 
 
             skystonePatternPipeline.setReturnHSV(gamepad2.a)                /*returnHSV = gamepad2.a*/;
@@ -316,12 +317,6 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
             if(badData) telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
             telemetry.update();
         }
-    }
-
-    public double trim(double input, double min, double max) {
-        if(input < min) input = min;
-        if(input > max) input = max;
-        return input;
     }
 
     public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
