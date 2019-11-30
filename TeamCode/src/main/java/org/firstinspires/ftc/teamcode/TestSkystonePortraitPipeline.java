@@ -39,6 +39,10 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
     SkystonePatternPipeline skystonePatternPipeline;
     private SkystonePlacement skystonePlacement = CENTER;
 
+    private List<MatOfPoint> contours; // Contours from pipeline after filtering
+
+
+
 
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
