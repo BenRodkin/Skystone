@@ -37,6 +37,10 @@ public class SlippyBotHardware {
     OpenCvCamera phoneCam;
     SkystonePatternPipeline vision;
 
+    public void init(HardwareMap hwMap) {
+        init(hwMap, false); // Default is to not initialize the camera
+    }
+
 
     public void init(HardwareMap hardwareMap, boolean initCamera) {
         frontLeft   = hardwareMap.dcMotor.get("fl_drive");
