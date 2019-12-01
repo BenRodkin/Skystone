@@ -45,9 +45,17 @@ public class TestMecanumFieldCentric extends OpMode {
     public void loop() {
 
 
+
+
         telemetry.addLine("Running");
+        telemetry.addLine();
+        telemetry.addData("Heading", heading());
         telemetry.update();
     }
 
     
+
+    protected float heading() {
+        return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
 }
