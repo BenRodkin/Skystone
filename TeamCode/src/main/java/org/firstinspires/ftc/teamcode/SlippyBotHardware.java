@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -19,6 +20,8 @@ public class SlippyBotHardware {
     public DcMotor pulleyRight;
 
     public DcMotor arm;
+
+    public Servo clamp;
 
     public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
     public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
@@ -54,6 +57,8 @@ public class SlippyBotHardware {
         pulleyRight     = hardwareMap.dcMotor.get("pulley_right");
 
         arm         = hardwareMap.dcMotor.get("arm");
+        clamp       = hardwareMap.servo.get("clamp");
+
 
         frontLeft.  setDirection(DcMotorSimple.Direction.REVERSE);
         rearLeft.   setDirection(DcMotorSimple.Direction.REVERSE);
