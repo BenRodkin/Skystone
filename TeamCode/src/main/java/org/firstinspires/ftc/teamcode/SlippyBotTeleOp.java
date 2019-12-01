@@ -16,6 +16,10 @@ public class SlippyBotTeleOp extends OpMode {
     double pullyPower = 0.0;
 
     double armPower = 0.0;
+    double clampPos = 0.0;
+
+    GamepadCooldowns gp2 = new GamepadCooldowns();
+    double runtime = 0.0;
 
     public void init() {
         hardware.init(hardwareMap);
@@ -25,6 +29,8 @@ public class SlippyBotTeleOp extends OpMode {
     }
 
     public void loop() {
+
+        runtime = getRuntime();
 
         // Do the math
         double drive  = -gamepad1.left_stick_y;
@@ -40,6 +46,10 @@ public class SlippyBotTeleOp extends OpMode {
 
         armPower = gamepad2.left_stick_y * 1.0;
 
+        if(gamepad2.a && gp2.a.ready(runtime)) {
+            clampPos = Math.abs(1 - clampPos);
+            gp2.a.updateSnapshot(runtime);
+        }
 
 
 
@@ -54,6 +64,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.pulleyRight.   setPower(pullyPower);
 
         hardware.arm.           setPower(armPower);
+        hardware.clamp.         setPosition(clampPos);
+
 
         telemetry.addLine("Running");
         telemetry.update();
