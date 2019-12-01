@@ -36,11 +36,17 @@ public class TestMecanumFieldCentric extends OpMode {
         imu.initialize(parameters);
 
 
+        // Done!
+        telemetry.addLine("Ready");
+        telemetry.update();
     }
 
     @Override
     public void loop() {
 
+
+        telemetry.addLine("Running");
+        telemetry.update();
     }
 
     
