@@ -15,6 +15,8 @@ public class SlippyBotTeleOp extends OpMode {
 
     double pullyPower = 0.0;
 
+    double armPower = 0.0;
+
     public void init() {
         hardware.init(hardwareMap);
 
@@ -36,6 +38,8 @@ public class SlippyBotTeleOp extends OpMode {
 
         pullyPower = (gamepad2.left_trigger - gamepad2.right_trigger);
 
+        armPower = gamepad2.left_stick_y * 1.0;
+
 
 
 
@@ -49,6 +53,7 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.pulleyLeft.    setPower(pullyPower);
         hardware.pulleyRight.   setPower(pullyPower);
 
+        hardware.arm.           setPower(armPower);
 
         telemetry.addLine("Running");
         telemetry.update();
