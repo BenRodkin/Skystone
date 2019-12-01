@@ -18,6 +18,8 @@ public class SlippyBotHardware {
     public DcMotor pulleyLeft;
     public DcMotor pulleyRight;
 
+    public DcMotor arm;
+
     public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
     public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
     public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
@@ -51,6 +53,7 @@ public class SlippyBotHardware {
         pulleyLeft      = hardwareMap.dcMotor.get("pulley_left");
         pulleyRight     = hardwareMap.dcMotor.get("pulley_right");
 
+        arm         = hardwareMap.dcMotor.get("arm");
 
         frontLeft.  setDirection(DcMotorSimple.Direction.REVERSE);
         rearLeft.   setDirection(DcMotorSimple.Direction.REVERSE);
@@ -64,6 +67,11 @@ public class SlippyBotHardware {
 
         pulleyLeft.     setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         pulleyRight.    setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        arm.            setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+
 
 
 
