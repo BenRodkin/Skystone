@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -20,6 +21,9 @@ public class SlippyBotHardware {
     public DcMotor pulleyRight;
 
     public DcMotor arm;
+
+    public CRServo intakeLeft;
+    public CRServo intakeRight;
 
     public Servo clamp;
 
@@ -57,6 +61,10 @@ public class SlippyBotHardware {
         pulleyRight     = hardwareMap.dcMotor.get("pulley_right");
 
         arm         = hardwareMap.dcMotor.get("arm");
+
+        intakeLeft  = hardwareMap.crservo.get("intake_left");
+        intakeRight = hardwareMap.crservo.get("intake_right");
+
         clamp       = hardwareMap.servo.get("clamp");
 
 
@@ -65,10 +73,12 @@ public class SlippyBotHardware {
 
         pulleyLeft. setDirection(DcMotorSimple.Direction.REVERSE);
 
-        frontLeft.  setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontRight. setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rearLeft.   setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rearRight.  setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intakeLeft. setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontLeft.      setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.     setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearLeft.       setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearRight.      setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         pulleyLeft.     setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         pulleyRight.    setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
