@@ -46,6 +46,17 @@ public class SlippyBotTeleOp extends OpMode {
 
         armPower = gamepad2.left_stick_y * 1.0;
 
+        if(gamepad2.b) {
+            hardware.intakeLeft.setPower(1.0);
+            hardware.intakeRight.setPower(1.0);
+        } else if(gamepad2.y) {
+            hardware.intakeLeft.setPower(-1.0);
+            hardware.intakeRight.setPower(-1.0);
+        } else {
+            hardware.intakeLeft.setPower(0.0);
+            hardware.intakeRight.setPower(0.0);
+        }
+
         if(gamepad2.a && gp2.a.ready(runtime)) {
             clampPos = Math.abs(1 - clampPos);
             gp2.a.updateSnapshot(runtime);
