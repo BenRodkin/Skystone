@@ -13,7 +13,7 @@ public class ButtonCooldown {
         return(runtime - snapshot) > cooldown;
     }
 
-    public void setCooldown(double cooldown) {
-        this.cooldown = cooldown;
+    public void setCooldown(double seconds) {
+        this.cooldown = seconds;
     }
 }
