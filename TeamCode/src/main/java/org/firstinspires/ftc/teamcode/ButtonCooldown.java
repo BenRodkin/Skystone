@@ -16,4 +16,12 @@ public class ButtonCooldown {
     public void setCooldown(double seconds) {
         this.cooldown = seconds;
     }
+
+    public double getCooldown () {
+        return this.cooldown;
+    }
+
+    public double getSnapshot () {
+        return this.snapshot;
+    }
 }
