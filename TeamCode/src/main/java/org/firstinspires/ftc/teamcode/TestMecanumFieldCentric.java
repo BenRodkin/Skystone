@@ -58,7 +58,7 @@ public class TestMecanumFieldCentric extends OpMode {
 
     public void mecanumDriveFieldCentric(double x, double y, double twist, double heading) {
         // Account for the gyro heading in the drive vector
-        double[] rotated = rotateVector(x, y, heading);
+        double[] rotated = rotateVector(x, y, -1 * heading);    // Heading is negated to correct vector rotation
 
         // We are making seperate variables here for clarity's sake
         double xIn = rotated[0];
