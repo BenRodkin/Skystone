@@ -26,6 +26,8 @@ public class SlippyBotTeleOp extends OpMode {
     public void init() {
         hardware.init(hardwareMap);
 
+        gp2.a.setCooldown(1.000);
+
         telemetry.addLine("Ready");
         telemetry.update();
     }
