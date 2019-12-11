@@ -21,6 +21,8 @@ public class SlippyBotTeleOp extends OpMode {
     GamepadCooldowns gp2 = new GamepadCooldowns();
     double runtime = 0.0;
 
+    public static final double ARM_SCALAR = 0.6;
+
     public void init() {
         hardware.init(hardwareMap);
 
@@ -44,7 +46,7 @@ public class SlippyBotTeleOp extends OpMode {
 
         pullyPower = (gamepad2.left_trigger - gamepad2.right_trigger);
 
-        armPower = gamepad2.left_stick_y * 1.0;
+        armPower = gamepad2.left_stick_y * ARM_SCALAR;
 
         if(gamepad2.b) {
             hardware.intakeLeft.setPower(1.0);
