@@ -14,6 +14,11 @@ public class TestSidewaysGripper extends LinearOpMode {
     Servo gripper;     // Grips the Stone. This object controls both linear actuators at once because they are wired with a Y-splitter.
     Servo wrist;    // Controls the rotation of the gripping mechanism.
 
+    private final double GRIPPER_CLOSED = 0.0;
+    private final double GRIPPER_OPEN = 1.0;
+
+    private final double WRIST_SCALAR = 0.08;
+
     @Override
     public void runOpMode() {
 
@@ -41,6 +46,11 @@ public class TestSidewaysGripper extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()) {
+
+            if(gamepad1.a) gripper.setPosition(GRIPPER_CLOSED);
+            else gripper.setPosition(GRIPPER_OPEN);
+
+            wrist.setPosition(wrist.getPosition() + (gamepad1.left_stick_y * WRIST_SCALAR));
 
 
             telemetry.addLine("Running");
