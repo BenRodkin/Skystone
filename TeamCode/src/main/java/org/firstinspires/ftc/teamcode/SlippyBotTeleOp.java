@@ -2,9 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
-import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
