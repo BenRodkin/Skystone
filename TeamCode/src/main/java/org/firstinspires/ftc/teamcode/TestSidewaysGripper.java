@@ -17,7 +17,7 @@ public class TestSidewaysGripper extends LinearOpMode {
     private final double GRIPPER_CLOSED = 0.0;
     private final double GRIPPER_OPEN = 1.0;
 
-    private final double WRIST_SCALAR = 0.08;
+    private final double WRIST_SCALAR = 0.01;
 
     @Override
     public void runOpMode() {
