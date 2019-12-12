@@ -3,6 +3,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
+
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
 public class SlippyBotTeleOp extends OpMode {
 
@@ -67,9 +71,11 @@ public class SlippyBotTeleOp extends OpMode {
 //        }
 
         if(gamepad2.a && gp2.a.ready(runtime)) {
-            clampPos = Math.abs(1 - clampPos);
+            hardware.gripper.setPosition(Math.abs(1 - hardware.gripper.getPosition()));
             gp2.a.updateSnapshot(runtime);
         }
+
+        hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
 
 
