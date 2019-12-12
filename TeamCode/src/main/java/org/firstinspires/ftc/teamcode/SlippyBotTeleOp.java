@@ -2,7 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.FAST;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
 public class SlippyBotTeleOp extends OpMode {
@@ -20,6 +24,8 @@ public class SlippyBotTeleOp extends OpMode {
 //    double clampPos = 0.0;
 
     GamepadCooldowns gp2 = new GamepadCooldowns();
+    GamepadCooldowns gp1 = new GamepadCooldowns();
+    
     double runtime = 0.0;
 
     public static final double ARM_SCALAR = 0.6;
@@ -76,12 +82,20 @@ public class SlippyBotTeleOp extends OpMode {
 
 
 
+        // Handle speed modifiers
+        if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
+            if(wheelSpeedMod == FAST) wheelSpeedMod = SLOW;
+            else if(wheelSpeedMod == SLOW) wheelSpeedMod = FAST;
+
+            gp1.lb.updateSnapshot(runtime);
+        }
+
 
         // Set the power
-        hardware.frontLeft. setPower(flPower);
-        hardware.frontRight.setPower(frPower);
-        hardware.rearLeft.  setPower(rlPower);
-        hardware.rearRight. setPower(rrPower);
+        hardware.frontLeft. setPower(flPower * wheelSpeedMod);
+        hardware.frontRight.setPower(frPower * wheelSpeedMod);
+        hardware.rearLeft.  setPower(rlPower * wheelSpeedMod);
+        hardware.rearRight. setPower(rrPower * wheelSpeedMod);
 
         hardware.pulleyLeft.    setPower(pullyPower);
         hardware.pulleyRight.   setPower(pullyPower);
@@ -91,6 +105,8 @@ public class SlippyBotTeleOp extends OpMode {
 
 
         telemetry.addLine("Running");
+        telemetry.addLine();
+        telemetry.addData("Wheel driver speed mod", wheelSpeedMod);
         telemetry.addLine();
         telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
         telemetry.addLine();
