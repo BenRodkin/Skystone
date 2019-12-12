@@ -11,7 +11,7 @@ public class TestSidewaysGripper extends LinearOpMode {
     SlippyBotHardware hardware = new SlippyBotHardware();
 
     // Sideways gripper hardware
-    Servo grip;     // Grips the Stone. This object controls both linear actuators at once because they are wired with a Y-splitter.
+    Servo gripper;     // Grips the Stone. This object controls both linear actuators at once because they are wired with a Y-splitter.
     Servo wrist;    // Controls the rotation of the gripping mechanism.
 
     @Override
@@ -21,7 +21,7 @@ public class TestSidewaysGripper extends LinearOpMode {
         hardware.init(hardwareMap);
 
         // Initialize sideways gripper hardware
-        grip = hardwareMap.servo.get("gripper");
+        gripper = hardwareMap.servo.get("gripper");
         wrist = hardwareMap.servo.get("wrist");
 
         telemetry.addLine("Ready");
@@ -34,7 +34,7 @@ public class TestSidewaysGripper extends LinearOpMode {
 
             telemetry.addLine("Running");
             telemetry.addLine();
-            telemetry.addData("Grip position", grip.getPosition());
+            telemetry.addData("Gripper position", gripper.getPosition());
             telemetry.addData("Wrist position", wrist.getPosition());
             telemetry.addLine();
             telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
