@@ -25,7 +25,7 @@ public class SlippyBotHardware {
     public CRServo intakeLeft;
     public CRServo intakeRight;
 
-    public Servo clamp;
+//    public Servo clamp;
 
     public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
     public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
@@ -65,7 +65,7 @@ public class SlippyBotHardware {
         intakeLeft  = hardwareMap.crservo.get("intake_left");
         intakeRight = hardwareMap.crservo.get("intake_right");
 
-        clamp       = hardwareMap.servo.get("clamp");
+//        clamp       = hardwareMap.servo.get("clamp");
 
 
         frontLeft.  setDirection(DcMotorSimple.Direction.REVERSE);
