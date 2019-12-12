@@ -33,7 +33,8 @@ public class SlippyBotTeleOp extends OpMode {
     public void init() {
         hardware.init(hardwareMap);
 
-        gp2.a.setCooldown(1.000);
+        gp2.a.setCooldown(1.000);   // 1000 milliseconds
+        gp1.lb.setCooldown(1.000);  // 1000 milliseconds
 
         telemetry.addLine("Ready");
         telemetry.update();
