@@ -40,7 +40,7 @@ public class SlippyBotHardware {
     public static final double GRIPPER_CLOSED = 0.0;
     public static final double GRIPPER_OPEN = 1.0;
 
-    public static final double WRIST_SCALAR = 0.01;
+    public static final double WRIST_SCALAR = 0.008;
 
 
     // PID variables
