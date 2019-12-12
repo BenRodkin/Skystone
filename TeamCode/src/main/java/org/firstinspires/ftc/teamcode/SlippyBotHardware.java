@@ -27,10 +27,18 @@ public class SlippyBotHardware {
 
 //    public Servo clamp;
 
+    Servo gripper;
+    Servo wrist;
+
+    // Drive encoder variables
     public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
     public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
     public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
     public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
+
+    // Servo position variables
+    public static final double GRIPPER_CLOSED = 0.0;
+    public static final double GRIPPER_OPEN = 1.0;
 
 
     // PID variables
@@ -67,6 +75,10 @@ public class SlippyBotHardware {
 
 //        clamp       = hardwareMap.servo.get("clamp");
 
+        gripper = hardwareMap.servo.get("gripper");
+        wrist = hardwareMap.servo.get("wrist");
+
+
 
         frontLeft.  setDirection(DcMotorSimple.Direction.REVERSE);
         rearLeft.   setDirection(DcMotorSimple.Direction.REVERSE);
@@ -87,6 +99,16 @@ public class SlippyBotHardware {
 
 
 
+        /*
+            We are using Actuonix PQ-12 linear actuators for the grippers as of Dec 12 2019. They
+            take a signal between 1.0 milliseconds (extend; 1000 microseconds) and 2.0 milliseconds
+            (retract; 2000 microseconds) according to Actuonix's datasheet. REV Smart Robot Servos,
+            for comparison, take a signal between 500 microseconds (-90 degrees) and 2500
+            microseconds (90 degrees), so a 2500 microseconds signal is sent when setPosition(1.0)
+            is called. To correct the range for the linear actuator servos, We are setting them to
+            0.4 (1000 / 2500) and 0.8 (2000 / 2500).
+         */
+        gripper.scaleRange(0.4, 0.8);
 
 
 
