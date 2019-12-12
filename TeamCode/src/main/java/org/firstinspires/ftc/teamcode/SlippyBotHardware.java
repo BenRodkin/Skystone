@@ -36,9 +36,11 @@ public class SlippyBotHardware {
     public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
     public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
 
-    // Servo position variables
+    // Servo-specific variables
     public static final double GRIPPER_CLOSED = 0.0;
     public static final double GRIPPER_OPEN = 1.0;
+
+    public static final double WRIST_SCALAR = 0.01;
 
 
     // PID variables
@@ -74,6 +76,7 @@ public class SlippyBotHardware {
         intakeRight = hardwareMap.crservo.get("intake_right");
 
 //        clamp       = hardwareMap.servo.get("clamp");
+
 
         gripper = hardwareMap.servo.get("gripper");
         wrist = hardwareMap.servo.get("wrist");

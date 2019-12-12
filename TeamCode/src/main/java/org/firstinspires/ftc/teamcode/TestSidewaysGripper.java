@@ -6,14 +6,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
 @TeleOp(name = "Test: Sideways Gripper", group = "Testing")
 public class TestSidewaysGripper extends LinearOpMode {
 
     // Hardware class
     SlippyBotHardware hardware = new SlippyBotHardware();
-
-    private final double WRIST_SCALAR = 0.01;
 
     @Override
     public void runOpMode() {
