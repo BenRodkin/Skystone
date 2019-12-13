@@ -173,6 +173,17 @@ public class SlippyBotHardware {
         rearRight.setPower(power);
     }
 
+    // Gyroscope methods
+    public double normalize180(double angle) {
+        while(angle > 180) {
+            angle -= 360;
+        }
+        while(angle <= -180) {
+            angle += 360;
+        }
+        return angle;
+    }
+
     public float heading() {
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }

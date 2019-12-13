@@ -165,7 +165,7 @@ public class TestPID extends LinearOpMode {
         double turnStart = getRuntime();
         while (opModeIsActive() &&
                 (getRuntime() - turnStart) < TIMEOUT) {
-            double error = normalize180(-(target - hardware.heading()));
+            double error = hardware.normalize180(-(target - hardware.heading()));
             double power = hardware.pid.calculateGivenError(error);
 
             telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
@@ -186,15 +186,5 @@ public class TestPID extends LinearOpMode {
 
         hardware.setLeftPower(0);
         hardware.setRightPower(0);
-    }
-
-    public double normalize180(double angle) {
-        while(angle > 180) {
-            angle -= 360;
-        }
-        while(angle <= -180) {
-            angle += 360;
-        }
-        return angle;
     }
 }
