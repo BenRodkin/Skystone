@@ -10,6 +10,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
+
 
 @Autonomous(name = "Test: SynchronousPID", group = "Testing")
 public class TestPID extends LinearOpMode {
@@ -160,10 +162,13 @@ public class TestPID extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
-        while (opModeIsActive()) {
+        double turnStart = getRuntime();
+        while (opModeIsActive() &&
+                (getRuntime() - turnStart) < TIMEOUT) {
             double error = normalize180(-(target - heading()));
             double power = hardware.pid.calculateGivenError(error);
 
+            telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
             telemetry.addData("Current error", error);
             telemetry.addData("Current power", power);
 
