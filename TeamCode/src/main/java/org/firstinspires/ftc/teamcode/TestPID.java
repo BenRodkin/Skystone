@@ -161,7 +161,7 @@ public class TestPID extends LinearOpMode {
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
         while (opModeIsActive()) {
-            double error = normalize180(target - heading());
+            double error = normalize180(-(target - heading()));
             double power = hardware.pid.calculateGivenError(error);
 
             telemetry.addData("Current error", error);
