@@ -30,6 +30,8 @@ public class TestSlippyMovement extends LinearOpMode {
             if(gamepad1.dpad_down)  driveEncoderCounts(-1000, DRIVE_SPEED);  // Drive backward
             if(gamepad1.dpad_left)  strafeEncoderCounts(-1000, DRIVE_SPEED); // Strafe left
 
+            if(gamepad1.left_bumper) driveInches(24.0, DRIVE_SPEED);
+
 
             telemetry.addData("Front left position",    hardware.frontLeft.getCurrentPosition());
             telemetry.addData("Front right position",   hardware.frontRight.getCurrentPosition());
@@ -37,6 +39,10 @@ public class TestSlippyMovement extends LinearOpMode {
             telemetry.addData("Rear right position",    hardware.rearRight.getCurrentPosition());
             telemetry.update();
         }
+    }
+
+    private void driveInches(double inches, double speed) {
+        driveEncoderCounts((int)(inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
 
     private void driveEncoderCounts(int counts, double speed) {
