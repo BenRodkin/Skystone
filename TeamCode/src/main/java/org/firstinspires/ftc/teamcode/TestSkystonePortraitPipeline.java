@@ -37,7 +37,8 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     private SkystonePlacement placement = CENTER;
 
-    private final boolean INIT_CAMERA = true;
+    private final boolean INIT_CAMERA   = true;
+    private final boolean INIT_IMU      = false;
 
 
 
@@ -48,7 +49,7 @@ public class TestSkystonePortraitPipeline extends LinearOpMode {
 
     public void runOpMode() {
 
-        hardware.init(hardwareMap, INIT_CAMERA);
+        hardware.init(hardwareMap, INIT_CAMERA, INIT_IMU);
 
 
         telemetry.addLine("Ready");
