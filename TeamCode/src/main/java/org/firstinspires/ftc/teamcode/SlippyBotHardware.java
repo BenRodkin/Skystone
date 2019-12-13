@@ -53,7 +53,7 @@ public class SlippyBotHardware {
 
 
     // PID variables
-    public final double MAX_SPEED = 0.4;
+    public final double MAX_SPEED = 0.3;
     public final double P = 0.025;
     public final double I = 0.0;
     public final double D = 0.0;
