@@ -33,6 +33,7 @@ public class TestSidewaysGripper extends LinearOpMode {
 
             hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad1.right_stick_y * WRIST_SCALAR));
 
+            hardware.arm.setPower(gamepad1.left_stick_y * 0.6);
 
 
             telemetry.addLine("Running");
