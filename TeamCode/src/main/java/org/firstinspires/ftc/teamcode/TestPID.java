@@ -142,7 +142,7 @@ public class TestPID extends LinearOpMode {
             telemetry.addData("kI", hardware.pid.getI());
             telemetry.addData("kD", hardware.pid.getD());
             telemetry.addLine();
-            telemetry.addData("Heading", heading());
+            telemetry.addData("Heading", hardware.heading());
             telemetry.update();
         }
 
@@ -165,7 +165,7 @@ public class TestPID extends LinearOpMode {
         double turnStart = getRuntime();
         while (opModeIsActive() &&
                 (getRuntime() - turnStart) < TIMEOUT) {
-            double error = normalize180(-(target - heading()));
+            double error = normalize180(-(target - hardware.heading()));
             double power = hardware.pid.calculateGivenError(error);
 
             telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
@@ -196,9 +196,5 @@ public class TestPID extends LinearOpMode {
             angle += 360;
         }
         return angle;
-    }
-
-    public float heading() {
-        return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
 }
