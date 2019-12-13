@@ -308,6 +308,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         while(opModeIsActive()) {
             telemetry.addLine("Running");
             telemetry.addLine();
+            telemetry.addData("Skystone placement", placement);
             telemetry.addData("Heading", hardware.heading());
             telemetry.update();
         }
