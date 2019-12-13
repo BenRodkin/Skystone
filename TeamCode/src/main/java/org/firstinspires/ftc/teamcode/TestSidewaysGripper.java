@@ -14,6 +14,21 @@ public class TestSidewaysGripper extends LinearOpMode {
     // Hardware class
     SlippyBotHardware hardware = new SlippyBotHardware();
 
+    // Wrist positions
+    private final double WRIST_PLACING  = 0.20;
+    private final double WRIST_GRABBING = 0.76;
+    private final double WRIST_STARTING = 0.52;
+    private final double WRIST_STORING  = 0.40;
+
+    // Arm positions (to seperate different modes of operation for the wrist)
+    private final int ARM_PLACING   = 1900;
+    private final int ARM_GRABBING  = 40;
+    private final int ARM_STARTING  = 0;
+    private final int ARM_STORING   = 200;
+
+    ArmMode armMode = ArmMode.STARTING;
+
+
     @Override
     public void runOpMode() {
 
@@ -35,8 +50,19 @@ public class TestSidewaysGripper extends LinearOpMode {
 
             hardware.arm.setPower(gamepad1.left_stick_y * 0.6);
 
+            // Decide which region of operation the arm is in
+            int armPos = hardware.arm.getCurrentPosition();
+            if(armPos >= ARM_PLACING) armMode = ArmMode.PLACING;
+            else if(armPos > ARM_GRABBING) armMode = ArmMode.STORING;
+            else if(armPos > ARM_STARTING &&
+                        armPos < ARM_GRABBING) armMode = ArmMode.GRABBING;
+
+
+
 
             telemetry.addLine("Running");
+            telemetry.addLine();
+            telemetry.addData("armMode", armMode);
             telemetry.addLine();
             telemetry.addData("Gripper position", hardware.gripper.getPosition());
             telemetry.addData("Wrist position", hardware.wrist.getPosition());
