@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
 
-
+@Disabled
 @Autonomous(name = "Test: SynchronousPID", group = "Testing")
 public class TestPID extends LinearOpMode {
 

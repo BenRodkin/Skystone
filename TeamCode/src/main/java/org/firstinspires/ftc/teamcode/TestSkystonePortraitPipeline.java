@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
@@ -26,7 +27,7 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
 
-//@Disabled
+@Disabled
 @Autonomous(name = "Test: Portrait Pipeline", group = "Testing")
 public class TestSkystonePortraitPipeline extends LinearOpMode {
 
