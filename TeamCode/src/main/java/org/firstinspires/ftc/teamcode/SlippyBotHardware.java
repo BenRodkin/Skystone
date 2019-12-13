@@ -14,6 +14,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 
 public class SlippyBotHardware {
 
+    // Motors
     public DcMotor frontLeft;
     public DcMotor frontRight;
     public DcMotor rearLeft;
@@ -24,6 +25,7 @@ public class SlippyBotHardware {
 
     public DcMotor arm;
 
+    // Servos
     public CRServo intakeLeft;
     public CRServo intakeRight;
 
