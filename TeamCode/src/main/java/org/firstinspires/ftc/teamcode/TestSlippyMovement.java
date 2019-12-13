@@ -9,7 +9,7 @@ public class TestSlippyMovement extends LinearOpMode {
 
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    private final double DRIVE_SPEED = 0.4;
+    private final double DRIVE_SPEED = 0.5;
 
 
     @Override
