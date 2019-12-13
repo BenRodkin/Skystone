@@ -39,6 +39,9 @@ public class TestPID extends LinearOpMode {
     // Increment for increasing or decreasing PID coefficients
     private final double K_STEP = 0.005;
 
+    private final boolean INIT_CAMERA   = false;
+    private final boolean INIT_IMU      = true;
+
     @Override public void runOpMode() throws InterruptedException {
 
         telemetry.addLine("Initializing hardware");
@@ -55,7 +58,7 @@ public class TestPID extends LinearOpMode {
 //        imu = hardwareMap.get(BNO055IMU.class, "imu");
 //        imu.initialize(parameters);
 
-        hardware.init(hardwareMap);
+        hardware.init(hardwareMap, INIT_CAMERA, INIT_IMU);
 
         telemetry.addLine("Ready");
         telemetry.update();
