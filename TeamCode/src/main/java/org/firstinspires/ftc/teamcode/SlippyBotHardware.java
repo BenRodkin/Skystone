@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -29,6 +31,10 @@ public class SlippyBotHardware {
 
     Servo gripper;
     Servo wrist;
+
+
+//    // IMU
+    BNO055IMU imu;
 
     // Drive encoder variables
     public final double COUNTS_PER_REV_HD_20    = 560; // REV HD Hex 20:1 motor
@@ -69,11 +75,11 @@ public class SlippyBotHardware {
     SkystonePatternPipeline vision;
 
     public void init(HardwareMap hwMap) {
-        init(hwMap, false); // Default is to not initialize the camera
+        init(hwMap, false, false); // Default is to not initialize the camera or the IMU
     }
 
 
-    public void init(HardwareMap hardwareMap, boolean initCamera) {
+    public void init(HardwareMap hardwareMap, boolean initCamera, boolean initIMU) {
         frontLeft   = hardwareMap.dcMotor.get("fl_drive");
         frontRight  = hardwareMap.dcMotor.get("fr_drive");
         rearLeft    = hardwareMap.dcMotor.get("rl_drive");
@@ -126,6 +132,19 @@ public class SlippyBotHardware {
         gripper.scaleRange(0.4, 0.8);
 
 
+        // IMU
+        if(initIMU) {
+            BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+            parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+            parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+            parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+            parameters.loggingEnabled      = true;
+            parameters.loggingTag          = "IMU";
+            parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+            imu = hardwareMap.get(BNO055IMU.class, "imu");
+            imu.initialize(parameters);
+        }
 
         // Camera
         if(initCamera) {
