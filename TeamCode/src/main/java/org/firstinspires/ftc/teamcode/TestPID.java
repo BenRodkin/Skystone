@@ -11,7 +11,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 
-@Disabled
 @Autonomous(name = "Test: SynchronousPID", group = "Testing")
 public class TestPID extends LinearOpMode {
 
