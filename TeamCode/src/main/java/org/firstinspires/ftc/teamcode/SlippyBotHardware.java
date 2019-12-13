@@ -46,6 +46,7 @@ public class SlippyBotHardware {
     public final double DRIVE_GEAR_REDUCTION    = 20.0 / 26.0; // 15 tooth on motor shaft to 15 tooth on wheel shaft
     public final double WHEEL_DI_INCHES         = 90.0 / 25.4; // 90mm diameter wheel divided by 25.4(in/mm)
 //    public final double COUNTS_PER_INCH         = (COUNTS_PER_REV_HD_20 * DRIVE_GEAR_REDUCTION) / (WHEEL_DI_INCHES * Math.PI);
+    public final double COUNTS_PER_INCH_EMPIRICAL = 1000 / 24.0;    // 1000 counts divided by 24.0 inches; determined through testing
 
     // Servo-specific variables
     public static final double GRIPPER_CLOSED = 0.0;
