@@ -24,8 +24,8 @@ public class TestFoundation extends OpMode {
 
         telemetry.addLine("Running");
         telemetry.addLine();
-        telemetry.addData("found_left position", found_left.getPosition());
-        telemetry.addData("found_right position", found_right.getPosition());
+        telemetry.addData("found_left position", hardware.foundLeft.getPosition());
+        telemetry.addData("found_right position", hardware.foundRight.getPosition());
         telemetry.update();
     }
 
