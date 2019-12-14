@@ -40,10 +40,10 @@ public class TestSidewaysGripper extends LinearOpMode {
 
             // Decide which region of operation the arm is in
             int armPos = hardware.arm.getCurrentPosition();
-            if(armPos >= ARM_PLACING) armMode = ArmMode.PLACING;
-            else if(armPos > ARM_GRABBING) armMode = ArmMode.STORING;
-            else if(armPos > ARM_STARTING &&
-                        armPos < ARM_GRABBING) armMode = ArmMode.GRABBING;
+            if(armPos >= hardware.ARM_PLACING) armMode = ArmMode.PLACING;
+            else if(armPos > hardware.ARM_GRABBING) armMode = ArmMode.STORING;
+            else if(armPos > hardware.ARM_STARTING &&
+                        armPos < hardware.ARM_GRABBING) armMode = ArmMode.GRABBING;
 
 
 
