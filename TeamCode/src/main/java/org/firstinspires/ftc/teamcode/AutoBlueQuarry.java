@@ -53,6 +53,11 @@ public class AutoBlueQuarry extends LinearOpMode {
     // Threshold to transform trigger input into digital input (e.g. if(gamepad1.left_trigger > TRIGGER_THRESHOLD))
     private final double TRIGGER_THRESHOLD = 0.7;
 
+    // Drive motor speeds
+    private final double DRIVE_SPEED    = 0.5;
+    private final double STRAFE_SPEED   = 0.5;
+
+
     public void runOpMode() {
 
         telemetry.addLine("Initializing hardware... do not move robot!");
