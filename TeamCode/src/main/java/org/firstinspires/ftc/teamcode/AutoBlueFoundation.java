@@ -39,22 +39,56 @@ public class AutoBlueFoundation extends LinearOpMode {
 
         waitForStart();
 
+        // Raise foundation servos in preparation for grabbing Foundation
+        hardware.releaseFoundation();
+
         // Optional pause at start for compliance with alliance partner strategy
         if(SLEEP_AT_START) sleep(SLEEP_TIME_MILLIS);
 
-        // Step 1: drive to Foundation
+        driveInches(24.0);
+
+        strafeEncoderCounts(-500, STRAFE_SPEED);
+
+        driveInches(6.5, DRIVE_SPEED);
+
+        hardware.setLeftPower(0.2);
+        hardware.setRightPower(0.2);
+
+        sleep(700);
+        hardware.clampFoundation();
+        sleep(150);
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        driveInches(-20.0);
+
+        hardware.setLeftPower(-DRIVE_SPEED);
+        hardware.setRightPower(-DRIVE_SPEED);
+        sleep(250);
+
+        while(opModeIsActive() &&
+                hardware.heading() < 85) {
+            hardware.setLeftPower(1.0);
+            hardware.setRightPower(-1.0);
+
+            telemetry.addLine("Turning");
+            telemetry.addData("Heading", hardware.heading());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
 
 
-        // Step 2: grab Foundation
+        strafeEncoderCounts(-500, DRIVE_SPEED);
 
+        strafeEncoderCounts(100, STRAFE_SPEED);
 
-        // Step 3: pull Foundation into Building Site
+        hardware.releaseFoundation();
+        sleep(150);
 
+        driveInches(-36.0);
 
-        // Step 4: release Foundation
-
-
-        // Step 5: park under Skybridge
 
 
         while(opModeIsActive()) {
