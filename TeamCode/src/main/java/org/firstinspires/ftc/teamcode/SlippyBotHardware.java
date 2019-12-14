@@ -162,6 +162,11 @@ public class SlippyBotHardware {
         gripper.scaleRange(0.4, 0.8);
 
 
+        // Set servo positions
+        wrist.setPosition(WRIST_STARTING);
+        gripper.setPosition(GRIPPER_OPEN);
+        clampFoundation();  // For foundation servos
+
         // IMU
         if(initIMU) {
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
