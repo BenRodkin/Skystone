@@ -9,7 +9,10 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_STARTING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
 
 @TeleOp(name = "Test: Sideways Gripper", group = "Testing")
 public class TestSidewaysGripper extends LinearOpMode {
@@ -48,6 +51,12 @@ public class TestSidewaysGripper extends LinearOpMode {
             else if(armPos > ARM_STARTING &&
                         armPos < ARM_GRABBING) armMode = ArmMode.GRABBING;
 
+            switch(armMode) {
+                case PLACING: hardware.wrist.setPosition(WRIST_PLACING);    break;
+                case STORING: hardware.wrist.setPosition(WRIST_STORING);    break;
+                case GRABBING: hardware.wrist.setPosition(WRIST_GRABBING);  break;
+            }
+
 
 
 
@@ -55,7 +64,7 @@ public class TestSidewaysGripper extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("armMode", armMode);
             telemetry.addLine();
-            telemetry.addData("Gripper position", hardware.gripper.getPosition());
+//            telemetry.addData("Gripper position", hardware.gripper.getPosition());
             telemetry.addData("Wrist position", hardware.wrist.getPosition());
             telemetry.addLine();
             telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
