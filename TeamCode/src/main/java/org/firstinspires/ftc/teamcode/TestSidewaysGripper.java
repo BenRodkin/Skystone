@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_GRABBING;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_PLACING;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_STARTING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
@@ -40,10 +43,10 @@ public class TestSidewaysGripper extends LinearOpMode {
 
             // Decide which region of operation the arm is in
             int armPos = hardware.arm.getCurrentPosition();
-            if(armPos >= hardware.ARM_PLACING) armMode = ArmMode.PLACING;
-            else if(armPos > hardware.ARM_GRABBING) armMode = ArmMode.STORING;
-            else if(armPos > hardware.ARM_STARTING &&
-                        armPos < hardware.ARM_GRABBING) armMode = ArmMode.GRABBING;
+            if(armPos >= ARM_PLACING) armMode = ArmMode.PLACING;
+            else if(armPos > ARM_GRABBING) armMode = ArmMode.STORING;
+            else if(armPos > ARM_STARTING &&
+                        armPos < ARM_GRABBING) armMode = ArmMode.GRABBING;
 
 
 
