@@ -381,6 +381,9 @@ public class AutoBlueQuarry extends LinearOpMode {
     }
 
     // Encoder-controlled movement
+    private void driveInches(double inches) {
+        driveInches(inches, DRIVE_SPEED);   // Defaults to local field member speed
+    }
     private void driveInches(double inches, double speed) {
         driveEncoderCounts((int)(inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
