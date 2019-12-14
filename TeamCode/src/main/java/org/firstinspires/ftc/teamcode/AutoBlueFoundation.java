@@ -26,7 +26,7 @@ public class AutoBlueFoundation extends LinearOpMode {
 
     // Variables for sleeping at start
     private final boolean SLEEP_AT_START    = false;
-    private final int SLEEP_TIME_MILLIS     = 10000;    // 10,000 milliseconds = 10.0 seconds
+    private final int SLEEP_TIME_MILLIS     = 10000;    // 10,000 milliseconds = 10.0 seconds. May not finish if above 17 seconds.
 
 
 
