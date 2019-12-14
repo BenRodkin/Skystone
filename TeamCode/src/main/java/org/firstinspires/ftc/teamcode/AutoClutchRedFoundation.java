@@ -60,7 +60,7 @@ public class AutoClutchRedFoundation extends LinearOpMode {
         hardware.releaseFoundation();
         sleep(150);
 
-        strafeEncoderCounts(-3000, STRAFE_SPEED);
+        strafeEncoderCounts(-2500, STRAFE_SPEED);
 
 
 
