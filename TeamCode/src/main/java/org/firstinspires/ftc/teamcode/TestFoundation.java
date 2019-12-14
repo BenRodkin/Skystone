@@ -21,6 +21,9 @@ public class TestFoundation extends OpMode {
 
     public void loop() {
 
+        if(gamepad1.x) hardware.clampFoundation();
+        if(gamepad1.y) hardware.releaseFoundation();
+
 
         telemetry.addLine("Running");
         telemetry.addLine();
