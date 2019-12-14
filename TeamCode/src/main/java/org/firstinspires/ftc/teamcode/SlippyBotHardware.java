@@ -194,4 +194,15 @@ public class SlippyBotHardware {
     public float heading() {
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
+
+    // Foundation moving methods
+    public void clampFoundation() {
+        foundLeft.setPosition(CLAMP_LEFT);
+        foundRight.setPosition(CLAMP_RIGHT);
+    }
+
+    public void releaseFoundation() {
+        foundLeft.setPosition(RELEASE_LEFT);
+        foundRight.setPosition(RELEASE_RIGHT);
+    }
 }
