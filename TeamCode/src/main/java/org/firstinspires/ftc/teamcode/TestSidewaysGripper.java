@@ -14,18 +14,6 @@ public class TestSidewaysGripper extends LinearOpMode {
     // Hardware class
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    // Wrist positions
-    private final double WRIST_PLACING  = 0.20;
-    private final double WRIST_GRABBING = 0.76;
-    private final double WRIST_STARTING = 0.52;
-    private final double WRIST_STORING  = 0.40;
-
-    // Arm positions (to seperate different modes of operation for the wrist)
-    private final int ARM_PLACING   = 1900;
-    private final int ARM_GRABBING  = 40;
-    private final int ARM_STARTING  = 0;
-    private final int ARM_STORING   = 200;
-
     ArmMode armMode = ArmMode.STARTING;
 
 
