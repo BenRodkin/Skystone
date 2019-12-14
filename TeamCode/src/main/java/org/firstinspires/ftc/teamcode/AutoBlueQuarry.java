@@ -351,7 +351,9 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Step 11: park under Skybridge
 
 
-
+        //------------------------------------------------------------------------------------------
+        // Autonomous ends here
+        //------------------------------------------------------------------------------------------
 
         while(opModeIsActive()) {
             telemetry.addLine("Finished.");
