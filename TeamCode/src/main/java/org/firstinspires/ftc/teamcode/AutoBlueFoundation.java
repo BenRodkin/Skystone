@@ -4,12 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.opencv.core.MatOfPoint;
-
-import java.util.List;
-
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
-
 @Autonomous(name = "Blue Foundation", group = "Autonomous")
 public class AutoBlueFoundation extends LinearOpMode {
 
