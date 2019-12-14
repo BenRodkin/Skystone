@@ -119,6 +119,8 @@ public class SlippyBotTeleOp extends OpMode {
         telemetry.addLine();
         telemetry.addData("Wheel driver speed mod", wheelSpeedMod);
         telemetry.addLine();
+        telemetry.addData("Wrist position", hardware.wrist.getPosition());
+        telemetry.addLine();
         telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
         telemetry.addLine();
 //        telemetry.addData("Clamp position", hardware.clamp.getPosition());
