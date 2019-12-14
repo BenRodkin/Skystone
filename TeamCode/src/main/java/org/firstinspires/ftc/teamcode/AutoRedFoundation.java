@@ -41,7 +41,7 @@ public class AutoRedFoundation extends LinearOpMode {
 
         driveInches(24.0);
 
-        strafeEncoderCounts(-500, STRAFE_SPEED);
+        strafeEncoderCounts(500, STRAFE_SPEED);
 
         driveInches(6.5, DRIVE_SPEED);
 
@@ -61,9 +61,9 @@ public class AutoRedFoundation extends LinearOpMode {
         sleep(250);
 
         while(opModeIsActive() &&
-                hardware.heading() < 85) {
-            hardware.setLeftPower(1.0);
-            hardware.setRightPower(-1.0);
+                hardware.heading() > -85) {
+            hardware.setLeftPower(-1.0);
+            hardware.setRightPower(1.0);
 
             telemetry.addLine("Turning");
             telemetry.addData("Heading", hardware.heading());
@@ -74,9 +74,9 @@ public class AutoRedFoundation extends LinearOpMode {
         hardware.setRightPower(0.0);
 
 
-        strafeEncoderCounts(-500, DRIVE_SPEED);
+        strafeEncoderCounts(500, DRIVE_SPEED);
 
-        strafeEncoderCounts(100, STRAFE_SPEED);
+        strafeEncoderCounts(-100, STRAFE_SPEED);
 
         hardware.releaseFoundation();
         sleep(150);
