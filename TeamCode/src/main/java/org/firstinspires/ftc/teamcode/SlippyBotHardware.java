@@ -34,8 +34,8 @@ public class SlippyBotHardware {
 
 //    public Servo clamp;
 
-    Servo gripper;
-    Servo wrist;
+    public Servo gripper;
+    public Servo wrist;
 
 
 //    // IMU
