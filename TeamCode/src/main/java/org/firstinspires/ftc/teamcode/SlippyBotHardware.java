@@ -37,6 +37,9 @@ public class SlippyBotHardware {
     public Servo gripper;
     public Servo wrist;
 
+    public Servo foundLeft;
+    public Servo foundRight;
+
 
 //    // IMU
     BNO055IMU imu;
@@ -104,6 +107,9 @@ public class SlippyBotHardware {
 
         gripper = hardwareMap.servo.get("gripper");
         wrist = hardwareMap.servo.get("wrist");
+
+        foundLeft  = hardwareMap.servo.get("found_left");
+        foundRight = hardwareMap.servo.get("found_right");
 
 
 
