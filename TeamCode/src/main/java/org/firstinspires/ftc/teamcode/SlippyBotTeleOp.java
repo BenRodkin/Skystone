@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.FAST;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 
@@ -87,6 +88,8 @@ public class SlippyBotTeleOp extends OpMode {
 
             gp2.a.updateSnapshot(runtime);
         }
+
+        if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
 
 
 
