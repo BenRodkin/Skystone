@@ -22,7 +22,7 @@ public class AutoBlueFoundation extends LinearOpMode {
 
     // Drive motor speeds
     private final double DRIVE_SPEED    = 0.5;
-    private final double STRAFE_SPEED   = 0.5;
+    private final double STRAFE_SPEED   = 0.8;
 
     // Variables for sleeping at start
     private final boolean SLEEP_AT_START    = false;
