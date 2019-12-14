@@ -39,8 +39,22 @@ public class AutoBlueFoundation extends LinearOpMode {
 
         waitForStart();
 
-        
+        // Optional pause at start for compliance with alliance partner strategy
+        if(SLEEP_AT_START) sleep(SLEEP_TIME_MILLIS);
 
+        // Step 1: drive to Foundation
+
+
+        // Step 2: grab Foundation
+
+
+        // Step 3: pull Foundation into Building Site
+
+
+        // Step 4: release Foundation
+
+
+        // Step 5: park under Skybridge
 
 
         while(opModeIsActive()) {
