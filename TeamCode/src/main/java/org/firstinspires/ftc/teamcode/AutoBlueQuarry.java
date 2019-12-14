@@ -58,7 +58,7 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final double STRAFE_SPEED   = 0.5;
 
 
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
 
         telemetry.addLine("Initializing hardware... do not move robot!");
         telemetry.update();
@@ -322,7 +322,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(24.0);
 
         // Step 2: turn parallel to Quarry
-
+        turnToHeadingPID(90);
 
         // Step 3: strafe to align with Skystone
 
