@@ -312,6 +312,40 @@ public class AutoBlueQuarry extends LinearOpMode {
 
 
         while(opModeIsActive()) {
+
+            // Step 1: drive to Quarry
+
+
+            // Step 2: turn parallel to Quarry
+
+
+            // Step 3: strafe to align with Skystone
+
+
+            // Step 4: start intake and drive forward
+
+
+            // Step 5: grip Skystone
+
+
+            // Step 6: strafe back to in front of alliance Skybridge
+
+
+            // Step 7: drive under Skybridge
+
+
+            // Step 8: turn towards Foundation
+
+
+            // Step 9: drive forward, place Skystone, drive backward
+
+
+            // Step 10: turn back towards Skybridge
+
+
+            // Step 11: park under Skybridge
+
+
             telemetry.addLine("Running");
             telemetry.addLine();
             telemetry.addData("Skystone placement", placement);
