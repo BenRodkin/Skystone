@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
@@ -28,6 +29,7 @@ import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
 import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
 
+@Disabled
 @Autonomous(name = "Blue Quarry", group = "Autonomous")
 public class AutoBlueQuarry extends LinearOpMode {
 
