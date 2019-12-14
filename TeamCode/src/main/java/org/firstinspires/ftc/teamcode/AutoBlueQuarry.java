@@ -322,7 +322,13 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(24.0);
 
         // Step 2: turn parallel to Quarry
-        turnToHeadingPID(90);
+        switch(placement) {
+            case LEFT :     turnToHeadingPID(90);   break;  // Face left
+            case CENTER:    turnToHeadingPID(90);   break;  // Face left
+            case RIGHT:     turnToHeadingPID(-90);  break;  // Face right
+            default:        turnToHeadingPID(90);   break;  // Face left (default to CENTER)
+        }
+
 
         // Step 3: strafe to align with Skystone
 
