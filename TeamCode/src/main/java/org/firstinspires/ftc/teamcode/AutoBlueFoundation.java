@@ -18,7 +18,7 @@ public class AutoBlueFoundation extends LinearOpMode {
 
     // Hardware class initialization variables
     private final boolean INIT_CAMERA   = false;
-    private final boolean INIT_IMU      = false;
+    private final boolean INIT_IMU      = true;
 
     // Drive motor speeds
     private final double DRIVE_SPEED    = 0.5;
