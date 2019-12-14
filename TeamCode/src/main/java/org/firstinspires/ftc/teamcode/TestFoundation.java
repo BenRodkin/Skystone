@@ -9,22 +9,11 @@ public class TestFoundation extends OpMode {
 
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    Servo found_left;
-    Servo found_right;
-
-    private final double CLAMP_LEFT     = 0.0;
-    private final double RELEASE_LEFT   = 1.0;
-
-    private final double CLAMP_RIGHT    = 1.0;
-    private final double RELEASE_RIGHT  = 0.0;
-
-
 
     public void init() {
-        hardware.init(hardwareMap); // Default to false for camera and IMU
 
-        found_left  = hardwareMap.servo.get("found_left");
-        found_right = hardwareMap.servo.get("found_right");
+        // Hardware
+        hardware.init(hardwareMap); // Default to false for camera and IMU
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -41,13 +30,5 @@ public class TestFoundation extends OpMode {
     }
 
 
-    public void clampFoundation() {
-        found_left.setPosition(CLAMP_LEFT);
-        found_right.setPosition(CLAMP_RIGHT);
-    }
 
-    public void releaseFoundation() {
-        found_left.setPosition(RELEASE_LEFT);
-        found_right.setPosition(RELEASE_RIGHT);
-    }
 }
