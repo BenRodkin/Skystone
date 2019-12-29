@@ -12,6 +12,10 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
 public class SlippyBotTeleOp extends OpMode {
 
+    private final double TEST_OPEN = 0.0;
+    private final double TEST_CLOSED = 0.4;
+
+
     SlippyBotHardware hardware = new SlippyBotHardware();
 
     double flPower = 0.0;
@@ -82,6 +86,8 @@ public class SlippyBotTeleOp extends OpMode {
 //        else {
 ////            hardware.gripper.setPosition(hardware.gripper.getPosition());   // Always send a new setPosition() command each loop because linear actuators give up
 //        }
+        if(gamepad2.a)  hardware.testGripper.setPosition(TEST_OPEN);
+        else            hardware.testGripper.setPosition(TEST_CLOSED);
 
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
