@@ -31,6 +31,8 @@ public class AutoPark extends LinearOpMode {
 
         driveInches(24.0);
 
+        strafeEncoderCounts(500, 0.4);
+
 
     }
 
