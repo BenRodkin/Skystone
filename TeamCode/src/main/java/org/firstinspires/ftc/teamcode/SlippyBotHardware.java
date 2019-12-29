@@ -34,7 +34,8 @@ public class SlippyBotHardware {
 
 //    public Servo clamp;
 
-    public Servo gripper;
+//    public Servo gripper;
+    public Servo testGripper;
     public Servo wrist;
 
     public Servo foundLeft;
@@ -123,7 +124,7 @@ public class SlippyBotHardware {
 //        clamp       = hardwareMap.servo.get("clamp");
 
 
-        gripper = hardwareMap.servo.get("gripper");
+        testGripper = hardwareMap.servo.get("gripper");
         wrist = hardwareMap.servo.get("wrist");
 
         foundLeft  = hardwareMap.servo.get("found_left");
@@ -159,12 +160,12 @@ public class SlippyBotHardware {
             is called. To correct the range for the linear actuator servos, We are setting them to
             0.4 (1000 / 2500) and 0.8 (2000 / 2500).
          */
-        gripper.scaleRange(0.4, 0.8);
+//        gripper.scaleRange(0.2, 0.8);
 
 
         // Set servo positions
         wrist.setPosition(WRIST_STARTING);
-        gripper.setPosition(GRIPPER_OPEN);
+//        gripper.setPosition(GRIPPER_OPEN);
         clampFoundation();  // For foundation servos
 
         // IMU
