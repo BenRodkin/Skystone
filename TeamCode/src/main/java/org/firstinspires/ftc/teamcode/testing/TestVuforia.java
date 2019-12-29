@@ -89,6 +89,13 @@ public class TestVuforia extends LinearOpMode {
     private float phoneYRotate    = 0;
     private float phoneZRotate    = 0;
 
+    public double xPos;
+    public double yPos;
+    public double zPos;
+
+    public double heading;
+
+
     @Override public void runOpMode() {
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -237,6 +244,19 @@ public class TestVuforia extends LinearOpMode {
             }
 
             if (targetVisible) {
+                xPos = lastLocation.getTranslation().get(0) / mmPerInch;
+                yPos = lastLocation.getTranslation().get(1) / mmPerInch;
+                zPos = lastLocation.getTranslation().get(2) / mmPerInch;
+
+                heading = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES).thirdAngle;
+
+                telemetry.addData("X Position", xPos);
+                telemetry.addData("Y Position", yPos);
+                telemetry.addData("Z Position", zPos);
+
+                telemetry.addLine();
+                telemetry.addData("Heading", heading);
+                
             }
             telemetry.update();
 //            if (targetVisible) {
