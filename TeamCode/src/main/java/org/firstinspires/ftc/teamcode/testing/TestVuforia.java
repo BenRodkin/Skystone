@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -43,6 +44,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +97,11 @@ public class TestVuforia extends LinearOpMode {
 
     public double heading;
 
+    SlippyBotHardware hardware = new SlippyBotHardware();
 
-    @Override public void runOpMode() {
+    @Override
+    public void runOpMode() {
+        hardware.init(hardwareMap);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -276,5 +281,47 @@ public class TestVuforia extends LinearOpMode {
         }
 
         targetsSkyStone.deactivate();
+    }
+
+
+    private void driveInches(double inches, double speed) {
+        driveEncoderCounts((int) (inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
+    }
+
+
+    private void driveEncoderCounts(int counts, double speed) {
+        hardware.frontLeft.setTargetPosition(hardware.frontLeft.getCurrentPosition() + counts);
+        hardware.frontRight.setTargetPosition(hardware.frontRight.getCurrentPosition() + counts);
+        hardware.rearLeft.setTargetPosition(hardware.rearLeft.getCurrentPosition() + counts);
+        hardware.rearRight.setTargetPosition(hardware.rearRight.getCurrentPosition() + counts);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.setLeftPower(speed);
+        hardware.setRightPower(speed);
+
+        while (opModeIsActive() &&
+                hardware.frontLeft.isBusy() &&
+                hardware.frontRight.isBusy() &&
+                hardware.rearLeft.isBusy() &&
+                hardware.rearRight.isBusy()) {
+            telemetry.addData("Front left encoder", hardware.frontLeft.getCurrentPosition());
+            telemetry.addData("Front right encoder", hardware.frontRight.getCurrentPosition());
+            telemetry.addData("Rear left encoder", hardware.rearLeft.getCurrentPosition());
+            telemetry.addData("Rear right encoder", hardware.rearRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 }
