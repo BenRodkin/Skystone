@@ -75,10 +75,13 @@ public class SlippyBotTeleOp extends OpMode {
 //            gp2.a.updateSnapshot(runtime);
 //        }
 
-        if(gamepad2.a && gp2.a.ready(runtime)) {
-            hardware.gripper.setPosition(Math.abs(1 - hardware.gripper.getPosition()));
-            gp2.a.updateSnapshot(runtime);
-        }
+//        if(gamepad2.a && gp2.a.ready(runtime)) {
+////            hardware.gripper.setPosition(Math.abs(1 - hardware.gripper.getPosition()));
+//            gp2.a.updateSnapshot(runtime);
+//        }
+//        else {
+////            hardware.gripper.setPosition(hardware.gripper.getPosition());   // Always send a new setPosition() command each loop because linear actuators give up
+//        }
 
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
