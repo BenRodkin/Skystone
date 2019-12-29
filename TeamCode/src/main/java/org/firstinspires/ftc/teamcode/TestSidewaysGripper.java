@@ -37,8 +37,8 @@ public class TestSidewaysGripper extends LinearOpMode {
 
         while(opModeIsActive()) {
 
-            if(gamepad1.a) hardware.gripper.setPosition(GRIPPER_CLOSED);
-            else hardware.gripper.setPosition(GRIPPER_OPEN);
+//            if(gamepad1.a) hardware.gripper.setPosition(GRIPPER_CLOSED);
+//            else hardware.gripper.setPosition(GRIPPER_OPEN);
 
             hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad1.right_stick_y * WRIST_SCALAR));
 
