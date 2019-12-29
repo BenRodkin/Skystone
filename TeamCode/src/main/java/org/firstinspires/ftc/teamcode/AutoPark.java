@@ -29,7 +29,7 @@ public class AutoPark extends LinearOpMode {
         // Optional pause at start for compliance with alliance partner strategy
         if(SLEEP_AT_START) sleep(SLEEP_TIME_MILLIS);
 
-        driveInches(8.0);
+        driveInches(24.0);
 
 
     }
