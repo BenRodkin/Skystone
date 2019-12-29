@@ -216,7 +216,7 @@ public class TestVuforia extends LinearOpMode {
 
 
 
-        //waitForStart();
+        waitForStart();
 
         targetsSkyStone.activate();
         while (!isStopRequested()) {
