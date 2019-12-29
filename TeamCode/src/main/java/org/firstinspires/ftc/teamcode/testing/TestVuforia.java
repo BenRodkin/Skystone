@@ -61,13 +61,13 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
 public class TestVuforia extends LinearOpMode {
 
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
-    private static final boolean PHONE_IS_PORTRAIT = false  ;
+    private static final boolean PHONE_IS_PORTRAIT = false;
 
     private static final String VUFORIA_KEY =
             "AQEp+gX/////AAAAGabZ3yaKT0WLtofdjrrGznRKhqhzUCjAtaxsfr96aQv7kVlGcd6NUnv2Ic89/rJ/yPFvXrDDIWqGfpXvAhqVO94fs5EYBWUzB8qCBfTJ6U1Lmo15bBZ5/tz0iMkFc3ZX27xBTdIJ6C3zTIna1hErBvkeKpRI8nMwygPulWQej4jCaomF600Z9t9ZZZtQCH54bgqLmzMRIwZYOxCzcwh+nfP7teg9JtwI3NSUHmL2zkIiRYzwo53vv3+kv3CdzLnfiK/6ReAW6S/p9hO0ENCIcWJDUGgM4KDBW1aewp6OTpFt34D2ZIzop63/+ediGz8PJw3pcrRAuKEDQ/p1h7GAVHw8vbWgW1iTOkevHSv4bcp8";
 
-    private static final float mmPerInch        = 25.4f;
-    private static final float mmTargetHeight   = (6) * mmPerInch;          // the height of the center of the target image above the floor
+    private static final float mmPerInch = 25.4f;
+    private static final float mmTargetHeight = (6) * mmPerInch;          // the height of the center of the target image above the floor
 
     // Constant for Stone Target
     private static final float stoneZ = 2.00f * mmPerInch;
@@ -81,15 +81,15 @@ public class TestVuforia extends LinearOpMode {
 
     // Constants for perimeter targets
     private static final float halfField = 72 * mmPerInch;
-    private static final float quadField  = 36 * mmPerInch;
+    private static final float quadField = 36 * mmPerInch;
 
     // Class Members
     private OpenGLMatrix lastLocation = null;
     private VuforiaLocalizer vuforia = null;
     private boolean targetVisible = false;
-    private float phoneXRotate    = 0;
-    private float phoneYRotate    = 0;
-    private float phoneZRotate    = 0;
+    private float phoneXRotate = 0;
+    private float phoneYRotate = 0;
+    private float phoneZRotate = 0;
 
     public double xPos;
     public double yPos;
@@ -98,6 +98,10 @@ public class TestVuforia extends LinearOpMode {
     public double heading;
 
     SlippyBotHardware hardware = new SlippyBotHardware();
+
+    public List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
+
+
 
     @Override
     public void runOpMode() {
@@ -109,7 +113,7 @@ public class TestVuforia extends LinearOpMode {
         // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraDirection   = CAMERA_CHOICE;
+        parameters.cameraDirection = CAMERA_CHOICE;
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
@@ -145,7 +149,6 @@ public class TestVuforia extends LinearOpMode {
         rear2.setName("Rear Perimeter 2");
 
         // For convenience, gather together all the trackable objects in one easily-iterable collection */
-        List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
         allTrackables.addAll(targetsSkyStone);
 
 
@@ -181,7 +184,7 @@ public class TestVuforia extends LinearOpMode {
 
         front1.setLocation(OpenGLMatrix
                 .translation(-halfField, -quadField, mmTargetHeight)
-                .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0 , 90)));
+                .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, 90)));
 
         front2.setLocation(OpenGLMatrix
                 .translation(-halfField, quadField, mmTargetHeight)
@@ -197,7 +200,7 @@ public class TestVuforia extends LinearOpMode {
 
         rear1.setLocation(OpenGLMatrix
                 .translation(halfField, quadField, mmTargetHeight)
-                .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0 , -90)));
+                .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, -90)));
 
         rear2.setLocation(OpenGLMatrix
                 .translation(halfField, -quadField, mmTargetHeight)
@@ -211,12 +214,12 @@ public class TestVuforia extends LinearOpMode {
         }
 
         if (PHONE_IS_PORTRAIT) {
-            phoneXRotate = 90 ;
+            phoneXRotate = 90;
         }
 
-        final float CAMERA_FORWARD_DISPLACEMENT  = 4.0f * mmPerInch;
+        final float CAMERA_FORWARD_DISPLACEMENT = 4.0f * mmPerInch;
         final float CAMERA_VERTICAL_DISPLACEMENT = 8.0f * mmPerInch;
-        final float CAMERA_LEFT_DISPLACEMENT     = 0;
+        final float CAMERA_LEFT_DISPLACEMENT = 0;
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
                 .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
@@ -227,7 +230,6 @@ public class TestVuforia extends LinearOpMode {
         }
 
 
-
         waitForStart();
 
         targetsSkyStone.activate();
@@ -235,12 +237,12 @@ public class TestVuforia extends LinearOpMode {
 
             targetVisible = false;
             for (VuforiaTrackable trackable : allTrackables) {
-                if (((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
+                if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
                     telemetry.addData("Visible Target", trackable.getName());
                     targetVisible = true;
 
 
-                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)trackable.getListener()).getUpdatedRobotLocation();
+                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener) trackable.getListener()).getUpdatedRobotLocation();
                     if (robotLocationTransform != null) {
                         lastLocation = robotLocationTransform;
                     }
@@ -255,13 +257,21 @@ public class TestVuforia extends LinearOpMode {
 
                 heading = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES).thirdAngle;
 
+                if(gamepad1.a) {
+                    driveToXPosition(-43, .3);
+
+
+                }
+
+
+
                 telemetry.addData("X Position", xPos);
                 telemetry.addData("Y Position", yPos);
                 telemetry.addData("Z Position", zPos);
 
                 telemetry.addLine();
                 telemetry.addData("Heading", heading);
-                
+
             }
             telemetry.update();
 //            if (targetVisible) {
@@ -288,6 +298,38 @@ public class TestVuforia extends LinearOpMode {
         driveEncoderCounts((int) (inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
 
+    private void driveToXPosition(double targetX, double speed) {
+        while (xPos < targetX - 1 || xPos > targetX + 1) {
+            double power = xPos < targetX ? speed : -speed;
+            hardware.frontLeft  .setPower(-power);
+            hardware.rearLeft   .setPower(power);
+            hardware.frontRight .setPower(power);
+            hardware.rearRight  .setPower(-power);
+            
+
+            for (VuforiaTrackable trackable : allTrackables) {
+                if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
+                    telemetry.addData("Visible Target", trackable.getName());
+
+                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener) trackable.getListener()).getUpdatedRobotLocation();
+                    if (robotLocationTransform != null) {
+                        lastLocation = robotLocationTransform;
+                    }
+                    break;
+                }
+            }
+
+            xPos = lastLocation.getTranslation().get(0) / mmPerInch;
+
+
+            telemetry.addData("X Position", xPos);
+            telemetry.addData("Go to:", targetX);
+            telemetry.addData("Speed", speed);
+
+            telemetry.update();
+        }
+
+    }
 
     private void driveEncoderCounts(int counts, double speed) {
         hardware.frontLeft.setTargetPosition(hardware.frontLeft.getCurrentPosition() + counts);
