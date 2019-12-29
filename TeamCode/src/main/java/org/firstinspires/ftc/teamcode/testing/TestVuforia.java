@@ -55,7 +55,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
 
 
 
-@Autonomous(name="SKYSTONE Vuforia Nav", group ="Concept")
+@Autonomous(name="Test: Vuforia", group ="Testing")
 public class TestVuforia extends LinearOpMode {
 
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
