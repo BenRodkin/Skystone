@@ -5,23 +5,23 @@ import java.util.List;
 
 public class GamepadCooldowns {
 
-    ButtonCooldown dpUp     = new ButtonCooldown();
-    ButtonCooldown dpDown   = new ButtonCooldown();
-    ButtonCooldown dpLeft   = new ButtonCooldown();
-    ButtonCooldown dpRight  = new ButtonCooldown();
+    public ButtonCooldown dpUp     = new ButtonCooldown();
+    public ButtonCooldown dpDown   = new ButtonCooldown();
+    public ButtonCooldown dpLeft   = new ButtonCooldown();
+    public ButtonCooldown dpRight  = new ButtonCooldown();
 
-    ButtonCooldown a    = new ButtonCooldown();
-    ButtonCooldown b    = new ButtonCooldown();
-    ButtonCooldown x    = new ButtonCooldown();
-    ButtonCooldown y    = new ButtonCooldown();
+    public ButtonCooldown a    = new ButtonCooldown();
+    public ButtonCooldown b    = new ButtonCooldown();
+    public ButtonCooldown x    = new ButtonCooldown();
+    public ButtonCooldown y    = new ButtonCooldown();
 
-    ButtonCooldown lb   = new ButtonCooldown();
-    ButtonCooldown rb   = new ButtonCooldown();
-    ButtonCooldown lt   = new ButtonCooldown();
-    ButtonCooldown rt   = new ButtonCooldown();
+    public ButtonCooldown lb   = new ButtonCooldown();
+    public ButtonCooldown rb   = new ButtonCooldown();
+    public ButtonCooldown lt   = new ButtonCooldown();
+    public ButtonCooldown rt   = new ButtonCooldown();
 
-    ButtonCooldown lStickB = new ButtonCooldown();
-    ButtonCooldown rStickB = new ButtonCooldown();
+    public ButtonCooldown lStickB = new ButtonCooldown();
+    public ButtonCooldown rStickB = new ButtonCooldown();
 
     List<ButtonCooldown> buttonCooldowns = new LinkedList<>();
 

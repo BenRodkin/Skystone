@@ -99,8 +99,8 @@ public class SlippyBotHardware {
     public static final double TIMEOUT = 2.0;  // 2 seconds
 
     // Camera variables
-    OpenCvCamera phoneCam;
-    SkystonePatternPipeline vision;
+    public OpenCvCamera phoneCam;
+    public SkystonePatternPipeline vision;
 
     public void init(HardwareMap hwMap) {
         init(hwMap, false, false); // Default is to not initialize the camera or the IMU
