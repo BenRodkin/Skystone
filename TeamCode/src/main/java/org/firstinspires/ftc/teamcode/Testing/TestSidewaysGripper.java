@@ -1,14 +1,14 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.Miscellaneous.ArmMode;
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_GRABBING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.ARM_STARTING;
-import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
-import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;

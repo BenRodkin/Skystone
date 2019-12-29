@@ -1,24 +1,23 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name = "Park by aiming", group = "Autonomous")
-public class AutoPark extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
+
+@Disabled
+@Autonomous(name = "Test: Slippy Movement", group = "Testing")
+public class TestSlippyMovement extends LinearOpMode {
 
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    // Drive motor speeds
-    private final double DRIVE_SPEED    = 0.5;
-    private final double STRAFE_SPEED   = 0.8;
+    private final double DRIVE_SPEED = 0.5;
 
-    // Variables for sleeping at start
-    private final boolean SLEEP_AT_START    = false;
-    private final int SLEEP_TIME_MILLIS     = 10000;    // 10,000 milliseconds = 10.0 seconds. May not finish if above 17 seconds.
 
+    @Override
     public void runOpMode() {
-
         hardware.init(hardwareMap);
 
         telemetry.addLine("Ready");
@@ -26,21 +25,26 @@ public class AutoPark extends LinearOpMode {
 
         waitForStart();
 
-        // Optional pause at start for compliance with alliance partner strategy
-        if(SLEEP_AT_START) sleep(SLEEP_TIME_MILLIS);
+        while(opModeIsActive()) {
 
-        driveInches(24.0);
+            // Movement testing controls
+            // Convention: forward and right (from the robot's perspective) are positive movement
+            if(gamepad1.dpad_up)    driveEncoderCounts(1000, DRIVE_SPEED);   // Drive forward
+            if(gamepad1.dpad_right) strafeEncoderCounts(1000, DRIVE_SPEED);  // Strafe right
+            if(gamepad1.dpad_down)  driveEncoderCounts(-1000, DRIVE_SPEED);  // Drive backward
+            if(gamepad1.dpad_left)  strafeEncoderCounts(-1000, DRIVE_SPEED); // Strafe left
 
-        strafeEncoderCounts(500, 0.4);
+            if(gamepad1.left_bumper) driveInches(24.0, DRIVE_SPEED);
 
 
+            telemetry.addData("Front left position",    hardware.frontLeft.getCurrentPosition());
+            telemetry.addData("Front right position",   hardware.frontRight.getCurrentPosition());
+            telemetry.addData("Rear left position",     hardware.rearLeft.getCurrentPosition());
+            telemetry.addData("Rear right position",    hardware.rearRight.getCurrentPosition());
+            telemetry.update();
+        }
     }
 
-
-    // Encoder-controlled movement
-    private void driveInches(double inches) {
-        driveInches(inches, DRIVE_SPEED);   // Defaults to local field member speed
-    }
     private void driveInches(double inches, double speed) {
         driveEncoderCounts((int)(inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
@@ -82,10 +86,10 @@ public class AutoPark extends LinearOpMode {
     }
 
     private void strafeEncoderCounts(int counts, double speed) {
-        hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition()    - counts);
-        hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition()   + counts);
-        hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition()     + counts);
-        hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition()    - counts);
+        hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition()    + counts);
+        hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition()   - counts);
+        hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition()     - counts);
+        hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition()    + counts);
 
         hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
         hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);

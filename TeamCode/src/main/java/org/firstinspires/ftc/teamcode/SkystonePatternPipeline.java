@@ -15,9 +15,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
-
-class SkystonePatternPipeline extends OpenCvPipeline {
+public class SkystonePatternPipeline extends OpenCvPipeline {
 
     // HSV Threshold input variables
     public static final double THRESHOLD_STEP = 1.0;

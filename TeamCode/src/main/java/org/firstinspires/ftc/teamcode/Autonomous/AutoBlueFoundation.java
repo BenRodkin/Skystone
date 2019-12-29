@@ -1,48 +1,106 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Disabled
-@Autonomous(name = "Test: Slippy Movement", group = "Testing")
-public class TestSlippyMovement extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
+@Autonomous(name = "Blue Foundation", group = "Autonomous")
+public class AutoBlueFoundation extends LinearOpMode {
+
+    // Hardware
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    private final double DRIVE_SPEED = 0.5;
+    // Hardware class initialization variables
+    private final boolean INIT_CAMERA   = false;
+    private final boolean INIT_IMU      = true;
+
+    // Drive motor speeds
+    private final double DRIVE_SPEED    = 0.5;
+    private final double STRAFE_SPEED   = 0.8;
+
+    // Variables for sleeping at start
+    private final boolean SLEEP_AT_START    = false;
+    private final int SLEEP_TIME_MILLIS     = 10000;    // 10,000 milliseconds = 10.0 seconds. May not finish if above 17 seconds.
 
 
-    @Override
+
     public void runOpMode() {
-        hardware.init(hardwareMap);
+
+        hardware.init(hardwareMap, INIT_CAMERA, INIT_IMU);
 
         telemetry.addLine("Ready");
         telemetry.update();
 
         waitForStart();
 
+        // Raise foundation servos in preparation for grabbing Foundation
+        hardware.releaseFoundation();
+
+        // Optional pause at start for compliance with alliance partner strategy
+        if(SLEEP_AT_START) sleep(SLEEP_TIME_MILLIS);
+
+        driveInches(24.0);
+
+        strafeEncoderCounts(-500, STRAFE_SPEED);
+
+        driveInches(6.5, DRIVE_SPEED);
+
+        hardware.setLeftPower(0.2);
+        hardware.setRightPower(0.2);
+
+        sleep(700);
+        hardware.clampFoundation();
+        sleep(150);
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        driveInches(-20.0);
+
+        hardware.setLeftPower(-DRIVE_SPEED);
+        hardware.setRightPower(-DRIVE_SPEED);
+        sleep(250);
+
+        while(opModeIsActive() &&
+                hardware.heading() < 85) {
+            hardware.setLeftPower(1.0);
+            hardware.setRightPower(-1.0);
+
+            telemetry.addLine("Turning");
+            telemetry.addData("Heading", hardware.heading());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+
+        strafeEncoderCounts(-500, DRIVE_SPEED);
+
+        strafeEncoderCounts(100, STRAFE_SPEED);
+
+        hardware.releaseFoundation();
+        sleep(150);
+
+        driveInches(-36.0);
+
+
+
         while(opModeIsActive()) {
-
-            // Movement testing controls
-            // Convention: forward and right (from the robot's perspective) are positive movement
-            if(gamepad1.dpad_up)    driveEncoderCounts(1000, DRIVE_SPEED);   // Drive forward
-            if(gamepad1.dpad_right) strafeEncoderCounts(1000, DRIVE_SPEED);  // Strafe right
-            if(gamepad1.dpad_down)  driveEncoderCounts(-1000, DRIVE_SPEED);  // Drive backward
-            if(gamepad1.dpad_left)  strafeEncoderCounts(-1000, DRIVE_SPEED); // Strafe left
-
-            if(gamepad1.left_bumper) driveInches(24.0, DRIVE_SPEED);
-
-
-            telemetry.addData("Front left position",    hardware.frontLeft.getCurrentPosition());
-            telemetry.addData("Front right position",   hardware.frontRight.getCurrentPosition());
-            telemetry.addData("Rear left position",     hardware.rearLeft.getCurrentPosition());
-            telemetry.addData("Rear right position",    hardware.rearRight.getCurrentPosition());
+            telemetry.addLine("Running");
             telemetry.update();
         }
     }
 
+
+
+
+
+    // Encoder-controlled movement
+    private void driveInches(double inches) {
+        driveInches(inches, DRIVE_SPEED);   // Defaults to local field member speed
+    }
     private void driveInches(double inches, double speed) {
         driveEncoderCounts((int)(inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
@@ -84,10 +142,10 @@ public class TestSlippyMovement extends LinearOpMode {
     }
 
     private void strafeEncoderCounts(int counts, double speed) {
-        hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition()    + counts);
-        hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition()   - counts);
-        hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition()     - counts);
-        hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition()    + counts);
+        hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition()    - counts);
+        hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition()   + counts);
+        hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition()     + counts);
+        hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition()    - counts);
 
         hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
         hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);

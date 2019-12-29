@@ -1,9 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Miscellaneous.GamepadCooldowns;
+import org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -22,9 +24,9 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
+import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.CENTER;
+import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.LEFT;
+import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.RIGHT;
 
 @Disabled
 @Autonomous(name = "Test: Skystone Pipeline", group = "Testing")

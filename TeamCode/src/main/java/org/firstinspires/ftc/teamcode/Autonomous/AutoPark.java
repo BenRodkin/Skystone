@@ -1,18 +1,15 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name = "Blue Foundation", group = "Autonomous")
-public class AutoBlueFoundation extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
-    // Hardware
+@Autonomous(name = "Park by aiming", group = "Autonomous")
+public class AutoPark extends LinearOpMode {
+
     SlippyBotHardware hardware = new SlippyBotHardware();
-
-    // Hardware class initialization variables
-    private final boolean INIT_CAMERA   = false;
-    private final boolean INIT_IMU      = true;
 
     // Drive motor speeds
     private final double DRIVE_SPEED    = 0.5;
@@ -22,77 +19,24 @@ public class AutoBlueFoundation extends LinearOpMode {
     private final boolean SLEEP_AT_START    = false;
     private final int SLEEP_TIME_MILLIS     = 10000;    // 10,000 milliseconds = 10.0 seconds. May not finish if above 17 seconds.
 
-
-
     public void runOpMode() {
 
-        hardware.init(hardwareMap, INIT_CAMERA, INIT_IMU);
+        hardware.init(hardwareMap);
 
         telemetry.addLine("Ready");
         telemetry.update();
 
         waitForStart();
 
-        // Raise foundation servos in preparation for grabbing Foundation
-        hardware.releaseFoundation();
-
         // Optional pause at start for compliance with alliance partner strategy
         if(SLEEP_AT_START) sleep(SLEEP_TIME_MILLIS);
 
         driveInches(24.0);
 
-        strafeEncoderCounts(-500, STRAFE_SPEED);
-
-        driveInches(6.5, DRIVE_SPEED);
-
-        hardware.setLeftPower(0.2);
-        hardware.setRightPower(0.2);
-
-        sleep(700);
-        hardware.clampFoundation();
-        sleep(150);
-        hardware.setLeftPower(0.0);
-        hardware.setRightPower(0.0);
-
-        driveInches(-20.0);
-
-        hardware.setLeftPower(-DRIVE_SPEED);
-        hardware.setRightPower(-DRIVE_SPEED);
-        sleep(250);
-
-        while(opModeIsActive() &&
-                hardware.heading() < 85) {
-            hardware.setLeftPower(1.0);
-            hardware.setRightPower(-1.0);
-
-            telemetry.addLine("Turning");
-            telemetry.addData("Heading", hardware.heading());
-            telemetry.update();
-        }
-
-        hardware.setLeftPower(0.0);
-        hardware.setRightPower(0.0);
+        strafeEncoderCounts(500, 0.4);
 
 
-        strafeEncoderCounts(-500, DRIVE_SPEED);
-
-        strafeEncoderCounts(100, STRAFE_SPEED);
-
-        hardware.releaseFoundation();
-        sleep(150);
-
-        driveInches(-36.0);
-
-
-
-        while(opModeIsActive()) {
-            telemetry.addLine("Running");
-            telemetry.update();
-        }
     }
-
-
-
 
 
     // Encoder-controlled movement

@@ -1,10 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Miscellaneous.GamepadCooldowns;
+import org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement;
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
@@ -23,9 +26,9 @@ import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.SAT_MAX;
 import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.SKYSTONE_CONFIDENCE_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.THRESHOLD_STEP;
 import static org.firstinspires.ftc.teamcode.SkystonePatternPipeline.VAL_MAX;
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.CENTER;
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.LEFT;
-import static org.firstinspires.ftc.teamcode.SkystonePlacement.RIGHT;
+import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.CENTER;
+import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.LEFT;
+import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.RIGHT;
 
 @Disabled
 @Autonomous(name = "Test: Portrait Pipeline", group = "Testing")
