@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.Testing;
+package org.firstinspires.ftc.teamcode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Miscellaneous.GamepadCooldowns;
-import org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement;
+import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
+import org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement;
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -16,19 +16,19 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 import java.util.Locale;
 
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.HSV_MIN;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.HUE_MAX;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.IMG_HEIGHT;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.IMG_WIDTH;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.RECT_MIN;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.RECT_STEP;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.SAT_MAX;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.SKYSTONE_CONFIDENCE_THRESHOLD;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.THRESHOLD_STEP;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePatternPipeline.VAL_MAX;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.CENTER;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.LEFT;
-import static org.firstinspires.ftc.teamcode.Miscellaneous.SkystonePlacement.RIGHT;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HSV_MIN;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HUE_MAX;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.IMG_HEIGHT;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.IMG_WIDTH;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.RECT_MIN;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.RECT_STEP;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.SAT_MAX;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.SKYSTONE_CONFIDENCE_THRESHOLD;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.THRESHOLD_STEP;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.VAL_MAX;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.CENTER;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.LEFT;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.RIGHT;
 
 @Disabled
 @Autonomous(name = "Test: Portrait Pipeline", group = "Testing")

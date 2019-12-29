@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Miscellaneous;
+package org.firstinspires.ftc.teamcode.miscellaneous;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;

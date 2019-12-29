@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Testing;
+package org.firstinspires.ftc.teamcode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Miscellaneous.GamepadCooldowns;
+import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;

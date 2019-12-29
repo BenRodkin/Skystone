@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Miscellaneous;
+package org.firstinspires.ftc.teamcode.miscellaneous;
 
 public enum ArmMode {
     PLACING,
