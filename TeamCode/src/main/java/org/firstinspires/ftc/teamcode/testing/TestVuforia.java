@@ -258,7 +258,7 @@ public class TestVuforia extends LinearOpMode {
                 heading = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES).thirdAngle;
 
                 if(gamepad1.a) {
-                    driveToXPosition(-43, .3);
+                    strafeToXPosition(-43, .3);
 
 
                 }
@@ -298,14 +298,14 @@ public class TestVuforia extends LinearOpMode {
         driveEncoderCounts((int) (inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
 
-    private void driveToXPosition(double targetX, double speed) {
+    private void strafeToXPosition(double targetX, double speed) {
         while (xPos < targetX - 1 || xPos > targetX + 1) {
             double power = xPos < targetX ? speed : -speed;
             hardware.frontLeft  .setPower(-power);
             hardware.rearLeft   .setPower(power);
             hardware.frontRight .setPower(power);
             hardware.rearRight  .setPower(-power);
-            
+
 
             for (VuforiaTrackable trackable : allTrackables) {
                 if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
