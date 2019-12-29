@@ -257,13 +257,13 @@ public class TestVuforia extends LinearOpMode {
 
                 heading = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES).thirdAngle;
 
-                if(gamepad1.a) {
+                if(gamepad1.x) {
                     strafeToXPosition(-43, .3);
-
-
                 }
 
-
+                if(gamepad2.y) {
+                    driveToYPosition(25, .3);
+                }
 
                 telemetry.addData("X Position", xPos);
                 telemetry.addData("Y Position", yPos);
@@ -301,11 +301,11 @@ public class TestVuforia extends LinearOpMode {
     private void strafeToXPosition(double targetX, double speed) {
         while (xPos < targetX - 1 || xPos > targetX + 1) {
             double power = xPos < targetX ? speed : -speed;
+
             hardware.frontLeft  .setPower(-power);
             hardware.rearLeft   .setPower(power);
             hardware.frontRight .setPower(power);
             hardware.rearRight  .setPower(-power);
-
 
             for (VuforiaTrackable trackable : allTrackables) {
                 if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
@@ -321,13 +321,43 @@ public class TestVuforia extends LinearOpMode {
 
             xPos = lastLocation.getTranslation().get(0) / mmPerInch;
 
-
             telemetry.addData("X Position", xPos);
             telemetry.addData("Go to:", targetX);
             telemetry.addData("Speed", speed);
 
             telemetry.update();
         }
+
+    }
+
+    private void driveToYPosition(double targetY, double speed) {
+        while (yPos < targetY - 1 || yPos > targetY + 1) {
+            double power = yPos < targetY ? speed : -speed;
+
+            hardware.setLeftPower   (power);
+            hardware.setRightPower  (power);
+
+            for (VuforiaTrackable trackable : allTrackables) {
+                if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
+                    telemetry.addData("Visible Target", trackable.getName());
+
+                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener) trackable.getListener()).getUpdatedRobotLocation();
+                    if (robotLocationTransform != null) {
+                        lastLocation = robotLocationTransform;
+                    }
+                    break;
+                }
+            }
+
+            yPos = lastLocation.getTranslation().get(1) / mmPerInch;
+
+            telemetry.addData("Y Position", yPos);
+            telemetry.addData("Go to", targetY);
+            telemetry.addData("Speed", speed);
+
+            telemetry.update();
+        }
+
 
     }
 
