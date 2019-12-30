@@ -122,7 +122,7 @@ public class SlippyBotHardware {
 
         arm         = hardwareMap.dcMotor.get("arm");
 
-        tapeMeasure = hardwareMap.dcMotor.get("tape-measure");
+        tapeMeasure = hardwareMap.dcMotor.get("tape_measure");
 
         intakeLeft  = hardwareMap.crservo.get("intake_left");
         intakeRight = hardwareMap.crservo.get("intake_right");
