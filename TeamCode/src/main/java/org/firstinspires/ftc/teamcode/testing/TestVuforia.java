@@ -80,7 +80,7 @@ public class TestVuforia extends LinearOpMode {
     private static final float quadField = 36 * mmPerInch;
 
     // Class Members
-    private OpenGLMatrix lastLocation = null;
+    private OpenGLMatrix lastLocation = null;       //Convention for direction: X- In and Out; Y- Left and Right; Z- Up and Down
     private VuforiaLocalizer vuforia = null;
     private boolean targetVisible = false;
     private float phoneXRotate = 0;
