@@ -30,6 +30,8 @@ public class SlippyBotHardware {
 
     public DcMotor arm;
 
+    public DcMotor tapeMeasure;
+
     // Servos
     public CRServo intakeLeft;
     public CRServo intakeRight;
@@ -119,6 +121,8 @@ public class SlippyBotHardware {
         pulleyRight     = hardwareMap.dcMotor.get("pulley_right");
 
         arm         = hardwareMap.dcMotor.get("arm");
+
+        tapeMeasure = hardwareMap.dcMotor.get("tape-measure");
 
         intakeLeft  = hardwareMap.crservo.get("intake_left");
         intakeRight = hardwareMap.crservo.get("intake_right");
