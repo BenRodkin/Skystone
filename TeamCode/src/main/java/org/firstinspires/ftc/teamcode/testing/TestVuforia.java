@@ -97,6 +97,8 @@ public class TestVuforia extends LinearOpMode {
 
     public double heading;
 
+    public final double POSITION_ERROR_RANGE = 0.5;
+
     SlippyBotHardware hardware = new SlippyBotHardware();
 
     public List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
@@ -299,8 +301,8 @@ public class TestVuforia extends LinearOpMode {
     }
 
     private void strafeToXPosition(double targetX, double speed) {
-        while (xPos < targetX - 1 || xPos > targetX + 1) {
             double power = xPos < targetX ? speed : -speed;
+        while (xPos < targetX - POSITION_ERROR_RANGE || xPos > targetX + POSITION_ERROR_RANGE) {
 
             hardware.frontLeft  .setPower(-power);
             hardware.rearLeft   .setPower(power);
@@ -331,8 +333,8 @@ public class TestVuforia extends LinearOpMode {
     }
 
     private void driveToYPosition(double targetY, double speed) {
-        while (yPos < targetY - 1 || yPos > targetY + 1) {
             double power = yPos < targetY ? speed : -speed;
+        while (yPos < targetY - POSITION_ERROR_RANGE || yPos > targetY + POSITION_ERROR_RANGE) {
 
             hardware.setLeftPower   (power);
             hardware.setRightPower  (power);
