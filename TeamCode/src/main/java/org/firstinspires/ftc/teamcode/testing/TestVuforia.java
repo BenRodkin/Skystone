@@ -30,15 +30,11 @@
 package org.firstinspires.ftc.teamcode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
@@ -260,11 +256,11 @@ public class TestVuforia extends LinearOpMode {
                 heading = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES).thirdAngle;
 
                 if(gamepad1.x) {
-                    strafeToXPosition(-43, .3);
+                    driveToXPosition(-43, .3);
                 }
 
                 if(gamepad1.y) {
-                    driveToYPosition(25, .3);
+                    strafeToYPosition(25, .3);
                 }
 
                 telemetry.addData("X Position", xPos);
@@ -300,14 +296,12 @@ public class TestVuforia extends LinearOpMode {
         driveEncoderCounts((int) (inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
 
-    private void strafeToXPosition(double targetX, double speedFactor) {
+    private void driveToXPosition(double targetX, double speedFactor) {
         while (xPos < targetX - POSITION_ERROR_RANGE || xPos > targetX + POSITION_ERROR_RANGE) {
             double power = (targetX-xPos)*speedFactor;
 
-            hardware.frontLeft  .setPower(-power);
-            hardware.rearLeft   .setPower(power);
-            hardware.frontRight .setPower(power);
-            hardware.rearRight  .setPower(-power);
+            hardware.setLeftPower   (power);
+            hardware.setRightPower  (power);
 
             for (VuforiaTrackable trackable : allTrackables) {
                 if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
@@ -325,19 +319,23 @@ public class TestVuforia extends LinearOpMode {
 
             telemetry.addData("X Position", xPos);
             telemetry.addData("Go to:", targetX);
-            telemetry.addData("Speed", speedFactor);
+            telemetry.addData("Speed Factor", speedFactor);
+            telemetry.addData("Power", power);
 
             telemetry.update();
         }
 
     }
 
-    private void driveToYPosition(double targetY, double speedFactor) {
+    private void strafeToYPosition(double targetY, double speedFactor) {
         while (yPos < targetY - POSITION_ERROR_RANGE || yPos > targetY + POSITION_ERROR_RANGE) {
             double power = (targetY - yPos)*speedFactor;
 
-            hardware.setLeftPower   (power);
-            hardware.setRightPower  (power);
+            hardware.frontLeft  .setPower(-power);
+            hardware.rearLeft   .setPower(power);
+            hardware.frontRight .setPower(power);
+            hardware.rearRight  .setPower(-power);
+
 
             for (VuforiaTrackable trackable : allTrackables) {
                 if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
@@ -355,7 +353,8 @@ public class TestVuforia extends LinearOpMode {
 
             telemetry.addData("Y Position", yPos);
             telemetry.addData("Go to", targetY);
-            telemetry.addData("Speed", speedFactor);
+            telemetry.addData("Speed Factor", speedFactor);
+            telemetry.addData("Power", power);
 
             telemetry.update();
         }
