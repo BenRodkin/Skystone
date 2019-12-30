@@ -22,7 +22,10 @@ public class TestTapeMeasureParking extends OpMode {
     @Override
     public void loop() {
 
+        hardware.tapeMeasure.setPower(gamepad1.left_stick_y);
+
         telemetry.addLine("Running");
+        telemetry.addData("Tape Measure Position", hardware.tapeMeasure.getCurrentPosition());
         telemetry.update();
     }
 }
