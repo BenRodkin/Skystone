@@ -261,7 +261,7 @@ public class TestVuforia extends LinearOpMode {
                     strafeToXPosition(-43, .3);
                 }
 
-                if(gamepad2.y) {
+                if(gamepad1.y) {
                     driveToYPosition(25, .3);
                 }
 
