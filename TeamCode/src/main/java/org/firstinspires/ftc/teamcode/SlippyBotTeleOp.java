@@ -15,7 +15,7 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 public class SlippyBotTeleOp extends OpMode {
 
     private final double TEST_OPEN = 0.0;
-    private final double TEST_CLOSED = 0.4;
+    private final double TEST_CLOSED = 1.0;
 
 
     SlippyBotHardware hardware = new SlippyBotHardware();
