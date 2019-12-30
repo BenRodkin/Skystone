@@ -300,9 +300,9 @@ public class TestVuforia extends LinearOpMode {
         driveEncoderCounts((int) (inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
     }
 
-    private void strafeToXPosition(double targetX, double speed) {
-            double power = xPos < targetX ? speed : -speed;
+    private void strafeToXPosition(double targetX, double speedFactor) {
         while (xPos < targetX - POSITION_ERROR_RANGE || xPos > targetX + POSITION_ERROR_RANGE) {
+            double power = (targetX-xPos)*speedFactor;
 
             hardware.frontLeft  .setPower(-power);
             hardware.rearLeft   .setPower(power);
@@ -325,16 +325,16 @@ public class TestVuforia extends LinearOpMode {
 
             telemetry.addData("X Position", xPos);
             telemetry.addData("Go to:", targetX);
-            telemetry.addData("Speed", speed);
+            telemetry.addData("Speed", speedFactor);
 
             telemetry.update();
         }
 
     }
 
-    private void driveToYPosition(double targetY, double speed) {
-            double power = yPos < targetY ? speed : -speed;
+    private void driveToYPosition(double targetY, double speedFactor) {
         while (yPos < targetY - POSITION_ERROR_RANGE || yPos > targetY + POSITION_ERROR_RANGE) {
+            double power = (targetY - yPos)*speedFactor;
 
             hardware.setLeftPower   (power);
             hardware.setRightPower  (power);
@@ -355,7 +355,7 @@ public class TestVuforia extends LinearOpMode {
 
             telemetry.addData("Y Position", yPos);
             telemetry.addData("Go to", targetY);
-            telemetry.addData("Speed", speed);
+            telemetry.addData("Speed", speedFactor);
 
             telemetry.update();
         }
