@@ -210,6 +210,18 @@ public class SlippyBotHardware {
         rearRight.setPower(power);
     }
 
+
+    public void setMecanumPower(double drive, double strafe, double twist) {
+        setMecanumPower(drive,strafe,twist,1);
+    }
+
+    public void setMecanumPower(double drive, double strafe, double twist, double speedMod) {
+        frontLeft.setPower( (drive + strafe + twist) * speedMod);
+        frontRight.setPower((drive - strafe - twist) * speedMod);
+        rearLeft.setPower(  (drive - strafe + twist) * speedMod);
+        rearRight.setPower( (drive + strafe - twist) * speedMod);
+    }
+
     // Gyroscope methods
     public double normalize180(double angle) {
         while(angle > 180) {

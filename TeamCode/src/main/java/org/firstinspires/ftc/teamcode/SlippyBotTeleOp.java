@@ -20,10 +20,6 @@ public class SlippyBotTeleOp extends OpMode {
 
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    double flPower = 0.0;
-    double frPower = 0.0;
-    double rlPower = 0.0;
-    double rrPower = 0.0;
 
     double pullyPower = 0.0;
 
@@ -56,10 +52,7 @@ public class SlippyBotTeleOp extends OpMode {
         double strafe = gamepad1.left_stick_x;
         double twist  = -gamepad1.right_stick_x;
 
-        flPower = (drive + strafe + twist);
-        frPower = (drive - strafe - twist);
-        rlPower = (drive - strafe + twist);
-        rrPower = (drive + strafe - twist);
+
 
         pullyPower = (gamepad2.left_trigger - gamepad2.right_trigger);
 
@@ -114,10 +107,7 @@ public class SlippyBotTeleOp extends OpMode {
 
 
         // Set the power
-        hardware.frontLeft. setPower(flPower * wheelSpeedMod);
-        hardware.frontRight.setPower(frPower * wheelSpeedMod);
-        hardware.rearLeft.  setPower(rlPower * wheelSpeedMod);
-        hardware.rearRight. setPower(rrPower * wheelSpeedMod);
+        hardware.setMecanumPower(drive, strafe, twist, wheelSpeedMod);
 
         hardware.pulleyLeft.    setPower(pullyPower);
         hardware.pulleyRight.   setPower(pullyPower);
