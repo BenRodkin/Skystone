@@ -106,10 +106,7 @@ public class AutoBlueFoundation extends LinearOpMode {
     }
 
     private void driveEncoderCounts(int counts, double speed) {
-        hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition()    + counts);
-        hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition()   + counts);
-        hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition()     + counts);
-        hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition()    + counts);
+        hardware.setDriveCounts(counts);
 
         hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
         hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
@@ -142,10 +139,7 @@ public class AutoBlueFoundation extends LinearOpMode {
     }
 
     private void strafeEncoderCounts(int counts, double speed) {
-        hardware.frontLeft.setTargetPosition    (hardware.frontLeft.getCurrentPosition()    - counts);
-        hardware.frontRight.setTargetPosition   (hardware.frontRight.getCurrentPosition()   + counts);
-        hardware.rearLeft.setTargetPosition     (hardware.rearLeft.getCurrentPosition()     + counts);
-        hardware.rearRight.setTargetPosition    (hardware.rearRight.getCurrentPosition()    - counts);
+        hardware.setStrafeCounts(counts);
 
         hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
         hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);

@@ -331,10 +331,10 @@ public class TestVuforia extends LinearOpMode {
         while (yPos < targetY - POSITION_ERROR_RANGE || yPos > targetY + POSITION_ERROR_RANGE) {
             double power = (targetY - yPos)*speedFactor;
 
-            hardware.frontLeft  .setPower(-power);
-            hardware.rearLeft   .setPower(power);
-            hardware.frontRight .setPower(power);
-            hardware.rearRight  .setPower(-power);
+            hardware.frontLeft  .setPower(power);
+            hardware.rearLeft   .setPower(-power);
+            hardware.frontRight .setPower(-power);
+            hardware.rearRight  .setPower(power);
 
 
             for (VuforiaTrackable trackable : allTrackables) {
