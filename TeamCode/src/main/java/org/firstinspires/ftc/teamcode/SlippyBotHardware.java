@@ -200,6 +200,7 @@ public class SlippyBotHardware {
     }
 
 
+    // Movement methods
     public void setLeftPower(double power) {
         frontLeft.setPower(power);
         rearLeft.setPower(power);
@@ -221,6 +222,21 @@ public class SlippyBotHardware {
         rearLeft.setPower(  (drive - strafe + twist) * speedMod);
         rearRight.setPower( (drive + strafe - twist) * speedMod);
     }
+
+    public void setDriveCounts(int counts) {
+        frontLeft.setTargetPosition    (frontLeft.getCurrentPosition()    + counts);
+        frontRight.setTargetPosition   (frontRight.getCurrentPosition()   + counts);
+        rearLeft.setTargetPosition     (rearLeft.getCurrentPosition()     + counts);
+        rearRight.setTargetPosition    (rearRight.getCurrentPosition()    + counts);
+    }
+
+    public void setStrafeCounts(int counts) {
+        frontLeft.setTargetPosition    (frontLeft.getCurrentPosition()    - counts);
+        frontRight.setTargetPosition   (frontRight.getCurrentPosition()   + counts);
+        rearLeft.setTargetPosition     (rearLeft.getCurrentPosition()     + counts);
+        rearRight.setTargetPosition    (rearRight.getCurrentPosition()    - counts);
+    }
+
 
     // Gyroscope methods
     public double normalize180(double angle) {
@@ -247,4 +263,6 @@ public class SlippyBotHardware {
         foundLeft.setPosition(RELEASE_LEFT);
         foundRight.setPosition(RELEASE_RIGHT);
     }
+
+
 }
