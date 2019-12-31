@@ -256,11 +256,11 @@ public class TestVuforia extends LinearOpMode {
                 heading = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES).thirdAngle;
 
                 if(gamepad1.x) {
-                    driveToXPosition(-43, .3);
+                    driveToXPosition(-43, -0.1);
                 }
 
                 if(gamepad1.y) {
-                    strafeToYPosition(25, .3);
+                    strafeToYPosition(25, 0.1 );
                 }
 
                 telemetry.addData("X Position", xPos);
