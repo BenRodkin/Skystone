@@ -231,10 +231,10 @@ public class SlippyBotHardware {
     }
 
     public void setStrafeCounts(int counts) {
-        frontLeft.setTargetPosition    (frontLeft.getCurrentPosition()    - counts);
-        frontRight.setTargetPosition   (frontRight.getCurrentPosition()   + counts);
-        rearLeft.setTargetPosition     (rearLeft.getCurrentPosition()     + counts);
-        rearRight.setTargetPosition    (rearRight.getCurrentPosition()    - counts);
+        frontLeft.setTargetPosition    (frontLeft.getCurrentPosition()    + counts);
+        frontRight.setTargetPosition   (frontRight.getCurrentPosition()   - counts);
+        rearLeft.setTargetPosition     (rearLeft.getCurrentPosition()     - counts);
+        rearRight.setTargetPosition    (rearRight.getCurrentPosition()    + counts);
     }
 
 
