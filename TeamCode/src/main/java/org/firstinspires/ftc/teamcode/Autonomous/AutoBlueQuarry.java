@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 import org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement;
-import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
@@ -30,47 +29,39 @@ import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeli
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.CENTER;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.LEFT;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.RIGHT;
-import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
 
-@Disabled
-@Autonomous(name = "Blue Quarry", group = "Autonomous")
+@Autonomous(name = "Blue Quarry",group = "Autonomous")
 public class AutoBlueQuarry extends LinearOpMode {
 
-    // Hardware
     SlippyBotHardware hardware = new SlippyBotHardware();
 
-    // Contours from pipeline after filtering
-    private List<MatOfPoint> contours;
+    private List<MatOfPoint> contours; // Contours from pipeline after filtering
 
-    // Skystone placement for path decision
+
     private SkystonePlacement placement = CENTER;
 
-    // Hardware class initialization variables
     private final boolean INIT_CAMERA   = true;
-    private final boolean INIT_IMU      = true;
+    private final boolean INIT_IMU      = false;
 
-    // Gamepad cooldowns
+
+
     GamepadCooldowns gp1 = new GamepadCooldowns();
-
-    // Local runtime variable to cut down on the number of calls to getRuntime()
     double runtime = 0.0;
-
-    // Threshold to transform trigger input into digital input (e.g. if(gamepad1.left_trigger > TRIGGER_THRESHOLD))
     private final double TRIGGER_THRESHOLD = 0.7;
 
-    // Drive motor speeds
-    private final double DRIVE_SPEED    = 0.5;
-    private final double STRAFE_SPEED   = 0.5;
-
-
+    @Override
     public void runOpMode() throws InterruptedException {
 
-        telemetry.addLine("Initializing hardware... do not move robot!");
+        hardware.init(hardwareMap,true,true);
+
+        telemetry.addLine("Ready");
         telemetry.update();
 
-        hardware.init(hardwareMap, INIT_CAMERA, INIT_IMU);
 
-        while(!isStarted() && !isStopRequested()) {
+        waitForStart();
+
+
+        while(opModeIsActive()) {
 
             // Update local HSV threshold references
             double[] localHsvHue = hardware.vision.gethsvHue();
@@ -99,95 +90,111 @@ public class AutoBlueQuarry extends LinearOpMode {
             // Modify threshold variables if the buttons are pressed and thresholds are within outer limits 0 & 255
 
             // HUE MINIMUM
-            if(gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
-                if (localHsvHue[0] > HSV_MIN)       hardware.vision.setHsvHueMin(localHsvHue[0] - THRESHOLD_STEP)   /*hsvHue[0] -= THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvHueMin(HSV_MIN)                           /*hsvHue[0] = HSV_MIN*/;
+            if (gamepad1.dpad_down && gp1.dpDown.ready(runtime)) {
+                if (localHsvHue[0] > HSV_MIN)
+                    hardware.vision.setHsvHueMin(localHsvHue[0] - THRESHOLD_STEP)   /*hsvHue[0] -= THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvHueMin(HSV_MIN)                           /*hsvHue[0] = HSV_MIN*/;
                 gp1.dpDown.updateSnapshot(runtime);
             }
 
-            if(gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
-                if(localHsvHue[0] < localHsvHue[1]) hardware.vision.setHsvHueMin(localHsvHue[0] + THRESHOLD_STEP)   /*hsvHue[0] += THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvHueMin(localHsvHue[1])                    /*hsvHue[0] = hsvHue[1]*/;
+            if (gamepad1.dpad_up && gp1.dpUp.ready(runtime)) {
+                if (localHsvHue[0] < localHsvHue[1])
+                    hardware.vision.setHsvHueMin(localHsvHue[0] + THRESHOLD_STEP)   /*hsvHue[0] += THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvHueMin(localHsvHue[1])                    /*hsvHue[0] = hsvHue[1]*/;
                 gp1.dpUp.updateSnapshot(runtime);
             }
 
 
             // HUE MAXIMUM
-            if(gamepad1.y && gp1.y.ready(runtime)) {
-                if (localHsvHue[1] < HUE_MAX)       hardware.vision.setHsvHueMax(localHsvHue[1] + THRESHOLD_STEP)   /*hsvHue[1] += THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvHueMax(HUE_MAX)                           /*hsvHue[1] = HUE_MAX*/;
+            if (gamepad1.y && gp1.y.ready(runtime)) {
+                if (localHsvHue[1] < HUE_MAX)
+                    hardware.vision.setHsvHueMax(localHsvHue[1] + THRESHOLD_STEP)   /*hsvHue[1] += THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvHueMax(HUE_MAX)                           /*hsvHue[1] = HUE_MAX*/;
                 gp1.y.updateSnapshot(runtime);
             }
 
-            if(gamepad1.a && gp1.a.ready(runtime)) {
-                if(localHsvHue[1] > localHsvHue[0]) hardware.vision.setHsvHueMax(localHsvHue[1] - THRESHOLD_STEP)   /*hsvHue[1] -= THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvHueMax(localHsvHue[0])                    /*hsvHue[1] = hsvHue[0]*/;
+            if (gamepad1.a && gp1.a.ready(runtime)) {
+                if (localHsvHue[1] > localHsvHue[0])
+                    hardware.vision.setHsvHueMax(localHsvHue[1] - THRESHOLD_STEP)   /*hsvHue[1] -= THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvHueMax(localHsvHue[0])                    /*hsvHue[1] = hsvHue[0]*/;
                 gp1.a.updateSnapshot(runtime);
             }
 
 
-
-
             // SAT MINIMUM
-            if(gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
-                if (localHsvSat[0] > HSV_MIN)       hardware.vision.setHsvSatMin(localHsvSat[0] - THRESHOLD_STEP)   /*hsvSat[0] -= THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvSatMin(HSV_MIN)                           /*hsvSat[0] = HSV_MIN*/;
+            if (gamepad1.dpad_left && gp1.dpLeft.ready(runtime)) {
+                if (localHsvSat[0] > HSV_MIN)
+                    hardware.vision.setHsvSatMin(localHsvSat[0] - THRESHOLD_STEP)   /*hsvSat[0] -= THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvSatMin(HSV_MIN)                           /*hsvSat[0] = HSV_MIN*/;
                 gp1.dpLeft.updateSnapshot(runtime);
             }
 
-            if(gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
-                if(localHsvSat[0] < localHsvSat[1]) hardware.vision.setHsvSatMin(localHsvSat[0] + THRESHOLD_STEP)   /*hsvSat[0] += THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvSatMin(localHsvSat[1])                    /*hsvSat[0] = hsvSat[1]*/;
+            if (gamepad1.dpad_right && gp1.dpRight.ready(runtime)) {
+                if (localHsvSat[0] < localHsvSat[1])
+                    hardware.vision.setHsvSatMin(localHsvSat[0] + THRESHOLD_STEP)   /*hsvSat[0] += THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvSatMin(localHsvSat[1])                    /*hsvSat[0] = hsvSat[1]*/;
                 gp1.dpRight.updateSnapshot(runtime);
             }
 
 
             // SAT MAXIMUM
-            if(gamepad1.b && gp1.b.ready(runtime)) {
-                if (localHsvSat[1] < SAT_MAX)       hardware.vision.setHsvSatMax(localHsvSat[1] + THRESHOLD_STEP)   /*hsvSat[1] += THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvSatMax(SAT_MAX)                           /*hsvSat[1] = SAT_MAX*/;
+            if (gamepad1.b && gp1.b.ready(runtime)) {
+                if (localHsvSat[1] < SAT_MAX)
+                    hardware.vision.setHsvSatMax(localHsvSat[1] + THRESHOLD_STEP)   /*hsvSat[1] += THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvSatMax(SAT_MAX)                           /*hsvSat[1] = SAT_MAX*/;
                 gp1.b.updateSnapshot(runtime);
             }
 
-            if(gamepad1.x && gp1.x.ready(runtime)) {
-                if(localHsvSat[1] > localHsvSat[0]) hardware.vision.setHsvSatMax(localHsvSat[1] - THRESHOLD_STEP)   /*hsvSat[1] -= THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvSatMax(localHsvSat[0])                    /*hsvSat[1] = hsvSat[0]*/;
+            if (gamepad1.x && gp1.x.ready(runtime)) {
+                if (localHsvSat[1] > localHsvSat[0])
+                    hardware.vision.setHsvSatMax(localHsvSat[1] - THRESHOLD_STEP)   /*hsvSat[1] -= THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvSatMax(localHsvSat[0])                    /*hsvSat[1] = hsvSat[0]*/;
                 gp1.x.updateSnapshot(runtime);
             }
 
 
-
-
             // VAL MINIMUM
-            if(gamepad1.left_trigger > TRIGGER_THRESHOLD && gp1.lt.ready(runtime)) {
-                if (localHsvVal[0] > HSV_MIN)       hardware.vision.setHsvValMin(localHsvVal[0] - THRESHOLD_STEP)   /*hsvVal[0] -= THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvValMin(HSV_MIN)                           /*hsvVal[0] = HSV_MIN*/;
+            if (gamepad1.left_trigger > TRIGGER_THRESHOLD && gp1.lt.ready(runtime)) {
+                if (localHsvVal[0] > HSV_MIN)
+                    hardware.vision.setHsvValMin(localHsvVal[0] - THRESHOLD_STEP)   /*hsvVal[0] -= THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvValMin(HSV_MIN)                           /*hsvVal[0] = HSV_MIN*/;
                 gp1.lt.updateSnapshot(runtime);
             }
 
-            if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
-                if(localHsvVal[0] < localHsvVal[1]) hardware.vision.setHsvValMin(localHsvVal[0] + THRESHOLD_STEP)   /*hsvVal[0] += THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvValMin(localHsvVal[1])                    /*hsvVal[0] = hsvVal[1]*/;
+            if (gamepad1.left_bumper && gp1.lb.ready(runtime)) {
+                if (localHsvVal[0] < localHsvVal[1])
+                    hardware.vision.setHsvValMin(localHsvVal[0] + THRESHOLD_STEP)   /*hsvVal[0] += THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvValMin(localHsvVal[1])                    /*hsvVal[0] = hsvVal[1]*/;
                 gp1.lb.updateSnapshot(runtime);
             }
 
 
-
             // VAL MAXIMUM
-            if(gamepad1.right_trigger > TRIGGER_THRESHOLD && gp1.rt.ready(runtime)) {
-                if (localHsvVal[1] > localHsvVal[0]) hardware.vision.setHsvValMax(localHsvVal[1] - THRESHOLD_STEP)  /*hsvVal[1] -= THRESHOLD_STEP*/;
-                else                                 hardware.vision.setHsvValMax(localHsvVal[0])                   /*hsvVal[1] = hsvVal[0]*/;
+            if (gamepad1.right_trigger > TRIGGER_THRESHOLD && gp1.rt.ready(runtime)) {
+                if (localHsvVal[1] > localHsvVal[0])
+                    hardware.vision.setHsvValMax(localHsvVal[1] - THRESHOLD_STEP)  /*hsvVal[1] -= THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvValMax(localHsvVal[0])                   /*hsvVal[1] = hsvVal[0]*/;
                 gp1.rt.updateSnapshot(runtime);
             }
 
-            if(gamepad1.right_bumper && gp1.rb.ready(runtime)) {
-                if(localHsvVal[1] < VAL_MAX)        hardware.vision.setHsvValMax(localHsvVal[1] + THRESHOLD_STEP)   /*hsvVal[1] += THRESHOLD_STEP*/;
-                else                                hardware.vision.setHsvValMax(VAL_MAX)                           /*hsvVal[1] = VAL_MAX*/;
+            if (gamepad1.right_bumper && gp1.rb.ready(runtime)) {
+                if (localHsvVal[1] < VAL_MAX)
+                    hardware.vision.setHsvValMax(localHsvVal[1] + THRESHOLD_STEP)   /*hsvVal[1] += THRESHOLD_STEP*/;
+                else
+                    hardware.vision.setHsvValMax(VAL_MAX)                           /*hsvVal[1] = VAL_MAX*/;
                 gp1.rb.updateSnapshot(runtime);
             }
-
-
-
 
 
             //--------------------------------------------------------------------------------------
@@ -206,29 +213,27 @@ public class AutoBlueQuarry extends LinearOpMode {
              */
 
             // Get rectangle boundaries
-            double localRectTop     = hardware.vision.getRectTop();
-            double localRectLeft    = hardware.vision.getRectLeft();
-            double localRectBot     = hardware.vision.getRectBot();
-            double localRectRight   = hardware.vision.getRectRight();
+            double localRectTop = hardware.vision.getRectTop();
+            double localRectLeft = hardware.vision.getRectLeft();
+            double localRectBot = hardware.vision.getRectBot();
+            double localRectRight = hardware.vision.getRectRight();
 
 
-            hardware.vision.setRectTop  (Range.clip(localRectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))   /*rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
-            hardware.vision.setRectLeft (Range.clip(localRectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))    /*rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
-            hardware.vision.setRectBot  (Range.clip(localRectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))  /*rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
-            hardware.vision.setRectRight(Range.clip(localRectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))   /*rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
+            hardware.vision.setRectTop(Range.clip(localRectTop + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))   /*rectTop     = trim(rectTop      + (gamepad2.left_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
+            hardware.vision.setRectLeft(Range.clip(localRectLeft + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))    /*rectLeft    = trim(rectLeft     + (gamepad2.left_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
+            hardware.vision.setRectBot(Range.clip(localRectBot + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT))  /*rectBot     = trim(rectBot      + (gamepad2.right_stick_y * RECT_STEP), RECT_MIN, IMG_HEIGHT)*/;
+            hardware.vision.setRectRight(Range.clip(localRectRight + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH))   /*rectRight   = trim(rectRight    + (gamepad2.right_stick_x * RECT_STEP), RECT_MIN, IMG_WIDTH)*/;
 
 
             hardware.vision.setReturnHSV(gamepad2.a)                /*returnHSV = gamepad2.a*/;
-            if(gamepad2.x) hardware.vision.setDrawRect(false)       /*drawRect = false*/;
-            else if(gamepad2.y) hardware.vision.setDrawRect(true)   /*drawRect = true*/;
-
-
+            if (gamepad2.x) hardware.vision.setDrawRect(false)       /*drawRect = false*/;
+            else if (gamepad2.y) hardware.vision.setDrawRect(true)   /*drawRect = true*/;
 
 
             contours = hardware.vision.filterContoursOutput();
-            double contoursProportionLeft     = 0;
-            double contoursProportionCenter   = 0;
-            double contoursProportionRight    = 0;
+            double contoursProportionLeft = 0;
+            double contoursProportionCenter = 0;
+            double contoursProportionRight = 0;
 
 
             double leftBound = hardware.vision.getLeftBound();
@@ -242,14 +247,12 @@ public class AutoBlueQuarry extends LinearOpMode {
             Point rectCenter = new Point();
 
 
-
-
             try {
-                for(MatOfPoint c : contours) {
+                for (MatOfPoint c : contours) {
                     Rect boundingRect = Imgproc.boundingRect(c);
 
                     // See if boundingRect is inside of the cropping rectangle
-                    if(boundingRect.x >= localRectLeft &&
+                    if (boundingRect.x >= localRectLeft &&
                             boundingRect.y >= localRectTop &&
                             boundingRect.x + boundingRect.width <= localRectRight &&
                             boundingRect.y + boundingRect.height <= localRectBot) {
@@ -257,12 +260,15 @@ public class AutoBlueQuarry extends LinearOpMode {
                         // Now classify as left, center, or right
                         rectCenter.x = (2 * boundingRect.x + boundingRect.width) / 2.0;     // Get the center of the rectangle
                         rectCenter.y = (2 * boundingRect.y + boundingRect.height) / 2.0;
-                        if(rectCenter.x < leftBound)        contoursProportionLeft     += boundingRect.area(); // rectangle in left 1/3 of the screen
-                        else if(rectCenter.x < centerBound) contoursProportionCenter   += boundingRect.area(); // rectangle in center 1/3 of the screen
-                        else                                contoursProportionRight    += boundingRect.area(); // rectangle in right 1/3 of the screen
+                        if (rectCenter.x < leftBound)
+                            contoursProportionLeft += boundingRect.area(); // rectangle in left 1/3 of the screen
+                        else if (rectCenter.x < centerBound)
+                            contoursProportionCenter += boundingRect.area(); // rectangle in center 1/3 of the screen
+                        else
+                            contoursProportionRight += boundingRect.area(); // rectangle in right 1/3 of the screen
                     }
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 telemetry.addLine("Error while iterating through contours!");
             }
 
@@ -271,9 +277,9 @@ public class AutoBlueQuarry extends LinearOpMode {
 
             // Divide all three tallies by the largest to get proportions
             try {
-                contoursProportionLeft     /= largestTally;
-                contoursProportionCenter   /= largestTally;
-                contoursProportionRight    /= largestTally;
+                contoursProportionLeft /= largestTally;
+                contoursProportionCenter /= largestTally;
+                contoursProportionRight /= largestTally;
             } catch (Exception e) {
                 telemetry.addLine("Error while dividing contour tallies by largest tally.");
             }
@@ -285,13 +291,12 @@ public class AutoBlueQuarry extends LinearOpMode {
             double confidence = 1.0 - smallestProportionedTally;
 
 
-
             // Compare contour area tallies to see which third of the bounding rectangle
             // has the least (which will be the third with the Skystone in it).
             // If data is below our confidence threshold, keep the last reading instead
             // of getting a new one from bad data.
             boolean badData = confidence < SKYSTONE_CONFIDENCE_THRESHOLD || Double.isNaN(confidence);    // true if confidence is too low or if we get NaN as confidence
-            if(badData) {
+            if (badData) {
                 // Do nothing; last reading will be kept
             } else {
                 // Good data! Update our decision.
@@ -304,80 +309,20 @@ public class AutoBlueQuarry extends LinearOpMode {
             telemetry.addLine(String.format("Sat: [%s, %s]", localHsvSat[0], localHsvSat[1]));
             telemetry.addLine(String.format("Val: [%s, %s]", localHsvVal[0], localHsvVal[1]));
             telemetry.addLine();
-            telemetry.addData("contoursProportionLeft",    String.format(Locale.ENGLISH, "%.2f", contoursProportionLeft));
-            telemetry.addData("contoursProportionCenter",  String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
-            telemetry.addData("contoursProportionRight",   String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
+            telemetry.addData("contoursProportionLeft", String.format(Locale.ENGLISH, "%.2f", contoursProportionLeft));
+            telemetry.addData("contoursProportionCenter", String.format(Locale.ENGLISH, "%.2f", contoursProportionCenter));
+            telemetry.addData("contoursProportionRight", String.format(Locale.ENGLISH, "%.2f", contoursProportionRight));
             telemetry.addLine();
             telemetry.addData("placement", placement);
             telemetry.addLine();
             telemetry.addData("Confidence", String.format(Locale.ENGLISH, "%.2f", confidence));
-            if(badData) telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
+            if (badData)
+                telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
             telemetry.update();
-        }
-
-
-        //------------------------------------------------------------------------------------------
-        // Autonomous starts here
-        //------------------------------------------------------------------------------------------
-
-        telemetry.addLine("Running");
-        telemetry.update();
-
-        // Step 1: drive to Quarry
-        driveInches(24.0);
-
-        // Step 2: turn parallel to Quarry
-        switch(placement) {
-            case LEFT :     turnToHeadingPID(90);   break;  // Face left
-            case CENTER:    turnToHeadingPID(90);   break;  // Face left
-            case RIGHT:     turnToHeadingPID(-90);  break;  // Face right
-            default:        turnToHeadingPID(90);   break;  // Face left (default to CENTER)
-        }
-
-
-        // Step 3: strafe to align with Skystone
-
-
-        // Step 4: start intake and drive forward
-
-
-        // Step 5: grip Skystone
-
-
-        // Step 6: strafe back to in front of alliance Skybridge
-
-
-        // Step 7: drive under Skybridge
-
-
-        // Step 8: turn towards Foundation
-
-
-        // Step 9: drive forward, place Skystone, drive backward
-
-
-        // Step 10: turn back towards Skybridge
-
-
-        // Step 11: park under Skybridge
-
-
-        //------------------------------------------------------------------------------------------
-        // Autonomous ends here
-        //------------------------------------------------------------------------------------------
-
-        while(opModeIsActive()) {
-            telemetry.addLine("Finished.");
-            telemetry.addLine();
-            telemetry.addData("Skystone placement", placement);
-            telemetry.addData("Heading", hardware.heading());
-            telemetry.update();
-        }
 
     }
+}
 
-
-    // Skystone placement decision-making
     public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
         return Math.max(Math.max(tallyLeft, tallyCenter), tallyRight);
     }
@@ -398,113 +343,4 @@ public class AutoBlueQuarry extends LinearOpMode {
         return CENTER;                                      // Default case
     }
 
-
-    // Gyroscope turning
-    public void turnToHeadingPID(int target) throws InterruptedException {
-
-        telemetry.addData("Turning to target", target);
-        telemetry.addLine("Press dpad_down to stop.");
-
-        hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
-        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
-        hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
-
-        double turnStart = getRuntime();
-        while (opModeIsActive() &&
-                (getRuntime() - turnStart) < TIMEOUT) {
-            double error = hardware.normalize180(-(target - hardware.heading()));
-            double power = hardware.pid.calculateGivenError(error);
-
-            telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
-            telemetry.addData("Current error", error);
-            telemetry.addData("Current power", power);
-
-            hardware.setLeftPower(-power);
-            hardware.setRightPower(power);
-
-            if (Math.abs(error) < hardware.TOLERANCE || gamepad2.dpad_down) {
-                break;
-            }
-
-            Thread.sleep(1);
-
-            telemetry.update();
-        }
-
-        hardware.setLeftPower(0);
-        hardware.setRightPower(0);
-    }
-
-    // Encoder-controlled movement
-    private void driveInches(double inches) {
-        driveInches(inches, DRIVE_SPEED);   // Defaults to local field member speed
-    }
-    private void driveInches(double inches, double speed) {
-        driveEncoderCounts((int)(inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
-    }
-
-    private void driveEncoderCounts(int counts, double speed) {
-        hardware.setDriveCounts(counts);
-
-        hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.rearLeft.setMode   (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.rearRight.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
-
-        hardware.setLeftPower(speed);
-        hardware.setRightPower(speed);
-
-        while(opModeIsActive() &&
-                hardware.frontLeft.isBusy() &&
-                hardware.frontRight.isBusy() &&
-                hardware.rearLeft.isBusy() &&
-                hardware.rearRight.isBusy()) {
-            telemetry.addData("Front left encoder",     hardware.frontLeft.getCurrentPosition());
-            telemetry.addData("Front right encoder",    hardware.frontRight.getCurrentPosition());
-            telemetry.addData("Rear left encoder",      hardware.rearLeft.getCurrentPosition());
-            telemetry.addData("Rear right encoder",     hardware.rearRight.getCurrentPosition());
-            telemetry.update();
-        }
-
-        hardware.setLeftPower(0.0);
-        hardware.setRightPower(0.0);
-
-        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-    }
-
-    private void strafeEncoderCounts(int counts, double speed) {
-        hardware.setStrafeCounts(counts);
-
-        hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.rearLeft.setMode   (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.rearRight.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
-
-        hardware.setLeftPower(speed);
-        hardware.setRightPower(speed);
-
-        while(opModeIsActive() &&
-                hardware.frontLeft.isBusy() &&
-                hardware.frontRight.isBusy() &&
-                hardware.rearLeft.isBusy() &&
-                hardware.rearRight.isBusy()) {
-            telemetry.addData("Front left encoder",     hardware.frontLeft.getCurrentPosition());
-            telemetry.addData("Front right encoder",    hardware.frontRight.getCurrentPosition());
-            telemetry.addData("Rear left encoder",      hardware.rearLeft.getCurrentPosition());
-            telemetry.addData("Rear right encoder",     hardware.rearRight.getCurrentPosition());
-            telemetry.update();
-        }
-
-        hardware.setLeftPower(0.0);
-        hardware.setRightPower(0.0);
-
-        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
 }
