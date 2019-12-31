@@ -29,6 +29,7 @@ public class SlippyBotTeleOp extends OpMode {
     GamepadCooldowns gp2 = new GamepadCooldowns();
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
+    boolean gripOpen = true;
 
     public static final double ARM_SCALAR = 0.6;
 
@@ -38,6 +39,7 @@ public class SlippyBotTeleOp extends OpMode {
         gp2.a.setCooldown(1.000);   // 1000 milliseconds
         gp1.a.setCooldown(1.000);   // 1000 milliseconds
         gp1.lb.setCooldown(1.000);  // 1000 milliseconds
+
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -81,8 +83,14 @@ public class SlippyBotTeleOp extends OpMode {
 //        else {
 ////            hardware.gripper.setPosition(hardware.gripper.getPosition());   // Always send a new setPosition() command each loop because linear actuators give up
 //        }
-        if(gamepad2.a)  hardware.testGripper.setPosition(TEST_OPEN);
-        else            hardware.testGripper.setPosition(TEST_CLOSED);
+        if(gamepad2.a && gp2.a.ready(runtime)) {
+            if(gripOpen) {
+                hardware.testGripper.setPosition(TEST_OPEN);
+            } else {
+                hardware.testGripper.setPosition(TEST_CLOSED);
+            }
+            gripOpen = !gripOpen;
+        }
 
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
