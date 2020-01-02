@@ -75,7 +75,7 @@ public class SlippyBotHardware {
     public static double wheelSpeedMod  = FAST;
     public static double armSpeedMod    = FAST;
 
-    public static final double WRIST_SCALAR = 0.008;
+    public static final double WRIST_SCALAR = 0.01;
 
     // Wrist positions
     public static final double WRIST_PLACING  = 0.20;
