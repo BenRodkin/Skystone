@@ -39,6 +39,8 @@ public class TestTeleOpEnhancements extends OpMode {
         hardware.mecanumDriveFieldCentric(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x, hardware.heading());
 
         // Dpad up increases wrist scalar
+        hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
+
         if(gamepad2.dpad_up && gp2.dpUp.ready(runtime)) {
             wristScalarLocal += WRIST_STEP;
 
@@ -51,7 +53,6 @@ public class TestTeleOpEnhancements extends OpMode {
 
             gp2.dpDown.updateSnapshot(runtime);
         }
-        hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * wristScalarLocal));
 
         telemetry.addLine("Running");
         telemetry.addLine();
