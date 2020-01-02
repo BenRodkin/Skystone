@@ -90,7 +90,7 @@ public class SlippyBotTeleOp extends OpMode {
                 hardware.testGripper.setPosition(TEST_CLOSED);
             }
             gripOpen = !gripOpen;
-            
+
             gp2.a.updateSnapshot(runtime);
         }
 
