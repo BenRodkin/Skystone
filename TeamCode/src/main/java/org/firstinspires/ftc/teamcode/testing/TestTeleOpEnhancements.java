@@ -14,6 +14,8 @@ public class TestTeleOpEnhancements extends OpMode {
     private final boolean INIT_CAM = false;
     private final boolean INIT_IMU = true;
 
+    private double wristScalarLocal = 0.008;
+
     public void init() {
         hardware.init(hardwareMap, INIT_CAM, INIT_IMU);
 
@@ -26,12 +28,14 @@ public class TestTeleOpEnhancements extends OpMode {
         hardware.mecanumDriveFieldCentric(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x, hardware.heading());
 
 
-        hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
+        hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * wristScalarLocal));
+
         telemetry.addLine("Running");
         telemetry.addLine();
         telemetry.addData("Heading", hardware.heading());
         telemetry.addLine();
         telemetry.addData("Wrist pos", hardware.wrist.getPosition());
+        telemetry.addData("Wrist scalar (local)", wristScalarLocal);
         telemetry.update();
     }
 }
