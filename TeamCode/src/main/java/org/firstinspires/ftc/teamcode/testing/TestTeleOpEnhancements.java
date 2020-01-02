@@ -10,9 +10,11 @@ import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 public class TestTeleOpEnhancements extends OpMode {
 
     SlippyBotHardware hardware = new SlippyBotHardware();
+    private final boolean INIT_CAM = false;
+    private final boolean INIT_IMU = true;
 
     public void init() {
-        hardware.init(hardwareMap);
+        hardware.init(hardwareMap, INIT_CAM, INIT_IMU);
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -21,6 +23,8 @@ public class TestTeleOpEnhancements extends OpMode {
     public void loop() {
 
         telemetry.addLine("Running");
+        telemetry.addLine();
+        telemetry.addData("Heading", hardware.heading());
         telemetry.update();
     }
 }
