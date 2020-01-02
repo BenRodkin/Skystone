@@ -90,6 +90,8 @@ public class SlippyBotTeleOp extends OpMode {
                 hardware.testGripper.setPosition(TEST_CLOSED);
             }
             gripOpen = !gripOpen;
+            
+            gp2.a.updateSnapshot(runtime);
         }
 
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
