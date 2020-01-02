@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
 @TeleOp(name = "Test: TeleOp Enhancements", group = "Testing")
 public class TestTeleOpEnhancements extends OpMode {
@@ -25,9 +26,12 @@ public class TestTeleOpEnhancements extends OpMode {
         hardware.mecanumDriveFieldCentric(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x, hardware.heading());
 
 
+        hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
         telemetry.addLine("Running");
         telemetry.addLine();
         telemetry.addData("Heading", hardware.heading());
+        telemetry.addLine();
+        telemetry.addData("Wrist pos", hardware.wrist.getPosition());
         telemetry.update();
     }
 }
