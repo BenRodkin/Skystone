@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
@@ -18,9 +19,13 @@ public class TestTeleOpEnhancements extends OpMode {
     GamepadCooldowns gp2 = new GamepadCooldowns();
     double runtime = 0.0;
 
+    private int armScalarLocal = 25;
 
     public void init() {
         hardware.init(hardwareMap, INIT_CAM, INIT_IMU);
+
+        hardware.arm.setTargetPosition(0);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         gp2.dpUp.setCooldown(0.500);    // 500ms
         gp2.dpDown.setCooldown(0.500);  // 500ms
@@ -35,13 +40,18 @@ public class TestTeleOpEnhancements extends OpMode {
 
         hardware.mecanumDriveFieldCentric(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x, hardware.heading());
 
+        hardware.arm.setPower(ARM_POWER);
+        hardware.arm.setTargetPosition(hardware.arm.getTargetPosition() + (int)(gamepad1.left_stick_y * armScalarLocal));
+
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
         telemetry.addLine("Running");
         telemetry.addLine();
         telemetry.addData("Heading", hardware.heading());
         telemetry.addLine();
-        telemetry.addData("Wrist pos", hardware.wrist.getPosition());
+        telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
+        telemetry.addData("Arm target", hardware.arm.getTargetPosition());
+        telemetry.addData("Arm scalar (local)", armScalarLocal);
         telemetry.update();
     }
 }
