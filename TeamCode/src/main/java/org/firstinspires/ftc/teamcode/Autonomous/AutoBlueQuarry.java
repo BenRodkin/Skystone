@@ -324,6 +324,8 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Code following here will run once "Play" is pressed
 
+        driveInches(24.0);
+        sleep(500);
 
 
         // This loop will run until "Stop" is pressed
