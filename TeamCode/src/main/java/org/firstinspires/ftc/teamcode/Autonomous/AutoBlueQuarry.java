@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
@@ -42,6 +43,10 @@ public class AutoBlueQuarry extends LinearOpMode {
 
     private final boolean INIT_CAMERA   = true;
     private final boolean INIT_IMU      = false;
+
+    // Drive motor speeds
+    private final double DRIVE_SPEED    = 0.5;
+    private final double STRAFE_SPEED   = 0.8;
 
 
 
@@ -328,6 +333,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         }
     }
 
+    // Skystone detection methods
     public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
         return Math.max(Math.max(tallyLeft, tallyCenter), tallyRight);
     }
@@ -345,6 +351,79 @@ public class AutoBlueQuarry extends LinearOpMode {
                 tallyRight < tallyCenter)   return RIGHT;   // Skystone is in the right position
 
         return CENTER;                                      // Default case
+    }
+
+    // Encoder-controlled movement
+    private void driveInches(double inches) {
+        driveInches(inches, DRIVE_SPEED);   // Defaults to local field member speed
+    }
+    private void driveInches(double inches, double speed) {
+        driveEncoderCounts((int)(inches * hardware.COUNTS_PER_INCH_EMPIRICAL), speed);
+    }
+
+    private void driveEncoderCounts(int counts, double speed) {
+        hardware.setDriveCounts(counts);
+
+        hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearLeft.setMode   (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearRight.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.setLeftPower(speed);
+        hardware.setRightPower(speed);
+
+        while(opModeIsActive() &&
+                hardware.frontLeft.isBusy() &&
+                hardware.frontRight.isBusy() &&
+                hardware.rearLeft.isBusy() &&
+                hardware.rearRight.isBusy()) {
+            telemetry.addData("Front left encoder",     hardware.frontLeft.getCurrentPosition());
+            telemetry.addData("Front right encoder",    hardware.frontRight.getCurrentPosition());
+            telemetry.addData("Rear left encoder",      hardware.rearLeft.getCurrentPosition());
+            telemetry.addData("Rear right encoder",     hardware.rearRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+    }
+
+    private void strafeEncoderCounts(int counts, double speed) {
+        hardware.setStrafeCounts(counts);
+
+        hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearLeft.setMode   (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearRight.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.setLeftPower(speed);
+        hardware.setRightPower(speed);
+
+        while(opModeIsActive() &&
+                hardware.frontLeft.isBusy() &&
+                hardware.frontRight.isBusy() &&
+                hardware.rearLeft.isBusy() &&
+                hardware.rearRight.isBusy()) {
+            telemetry.addData("Front left encoder",     hardware.frontLeft.getCurrentPosition());
+            telemetry.addData("Front right encoder",    hardware.frontRight.getCurrentPosition());
+            telemetry.addData("Rear left encoder",      hardware.rearLeft.getCurrentPosition());
+            telemetry.addData("Rear right encoder",     hardware.rearRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
 }
