@@ -323,6 +323,8 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
+            telemetry.addLine("Skystone is in the " + placement.toString().toLowerCase() + " position.");
+            telemetry.update();
         }
     }
 
