@@ -57,9 +57,6 @@ public class AutoBlueQuarry extends LinearOpMode {
         telemetry.addLine("Ready");
         telemetry.update();
 
-
-        waitForStart();
-
         // This loop will run after pressing "Init" and before pressing "Play"
         while(!isStarted()) {
             // Update local HSV threshold references
