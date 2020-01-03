@@ -20,6 +20,9 @@ public class TestTeleOpEnhancements extends OpMode {
     double runtime = 0.0;
 
     private int armScalarLocal = 25;
+    private final int ARM_STEP = 5;
+    private final double ARM_POWER = 1.0;
+
 
     public void init() {
         hardware.init(hardwareMap, INIT_CAM, INIT_IMU);
