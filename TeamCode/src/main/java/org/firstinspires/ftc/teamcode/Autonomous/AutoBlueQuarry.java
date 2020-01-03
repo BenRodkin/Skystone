@@ -394,6 +394,9 @@ public class AutoBlueQuarry extends LinearOpMode {
 
     }
 
+    private void strafeEncoderCounts(int counts) {
+        strafeEncoderCounts(counts, STRAFE_SPEED);  // Default to class member
+    }
     private void strafeEncoderCounts(int counts, double speed) {
         hardware.setStrafeCounts(counts);
 
