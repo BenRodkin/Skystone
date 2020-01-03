@@ -60,9 +60,8 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         waitForStart();
 
-
-        while(opModeIsActive()) {
-
+        // This loop will run after pressing "Init" and before pressing "Play"
+        while(!isStarted()) {
             // Update local HSV threshold references
             double[] localHsvHue = hardware.vision.gethsvHue();
             double[] localHsvSat = hardware.vision.getHsvSat();
@@ -319,14 +318,20 @@ public class AutoBlueQuarry extends LinearOpMode {
             if (badData)
                 telemetry.addLine("Confidence is below threshold or not a number. Keeping last placement decision.");
             telemetry.update();
+        }
 
+        // Code following here will run once "Play" is pressed
+
+
+
+        // This loop will run until "Stop" is pressed
+        while(opModeIsActive()) {
+        }
     }
-}
 
     public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
         return Math.max(Math.max(tallyLeft, tallyCenter), tallyRight);
     }
-
     public double smallest(double tallyLeft, double tallyCenter, double tallyRight) {
         return Math.min(Math.min(tallyLeft, tallyCenter), tallyRight);
     }
