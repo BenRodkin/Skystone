@@ -328,6 +328,8 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(24.0);
         sleep(500);
 
+        turnToHeadingPID(-85);
+        sleep(500);
 
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
