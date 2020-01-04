@@ -51,6 +51,12 @@ public class AutoBlueQuarry extends LinearOpMode {
 
 
 
+    // Distance class members
+    private final double DIST_RIGHT_INCHES = 0.0;
+    private final double DIST_LEFT_INCHES = DIST_RIGHT_INCHES + 8.0;   // Add 1 Stone's length
+    private final double DIST_CENTER_INCHES = DIST_RIGHT_INCHES - 8.0;  // Subtract 1 Stone's length
+
+
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
     private final double TRIGGER_THRESHOLD = 0.7;
@@ -330,6 +336,17 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         turnToHeadingPID(-85);
         sleep(500);
+
+        switch(placement) {
+            case LEFT:      driveInches(DIST_LEFT_INCHES);      break;
+            case CENTER:    driveInches(DIST_CENTER_INCHES);    break;
+            case RIGHT:     driveInches(DIST_RIGHT_INCHES);     break;
+            default:
+                telemetry.addLine("Placement defaulted. Stopping OpMode.");
+                telemetry.update();
+                sleep(500);
+                requestOpModeStop();
+        }
 
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
