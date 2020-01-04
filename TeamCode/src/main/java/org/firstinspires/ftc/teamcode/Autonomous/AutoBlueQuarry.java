@@ -351,6 +351,9 @@ public class AutoBlueQuarry extends LinearOpMode {
                 requestOpModeStop();
         }
 
+        // Enter Quarry
+        strafeEncoderCounts(-400);
+
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
             telemetry.addLine("Skystone is in the " + placement.toString().toLowerCase() + " position.");
