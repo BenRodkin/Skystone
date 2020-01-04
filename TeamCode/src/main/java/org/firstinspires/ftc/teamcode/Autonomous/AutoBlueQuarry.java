@@ -17,6 +17,7 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 import java.util.Locale;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HSV_MIN;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HUE_MAX;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.IMG_HEIGHT;
@@ -429,6 +430,42 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    // Gyro-controlled turning
+    public void turnToHeadingPID(int target) throws InterruptedException {
+
+        telemetry.addData("Turning to target", target);
+        telemetry.addLine("Press dpad_down to stop.");
+
+        hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
+        hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
+
+        double turnStart = getRuntime();
+        while (opModeIsActive() &&
+                (getRuntime() - turnStart) < TIMEOUT) {
+            double error = hardware.normalize180(-(target - hardware.heading()));
+            double power = hardware.pid.calculateGivenError(error);
+
+            telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
+            telemetry.addData("Current error", error);
+            telemetry.addData("Current power", power);
+
+            hardware.setLeftPower(-power);
+            hardware.setRightPower(power);
+
+            if (Math.abs(error) < hardware.TOLERANCE || gamepad2.dpad_down) {
+                break;
+            }
+
+            Thread.sleep(1);
+
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0);
+        hardware.setRightPower(0);
     }
 
 }
