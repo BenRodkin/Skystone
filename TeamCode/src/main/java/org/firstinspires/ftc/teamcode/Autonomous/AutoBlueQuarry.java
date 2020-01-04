@@ -331,12 +331,15 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Code following here will run once "Play" is pressed
 
+        // Drive to Quarry
         driveInches(24.0);
         sleep(500);
 
+        // Turn parallel to Quarry
         turnToHeadingPID(-85);
         sleep(500);
 
+        // Drive to prepare to enter Quarry
         switch(placement) {
             case LEFT:      driveInches(DIST_LEFT_INCHES);      break;
             case CENTER:    driveInches(DIST_CENTER_INCHES);    break;
