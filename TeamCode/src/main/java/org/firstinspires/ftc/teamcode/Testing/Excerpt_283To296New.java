@@ -6,7 +6,7 @@
  * @version (a version number or a date)
  */
 import java.util.*;
-public class Excerpt_283To296New
+public class TestExcerpt_283To296New
 {
     /*Above:  
      * Initialize the lastContours ArrayList and three entries
