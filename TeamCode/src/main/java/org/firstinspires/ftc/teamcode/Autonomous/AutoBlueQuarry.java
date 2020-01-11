@@ -313,6 +313,10 @@ public class AutoBlueQuarry extends LinearOpMode {
             }
 
             telemetry.addLine("Running");
+            telemetry.addLine();
+            telemetry.addData("Arm pos", hardware.arm.getCurrentPosition());
+            telemetry.addLine();
+            telemetry.addLine();
             telemetry.addLine(String.format("Hue: [%s, %s]", localHsvHue[0], localHsvHue[1]));
             telemetry.addLine(String.format("Sat: [%s, %s]", localHsvSat[0], localHsvSat[1]));
             telemetry.addLine(String.format("Val: [%s, %s]", localHsvVal[0], localHsvVal[1]));
