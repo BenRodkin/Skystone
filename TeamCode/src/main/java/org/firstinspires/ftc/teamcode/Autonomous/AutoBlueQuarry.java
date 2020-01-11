@@ -363,7 +363,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.intakeRight.setPower(1.0);
 
         // Raise arm
-        hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition() + 500);
+        hardware.arm.setTargetPosition(500);
         hardware.arm.setPower(0.1);
         hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while(hardware.arm.isBusy()) {  // Wait for arm to reach target before driving forward
