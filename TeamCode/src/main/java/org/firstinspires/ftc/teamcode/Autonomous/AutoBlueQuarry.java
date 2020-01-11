@@ -352,7 +352,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         }
 
         // Enter Quarry
-        strafeEncoderCounts(-400);
+        strafeEncoderCounts(-950);
 
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
