@@ -358,6 +358,25 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Enter Quarry
         strafeEncoderCounts(-950);
 
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Raise arm
+        hardware.arm.setTargetPosition(hardware.arm.getCurrentPosition() + 500);
+        hardware.arm.setPower(0.1);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while(hardware.arm.isBusy()) {  // Wait for arm to reach target before driving forward
+            telemetry.addData("Arm pos", hardware.arm.getCurrentPosition());
+            telemetry.update();
+        }
+        hardware.arm.setPower(0.0);
+
+        // Drive forward to intake Stone
+        driveInches(8.0, 0.2);
+
+
+
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
             telemetry.addLine("Finished");
