@@ -31,6 +31,8 @@ public class TestAutoArmPoses extends LinearOpMode {
 
         hardware.init(hardwareMap); // Default to no camera and no imu initialization
 
+        gp2.a.setCooldown(1.000);   // 1000 milliseconds
+
         telemetry.addLine("Ready");
         telemetry.update();
         waitForStart();
