@@ -100,7 +100,7 @@ public class SlippyBotTeleOp extends OpMode {
             hardware.foundLeft.setPosition(Math.abs(1 - hardware.foundLeft.getPosition()));
             hardware.foundRight.setPosition(Math.abs(1 - hardware.foundRight.getPosition()));
 
-            gp2.a.updateSnapshot(runtime);
+            gp1.a.updateSnapshot(runtime);
         }
 
         if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
