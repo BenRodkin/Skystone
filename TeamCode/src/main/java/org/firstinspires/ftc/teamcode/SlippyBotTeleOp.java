@@ -105,8 +105,6 @@ public class SlippyBotTeleOp extends OpMode {
 
         if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
 
-
-
         // Handle speed modifiers
         if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
             if(wheelSpeedMod == FAST) wheelSpeedMod = SLOW;
