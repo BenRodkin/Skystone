@@ -17,7 +17,9 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 import java.util.Locale;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HSV_MIN;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HUE_MAX;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.IMG_HEIGHT;
@@ -365,6 +367,10 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.arm.setPower(0.4);
         sleep(1000);
+
+        // Prepare gripper
+        hardware.wrist.setPosition(WRIST_GRABBING);
+        hardware.testGripper.setPosition(GRIPPER_OPEN);
 
 
         // Drive forward to intake Stone
