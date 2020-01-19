@@ -374,6 +374,9 @@ public class AutoBlueQuarry extends LinearOpMode {
 //        hardware.arm.setPower(0.0);
 
         
+        hardware.arm.setTargetPosition(500);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.arm.setPower(0.4);
 
 
         // Drive forward to intake Stone
