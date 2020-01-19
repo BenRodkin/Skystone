@@ -17,7 +17,9 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 import java.util.Locale;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HSV_MIN;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HUE_MAX;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.IMG_HEIGHT;
@@ -66,8 +68,6 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         hardware.init(hardwareMap,true,true);
 
-        telemetry.addLine("Ready");
-        telemetry.update();
 
         // This loop will run after pressing "Init" and before pressing "Play"
         while(!isStarted()) {
@@ -313,6 +313,10 @@ public class AutoBlueQuarry extends LinearOpMode {
             }
 
             telemetry.addLine("Running");
+            telemetry.addLine();
+            telemetry.addData("Arm pos", hardware.arm.getCurrentPosition());
+            telemetry.addLine();
+            telemetry.addLine();
             telemetry.addLine(String.format("Hue: [%s, %s]", localHsvHue[0], localHsvHue[1]));
             telemetry.addLine(String.format("Sat: [%s, %s]", localHsvSat[0], localHsvSat[1]));
             telemetry.addLine(String.format("Val: [%s, %s]", localHsvVal[0], localHsvVal[1]));
@@ -352,7 +356,27 @@ public class AutoBlueQuarry extends LinearOpMode {
         }
 
         // Enter Quarry
-        strafeEncoderCounts(-400);
+        strafeEncoderCounts(-950);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Raise arm
+        hardware.arm.setTargetPosition(500);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.arm.setPower(0.4);
+        sleep(1000);
+
+        // Prepare gripper
+        hardware.wrist.setPosition(WRIST_GRABBING);
+        hardware.testGripper.setPosition(GRIPPER_OPEN);
+
+
+        // Drive forward to intake Stone
+        driveInches(8.0, 0.2);
+
+
 
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {

@@ -52,7 +52,7 @@ public class AutoBlueFoundation extends LinearOpMode {
 
         sleep(700);
         hardware.clampFoundation();
-        sleep(150);
+        sleep(500);
         hardware.setLeftPower(0.0);
         hardware.setRightPower(0.0);
 
