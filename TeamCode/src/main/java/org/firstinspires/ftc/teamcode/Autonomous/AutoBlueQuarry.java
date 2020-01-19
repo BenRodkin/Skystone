@@ -371,6 +371,8 @@ public class AutoBlueQuarry extends LinearOpMode {
             telemetry.addData("Arm power", hardware.arm.getPower());
             telemetry.update();
         }
+        hardware.arm.setPower(0.0);
+
 
         // Drive forward to intake Stone
         driveInches(8.0, 0.2);
