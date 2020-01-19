@@ -66,7 +66,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         hardware.init(hardwareMap,true,true);
 
-        
+
         // This loop will run after pressing "Init" and before pressing "Play"
         while(!isStarted()) {
             // Update local HSV threshold references
@@ -366,6 +366,9 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while(hardware.arm.isBusy()) {  // Wait for arm to reach target before driving forward
             telemetry.addData("Arm pos", hardware.arm.getCurrentPosition());
+            telemetry.addData("Arm mode", hardware.arm.getMode());
+            telemetry.addData("Arm target", hardware.arm.getTargetPosition());
+            telemetry.addData("Arm power", hardware.arm.getPower());
             telemetry.update();
         }
 
