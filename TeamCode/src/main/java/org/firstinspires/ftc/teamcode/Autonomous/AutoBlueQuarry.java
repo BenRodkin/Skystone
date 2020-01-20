@@ -65,9 +65,10 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final int COUNTS_ENTER_QUARRY  = -950;
 
     // Arm targets
-    private final int ARM_CLEAR_INTAKE   = 500;  // For raising the arm clear of the intake
-    private final int ARM_GRABBING       = -50;  // For grabbing the Stone
-    private final int ARM_STORING        = 1800;  // For storing the Stone while traversing the field or keeping the arm out of harm's way
+    private final int ARM_CLEAR_INTAKE   = -500;  // For raising the arm clear of the intake
+    private final int ARM_GRABBING       = 50;  // For grabbing the Stone
+    private final int ARM_STORING        = -1800;  // For storing the Stone while traversing the field or keeping the arm out of harm's way
+    private final int ARM_START          = 0;
 
 
 
