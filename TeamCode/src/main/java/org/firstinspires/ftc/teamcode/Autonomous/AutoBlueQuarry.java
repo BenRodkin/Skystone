@@ -69,6 +69,10 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         hardware.init(hardwareMap,true,true);
 
+        // Reset arm encoder
+        hardware.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         // This loop will run after pressing "Init" and before pressing "Play"
         while(!isStarted()) {
