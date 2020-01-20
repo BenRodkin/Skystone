@@ -61,6 +61,7 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final double DIST_CENTER_INCHES = DIST_RIGHT_INCHES - 8.0;  // Subtract 1 Stone's length
     private final double DIST_INTAKE_STONE  = 8.0;
     private final double DIST_TO_BUILDING   = -66.0;
+    private final double DIST_DEPLOY_STONE  = 18.0;
 
     // Strafe distances
     private final int COUNTS_ENTER_QUARRY  = -950;
@@ -421,6 +422,20 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(DIST_TO_BUILDING,0.4);
 
         // Prepare to place stone
+        turnToHeadingPID(0);
+
+        // Drive to drop first stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Give time for stone to release
+        sleep(500);
+
+        // Drive back
+        driveInches(-DIST_DEPLOY_STONE,0.4);
 
 
         // Stop the intake
