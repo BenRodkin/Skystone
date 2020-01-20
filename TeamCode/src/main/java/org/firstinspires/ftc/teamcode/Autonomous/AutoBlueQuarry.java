@@ -386,10 +386,10 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.intakeRight.setPower(1.0);
 
         // Raise arm
-        hardware.arm.setTargetPosition(ARM_CLEAR_INTAKE);
-        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.arm.setPower(0.4);
-        sleep(1000);
+//        hardware.arm.setTargetPosition(ARM_CLEAR_INTAKE);
+//        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        hardware.arm.setPower(0.4);
+//        sleep(1000);
 
         // Prepare gripper
         //hardware.wrist.setPosition(WRIST_GRABBING);
@@ -417,9 +417,9 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Strafe out of quarry
         strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
 
-        // Put arm down
-        hardware.arm.setTargetPosition(ARM_GRABBING);
-        while (opModeIsActive() && hardware.arm.isBusy());
+//        // Put arm down
+//        hardware.arm.setTargetPosition(ARM_GRABBING);
+//        while (opModeIsActive() && hardware.arm.isBusy());
 
         // Drive to building zone
         driveInches(DIST_TO_BUILDING,0.4);
