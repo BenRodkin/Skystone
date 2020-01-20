@@ -412,6 +412,10 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Strafe out of quarry
         strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
 
+        // Put arm down
+        hardware.arm.setTargetPosition(ARM_GRABBING);
+        while (opModeIsActive() && hardware.arm.isBusy());
+
 
 
         // Stop the intake
