@@ -387,7 +387,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         sleep(1000);
 
         // Prepare gripper
-        hardware.wrist.setPosition(WRIST_GRABBING);
+        //hardware.wrist.setPosition(WRIST_GRABBING);
         hardware.testGripper.setPosition(GRIPPER_OPEN);
 
 
@@ -395,10 +395,19 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(DIST_INTAKE_STONE, 0.2);
 
         // Grab the stone
-        hardware.arm.setTargetPosition(ARM_GRABBING);       // Just below 0 to ensure full engagement
-        while(opModeIsActive() && hardware.arm.isBusy());   // Just chillin
-        hardware.testGripper.setPosition(GRIPPER_CLOSED);
-        sleep(1000);
+//        hardware.arm.setTargetPosition(ARM_GRABBING);       // Just below 0 to ensure full engagement
+//        while(opModeIsActive() && hardware.arm.isBusy());   // Just chillin
+//        hardware.testGripper.setPosition(GRIPPER_CLOSED);
+//        sleep(1000);
+
+//        // Raise the arm
+//        hardware.arm.setTargetPosition(ARM_STORING);
+//        hardware.arm.setPower(0.5);
+
+
+//        // Stop the intake
+//        hardware.intakeLeft.setPower(0.0);
+//        hardware.intakeRight.setPower(0.0);
 
         // Raise the arm
         hardware.arm.setTargetPosition(ARM_STORING);
