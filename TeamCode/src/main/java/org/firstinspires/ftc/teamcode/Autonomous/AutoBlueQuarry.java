@@ -54,10 +54,15 @@ public class AutoBlueQuarry extends LinearOpMode {
 
 
 
-    // Distance class members
-    private final double DIST_RIGHT_INCHES = 0.0;
-    private final double DIST_LEFT_INCHES = DIST_RIGHT_INCHES + 8.0;   // Add 1 Stone's length
+    // Drive distances
+    private final double DIST_TO_QUARRY     = 24.0;
+    private final double DIST_RIGHT_INCHES  = 0.0;
+    private final double DIST_LEFT_INCHES   = DIST_RIGHT_INCHES + 8.0;  // Add 1 Stone's length
     private final double DIST_CENTER_INCHES = DIST_RIGHT_INCHES - 8.0;  // Subtract 1 Stone's length
+    private final double DIST_INTAKE_STONE  = 8.0;
+
+    // Strafe distances
+    private final int COUNTS_ENTER_QUARRY  = -950;
 
     // Arm targets
     private final int ARM_CLEAR_INTAKE   = 500;  // For raising the arm clear of the intake
