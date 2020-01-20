@@ -456,11 +456,11 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Drive out of quarry
         driveInches(-DIST_SECOND_STONE,0.4);
 
-        // Strafe back into building zone
-        strafeEncoderCounts(-COUNTS_SECOND_STONE,0.4);
+        // Turn to face building zone
+        turnToHeadingPID(88);
 
-        // Prepare to spit out stone
-        driveInches(DIST_DEPLOY_STONE,0.4);
+        // Drive into building zone
+        driveInches(44,0.4);
 
         // Spit out stone
         hardware.intakeLeft.setPower(-1.0);
