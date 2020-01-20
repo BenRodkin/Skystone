@@ -17,6 +17,7 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 import java.util.Locale;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_CLOSED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
@@ -375,6 +376,23 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Drive forward to intake Stone
         driveInches(8.0, 0.2);
+
+        // Grab the stone
+        hardware.arm.setTargetPosition(-50); // Just below 0 to ensure full engagement
+        while(opModeIsActive() && hardware.arm.isBusy());   // Just chillin
+        hardware.testGripper.setPosition(GRIPPER_CLOSED);
+        sleep(1000);
+
+        // Raise the arm
+        hardware.arm.setTargetPosition(1800);
+        hardware.arm.setPower(0.5);
+
+
+        // Stop the intake
+        hardware.intakeLeft.setPower(0.0);
+        hardware.intakeRight.setPower(0.0);
+
+
 
 
 
