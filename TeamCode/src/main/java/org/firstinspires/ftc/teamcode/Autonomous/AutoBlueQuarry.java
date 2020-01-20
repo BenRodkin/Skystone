@@ -60,11 +60,14 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final double DIST_LEFT_INCHES   = DIST_RIGHT_INCHES + 8.0;  // Add 1 Stone's length
     private final double DIST_CENTER_INCHES = DIST_RIGHT_INCHES - 8.0;  // Subtract 1 Stone's length
     private final double DIST_INTAKE_STONE  = 8.0;
+    private final double DIST_SECOND_STONE  = 15.0;
     private final double DIST_TO_BUILDING   = -66.0;
     private final double DIST_DEPLOY_STONE  = 18.0;
 
     // Strafe distances
     private final int COUNTS_ENTER_QUARRY  = -950;
+    private final int COUNTS_SECOND_STONE = 2200;
+
 
     // Arm targets
     private final int ARM_CLEAR_INTAKE   = -500;  // For raising the arm clear of the intake
@@ -437,10 +440,18 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Drive back
         driveInches(-DIST_DEPLOY_STONE,0.4);
 
+        // Strafe in front of second stone
+        strafeEncoderCounts(COUNTS_SECOND_STONE,0.4);
 
-        // Stop the intake
-        hardware.intakeLeft.setPower(0.0);
-        hardware.intakeRight.setPower(0.0);
+        // Prepare to pull in stone
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive to grab second stone
+        driveInches(DIST_SECOND_STONE,0.4);
+
+        // Wait to grab stone
+        sleep(500);
 
 
 
