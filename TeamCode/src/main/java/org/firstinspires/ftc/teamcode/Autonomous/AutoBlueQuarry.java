@@ -353,7 +353,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Code following here will run once "Play" is pressed
 
         // Drive to Quarry
-        driveInches(24.0);
+        driveInches(DIST_TO_QUARRY);
         sleep(500);
 
         // Turn parallel to Quarry
@@ -373,7 +373,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         }
 
         // Enter Quarry
-        strafeEncoderCounts(-950);
+        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
 
         // Start intake (positive power for in)
         hardware.intakeLeft.setPower(1.0);
@@ -391,7 +391,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 
 
         // Drive forward to intake Stone
-        driveInches(8.0, 0.2);
+        driveInches(DIST_INTAKE_STONE, 0.2);
 
         // Grab the stone
         hardware.arm.setTargetPosition(ARM_GRABBING);       // Just below 0 to ensure full engagement
