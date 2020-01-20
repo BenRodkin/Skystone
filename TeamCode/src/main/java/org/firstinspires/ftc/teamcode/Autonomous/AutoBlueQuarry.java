@@ -59,6 +59,13 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final double DIST_LEFT_INCHES = DIST_RIGHT_INCHES + 8.0;   // Add 1 Stone's length
     private final double DIST_CENTER_INCHES = DIST_RIGHT_INCHES - 8.0;  // Subtract 1 Stone's length
 
+    // Arm targets
+    private final int ARM_CLEAR_INTAKE   = 500;  // For raising the arm clear of the intake
+    private final int ARM_GRABBING       = -50;  // For grabbing the Stone
+    private final int ARM_STORING        = 1800;  // For storing the Stone while traversing the field or keeping the arm out of harm's way
+
+
+
 
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
@@ -368,7 +375,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.intakeRight.setPower(1.0);
 
         // Raise arm
-        hardware.arm.setTargetPosition(500);
+        hardware.arm.setTargetPosition(ARM_CLEAR_INTAKE);
         hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.arm.setPower(0.4);
         sleep(1000);
@@ -382,13 +389,13 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(8.0, 0.2);
 
         // Grab the stone
-        hardware.arm.setTargetPosition(-50); // Just below 0 to ensure full engagement
+        hardware.arm.setTargetPosition(ARM_GRABBING);       // Just below 0 to ensure full engagement
         while(opModeIsActive() && hardware.arm.isBusy());   // Just chillin
         hardware.testGripper.setPosition(GRIPPER_CLOSED);
         sleep(1000);
 
         // Raise the arm
-        hardware.arm.setTargetPosition(1800);
+        hardware.arm.setTargetPosition(ARM_STORING);
         hardware.arm.setPower(0.5);
 
 
