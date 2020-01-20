@@ -143,6 +143,8 @@ public class SlippyBotHardware {
 
         pulleyLeft. setDirection(DcMotorSimple.Direction.REVERSE);
 
+        arm.        setDirection(DcMotorSimple.Direction.REVERSE);
+
         intakeLeft. setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontLeft.      setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
