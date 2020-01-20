@@ -466,6 +466,9 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.intakeLeft.setPower(-1.0);
         hardware.intakeRight.setPower(-1.0);
 
+        // Park under bridge
+        driveInches(-16,0.4);
+
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
             telemetry.addLine("Finished");
