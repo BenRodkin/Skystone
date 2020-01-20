@@ -453,9 +453,18 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Wait to grab stone
         sleep(500);
 
+        // Drive out of quarry
+        driveInches(-DIST_SECOND_STONE,0.4);
 
+        // Strafe back into building zone
+        strafeEncoderCounts(-COUNTS_SECOND_STONE,0.4);
 
+        // Prepare to spit out stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
 
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
 
         // This loop will run until "Stop" is pressed
         while(opModeIsActive()) {
