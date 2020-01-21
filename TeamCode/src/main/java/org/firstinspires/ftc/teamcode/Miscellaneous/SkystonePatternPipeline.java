@@ -30,10 +30,10 @@ public class SkystonePatternPipeline extends OpenCvPipeline {
     private static double[] hsvVal = new double[]{50.0, 255.0};      // Testing showed 50 (min) to be enough to cut out most of the Skystone
 
 
-    private static double rectTop   = 435.0;
-    private static double rectLeft  = 55.0;
-    private static double rectBot   = 533.0;
-    private static double rectRight = 480.0;
+    private static double rectTop   = 433.0;
+    private static double rectLeft  = 34.0;
+    private static double rectBot   = 506.0;
+    private static double rectRight = 464.0;
 
     public static final double RECT_STEP = 0.04;
     public static final double RECT_MIN = 0.0;
