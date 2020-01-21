@@ -65,7 +65,7 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final double DIST_DEPLOY_STONE  = 10.0;
 
     // Strafe distances
-    private final int COUNTS_ENTER_QUARRY  = -950;
+    private final int COUNTS_ENTER_QUARRY  = -900;
     private final int COUNTS_SECOND_STONE = 2200;
 
 
@@ -415,7 +415,7 @@ public class AutoBlueQuarry extends LinearOpMode {
 //        hardware.intakeRight.setPower(0.0);
 
         // Strafe out of quarry
-        strafeEncoderCounts(-(COUNTS_ENTER_QUARRY + 150),0.4);  // Add offset because COUNTS var is negative
+        strafeEncoderCounts(-(COUNTS_ENTER_QUARRY + 50),0.4);  // Add offset because COUNTS var is negative
 
 //        // Put arm down
 //        hardware.arm.setTargetPosition(ARM_GRABBING);
