@@ -399,21 +399,6 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Drive forward to intake Stone
         driveInches(DIST_INTAKE_STONE, 0.2);
 
-        // Grab the stone
-//        hardware.arm.setTargetPosition(ARM_GRABBING);       // Just below 0 to ensure full engagement
-//        while(opModeIsActive() && hardware.arm.isBusy());   // Just chillin
-//        hardware.testGripper.setPosition(GRIPPER_CLOSED);
-//        sleep(1000);
-
-//        // Raise the arm
-//        hardware.arm.setTargetPosition(ARM_STORING);
-//        hardware.arm.setPower(0.5);
-
-
-//        // Stop the intake
-//        hardware.intakeLeft.setPower(0.0);
-//        hardware.intakeRight.setPower(0.0);
-
         // Strafe out of quarry
         strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);  // Add offset because COUNTS var is negative
 
