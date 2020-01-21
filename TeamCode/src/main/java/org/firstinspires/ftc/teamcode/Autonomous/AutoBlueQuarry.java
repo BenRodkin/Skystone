@@ -62,7 +62,7 @@ public class AutoBlueQuarry extends LinearOpMode {
     private final double DIST_INTAKE_STONE  = 8.0;
     private final double DIST_SECOND_STONE  = 15.0;
     private final double DIST_TO_BUILDING   = -66.0;
-    private final double DIST_DEPLOY_STONE  = 18.0;
+    private final double DIST_DEPLOY_STONE  = 10.0;
 
     // Strafe distances
     private final int COUNTS_ENTER_QUARRY  = -950;
