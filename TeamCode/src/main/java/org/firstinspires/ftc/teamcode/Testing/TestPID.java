@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
@@ -28,9 +29,13 @@ public class TestPID extends LinearOpMode {
     private double kP = hardware.P;
     private double kI = hardware.I;
     private double kD = hardware.D;
+    private double maxSpeed = 0.25;
 
     // Increment for increasing or decreasing PID coefficients
     private final double K_STEP = 0.005;
+
+    // Increment for increasing or decreasing max speed
+    private final double SPEED_STEP = 0.025;
 
     private final boolean INIT_CAMERA   = false;
     private final boolean INIT_IMU      = true;
@@ -41,6 +46,9 @@ public class TestPID extends LinearOpMode {
         telemetry.update();
 
         hardware.init(hardwareMap, INIT_CAMERA, INIT_IMU);
+
+        cooldowns.rb.setCooldown(0.500);    // 500 ms
+        cooldowns.rt.setCooldown(0.500);    // 500 ms
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -102,6 +110,20 @@ public class TestPID extends LinearOpMode {
                 cooldowns.lt.updateSnapshot(runtime);
             }
 
+
+            // Max speed----------------------------------------------------------------------------
+            if(gamepad1.right_bumper && cooldowns.rb.ready(runtime)) {
+                maxSpeed = Range.clip(maxSpeed + SPEED_STEP, 0.0, 1.0); // Range from 0.0 to 1.0
+
+                cooldowns.rb.updateSnapshot(runtime);
+            }
+
+            if(gamepad1.right_trigger > TRIGGER_THRESHOLD && cooldowns.rt.ready(runtime)) {
+                maxSpeed = Range.clip(maxSpeed - SPEED_STEP, 0.0, 1.0); // Range from 0.0 to 1.0
+
+                cooldowns.rt.updateSnapshot(runtime);
+            }
+
             //--------------------------------------------------------------------------------------
             // END PID COEFFICIENT CONTROLS
             //--------------------------------------------------------------------------------------
@@ -127,6 +149,8 @@ public class TestPID extends LinearOpMode {
             telemetry.addData("kI", hardware.pid.getI());
             telemetry.addData("kD", hardware.pid.getD());
             telemetry.addLine();
+            telemetry.addData("Max Speed", maxSpeed);
+            telemetry.addLine();
             telemetry.addData("Heading", hardware.heading());
             telemetry.update();
         }
@@ -144,7 +168,7 @@ public class TestPID extends LinearOpMode {
         telemetry.addLine("Press dpad_down to stop.");
 
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
-        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
+        hardware.pid.setOutputRange(-maxSpeed, maxSpeed);                       // Set maximum motor power
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
         double prevError = -185.0;  // > 180 in order to keep error from reaching zero on first run through loop
