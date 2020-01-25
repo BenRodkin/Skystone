@@ -491,7 +491,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
 
         // Drive to building zone
-        driveInches(DIST_TO_BUILDING - 16.0,0.4);   // Subtract 16 inches to account for 2 Stone lengths
+        driveInches(DIST_TO_BUILDING + 16.0,0.4);   // Add 16 inches (var is -ve) to account for 2 Stone lengths
 
         // Turn to place stone
         turnToHeadingPID(0);
