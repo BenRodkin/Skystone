@@ -97,6 +97,8 @@ public class SlippyBotHardware {
     public final double D = 0.0;
     public final double TOLERANCE = 1;
 
+    public final double DV_TOLERANCE = 0.2;
+
     public final SynchronousPID pid = new SynchronousPID(P, I, D);
 
     // Timeout variable for looping methods
