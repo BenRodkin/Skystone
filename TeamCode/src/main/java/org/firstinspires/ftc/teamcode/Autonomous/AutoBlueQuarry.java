@@ -511,7 +511,6 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Turn towards Loading Zone
         turnToHeadingPID(-85);
-        sleep(1000);
 
         // Drive to Quarry
         driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
