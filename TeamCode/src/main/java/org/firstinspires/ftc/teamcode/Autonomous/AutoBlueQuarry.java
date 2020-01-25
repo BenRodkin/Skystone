@@ -477,9 +477,21 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(-16,0.4);
     }
     public void runCenterSkystone() throws InterruptedException {
-        telemetry.addLine("Running center");
-        telemetry.update();
-        sleep(2000);
+        // Enter Quarry
+        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
+
+
+
     }
     public void runRightSkystone() throws InterruptedException {
         telemetry.addLine("Running right");
