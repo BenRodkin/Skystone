@@ -368,9 +368,18 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Drive to prepare to enter Quarry
         switch(placement) {
-            case LEFT:      driveInches(DIST_LEFT_INCHES);      break;
-            case CENTER:    driveInches(DIST_CENTER_INCHES);    break;
-            case RIGHT:     driveInches(DIST_RIGHT_INCHES);     break;
+            case LEFT:
+                driveInches(DIST_LEFT_INCHES);
+                runLeftSkystone();
+                break;
+            case CENTER:
+                driveInches(DIST_CENTER_INCHES);
+                runCenterSkystone();
+                break;
+            case RIGHT:
+                driveInches(DIST_RIGHT_INCHES);
+                runRightSkystone();
+                break;
             default:
                 telemetry.addLine("Placement defaulted. Stopping OpMode.");
                 telemetry.update();
@@ -378,6 +387,19 @@ public class AutoBlueQuarry extends LinearOpMode {
                 requestOpModeStop();
         }
 
+        // This loop will run until "Stop" is pressed
+        while(opModeIsActive()) {
+            telemetry.addLine("Finished");
+            telemetry.addLine();
+            telemetry.addLine("Skystone is in the " + placement.toString().toLowerCase() + " position.");
+            telemetry.addLine();
+            telemetry.addData("Heading", hardware.heading());
+            telemetry.update();
+        }
+    }
+
+    // Skystone-placement-driven routine methods
+    public void runLeftSkystone() throws InterruptedException {
         // Enter Quarry
         strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
 
@@ -453,17 +475,22 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Park under bridge
         driveInches(-16,0.4);
-
-        // This loop will run until "Stop" is pressed
-        while(opModeIsActive()) {
-            telemetry.addLine("Finished");
-            telemetry.addLine();
-            telemetry.addLine("Skystone is in the " + placement.toString().toLowerCase() + " position.");
-            telemetry.addLine();
-            telemetry.addData("Heading", hardware.heading());
-            telemetry.update();
-        }
     }
+    public void runCenterSkystone() throws InterruptedException {
+        telemetry.addLine("Running center");
+        telemetry.update();
+        sleep(2000);
+    }
+    public void runRightSkystone() throws InterruptedException {
+        telemetry.addLine("Running right");
+        telemetry.update();
+        sleep(2000);
+    }
+
+
+
+
+
 
     // Skystone detection methods
     public double largest(double tallyLeft, double tallyCenter, double tallyRight) {
