@@ -102,7 +102,7 @@ public class SlippyBotHardware {
     public final SynchronousPID pid = new SynchronousPID(P, I, D);
 
     // Timeout variable for looping methods
-    public static final double TIMEOUT = 2.0;  // 2 seconds
+    public static final double TIMEOUT = 3.0;  // 3 seconds
 
     // Camera variables
     public OpenCvCamera phoneCam;
