@@ -510,12 +510,12 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(-DIST_DEPLOY_STONE,0.4);
 
         // Turn towards Loading Zone
-        turnToHeadingPID(85);
+        turnToHeadingPID(-85);
         sleep(1000);
 
         // Drive to Quarry
-        driveInches(DIST_TO_BUILDING - 18, 0.4);   // Subtract offset because var is -ve (increase magnitude)
-        
+        driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
+
 
     }
     public void runRightSkystone() throws InterruptedException {
