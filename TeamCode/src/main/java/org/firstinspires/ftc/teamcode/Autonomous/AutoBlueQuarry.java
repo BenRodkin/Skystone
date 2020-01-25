@@ -490,7 +490,24 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Strafe out of quarry
         strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
 
+        // Drive to building zone
+        driveInches(DIST_TO_BUILDING - 16.0,0.4);   // Subtract 16 inches to account for 2 Stone lengths
 
+        // Turn to place stone
+        turnToHeadingPID(0);
+
+        // Drive to drop first stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Give time for stone to release
+        sleep(500);
+
+        // Drive back
+        driveInches(-DIST_DEPLOY_STONE,0.4);
 
     }
     public void runRightSkystone() throws InterruptedException {
