@@ -60,11 +60,11 @@ public class SlippyBotHardware {
     public static final double GRIPPER_CLOSED = 0.0;
     public static final double GRIPPER_OPEN = 1.0;
 
-    public static final double CLAMP_LEFT     = 0.0;
-    public static final double RELEASE_LEFT   = 1.0;
+    public static final double CLAMP_LEFT     = 1.0;
+    public static final double RELEASE_LEFT   = 0.0;
 
-    private final double CLAMP_RIGHT    = 1.0;
-    private final double RELEASE_RIGHT  = 0.0;
+    private final double CLAMP_RIGHT    = 0.0;
+    private final double RELEASE_RIGHT  = 1.0;
 
 
     // Speed modifier variables
