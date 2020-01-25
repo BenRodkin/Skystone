@@ -516,6 +516,19 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Drive to Quarry
         driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
 
+        // Enter Quarry
+        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
+
 
     }
     public void runRightSkystone() throws InterruptedException {
