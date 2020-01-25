@@ -167,8 +167,10 @@ public class TestPID extends LinearOpMode {
             hardware.setLeftPower(-power);
             hardware.setRightPower(power);
 
-            if (Math.abs(error) < hardware.TOLERANCE || gamepad2.dpad_down) {
             prevError = error;      // Calculate after setting power and updating telemetry
+
+            if ( (Math.abs(error) < hardware.TOLERANCE && Math.abs(dv) < hardware.DV_TOLERANCE)
+                    || gamepad2.dpad_down) {
                 break;
             }
 
