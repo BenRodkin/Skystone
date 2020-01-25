@@ -147,13 +147,20 @@ public class TestPID extends LinearOpMode {
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
+        double prevError = -185.0;  // > 180 in order to keep error from reaching zero on first run through loop
         double turnStart = getRuntime();
         while (opModeIsActive() &&
                 (getRuntime() - turnStart) < TIMEOUT) {
             double error = hardware.normalize180(-(target - hardware.heading()));
             double power = hardware.pid.calculateGivenError(error);
 
+            double dv = prevError - error;
+
             telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
+            telemetry.addData("Current error", error);
+            telemetry.addData("Previous error", prevError);
+            telemetry.addData("dv", dv);
+            telemetry.addLine();
             telemetry.addData("Current error", error);
             telemetry.addData("Current power", power);
 
@@ -161,6 +168,7 @@ public class TestPID extends LinearOpMode {
             hardware.setRightPower(power);
 
             if (Math.abs(error) < hardware.TOLERANCE || gamepad2.dpad_down) {
+            prevError = error;      // Calculate after setting power and updating telemetry
                 break;
             }
 
