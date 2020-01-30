@@ -9,6 +9,7 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.FAST;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
@@ -104,6 +105,7 @@ public class SlippyBotTeleOp extends OpMode {
         }
 
         if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
+        if(gamepad2.right_bumper) hardware.wrist.setPosition(WRIST_STORING);
 
         // Handle speed modifiers
         if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
