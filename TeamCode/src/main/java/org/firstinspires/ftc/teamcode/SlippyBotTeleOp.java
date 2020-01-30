@@ -14,8 +14,8 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
 public class SlippyBotTeleOp extends OpMode {
 
-    private final double TEST_OPEN = 0.0;
-    private final double TEST_CLOSED = 1.0;
+    private final double TEST_OPEN = 0.8;
+    private final double TEST_CLOSED = 0.43;
 
 
     SlippyBotHardware hardware = new SlippyBotHardware();
