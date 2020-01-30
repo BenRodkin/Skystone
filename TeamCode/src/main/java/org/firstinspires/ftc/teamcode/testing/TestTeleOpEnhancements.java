@@ -80,7 +80,7 @@ public class TestTeleOpEnhancements extends OpMode {
         if(resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
             hardware.setPulleyTargets(0);
             hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
-            hardware.setPulleyPower(0.5);
+            hardware.setPulleyPower(1.0);
         }
 
         if( !hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD ) { // Pulley is busy or receiving driver pulley controls
