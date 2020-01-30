@@ -79,9 +79,9 @@ public class SlippyBotHardware {
 
     // Wrist positions
     public static final double WRIST_PLACING  = 0.00;
-    public static final double WRIST_GRABBING = 0.82;
+    public static final double WRIST_GRABBING = 0.91;
     public static final double WRIST_STARTING = 0.35;
-    public static final double WRIST_STORING  = 0.10;
+    public static final double WRIST_STORING  = 0.20;
 
     // Arm positions (to seperate different modes of operation for the wrist)
     public static final int ARM_PLACING   = 1900;
