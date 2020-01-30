@@ -24,6 +24,11 @@ public class TestTeleOpEnhancements extends OpMode {
     private final double ARM_POWER = 1.0;
 
 
+
+
+    private boolean resetPulleys = false;
+
+
     public void init() {
         hardware.init(hardwareMap, INIT_CAM, INIT_IMU);
 
@@ -48,13 +53,61 @@ public class TestTeleOpEnhancements extends OpMode {
 
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
+
+        /*
+            - Normal operation: setPower(pulleyPower);
+            - Reset button: target = 0, run to position
+            - Interrupt for reset: input from driver (Math.abs(pulleyPower) > THRESHOLD)
+
+            if(gp2.lb) resetting = true
+
+            if(resetting) {
+                pulley.setTargetPosition(0)
+                pulley.setMode(RUN_TO_POSITION)
+                pulley.setPower(1.0)
+            }
+
+            if( !pulley.isBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD ) {
+                resetting = false
+
+                pulley.setMode(RUN_WITHOUT_ENCODER)
+                pulley.setPower(pulleyPower)
+            }
+         */
+
+
+        if(gamepad2.left_bumper) resetPulleys = true;
+
+        double pulleyPower = gamepad2.left_trigger - gamepad2.right_trigger;
+        final double POWER_THRESHOLD = 0.01;
+
+        if(resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
+            hardware.setPulleyTargets(0);
+            hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.setPulleyPower(0.5);
+        }
+
+        if( !hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD ) { // Pulley is busy or receiving driver pulley controls
+            resetPulleys = false;
+
+            hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hardware.setPulleyPower(pulleyPower);
+        }
+
+
+
         telemetry.addLine("Running");
         telemetry.addLine();
-        telemetry.addData("Heading", hardware.heading());
+        telemetry.addData("resetPulleys", resetPulleys);
         telemetry.addLine();
-        telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
-        telemetry.addData("Arm target", hardware.arm.getTargetPosition());
-        telemetry.addData("Arm scalar (local)", armScalarLocal);
+        telemetry.addData("Left pulley RunMode", hardware.pulleyLeft.getMode());
+        telemetry.addData("Right pulley RunMode", hardware.pulleyRight.getMode());
+        telemetry.addLine();
+        telemetry.addData("Left pulley target", hardware.pulleyLeft.getTargetPosition());
+        telemetry.addData("Right pulley target", hardware.pulleyRight.getTargetPosition());
+        telemetry.addLine();
+        telemetry.addData("Left pulley power", hardware.pulleyLeft.getPower());
+        telemetry.addData("Right pulley power", hardware.pulleyRight.getPower());
         telemetry.update();
     }
 }
