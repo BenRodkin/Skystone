@@ -68,7 +68,7 @@ public class SlippyBotHardware {
 
 
     // Speed modifier variables
-    public static final double SLOW     = 0.5;
+    public static final double SLOW     = 0.35;
     public static final double NORMAL   = 0.8;
     public static final double FAST     = 1.0;
 
