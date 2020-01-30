@@ -90,6 +90,11 @@ public class SlippyBotHardware {
     public static final int ARM_STORING   = 200;
 
 
+    // Pulley control
+    public static boolean resetPulleys = false;
+    public static final double POWER_THRESHOLD = 0.01;
+
+
     // PID variables
     public final double MAX_SPEED = 0.25;
     public final double P = 0.045;

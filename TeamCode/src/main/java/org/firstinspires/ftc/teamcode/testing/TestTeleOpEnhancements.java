@@ -7,7 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.resetPulleys;
 
 @TeleOp(name = "Test: TeleOp Enhancements", group = "Testing")
 public class TestTeleOpEnhancements extends OpMode {
@@ -22,11 +24,6 @@ public class TestTeleOpEnhancements extends OpMode {
     private int armScalarLocal = 25;
     private final int ARM_STEP = 5;
     private final double ARM_POWER = 1.0;
-
-
-
-
-    private boolean resetPulleys = false;
 
 
     public void init() {
@@ -79,7 +76,6 @@ public class TestTeleOpEnhancements extends OpMode {
         if(gamepad2.left_bumper) resetPulleys = true;
 
         double pulleyPower = gamepad2.left_trigger - gamepad2.right_trigger;
-        final double POWER_THRESHOLD = 0.01;
 
         if(resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
             hardware.setPulleyTargets(0);
