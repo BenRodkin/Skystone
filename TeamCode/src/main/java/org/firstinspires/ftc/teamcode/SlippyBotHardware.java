@@ -318,4 +318,31 @@ public class SlippyBotHardware {
     }
 
 
+
+
+
+
+
+
+    // Pulley methods
+    public void setPulleyMode(DcMotor.RunMode newMode) {
+        pulleyLeft. setMode(newMode);
+        pulleyRight.setMode(newMode);
+    }
+
+    public void setPulleyTargets (int counts) {
+        pulleyLeft. setTargetPosition(counts);
+        pulleyRight.setTargetPosition(counts);
+    }
+
+    public void setPulleyPower(double power) {
+        pulleyLeft. setPower(power);
+        pulleyRight.setPower(power);
+    }
+
+    public boolean getPulleyIsBusy() {
+        return (pulleyLeft.isBusy() && pulleyRight.isBusy());   // With && operator, will return false once either is finished
+    }
+
+
 }
