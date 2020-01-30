@@ -143,6 +143,8 @@ public class SlippyBotTeleOp extends OpMode {
         telemetry.addLine();
         telemetry.addData("Arm position", hardware.arm.getCurrentPosition());
         telemetry.addLine();
+        telemetry.addData("Left pulley position", hardware.pulleyLeft.getCurrentPosition());
+        telemetry.addData("Right pulley position", hardware.pulleyRight.getCurrentPosition());
 //        telemetry.addData("Clamp position", hardware.clamp.getPosition());
         telemetry.addLine();
         telemetry.addData("Left pulley position", hardware.pulleyLeft.getCurrentPosition());
