@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 
@@ -36,6 +37,14 @@ public class SlippyBotTeleOp extends OpMode {
 
     public void init() {
         hardware.init(hardwareMap);
+
+        hardware.pulleyLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hardware.pulleyRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        hardware.pulleyLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        hardware.pulleyRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
 
         gp2.a.setCooldown(1.000);   // 1000 milliseconds
         gp1.a.setCooldown(1.000);   // 1000 milliseconds
