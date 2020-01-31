@@ -7,10 +7,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.FAST;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.resetPulleys;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.wheelSpeedMod;
 
 @TeleOp(name = "Mecanum Driver Control", group = "TeleOp")
@@ -128,8 +130,22 @@ public class SlippyBotTeleOp extends OpMode {
         // Set the power
         hardware.setMecanumPower(drive, strafe, twist, wheelSpeedMod);
 
-        hardware.pulleyLeft.    setPower(pulleyPower);
-        hardware.pulleyRight.   setPower(pulleyPower);
+        if(gamepad2.left_bumper) resetPulleys = true;
+
+        double pulleyPower = gamepad2.left_trigger - gamepad2.right_trigger;
+
+        if(resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
+            hardware.setPulleyTargets(0);
+            hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.setPulleyPower(1.0);
+        }
+
+        if( !hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD ) { // Pulley is busy or receiving driver pulley controls
+            resetPulleys = false;
+
+            hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hardware.setPulleyPower(pulleyPower);
+        }
 
         hardware.arm.           setPower(armPower);
 //        hardware.clamp.         setPosition(clampPos);
