@@ -96,18 +96,18 @@ public class SlippyBotHardware {
 
 
     // PID variables
-    public final double MAX_SPEED = 0.25;
-    public final double P = 0.045;
-    public final double I = 0.005;
-    public final double D = 0.040;
-    public final double TOLERANCE = 1;
+    public final double MAX_SPEED = 0.3;
+    public final double P = 0.025;
+    public final double I = 0.000;
+    public final double D = 0.000;
+    public final double TOLERANCE = 1.0;
 
     public final double DV_TOLERANCE = 0.2;
 
     public final SynchronousPID pid = new SynchronousPID(P, I, D);
 
     // Timeout variable for looping methods
-    public static final double TIMEOUT = 3.0;  // 3 seconds
+    public static final double TIMEOUT = 2.0;  // 2 seconds
 
     // Camera variables
     public OpenCvCamera phoneCam;
