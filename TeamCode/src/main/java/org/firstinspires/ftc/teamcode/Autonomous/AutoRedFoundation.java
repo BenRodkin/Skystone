@@ -56,7 +56,7 @@ public class AutoRedFoundation extends LinearOpMode {
         hardware.setLeftPower(0.0);
         hardware.setRightPower(0.0);
 
-        driveInches(-20.0);
+        driveInches(-30.0);
 
         hardware.setLeftPower(-DRIVE_SPEED);
         hardware.setRightPower(-DRIVE_SPEED);
@@ -78,7 +78,6 @@ public class AutoRedFoundation extends LinearOpMode {
 
         strafeEncoderCounts(500, DRIVE_SPEED);
 
-        strafeEncoderCounts(-100, STRAFE_SPEED);
 
         hardware.releaseFoundation();
         sleep(150);
