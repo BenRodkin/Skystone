@@ -457,6 +457,10 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Drive to grab second stone
         driveInches(DIST_SECOND_STONE,0.4);
 
+        // Wiggle to grab Stone
+        turnToHeadingPID( (int)(hardware.heading() - 10.0) );
+        turnToHeadingPID( (int)(hardware.heading() + 10.0) );
+
         // Wait to grab stone
         sleep(500);
 
