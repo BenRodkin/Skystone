@@ -54,9 +54,9 @@ public class AutoRedQuarry extends LinearOpMode {
 
     // Drive distances
     private final double DIST_TO_QUARRY     = 24.0;
-    private final double DIST_RIGHT_INCHES  = 0.0;
-    private final double DIST_LEFT_INCHES   = DIST_RIGHT_INCHES + 8.0;  // Add 1 Stone's length
-    private final double DIST_CENTER_INCHES = DIST_RIGHT_INCHES - 9.0;  // Adjusted to more than 1 Stone length
+    private final double DIST_LEFT_INCHES   = -11.0;
+    private final double DIST_CENTER_INCHES = DIST_LEFT_INCHES - 8.0;   // Subtract to increase dist bc -ve
+    private final double DIST_RIGHT_INCHES  = DIST_LEFT_INCHES + 6.0;   // Add to decrease dist bc -ve
     private final double DIST_INTAKE_STONE  = 8.0;
     private final double DIST_SECOND_STONE  = 15.0;
     private final double DIST_TO_BUILDING   = -66.0;
@@ -361,7 +361,7 @@ public class AutoRedQuarry extends LinearOpMode {
         sleep(500);
 
         // Turn parallel to Quarry
-        turnToHeadingPID(-85);
+        turnToHeadingPID(90);
         sleep(500);
 
         // Drive to prepare to enter Quarry
@@ -375,7 +375,7 @@ public class AutoRedQuarry extends LinearOpMode {
                 runCenterSkystone();
                 break;
             case RIGHT:
-                driveInches(DIST_RIGHT_INCHES - 0.5, 0.5);   // Sketch gang but like comp in 12 hours
+                driveInches(DIST_RIGHT_INCHES, 0.5);   // Sketch gang but like comp in 12 hours
                 runRightSkystone();
                 break;
             default:
