@@ -78,7 +78,6 @@ public class AutoBlueFoundation extends LinearOpMode {
 
         strafeEncoderCounts(-500, DRIVE_SPEED);
 
-        strafeEncoderCounts(100, STRAFE_SPEED);
 
         hardware.releaseFoundation();
         sleep(150);
