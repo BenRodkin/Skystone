@@ -540,9 +540,45 @@ public class AutoBlueQuarry extends LinearOpMode {
 
     }
     public void runRightSkystone() throws InterruptedException {
-        telemetry.addLine("Running right");
-        telemetry.update();
-        sleep(2000);
+        // Enter Quarry
+        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
+
+        // Drive to building zone
+        driveInches(DIST_TO_BUILDING + 8.0,0.4);   // Add 8 inches (var is -ve) to account for 1 Stone length
+
+        // Turn to place stone
+        turnToHeadingPID(0);
+
+        // Drive to drop first stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Give time for stone to release
+        sleep(500);
+
+        // Drive back
+        driveInches(-DIST_DEPLOY_STONE,0.4);
+
+        // Turn towards Loading Zone
+        turnToHeadingPID(-85);
+
+        // Drive to park
+        driveInches(24.0, 0.4);
+
+
     }
 
 
