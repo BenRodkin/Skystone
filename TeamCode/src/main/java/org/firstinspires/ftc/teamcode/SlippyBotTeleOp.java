@@ -34,6 +34,7 @@ public class SlippyBotTeleOp extends OpMode {
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
     boolean gripOpen = true;
+    boolean clamping = true;
 
     public static final double ARM_SCALAR = 0.6;
 
@@ -108,12 +109,24 @@ public class SlippyBotTeleOp extends OpMode {
 
         hardware.wrist.setPosition(hardware.wrist.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
 
+//        if(gamepad1.a && gp1.a.ready(runtime)) {
+//            hardware.foundLeft.setPosition(Math.abs(1 - hardware.foundLeft.getPosition()));
+//            hardware.foundRight.setPosition(Math.abs(1 - hardware.foundRight.getPosition()));
+//
+//            gp1.a.updateSnapshot(runtime);
+//        }
+
         if(gamepad1.a && gp1.a.ready(runtime)) {
-            hardware.foundLeft.setPosition(Math.abs(1 - hardware.foundLeft.getPosition()));
-            hardware.foundRight.setPosition(Math.abs(1 - hardware.foundRight.getPosition()));
+            if(clamping) {
+                hardware.clampFoundation();
+            } else {
+                hardware.releaseFoundation();
+            }
+            clamping = !clamping;
 
             gp1.a.updateSnapshot(runtime);
         }
+
 
         if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
         if(gamepad2.right_bumper) hardware.wrist.setPosition(WRIST_STORING);
