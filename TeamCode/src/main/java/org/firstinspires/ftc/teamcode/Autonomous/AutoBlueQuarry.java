@@ -516,7 +516,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
 
         // Enter Quarry
-        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
+        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY + 200, 0.4, 2.0);    // 2 second timeout
 
         // Start intake (positive power for in)
         hardware.intakeLeft.setPower(1.0);
@@ -526,7 +526,7 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(DIST_INTAKE_STONE, 0.2);
 
         // Strafe out of quarry
-        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
+        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 2.0);  // 2 second timeout
 
 
     }
@@ -636,6 +636,41 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+    private void strafeEncoderCountsTimeout(int counts, double speed, double timeoutSeconds) {
+        hardware.setStrafeCounts(counts);
+
+        hardware.frontLeft.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.frontRight.setMode (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearLeft.setMode   (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearRight.setMode  (DcMotor.RunMode.RUN_TO_POSITION);
+
+        hardware.setLeftPower(speed);
+        hardware.setRightPower(speed);
+
+        double startTime = getRuntime();
+
+        while(opModeIsActive() &&
+                hardware.frontLeft.isBusy() &&
+                hardware.frontRight.isBusy() &&
+                hardware.rearLeft.isBusy() &&
+                hardware.rearRight.isBusy() &&
+                (getRuntime() - startTime) < timeoutSeconds) {
+            telemetry.addData("Elapsed time", getRuntime() - startTime);
+            telemetry.addData("Front left encoder",     hardware.frontLeft.getCurrentPosition());
+            telemetry.addData("Front right encoder",    hardware.frontRight.getCurrentPosition());
+            telemetry.addData("Rear left encoder",      hardware.rearLeft.getCurrentPosition());
+            telemetry.addData("Rear right encoder",     hardware.rearRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0.0);
+        hardware.setRightPower(0.0);
+
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
 
     // Gyro-controlled turning
     public void turnToHeadingPID(int target) throws InterruptedException {
@@ -653,12 +688,14 @@ public class AutoBlueQuarry extends LinearOpMode {
             double error = hardware.normalize180(-(target - hardware.heading()));
             double power = hardware.pid.calculateGivenError(error);
 
+
             telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
             telemetry.addData("Current error", error);
             telemetry.addData("Current power", power);
 
             hardware.setLeftPower(-power);
             hardware.setRightPower(power);
+
 
             if (Math.abs(error) < hardware.TOLERANCE || gamepad2.dpad_down) {
                 break;
