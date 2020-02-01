@@ -50,9 +50,9 @@ public class AutoRedFoundation extends LinearOpMode {
         hardware.setLeftPower(0.2);
         hardware.setRightPower(0.2);
 
-        sleep(700);
+        sleep(800);
         hardware.clampFoundation();
-        sleep(150);
+        sleep(500);
         hardware.setLeftPower(0.0);
         hardware.setRightPower(0.0);
 
