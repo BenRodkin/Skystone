@@ -528,6 +528,15 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Strafe out of quarry
         strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 2.0);  // 2 second timeout
 
+        // Drive to loading zone
+        driveInches(DIST_TO_BUILDING, 0.4);
+
+        // Turn to face Building Zone
+        turnToHeadingPID(0);
+
+        // Park
+        strafeEncoderCountsTimeout(300, 0.4, 3.0);
+
 
     }
     public void runRightSkystone() throws InterruptedException {
