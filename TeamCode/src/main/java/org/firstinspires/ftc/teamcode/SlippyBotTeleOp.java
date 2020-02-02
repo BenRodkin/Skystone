@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.CAP_DEPLOYED;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.CAP_STOWED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.FAST;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
@@ -35,6 +37,7 @@ public class SlippyBotTeleOp extends OpMode {
     double runtime = 0.0;
     boolean gripOpen = true;
     boolean clamping = true;
+    boolean capstone = true;
 
     public static final double ARM_SCALAR = 0.6;
 
@@ -52,6 +55,7 @@ public class SlippyBotTeleOp extends OpMode {
         gp2.a.setCooldown(1.000);   // 1000 milliseconds
         gp1.a.setCooldown(1.000);   // 1000 milliseconds
         gp1.lb.setCooldown(1.000);  // 1000 milliseconds
+        gp1.x.setCooldown(0.752);   // 752 milliseconds
 
 
         telemetry.addLine("Ready");
@@ -66,7 +70,6 @@ public class SlippyBotTeleOp extends OpMode {
         double drive  = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
         double twist  = -gamepad1.right_stick_x;
-
 
 
         pulleyPower = (gamepad2.left_trigger - gamepad2.right_trigger);
@@ -163,6 +166,15 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.arm.           setPower(armPower);
 //        hardware.clamp.         setPosition(clampPos);
 
+        if(gamepad1.x && gp1.x.ready((runtime))) {
+            if(capstone){
+                hardware.capstone.setPosition(CAP_DEPLOYED);
+            } else {
+                hardware.capstone.setPosition(CAP_STOWED);
+            }
+            capstone = !capstone;
+            gp1.x.updateSnapshot(runtime);
+        }
 
         telemetry.addLine("Running");
         telemetry.addLine();
@@ -178,6 +190,8 @@ public class SlippyBotTeleOp extends OpMode {
         telemetry.addLine();
         telemetry.addData("Left pulley position", hardware.pulleyLeft.getCurrentPosition());
         telemetry.addData("Right pulley position", hardware.pulleyRight.getCurrentPosition());
+        telemetry.addLine();
+        telemetry.addData("Capstone position", hardware.capstone.getPosition());
         telemetry.update();
     }
 }
