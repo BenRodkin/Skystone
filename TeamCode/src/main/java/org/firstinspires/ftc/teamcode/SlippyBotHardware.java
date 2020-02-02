@@ -45,6 +45,8 @@ public class SlippyBotHardware {
     public Servo foundLeft;
     public Servo foundRight;
 
+    public Servo capstone;
+
 
 //    // IMU
     BNO055IMU imu;
@@ -82,6 +84,11 @@ public class SlippyBotHardware {
     public static final double WRIST_GRABBING = 1.00;
     public static final double WRIST_STARTING = 0.30;
     public static final double WRIST_STORING  = 0.30;
+
+    // Capstone positions
+    public static final double CAP_STOWED   = 0.0;
+    public static final double CAP_DEPLOYED = 1.0;
+
 
     // Arm positions (to seperate different modes of operation for the wrist)
     public static final int ARM_PLACING   = 1900;
@@ -143,6 +150,8 @@ public class SlippyBotHardware {
         foundLeft  = hardwareMap.servo.get("found_left");
         foundRight = hardwareMap.servo.get("found_right");
 
+        capstone    = hardwareMap.servo.get("capstone");
+
 
 
         frontLeft.  setDirection(DcMotorSimple.Direction.REVERSE);
@@ -166,6 +175,8 @@ public class SlippyBotHardware {
 
 
 
+
+
         /*
             We are using Actuonix PQ-12 linear actuators for the grippers as of Dec 12 2019. They
             take a signal between 1.0 milliseconds (extend; 1000 microseconds) and 2.0 milliseconds
@@ -181,6 +192,7 @@ public class SlippyBotHardware {
         // Set servo positions
         wrist.setPosition(WRIST_STARTING);
 //        gripper.setPosition(GRIPPER_OPEN);
+//        capstone.setPosition(CAP_STOWED);
         clampFoundation();  // For foundation servos
 
         // IMU
