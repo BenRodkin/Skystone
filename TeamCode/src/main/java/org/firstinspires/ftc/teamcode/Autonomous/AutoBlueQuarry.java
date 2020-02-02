@@ -377,7 +377,7 @@ public class AutoBlueQuarry extends LinearOpMode {
                 runCenterSkystone();
                 break;
             case RIGHT:
-                driveInches(DIST_RIGHT_INCHES - 0.5, 0.5);   // Sketch gang but like comp in 12 hours
+                driveInches(DIST_RIGHT_INCHES - 0.5, 0.6);   // Sketch gang but like comp in 12 hours
                 runRightSkystone();
                 break;
             default:
