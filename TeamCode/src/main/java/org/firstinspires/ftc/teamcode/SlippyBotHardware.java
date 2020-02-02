@@ -362,4 +362,82 @@ public class SlippyBotHardware {
     }
 
 
+
+
+
+
+
+    // OVERRIDE METHODS
+    public void stopAllMotors() {
+        frontLeft.setPower(0.0);
+        frontRight.setPower(0.0);
+        rearLeft.setPower(0.0);
+        rearRight.setPower(0.0);
+
+        pulleyLeft.setPower(0.0);
+        pulleyRight.setPower(0.0);
+
+        arm.setPower(0.0);
+        tapeMeasure.setPower(0.0);
+    }
+
+    public void capAndOverride() {
+        // Stop EVERYTHING
+        stopAllMotors();
+        intakeRight.setPower(0.0);
+        intakeLeft.setPower(0.0);
+
+        // Set up initial state
+        /*
+            Lift up
+            Arm up
+            Capstone down
+            Lift down
+            Wrist
+            Arm down
+            Capstone up
+            Profit
+         */
+        final int PULLEY_UP_COUNTS      = -1500;
+        final double PULLEY_POWER       = 1.0;
+        final int ARM_UP_COUNTS         = -600;
+        final double ARM_POWER          = 0.3;
+        final int PULLEY_DOWN_COUNTS    = 0;
+//        final int WRIST_WAIT_MILLIS     = 500;
+        final int ARM_DOWN_COUNTS       = 0;
+
+        // Lift up
+        setPulleyTargets(PULLEY_UP_COUNTS);
+        setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
+        setPulleyPower(PULLEY_POWER);
+
+        // Arm up
+        arm.setTargetPosition(ARM_UP_COUNTS);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setPower(ARM_POWER);
+
+        // Wait for arm to finish
+        while(arm.isBusy());
+
+        // Capstone down
+        capstone.setPosition(CAP_DEPLOYED);
+
+        // Lift down
+        setPulleyTargets(PULLEY_DOWN_COUNTS);
+
+        // Wrist
+        wrist.setPosition(WRIST_GRABBING);
+
+        // Arm down
+        arm.setTargetPosition(ARM_DOWN_COUNTS);
+
+        // Wait for arm to finish
+        while(arm.isBusy());
+
+        // Capstone up
+        capstone.setPosition(CAP_STOWED);
+
+
+        // pROFIT
+    }
 }
