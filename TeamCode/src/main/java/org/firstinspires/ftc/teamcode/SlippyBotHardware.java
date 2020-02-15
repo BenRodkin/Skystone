@@ -86,8 +86,8 @@ public class SlippyBotHardware {
     public static final double WRIST_STORING  = 0.30;
 
     // Capstone positions
-    public static final double CAP_STOWED   = 0.0;
-    public static final double CAP_DEPLOYED = 1.0;
+    public static final double CAP_STOWED   = 1.0;
+    public static final double CAP_DEPLOYED = 0.0;
 
 
     // Arm positions (to seperate different modes of operation for the wrist)
