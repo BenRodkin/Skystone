@@ -368,14 +368,20 @@ public class AutoRedQuarry extends LinearOpMode {
         switch(placement) {
             case LEFT:
                 driveInches(DIST_LEFT_INCHES - 1.0);
+                hardware.intakeLeft.setPower(1.0);
+                hardware.intakeRight.setPower(1.0);
                 runLeftSkystone();
                 break;
             case CENTER:
                 driveInches(DIST_CENTER_INCHES);
+                hardware.intakeLeft.setPower(1.0);
+                hardware.intakeRight.setPower(1.0);
                 runCenterSkystone();
                 break;
             case RIGHT:
                 driveInches(DIST_RIGHT_INCHES, 0.5);   // Sketch gang but like comp in 12 hours
+                hardware.intakeLeft.setPower(1.0);
+                hardware.intakeRight.setPower(1.0);
                 runRightSkystone();
                 break;
             default:
