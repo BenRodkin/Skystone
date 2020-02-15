@@ -67,19 +67,19 @@ public class SlippyBotTeleOp extends OpMode {
         runtime = getRuntime();
 
         // Do the math
-        double drive  = -gamepad1.left_stick_y;
+        double drive = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
-        double twist  = -gamepad1.right_stick_x;
+        double twist = -gamepad1.right_stick_x;
 
 
         pulleyPower = (gamepad2.left_trigger - gamepad2.right_trigger);
 
         armPower = gamepad2.left_stick_y * ARM_SCALAR;
 
-        if(gamepad2.b) {
+        if (gamepad2.b) {
             hardware.intakeLeft.setPower(1.0);
             hardware.intakeRight.setPower(1.0);
-        } else if(gamepad2.y) {
+        } else if (gamepad2.y) {
             hardware.intakeLeft.setPower(-1.0);
             hardware.intakeRight.setPower(-1.0);
         } else {
@@ -99,8 +99,8 @@ public class SlippyBotTeleOp extends OpMode {
 //        else {
 ////            hardware.gripper.setPosition(hardware.gripper.getPosition());   // Always send a new setPosition() command each loop because linear actuators give up
 //        }
-        if(gamepad2.a && gp2.a.ready(runtime)) {
-            if(gripOpen) {
+        if (gamepad2.a && gp2.a.ready(runtime)) {
+            if (gripOpen) {
                 hardware.testGripper.setPosition(TEST_OPEN);
             } else {
                 hardware.testGripper.setPosition(TEST_CLOSED);
@@ -119,8 +119,8 @@ public class SlippyBotTeleOp extends OpMode {
 //            gp1.a.updateSnapshot(runtime);
 //        }
 
-        if(gamepad1.a && gp1.a.ready(runtime)) {
-            if(clamping) {
+        if (gamepad1.a && gp1.a.ready(runtime)) {
+            if (clamping) {
                 hardware.clampFoundation();
             } else {
                 hardware.releaseFoundation();
@@ -132,12 +132,12 @@ public class SlippyBotTeleOp extends OpMode {
 
 
         if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
-        if(gamepad2.right_bumper) hardware.wrist.setPosition(WRIST_STORING);
+        if (gamepad2.right_bumper) hardware.wrist.setPosition(WRIST_STORING);
 
         // Handle speed modifiers
-        if(gamepad1.left_bumper && gp1.lb.ready(runtime)) {
-            if(wheelSpeedMod == FAST) wheelSpeedMod = SLOW;
-            else if(wheelSpeedMod == SLOW) wheelSpeedMod = FAST;
+        if (gamepad1.left_bumper && gp1.lb.ready(runtime)) {
+            if (wheelSpeedMod == FAST) wheelSpeedMod = SLOW;
+            else if (wheelSpeedMod == SLOW) wheelSpeedMod = FAST;
 
             gp1.lb.updateSnapshot(runtime);
         }
@@ -146,17 +146,17 @@ public class SlippyBotTeleOp extends OpMode {
         // Set the power
         hardware.setMecanumPower(drive, strafe, twist, wheelSpeedMod);
 
-        if(gamepad2.left_bumper) resetPulleys = true;
+        if (gamepad2.left_bumper) resetPulleys = true;
 
         double pulleyPower = gamepad2.left_trigger - gamepad2.right_trigger;
 
-        if(resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
+        if (resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
             hardware.setPulleyTargets(0);
             hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
             hardware.setPulleyPower(1.0);
         }
 
-        if( !hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD ) { // Pulley is busy or receiving driver pulley controls
+        if (!hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD) { // Pulley is busy or receiving driver pulley controls
             resetPulleys = false;
 
             hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -166,8 +166,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.arm.           setPower(armPower);
 //        hardware.clamp.         setPosition(clampPos);
 
-        if(gamepad1.x && gp1.x.ready((runtime))) {
-            if(capstone){
+        if (gamepad1.x && gp1.x.ready((runtime))) {
+            if (capstone) {
                 hardware.capstone.setPosition(CAP_DEPLOYED);
             } else {
                 hardware.capstone.setPosition(CAP_STOWED);
