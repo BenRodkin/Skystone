@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.CAP_DEPLOYED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.CAP_STOWED;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.FAST;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
@@ -131,7 +132,10 @@ public class SlippyBotTeleOp extends OpMode {
         }
 
 
-        if(gamepad2.x) hardware.wrist.setPosition(WRIST_GRABBING);
+        if (gamepad2.x) {
+            hardware.wrist.setPosition(WRIST_GRABBING);
+            hardware.testGripper.setPosition(GRIPPER_OPEN);
+        }
         if (gamepad2.right_bumper) hardware.wrist.setPosition(WRIST_STORING);
 
         // Handle speed modifiers
