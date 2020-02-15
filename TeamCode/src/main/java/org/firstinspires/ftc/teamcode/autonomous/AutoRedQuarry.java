@@ -367,7 +367,7 @@ public class AutoRedQuarry extends LinearOpMode {
         // Drive to prepare to enter Quarry
         switch(placement) {
             case LEFT:
-                driveInches(DIST_LEFT_INCHES);
+                driveInches(DIST_LEFT_INCHES - 1.0);
                 runLeftSkystone();
                 break;
             case CENTER:
