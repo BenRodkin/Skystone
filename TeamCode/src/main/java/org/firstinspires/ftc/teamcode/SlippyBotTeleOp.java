@@ -167,7 +167,8 @@ public class SlippyBotTeleOp extends OpMode {
             hardware.setPulleyPower(pulleyPower);
         }
 
-        hardware.arm.           setPower(armPower);
+
+        hardware.arm.setPower(armPower);
 //        hardware.clamp.         setPosition(clampPos);
 
         if (gamepad1.x && gp1.x.ready((runtime))) {
