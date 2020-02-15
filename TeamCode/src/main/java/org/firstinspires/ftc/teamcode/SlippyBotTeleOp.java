@@ -51,6 +51,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.pulleyLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         hardware.pulleyRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        hardware.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         gp2.a.setCooldown(1.000);   // 1000 milliseconds
