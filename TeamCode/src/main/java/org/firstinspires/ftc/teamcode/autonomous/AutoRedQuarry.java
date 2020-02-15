@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.TIMEOUT;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HSV_MIN;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.HUE_MAX;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeline.IMG_HEIGHT;
@@ -404,146 +405,130 @@ public class AutoRedQuarry extends LinearOpMode {
 
     // Skystone-placement-driven routine methods
     public void runLeftSkystone() throws InterruptedException {
-        telemetry.addLine("Running Left");
-        telemetry.update();
-        sleep(2000);
-//        // Enter Quarry
-//        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
+        // Enter Quarry
+        strafeEncoderCountsTimeout((COUNTS_ENTER_QUARRY - 50), 0.4, 1.5);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);  // Add offset because COUNTS var is negative
+
+        // Drive to building zone
+        driveInches(DIST_TO_BUILDING + 7.0,0.4);
+
+        // Prepare to place stone
+        turnToHeadingPID(5);
+
+        // Drive to drop first stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Give time for stone to release
+        sleep(500);
+
+        // Drive back
+        driveInches(-DIST_DEPLOY_STONE,0.4);
+
+        // Turn towards Loading Zone
+        turnToHeadingPID(105);
+        turnToHeadingPID(92);
+
+        // Drive to loading zone
+        driveInches(-(DIST_TO_BUILDING - 8.0), 0.4);   // Subtract offset because var is -ve (increase magnitude)
+
+        // Enter Quarry
+        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY - 200, 0.4, 2.0);    // 2 second timeout
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 2.0);  // 2 second timeout
+
+        // Straighten out
+        turnToHeadingPID(90);
+
+        // Drive to loading zone
+        driveInches(DIST_TO_BUILDING - 6, 0.4);
 //
-//        // Start intake (positive power for in)
-//        hardware.intakeLeft.setPower(1.0);
-//        hardware.intakeRight.setPower(1.0);
-//
-//        // Raise arm
-////        hardware.arm.setTargetPosition(ARM_CLEAR_INTAKE);
-////        hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-////        hardware.arm.setPower(0.4);
-////        sleep(1000);
-//
-//        // Prepare gripper
-//        //hardware.wrist.setPosition(WRIST_GRABBING);
-//        hardware.testGripper.setPosition(GRIPPER_OPEN);
-//
-//
-//        // Drive forward to intake Stone
-//        driveInches(DIST_INTAKE_STONE, 0.2);
-//
-//        // Strafe out of quarry
-//        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);  // Add offset because COUNTS var is negative
-//
-////        // Put arm down
-////        hardware.arm.setTargetPosition(ARM_GRABBING);
-////        while (opModeIsActive() && hardware.arm.isBusy());
-//
-//        // Drive to building zone
-//        driveInches(DIST_TO_BUILDING,0.4);
-//
-//        // Prepare to place stone
+//        // Turn to face Building Zone
 //        turnToHeadingPID(0);
 //
-//        // Drive to drop first stone
-//        driveInches(DIST_DEPLOY_STONE,0.4);
-//
-//        // Spit out stone
-//        hardware.intakeLeft.setPower(-1.0);
-//        hardware.intakeRight.setPower(-1.0);
-//
-//        // Give time for stone to release
-//        sleep(500);
-//
-//        // Drive back
-//        driveInches(-DIST_DEPLOY_STONE,0.4);
-//
-//        // Strafe in front of second stone
-//        strafeEncoderCounts(COUNTS_SECOND_STONE,0.4);
-//
-//        // Prepare to pull in stone
-//        hardware.intakeLeft.setPower(1.0);
-//        hardware.intakeRight.setPower(1.0);
-//
-//        // Drive to grab second stone
-//        driveInches(DIST_SECOND_STONE,0.4);
-//
-//        // Wiggle to grab Stone
-//        turnToHeadingPID( (int)(hardware.heading() - 10.0) );
-//        turnToHeadingPID( (int)(hardware.heading() + 10.0) );
-//
-//        // Wait to grab stone
-//        sleep(500);
-//
-//        // Drive out of quarry
-//        driveInches(-DIST_SECOND_STONE,0.4);
-//
-//        // Turn to face building zone
-//        turnToHeadingPID(88);
-//
-//        // Drive into building zone
-//        driveInches(44,0.4);
-//
-//        // Spit out stone
-//        hardware.intakeLeft.setPower(-1.0);
-//        hardware.intakeRight.setPower(-1.0);
-//
-//        // Park under bridge
-//        driveInches(-16,0.4);
+//        // Park
+//        strafeEncoderCountsTimeout(300, 0.4, 3.0);
+
+
     }
     public void runCenterSkystone() throws InterruptedException {
-        telemetry.addLine("Running Center");
-        telemetry.update();
-        sleep(2000);
-//        // Enter Quarry
-//        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
-//
-//        // Start intake (positive power for in)
-//        hardware.intakeLeft.setPower(1.0);
-//        hardware.intakeRight.setPower(1.0);
-//
-//        // Drive forward to intake Stone
-//        driveInches(DIST_INTAKE_STONE, 0.2);
-//
-//        // Strafe out of quarry
-//        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
-//
-//        // Drive to building zone
-//        driveInches(DIST_TO_BUILDING + 16.0,0.4);   // Add 16 inches (var is -ve) to account for 2 Stone lengths
-//
-//        // Turn to place stone
-//        turnToHeadingPID(0);
-//
-//        // Drive to drop first stone
-//        driveInches(DIST_DEPLOY_STONE,0.4);
-//
-//        // Spit out stone
-//        hardware.intakeLeft.setPower(-1.0);
-//        hardware.intakeRight.setPower(-1.0);
-//
-//        // Give time for stone to release
-//        sleep(500);
-//
-//        // Drive back
-//        driveInches(-DIST_DEPLOY_STONE,0.4);
-//
-//        // Turn towards Loading Zone
-//        turnToHeadingPID(-85);
-//
-//        // Drive to Quarry
-//        driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
-//
-//        // Enter Quarry
-//        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY + 200, 0.4, 2.0);    // 2 second timeout
-//
-//        // Start intake (positive power for in)
-//        hardware.intakeLeft.setPower(1.0);
-//        hardware.intakeRight.setPower(1.0);
-//
-//        // Drive forward to intake Stone
-//        driveInches(DIST_INTAKE_STONE, 0.2);
-//
-//        // Strafe out of quarry
-//        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 2.0);  // 2 second timeout
-//
-//        // Drive to loading zone
-//        driveInches(DIST_TO_BUILDING, 0.4);
+        // Enter Quarry
+        strafeEncoderCounts(COUNTS_ENTER_QUARRY - 50, 0.4);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
+
+        // Drive to building zone
+        driveInches(DIST_TO_BUILDING + 16.0,0.4);   // Add 16 inches (var is -ve) to account for 2 Stone lengths
+
+        // Turn to place stone
+        turnToHeadingPID(5);
+
+        // Drive to drop first stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Give time for stone to release
+        sleep(500);
+
+        // Drive back
+        driveInches(-DIST_DEPLOY_STONE,0.4);
+
+        // Turn towards Loading Zone
+        turnToHeadingPID(105);
+        turnToHeadingPID(88);
+
+        // Drive to Quarry
+        driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
+
+        // Enter Quarry
+        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY - 250, 0.4, 2.0);    // 2 second timeout
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY + 100,0.4, 2.0);  // 2 second timeout
+
+        turnToHeadingPID(90);
+
+        // Drive to loading zone
+        driveInches(DIST_TO_BUILDING - 3.0, 0.4);   // Subtract to increase bc -ve
 //
 //        // Turn to face Building Zone
 //        turnToHeadingPID(0);
@@ -554,62 +539,82 @@ public class AutoRedQuarry extends LinearOpMode {
 
     }
     public void runRightSkystone() throws InterruptedException {
-        telemetry.addLine("Running Right");
-        telemetry.update();
-        sleep(2000);
-//        // Enter Quarry
-//        strafeEncoderCounts(COUNTS_ENTER_QUARRY, 0.4);
-//
-//        // Start intake (positive power for in)
-//        hardware.intakeLeft.setPower(1.0);
-//        hardware.intakeRight.setPower(1.0);
-//
-//        // Drive forward to intake Stone
-//        driveInches(DIST_INTAKE_STONE, 0.2);
-//
-//        // Strafe out of quarry
-//        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
-//
-//        // Drive to building zone
-//        driveInches(DIST_TO_BUILDING + 8.0,0.4);   // Add 8 inches (var is -ve) to account for 1 Stone length
-//
-//        // Turn to place stone
-//        turnToHeadingPID(0);
-//
-//        // Drive to drop first stone
-//        driveInches(DIST_DEPLOY_STONE,0.4);
-//
-//        // Spit out stone
-//        hardware.intakeLeft.setPower(-1.0);
-//        hardware.intakeRight.setPower(-1.0);
-//
-//        // Give time for stone to release
-//        sleep(500);
-//
-//        // Drive back
-//        driveInches(-DIST_DEPLOY_STONE,0.4);
-//
-//        // Turn towards Loading Zone
-//        turnToHeadingPID(-85);
-//
-//        // Drive to Loading Zone
-//        driveInches(-(DIST_TO_BUILDING - 8.0), 0.4);   // Subtract offset to increase magnitude (bc var is -ve)
-//
-//        // Enter Quarry
-//        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY + 200, 0.4, 2.0);    // 2 second timeout
-//
-//        // Start intake (positive power for in)
-//        hardware.intakeLeft.setPower(1.0);
-//        hardware.intakeRight.setPower(1.0);
-//
-//        // Drive forward to intake Stone
-//        driveInches(DIST_INTAKE_STONE, 0.2);
-//
-//        // Strafe out of quarry
-//        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 2.0);  // 2 second timeout
-//
-//        // Drive to Loading Zone
-//        driveInches((DIST_TO_BUILDING - 8.0), 0.6);   // Subtract offset to increase magnitude (bc var is -ve)
+        // Enter Quarry
+        strafeEncoderCounts(COUNTS_ENTER_QUARRY - 50, 0.4);
+
+        // Start intake (positive power for in)
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive forward to intake Stone
+        driveInches(DIST_INTAKE_STONE, 0.2);
+
+        // Strafe out of quarry
+        strafeEncoderCounts(-COUNTS_ENTER_QUARRY,0.4);
+
+        // Drive to building zone
+        driveInches(DIST_TO_BUILDING + 1.0,0.4);   // Add 8 inches (var is -ve) to account for 1 Stone length
+
+        // Turn to place stone
+        turnToHeadingPID(5);
+
+        // Drive to drop first stone
+        driveInches(DIST_DEPLOY_STONE,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Give time for stone to release
+        sleep(500);
+
+        // Pull wrist back inside
+        hardware.wrist.setPosition(0.5);
+
+        // Drive back
+        driveInches(-(DIST_DEPLOY_STONE + 1.0),0.4);
+
+
+        // Strafe in front of second stone
+        strafeEncoderCounts(COUNTS_SECOND_STONE,0.4);
+
+        // Wrist back out
+        hardware.wrist.setPosition(WRIST_STORING);
+
+
+        // Prepare to pull in stone
+        hardware.intakeLeft.setPower(1.0);
+        hardware.intakeRight.setPower(1.0);
+
+        // Drive to grab second stone
+        driveInches(DIST_SECOND_STONE,0.4);
+
+        // Wiggle to grab Stone
+        turnToHeadingPID( (int)(hardware.heading() + 10.0) );
+        turnToHeadingPID( (int)(hardware.heading() - 10.0) );
+
+        driveInches(4.0);
+
+        // Wait to grab stone
+        sleep(500);
+
+        // Drive out of quarry
+        driveInches(-DIST_SECOND_STONE - 4.0,0.4);
+
+        // Turn to face building zone
+        turnToHeadingPID(-85);
+
+        // Drive into building zone
+        driveInches(44,0.4);
+
+        // Spit out stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Park under bridge
+        driveInches(-16,0.4);
+
+
     }
 
 
