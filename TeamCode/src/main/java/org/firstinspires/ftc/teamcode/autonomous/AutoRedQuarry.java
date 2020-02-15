@@ -55,7 +55,7 @@ public class AutoRedQuarry extends LinearOpMode {
     // Drive distances
     private final double DIST_TO_QUARRY     = 24.0;
     private final double DIST_LEFT_INCHES   = -11.0;
-    private final double DIST_CENTER_INCHES = DIST_LEFT_INCHES - 8.0;   // Subtract to increase dist bc -ve
+    private final double DIST_CENTER_INCHES = DIST_LEFT_INCHES - 9.0;   // Subtract to increase dist bc -ve
     private final double DIST_RIGHT_INCHES  = DIST_LEFT_INCHES + 6.0;   // Add to decrease dist bc -ve
     private final double DIST_INTAKE_STONE  = 8.0;
     private final double DIST_SECOND_STONE  = 15.0;
@@ -63,8 +63,8 @@ public class AutoRedQuarry extends LinearOpMode {
     private final double DIST_DEPLOY_STONE  = 10.0;
 
     // Strafe distances
-    private final int COUNTS_ENTER_QUARRY  = -900;
-    private final int COUNTS_SECOND_STONE = 2200;
+    private final int COUNTS_ENTER_QUARRY  = 900;
+    private final int COUNTS_SECOND_STONE = -2200;
 
 
     // Arm targets
