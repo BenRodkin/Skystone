@@ -13,6 +13,7 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
+import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.resetPulleys;
@@ -23,6 +24,13 @@ public class SlippyBotTeleOp extends OpMode {
 
     private final double TEST_OPEN = 0.8;
     private final double TEST_CLOSED = 0.43;
+    private final int PULLEY_UP_COUNTS = -1500;
+    private final double PULLEY_POWER = 1.0;
+    private final int ARM_UP_COUNTS = -1200;
+    private final double ARM_POWER = 0.3;
+    private final int PULLEY_DOWN_COUNTS = 0;
+    private final int WRIST_WAIT_MILLIS     = 500;
+    private final int ARM_DOWN_COUNTS = 0;
 
 
     SlippyBotHardware hardware = new SlippyBotHardware();
@@ -33,12 +41,15 @@ public class SlippyBotTeleOp extends OpMode {
     double armPower = 0.0;
 //    double clampPos = 0.0;
 
+    int capStage = 0;
+
     GamepadCooldowns gp2 = new GamepadCooldowns();
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
     boolean gripOpen = true;
     boolean clamping = true;
     boolean capstone = true;
+    boolean capping  = false;
 
     public static final double ARM_SCALAR = 0.6;
 
@@ -53,6 +64,9 @@ public class SlippyBotTeleOp extends OpMode {
 
         hardware.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        hardware.testGripper.setPosition(GRIPPER_OPEN);
+        hardware.capstone.setPosition(CAP_STOWED);
 
 
         gp2.a.setCooldown(0.500);   // 0500 milliseconds
@@ -153,41 +167,67 @@ public class SlippyBotTeleOp extends OpMode {
         // Set the power
         hardware.setMecanumPower(drive, strafe, twist, wheelSpeedMod);
 
-        if (gamepad2.left_bumper) resetPulleys = true;
+        if(gamepad2.dpad_left && gp2.dpLeft.ready(runtime))
+            capping = true;
 
-        double pulleyPower = gamepad2.left_trigger - gamepad2.right_trigger;
+        if(capping) {
 
-        if (resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
-            hardware.setPulleyTargets(0);
-            hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
-            hardware.setPulleyPower(1.0);
-        }
+            telemetry.addLine("Capping mode");
+            telemetry.addData("Capping stage", capStage-1);
 
-        if (!hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD) { // Pulley is busy or receiving driver pulley controls
-            resetPulleys = false;
+            if(gamepad2.dpad_left && gp2.dpLeft.ready(runtime)) {
+                capStage = AutoCap(capStage);
+                capStage++;
 
-            hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hardware.setPulleyPower(pulleyPower);
-        }
-
-
-        if(gamepad2.dpad_down) hardware.capstone.setPosition(CAP_DEPLOYED);
-        if(gamepad2.dpad_up) hardware.capstone.setPosition(CAP_STOWED);
-
-
-        hardware.arm.setPower(armPower);
-//        hardware.clamp.         setPosition(clampPos);
-
-        if (gamepad1.x && gp1.x.ready((runtime))) {
-            if (capstone) {
-                hardware.capstone.setPosition(CAP_DEPLOYED);
-            } else {
-                hardware.capstone.setPosition(CAP_STOWED);
+                gp2.dpLeft.updateSnapshot(runtime);
             }
-            capstone = !capstone;
-            gp1.x.updateSnapshot(runtime);
-        }
 
+           if(gamepad2.dpad_right){
+               capping = false;
+
+               hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+               hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+           }
+        } else {
+
+
+            if (gamepad2.left_bumper) resetPulleys = true;
+
+            double pulleyPower = gamepad2.left_trigger - gamepad2.right_trigger;
+
+            if (resetPulleys && Math.abs(pulleyPower) < POWER_THRESHOLD) {   // Resetting and receiving no driver pulley controls
+                hardware.setPulleyTargets(0);
+                hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
+                hardware.setPulleyPower(1.0);
+            }
+
+            if (!hardware.getPulleyIsBusy() || Math.abs(pulleyPower) > POWER_THRESHOLD) { // Pulley is busy or receiving driver pulley controls
+                resetPulleys = false;
+
+                hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                hardware.setPulleyPower(pulleyPower);
+            }
+
+            // Set up initial state
+        /*
+            Lift up
+            Arm up
+            Capstone down
+            Lift down
+            Wrist
+            Gripper open
+            Arm down
+            Capstone up
+            Profit
+         */
+
+            if (gamepad2.dpad_down) hardware.capstone.setPosition(CAP_DEPLOYED);
+            if (gamepad2.dpad_up) hardware.capstone.setPosition(CAP_STOWED);
+
+
+            hardware.arm.setPower(armPower);
+//        hardware.clamp.         setPosition(clampPos);
+        }
         telemetry.addLine("Running");
         telemetry.addLine();
         telemetry.addData("Wheel driver speed mod", wheelSpeedMod);
@@ -206,4 +246,53 @@ public class SlippyBotTeleOp extends OpMode {
         telemetry.addData("Capstone position", hardware.capstone.getPosition());
         telemetry.update();
     }
+
+    private int AutoCap(int stage){
+        switch (stage){
+            case 0 :
+                hardware.stopAllMotors();
+                hardware.intakeLeft.setPower(0.0);
+                hardware.intakeRight.setPower(0.0);
+
+                hardware.setPulleyTargets(PULLEY_UP_COUNTS);
+                hardware.setPulleyMode(DcMotor.RunMode.RUN_TO_POSITION);
+                hardware.setPulleyPower(PULLEY_POWER);
+
+                hardware.arm.setTargetPosition(ARM_UP_COUNTS);
+                hardware.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                hardware.arm.setPower(ARM_POWER);
+
+                break;
+            case 1 :
+                hardware.capstone.setPosition(CAP_DEPLOYED);
+
+                hardware.setPulleyTargets(PULLEY_DOWN_COUNTS);
+                hardware.setPulleyPower(PULLEY_POWER);
+
+                break;
+            case 2 :
+                hardware.wrist.setPosition(WRIST_GRABBING);
+                hardware.testGripper.setPosition(GRIPPER_OPEN);
+
+                hardware.arm.setTargetPosition(ARM_DOWN_COUNTS);
+                hardware.arm.setPower(ARM_POWER);
+
+                break;
+            case 3 :
+                hardware.capstone.setPosition(CAP_STOWED);
+
+                hardware.arm.setPower(0);
+                hardware.setPulleyPower(0);
+                hardware.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                hardware.setPulleyMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+                break;
+            default:
+                return -1;
+
+        }
+        return stage;
+}
+
 }
