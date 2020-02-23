@@ -69,8 +69,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.capstone.setPosition(CAP_STOWED);
 
 
-        gp2.a.setCooldown(0.500);   // 0500 milliseconds
-        gp1.a.setCooldown(1.000);   // 1000 milliseconds
+        gp2.a.setCooldown(0.250);   // 0250 milliseconds
+        gp1.a.setCooldown(0.250);   // 0250 milliseconds
         gp1.lb.setCooldown(1.000);  // 1000 milliseconds
         gp1.x.setCooldown(0.752);   // 0752 milliseconds
         gp2.dpLeft.setCooldown(0.250); // 0250 milliseconds
