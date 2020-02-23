@@ -13,7 +13,6 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.GRIPPER_OPEN;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.SLOW;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
-import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.resetPulleys;
@@ -29,7 +28,6 @@ public class SlippyBotTeleOp extends OpMode {
     private final int ARM_UP_COUNTS = -1200;
     private final double ARM_POWER = 0.3;
     private final int PULLEY_DOWN_COUNTS = 0;
-    private final int WRIST_WAIT_MILLIS     = 500;
     private final int ARM_DOWN_COUNTS = 0;
 
 
@@ -46,7 +44,7 @@ public class SlippyBotTeleOp extends OpMode {
     GamepadCooldowns gp2 = new GamepadCooldowns();
     GamepadCooldowns gp1 = new GamepadCooldowns();
     double runtime = 0.0;
-    boolean gripOpen = true;
+    boolean openGripper = false;
     boolean clamping = true;
     boolean capstone = true;
     boolean capping  = false;
@@ -106,12 +104,12 @@ public class SlippyBotTeleOp extends OpMode {
         }
 
         if (gamepad2.a && gp2.a.ready(runtime)) {
-            if (gripOpen) {
+            if (openGripper) {
                 hardware.testGripper.setPosition(TEST_OPEN);
             } else {
                 hardware.testGripper.setPosition(TEST_CLOSED);
             }
-            gripOpen = !gripOpen;
+            openGripper = !openGripper;
 
             gp2.a.updateSnapshot(runtime);
         }
