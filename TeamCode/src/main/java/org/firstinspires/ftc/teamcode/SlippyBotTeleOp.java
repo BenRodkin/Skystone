@@ -24,7 +24,7 @@ public class SlippyBotTeleOp extends OpMode {
 
     private final double TEST_OPEN = 0.8;
     private final double TEST_CLOSED = 0.43;
-    private final int PULLEY_UP_COUNTS = -1500;
+    private final int PULLEY_UP_COUNTS = -600;
     private final double PULLEY_POWER = 1.0;
     private final int ARM_UP_COUNTS = -1200;
     private final double ARM_POWER = 0.3;
