@@ -209,6 +209,12 @@ public class SlippyBotTeleOp extends OpMode {
             hardware.arm.setPower(armPower);
 //        hardware.clamp.         setPosition(clampPos);
         }
+
+
+        // Tape drive controls
+        hardware.tapeMeasure.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+
+
         telemetry.addLine("Running");
         telemetry.addLine();
         telemetry.addData("Wheel driver speed mod", wheelSpeedMod);
