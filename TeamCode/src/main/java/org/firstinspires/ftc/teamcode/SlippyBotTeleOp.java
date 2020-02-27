@@ -95,7 +95,7 @@ public class SlippyBotTeleOp extends OpMode {
         if (gamepad2.b) {
             hardware.intakeLeft.setPower(1.0);
             hardware.intakeRight.setPower(1.0);
-        } else if (gamepad2.y) {
+        } else if (gamepad2.y || gamepad1.b) {
             hardware.intakeLeft.setPower(-1.0);
             hardware.intakeRight.setPower(-1.0);
         } else {
