@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
-@Disabled
+
 @TeleOp(name = "Test: New Servo", group = "Testing")
 public class TestServo extends OpMode {
 
