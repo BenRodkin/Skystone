@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.testing;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_GRABBING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
+@Disabled
 @TeleOp(name = "Test: Arm Wrist Sync", group = "Testing")
 public class TestTeleOpArmWristSync extends OpMode {
 

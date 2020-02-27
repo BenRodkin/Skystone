@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.testing;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -14,6 +15,7 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_PLACING;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_STORING;
 
+@Disabled
 @TeleOp(name = "Test: Sideways Gripper", group = "Testing")
 public class TestSidewaysGripper extends LinearOpMode {
 

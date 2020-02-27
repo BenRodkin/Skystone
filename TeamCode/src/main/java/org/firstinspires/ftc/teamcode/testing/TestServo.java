@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.testing;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
-
+@Disabled
 @TeleOp(name = "Test: Trackstar Servo", group = "Testing")
 public class TestServo extends OpMode {
 

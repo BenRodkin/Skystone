@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.testing;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,6 +12,7 @@ import static org.firstinspires.ftc.teamcode.SlippyBotHardware.POWER_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.resetPulleys;
 
+@Disabled
 @TeleOp(name = "Test: TeleOp Enhancements", group = "Testing")
 public class TestTeleOpEnhancements extends OpMode {
 

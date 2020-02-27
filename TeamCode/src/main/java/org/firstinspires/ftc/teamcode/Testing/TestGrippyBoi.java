@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.testing;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -7,6 +8,7 @@ import org.firstinspires.ftc.teamcode.SlippyBotHardware;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
+@Disabled
 @TeleOp(name = "Test: Grippy Boi", group = "Testing")
 public class TestGrippyBoi extends OpMode {
 

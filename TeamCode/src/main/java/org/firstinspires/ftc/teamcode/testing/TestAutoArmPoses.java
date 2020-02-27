@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.SlippyBotHardware;
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.teamcode.miscellaneous.GamepadCooldowns;
 
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
+@Disabled
 @Autonomous(name = "Test: Auto Arm Poses", group = "Testing")
 public class TestAutoArmPoses extends LinearOpMode {
 
