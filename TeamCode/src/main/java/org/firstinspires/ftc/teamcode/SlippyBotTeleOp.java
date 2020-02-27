@@ -200,8 +200,8 @@ public class SlippyBotTeleOp extends OpMode {
             Profit
          */
 
-            if (gamepad2.dpad_up) hardware.capstone.setPosition(CAP_DEPLOYED);
-            if (gamepad2.dpad_down) hardware.capstone.setPosition(CAP_STOWED);
+            if (gamepad2.dpad_down) hardware.capstone.setPosition(CAP_DEPLOYED);
+            if (gamepad2.dpad_up) hardware.capstone.setPosition(CAP_STOWED);
 
 
             hardware.arm.setPower(armPower);
