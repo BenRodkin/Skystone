@@ -278,6 +278,9 @@ public class AutoBlueQuarry extends LinearOpMode {
             Point rectCenter = new Point();
 
 
+            // Keep track of error while iterating through contours
+            boolean contourIterateError = false;
+
             try {
                 for (MatOfPoint c : contours) {
                     Rect boundingRect = Imgproc.boundingRect(c);
@@ -301,6 +304,7 @@ public class AutoBlueQuarry extends LinearOpMode {
                 }
             } catch (Exception e) {
                 telemetry.addLine("Error while iterating through contours!");
+                contourIterateError = true;
             }
 
             // Get the largest tally
@@ -322,17 +326,24 @@ public class AutoBlueQuarry extends LinearOpMode {
             double confidence = 1.0 - smallestProportionedTally;
 
 
+            // Compare area tallies before determining badData to take advantage of SkystonePlacement.UNKNOWN
+            SkystonePlacement currentPlacement =
+                    compareAreaTallies(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
+
+
             // Compare contour area tallies to see which third of the bounding rectangle
             // has the least (which will be the third with the Skystone in it).
             // If data is below our confidence threshold, keep the last reading instead
             // of getting a new one from bad data.
-            boolean badData = confidence < SKYSTONE_CONFIDENCE_THRESHOLD || Double.isNaN(confidence);    // true if confidence is too low or if we get NaN as confidence
+            boolean badData =
+                    confidence < SKYSTONE_CONFIDENCE_THRESHOLD ||
+                            Double.isNaN(confidence) ||
+                            contourIterateError;    // true if confidence is too low or if we get NaN as confidence or if contour iteration fails
             if (badData) {
                 // Do nothing; last reading will be kept
             } else {
                 // Good data! Update our decision.
-                placement =
-                        compareAreaTallies(contoursProportionLeft, contoursProportionCenter, contoursProportionRight);
+                placement = currentPlacement;
             }
 
             telemetry.addLine("Running");
@@ -627,7 +638,6 @@ public class AutoBlueQuarry extends LinearOpMode {
         if(tallyRight < tallyLeft &&
                 tallyRight < tallyCenter)   return RIGHT;   // Skystone is in the right position
 
-        return CENTER;                                      // Default case
     }
 
     // Encoder-controlled movement
