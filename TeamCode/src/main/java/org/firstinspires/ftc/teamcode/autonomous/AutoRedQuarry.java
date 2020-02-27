@@ -33,6 +33,7 @@ import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePatternPipeli
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.CENTER;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.LEFT;
 import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.RIGHT;
+import static org.firstinspires.ftc.teamcode.miscellaneous.SkystonePlacement.UNKNOWN;
 
 @Autonomous(name = "Red Quarry",group = "Autonomous")
 public class AutoRedQuarry extends LinearOpMode {
@@ -651,7 +652,7 @@ public class AutoRedQuarry extends LinearOpMode {
         if(tallyRight < tallyLeft &&
                 tallyRight < tallyCenter)   return RIGHT;   // Skystone is in the right position
 
-        return CENTER;                                      // Default case
+        return UNKNOWN;                                     // Default case
     }
 
     // Encoder-controlled movement
