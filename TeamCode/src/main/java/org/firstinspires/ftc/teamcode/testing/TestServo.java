@@ -13,6 +13,10 @@ public class TestServo extends OpMode {
 
     Servo testServo;
 
+    double pos1 = 1.00; // Wrist grabbing
+    double pos2 = 0.20; // Wrist placing
+    double pos3 = 0.37; // Wrist stowed
+
     public void init() {
         testServo = hardwareMap.servo.get("wrist");
 
@@ -23,6 +27,11 @@ public class TestServo extends OpMode {
     public void loop() {
 
         testServo.setPosition(testServo.getPosition() + (gamepad2.right_stick_y * WRIST_SCALAR));
+
+        if(gamepad2.a) testServo.setPosition(pos1);
+        if(gamepad2.b) testServo.setPosition(pos2);
+        if(gamepad2.x) testServo.setPosition(pos3);
+
 
 
         telemetry.addLine("Running");
