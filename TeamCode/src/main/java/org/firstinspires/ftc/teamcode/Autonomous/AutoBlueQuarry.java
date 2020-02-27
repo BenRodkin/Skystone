@@ -339,7 +339,8 @@ public class AutoBlueQuarry extends LinearOpMode {
             boolean badData =
                     confidence < SKYSTONE_CONFIDENCE_THRESHOLD ||
                             Double.isNaN(confidence) ||
-                            contourIterateError;    // true if confidence is too low or if we get NaN as confidence or if contour iteration fails
+                            contourIterateError ||
+                            currentPlacement == UNKNOWN;    // true if confidence is too low or if we get NaN as confidence or if contour iteration fails
             if (badData) {
                 // Do nothing; last reading will be kept
             } else {

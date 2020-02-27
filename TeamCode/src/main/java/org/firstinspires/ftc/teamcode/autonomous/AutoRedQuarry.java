@@ -337,7 +337,8 @@ public class AutoRedQuarry extends LinearOpMode {
             boolean badData =
                     confidence < SKYSTONE_CONFIDENCE_THRESHOLD ||
                             Double.isNaN(confidence) ||
-                            contourIterateError;
+                            contourIterateError ||
+                            currentPlacement == UNKNOWN;
             // true if confidence is too low or if we get NaN as confidence or if contour iteration fails or if compareAreaTallies() defaults
 
             if (badData) {
