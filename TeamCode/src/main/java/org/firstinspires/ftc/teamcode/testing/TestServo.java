@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import static org.firstinspires.ftc.teamcode.SlippyBotHardware.WRIST_SCALAR;
 
 @Disabled
-@TeleOp(name = "Test: Trackstar Servo", group = "Testing")
+@TeleOp(name = "Test: New Servo", group = "Testing")
 public class TestServo extends OpMode {
 
     Servo testServo;
 
     public void init() {
-        testServo = hardwareMap.servo.get("found_right");
+        testServo = hardwareMap.servo.get("wrist");
 
         telemetry.addLine("Ready");
         telemetry.update();
