@@ -80,10 +80,10 @@ public class SlippyBotHardware {
     public static final double WRIST_SCALAR = 0.01;
 
     // Wrist positions
-    public static final double WRIST_PLACING  = 0.00;
+    public static final double WRIST_PLACING  = 0.20;
     public static final double WRIST_GRABBING = 1.00;
     public static final double WRIST_STARTING = 0.30;
-    public static final double WRIST_STORING  = 0.30;
+    public static final double WRIST_STORING  = 0.37;
 
     // Capstone positions
     public static final double CAP_STOWED   = 1.0;
