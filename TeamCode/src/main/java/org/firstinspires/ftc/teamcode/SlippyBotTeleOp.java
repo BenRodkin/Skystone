@@ -66,6 +66,8 @@ public class SlippyBotTeleOp extends OpMode {
         hardware.testGripper.setPosition(GRIPPER_OPEN);
         hardware.capstone.setPosition(CAP_STOWED);
 
+        hardware.releaseFoundation();   // Set foundation grippers to open
+
 
         gp2.a.setCooldown(0.250);   // 0250 milliseconds
         gp1.a.setCooldown(0.250);   // 0250 milliseconds
