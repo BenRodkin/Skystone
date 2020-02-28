@@ -598,8 +598,8 @@ public class AutoRedQuarry extends LinearOpMode {
         // Turn to place stone
         turnToHeadingPID(5);
 
-        // Drive to drop first stone
-        driveInches(DIST_DEPLOY_STONE,0.4);
+//        // Drive to drop first stone
+//        driveInches(DIST_DEPLOY_STONE,0.4);
 
         // Spit out stone
         hardware.intakeLeft.setPower(-1.0);
@@ -611,8 +611,8 @@ public class AutoRedQuarry extends LinearOpMode {
         // Pull wrist back inside
         hardware.wrist.setPosition(0.5);
 
-        // Drive back
-        driveInches(-(DIST_DEPLOY_STONE + 1.0),0.4);
+//        // Drive back
+//        driveInches(-(DIST_DEPLOY_STONE + 1.0),0.4);
 
 
         // Strafe in front of second stone
@@ -651,8 +651,13 @@ public class AutoRedQuarry extends LinearOpMode {
         hardware.intakeLeft.setPower(-1.0);
         hardware.intakeRight.setPower(-1.0);
 
-        // Park under bridge
-        driveInches(-16,0.4);
+        // Park
+        hardware.tapeMeasure.setPower(1.0);
+        sleep(1000);
+        hardware.tapeMeasure.setPower(0.0);
+
+//        // Park under bridge
+//        driveInches(-16,0.4);
 
 
     }
