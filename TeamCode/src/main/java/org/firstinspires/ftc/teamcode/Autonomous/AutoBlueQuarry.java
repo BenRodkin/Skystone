@@ -453,8 +453,8 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Prepare to place stone
         turnToHeadingPID(0);
 
-        // Drive to drop first stone
-        driveInches(DIST_DEPLOY_STONE,0.4);
+//        // Drive to drop first stone
+//        driveInches(DIST_DEPLOY_STONE,0.4);
 
         // Spit out stone
         hardware.intakeLeft.setPower(-1.0);
@@ -463,8 +463,8 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Give time for stone to release
         sleep(500);
 
-        // Drive back
-        driveInches(-DIST_DEPLOY_STONE,0.4);
+//        // Drive back
+//        driveInches(-DIST_DEPLOY_STONE,0.4);
 
         // Strafe in front of second stone
         strafeEncoderCounts(COUNTS_SECOND_STONE,0.4);
@@ -487,17 +487,24 @@ public class AutoBlueQuarry extends LinearOpMode {
         driveInches(-DIST_SECOND_STONE,0.4);
 
         // Turn to face building zone
-        turnToHeadingPID(88);
+        turnToHeadingPID(89);
+
+        // Spit out Stone while driving
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
 
         // Drive into building zone
         driveInches(44,0.4);
 
-        // Spit out stone
-        hardware.intakeLeft.setPower(-1.0);
-        hardware.intakeRight.setPower(-1.0);
+//        // Spit out stone
+//        hardware.intakeLeft.setPower(-1.0);
+//        hardware.intakeRight.setPower(-1.0);
 
         // Park under bridge
-        driveInches(-16,0.4);
+//        driveInches(-16,0.4);
+        hardware.tapeMeasure.setPower(1.0); // Positive is out
+        sleep(1000);
+        hardware.tapeMeasure.setPower(0.0);
     }
     public void runCenterSkystone() throws InterruptedException {
         // Enter Quarry
