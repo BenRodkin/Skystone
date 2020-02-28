@@ -518,8 +518,8 @@ public class AutoRedQuarry extends LinearOpMode {
         // Turn to place stone
         turnToHeadingPID(5);
 
-        // Drive to drop first stone
-        driveInches(DIST_DEPLOY_STONE,0.4);
+//        // Drive to drop first stone
+//        driveInches(DIST_DEPLOY_STONE,0.4);
 
         // Spit out stone
         hardware.intakeLeft.setPower(-1.0);
@@ -528,18 +528,18 @@ public class AutoRedQuarry extends LinearOpMode {
         // Give time for stone to release
         sleep(500);
 
-        // Drive back
-        driveInches(-DIST_DEPLOY_STONE,0.4);
+//        // Drive back
+//        driveInches(-DIST_DEPLOY_STONE,0.4);
 
         // Turn towards Loading Zone
         turnToHeadingPID(105);
-        turnToHeadingPID(88);
+        turnToHeadingPID(92);
 
         // Drive to Quarry
-        driveInches(-(DIST_TO_BUILDING), 0.4);   // Subtract offset because var is -ve (increase magnitude)
+        driveInches(-(DIST_TO_BUILDING), 0.6);   // Subtract offset because var is -ve (increase magnitude)
 
         // Enter Quarry
-        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY - 250, 0.4, 2.0);    // 2 second timeout
+        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY - 250, 0.4, 1.5);    // 2 second timeout
 
         // Start intake (positive power for in)
         hardware.intakeLeft.setPower(1.0);
@@ -549,12 +549,26 @@ public class AutoRedQuarry extends LinearOpMode {
         driveInches(DIST_INTAKE_STONE, 0.2);
 
         // Strafe out of quarry
-        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY + 100,0.4, 2.0);  // 2 second timeout
+        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY + 100,0.4, 1.5);  // 2 second timeout
 
-        turnToHeadingPID(90);
+        // Straighten out
+        turnToHeadingPID(93);
 
         // Drive to loading zone
-        driveInches(DIST_TO_BUILDING - 3.0, 0.4);   // Subtract to increase bc -ve
+        driveInches(DIST_TO_BUILDING - 3.0, 0.6);   // Subtract to increase bc -ve
+
+        // Spit out Stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Spin to park
+        zoomTurnToHeadingPID(-89, 4.0, 0.8); // 4.0 second timeout, 0.8 speed
+
+        // Park
+        hardware.tapeMeasure.setPower(1.0);
+        sleep(1000);
+        hardware.tapeMeasure.setPower(0.0);
+
 //
 //        // Turn to face Building Zone
 //        turnToHeadingPID(0);
