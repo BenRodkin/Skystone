@@ -599,8 +599,8 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Turn to place stone
         turnToHeadingPID(0);
 
-        // Drive to drop first stone
-        driveInches(DIST_DEPLOY_STONE,0.4);
+//        // Drive to drop first stone
+//        driveInches(DIST_DEPLOY_STONE,0.4);
 
         // Spit out stone
         hardware.intakeLeft.setPower(-1.0);
@@ -609,8 +609,8 @@ public class AutoBlueQuarry extends LinearOpMode {
         // Give time for stone to release
         sleep(500);
 
-        // Drive back
-        driveInches(-DIST_DEPLOY_STONE,0.4);
+//        // Drive back
+//        driveInches(-DIST_DEPLOY_STONE,0.4);
 
         // Turn towards Loading Zone
         turnToHeadingPID(-85);
@@ -633,6 +633,19 @@ public class AutoBlueQuarry extends LinearOpMode {
 
         // Drive to Loading Zone
         driveInches((DIST_TO_BUILDING - 8.0), 0.6);   // Subtract offset to increase magnitude (bc var is -ve)
+
+
+        // Turn to face away from bridge
+        zoomTurnToHeadingPID(89, 4.0, 0.8); // 4 second timeout and 0.8 speed
+
+        // Spit out Stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Park
+        hardware.tapeMeasure.setPower(1.0); // Positive is out
+        sleep(1000);
+        hardware.tapeMeasure.setPower(0.0);
     }
 
 
