@@ -756,6 +756,9 @@ public class AutoBlueQuarry extends LinearOpMode {
 
     // Gyro-controlled turning
     public void turnToHeadingPID(int target) throws InterruptedException {
+        turnToHeadingPID(target, TIMEOUT);
+    }
+    public void turnToHeadingPID(int target, double timeoutSeconds) throws InterruptedException {
 
         telemetry.addData("Turning to target", target);
         telemetry.addLine("Press dpad_down to stop.");
@@ -765,8 +768,9 @@ public class AutoBlueQuarry extends LinearOpMode {
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
         double turnStart = getRuntime();
+        double timeout = timeoutSeconds;
         while (opModeIsActive() &&
-                (getRuntime() - turnStart) < TIMEOUT) {
+                (getRuntime() - turnStart) < timeout) {
             double error = hardware.normalize180(-(target - hardware.heading()));
             double power = hardware.pid.calculateGivenError(error);
 
