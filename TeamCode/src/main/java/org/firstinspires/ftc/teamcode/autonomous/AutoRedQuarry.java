@@ -439,8 +439,8 @@ public class AutoRedQuarry extends LinearOpMode {
         // Prepare to place stone
         turnToHeadingPID(5);
 
-        // Drive to drop first stone
-        driveInches(DIST_DEPLOY_STONE,0.4);
+//        // Drive to drop first stone
+//        driveInches(DIST_DEPLOY_STONE,0.4);
 
         // Spit out stone
         hardware.intakeLeft.setPower(-1.0);
@@ -449,18 +449,18 @@ public class AutoRedQuarry extends LinearOpMode {
         // Give time for stone to release
         sleep(500);
 
-        // Drive back
-        driveInches(-DIST_DEPLOY_STONE,0.4);
+//        // Drive back
+//        driveInches(-DIST_DEPLOY_STONE,0.4);
 
         // Turn towards Loading Zone
         turnToHeadingPID(105);
         turnToHeadingPID(92);
 
         // Drive to loading zone
-        driveInches(-(DIST_TO_BUILDING - 8.0), 0.4);   // Subtract offset because var is -ve (increase magnitude)
+        driveInches(-(DIST_TO_BUILDING - 10.0), 0.6);   // Subtract offset because var is -ve (increase magnitude)
 
         // Enter Quarry
-        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY - 200, 0.4, 2.0);    // 2 second timeout
+        strafeEncoderCountsTimeout(COUNTS_ENTER_QUARRY - 200, 0.4, 1.5);    // 1.5 second timeout
 
         // Start intake (positive power for in)
         hardware.intakeLeft.setPower(1.0);
@@ -470,13 +470,25 @@ public class AutoRedQuarry extends LinearOpMode {
         driveInches(DIST_INTAKE_STONE, 0.2);
 
         // Strafe out of quarry
-        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 2.0);  // 2 second timeout
+        strafeEncoderCountsTimeout(-COUNTS_ENTER_QUARRY,0.4, 1.5);  // 1.5 second timeout
 
         // Straighten out
-        turnToHeadingPID(90);
+        turnToHeadingPID(93);
 
         // Drive to loading zone
-        driveInches(DIST_TO_BUILDING - 6, 0.4);
+        driveInches(DIST_TO_BUILDING - 6, 0.6);
+
+        // Spit out Stone
+        hardware.intakeLeft.setPower(-1.0);
+        hardware.intakeRight.setPower(-1.0);
+
+        // Spin to park
+        zoomTurnToHeadingPID(-89, 4.0, 0.8); // 4.0 second timeout, 0.8 speed
+
+        // Park
+        hardware.tapeMeasure.setPower(1.0);
+        sleep(1000);
+        hardware.tapeMeasure.setPower(0.0);
 //
 //        // Turn to face Building Zone
 //        turnToHeadingPID(0);
@@ -779,6 +791,43 @@ public class AutoRedQuarry extends LinearOpMode {
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
+
+        double turnStart = getRuntime();
+        double timeout = timeoutSeconds;
+        while (opModeIsActive() &&
+                (getRuntime() - turnStart) < timeout) {
+            double error = hardware.normalize180(-(target - hardware.heading()));
+            double power = hardware.pid.calculateGivenError(error);
+
+
+            telemetry.addData("Runtime - turnStart", getRuntime() - turnStart);
+            telemetry.addData("Current error", error);
+            telemetry.addData("Current power", power);
+
+            hardware.setLeftPower(-power);
+            hardware.setRightPower(power);
+
+
+            if (Math.abs(error) < hardware.TOLERANCE || gamepad2.dpad_down) {
+                break;
+            }
+
+            Thread.sleep(1);
+
+            telemetry.update();
+        }
+
+        hardware.setLeftPower(0);
+        hardware.setRightPower(0);
+    }
+    public void zoomTurnToHeadingPID(int target, double timeoutSeconds, double speed) throws InterruptedException {
+
+        telemetry.addData("Turning to target", target);
+        telemetry.addLine("Press dpad_down to stop.");
+
+        hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
+        hardware.pid.setOutputRange(-speed, speed);                             // Set maximum motor power
+        hardware.pid.setDeadband(5.0);                                          // Set how far off you can safely be from your target
 
         double turnStart = getRuntime();
         double timeout = timeoutSeconds;
